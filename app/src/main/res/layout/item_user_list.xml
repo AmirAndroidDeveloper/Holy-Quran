@@ -1,0 +1,196 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="com.example.holyquran.ui.mainPage.AdapterListener" />
+
+        <variable
+            name="viewModel"
+            type="com.example.holyquran.data.model.UserInfo" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
+        android:layout_marginRight="5dp">
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="8dp"
+            android:gravity="center"
+            app:cardElevation="8dp"
+            app:cardMaxElevation="10dp"
+            app:cardPreventCornerOverlap="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="87dp"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->clickListener.onclick(viewModel)}"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/idIVCourseImage"
+                    android:layout_width="45sp"
+                    android:layout_height="45sp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_delete2" />
+
+                <TextView
+                    android:id="@+id/idTVCourseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toEndOf="@id/idIVCourseImage"
+                    android:layout_toRightOf="@id/idIVCourseImage"
+                    android:text="@{viewModel.name}"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <!--            <TextView-->
+                <!--                android:id="@+id/idTVCourseRating"-->
+                <!--                android:layout_width="262dp"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:layout_below="@id/idTVCourseName"-->
+                <!--                android:layout_marginStart="10dp"-->
+                <!--                android:layout_marginLeft="10dp"-->
+                <!--                android:layout_marginTop="17dp"-->
+                <!--                android:textStyle="bold"-->
+                <!--                android:layout_toEndOf="@id/idIVCourseImage"-->
+                <!--                android:layout_toRightOf="@id/idIVCourseImage"-->
+                <!--                android:drawablePadding="2dp"-->
+                <!--                android:text="@{viewModel.categoryString}"-->
+                <!--                android:textColor="#000"-->
+                <!--                android:textSize="17dp"-->
+                <!--                app:drawableRightCompat="@drawable/ic_baseline_info_24" />-->
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
+
+
+
+
+
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginLeft="10dp"-->
+    <!--        android:layout_marginRight="10dp">-->
+
+
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="5dp"-->
+    <!--        app:cardCornerRadius="8dp"-->
+    <!--        app:cardElevation="8dp"-->
+    <!--        app:cardMaxElevation="10dp"-->
+    <!--        app:cardPreventCornerOverlap="true">-->
+
+
+    <!--        <RelativeLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="87dp"-->
+    <!--            android:layout_margin="10dp"-->
+    <!--            android:clickable="true"-->
+    <!--            android:focusable="true"-->
+    <!--            android:onClick="@{()->clickListener.onclick(viewModel)}"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/idIVCourseImage"-->
+    <!--                android:layout_width="45sp"-->
+    <!--                android:layout_height="45sp"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:layout_marginLeft="10dp"-->
+    <!--                android:layout_marginTop="25dp"-->
+    <!--                android:layout_marginEnd="10dp"-->
+    <!--                android:layout_marginRight="10dp"-->
+    <!--                android:layout_marginBottom="10dp"-->
+    <!--                android:contentDescription="@string/app_name"-->
+    <!--                android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_delete2" />-->
+
+    <!--            <TextView-->
+    <!--                android:id="@+id/idTVCourseName"-->
+    <!--                android:layout_width="286dp"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="10dp"-->
+    <!--                android:layout_marginLeft="10dp"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:layout_marginRight="25dp"-->
+    <!--                android:layout_toEndOf="@id/idIVCourseImage"-->
+    <!--                android:layout_toRightOf="@id/idIVCourseImage"-->
+    <!--                android:text="@{viewModel.categoryString}"-->
+    <!--                android:textColor="#000"-->
+    <!--                android:textSize="20sp"-->
+    <!--                android:textStyle="bold" />-->
+
+
+    <!--        </RelativeLayout>-->
+    <!--    </androidx.cardview.widget.CardView>-->
+    <!--    </LinearLayout>-->
+
+    <!--    <LinearLayout-->
+    <!--        android:clickable="true"-->
+    <!--        android:onClick="@{()->clickListener.onclick(viewModel)}"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+
+    <!--        <ImageView-->
+    <!--            android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"-->
+    <!--            android:layout_width="25dp"-->
+    <!--            android:layout_height="25dp"-->
+    <!--            android:layout_marginLeft="16dp"-->
+    <!--            android:src="@drawable/ic_delete2"-->
+    <!--            android:focusable="true"-->
+    <!--            android:layout_marginStart="16dp" />-->
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="25dp"-->
+    <!--            android:layout_marginRight="15dp"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:ellipsize="end"-->
+    <!--            android:singleLine="true"-->
+    <!--            android:text="@{viewModel.categoryString}"-->
+    <!--            android:textColor="@color/gray600"-->
+    <!--            android:textSize="20sp"-->
+    <!--            tools:text="موبایل" />-->
+
+    <!--        <FrameLayout-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content">-->
+    <!--        </FrameLayout>-->
