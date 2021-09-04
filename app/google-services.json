@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "52501052935",
+    "project_id": "holy-quran-d1c8f",
+    "storage_bucket": "holy-quran-d1c8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52501052935:android:f498820f79b4f208a534a2",
+        "android_client_info": {
+          "package_name": "com.example.holyquran"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52501052935-6cah8jph18v5t643issfa231rq1hifjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5im3aTLS_zVWR_kfXKN8O1wD2nR8EkDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52501052935-6cah8jph18v5t643issfa231rq1hifjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52501052935:android:26c5edb1f1549555a534a2",
+        "android_client_info": {
+          "package_name": "com.example.holyquran.holyQuran"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52501052935-6cah8jph18v5t643issfa231rq1hifjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5im3aTLS_zVWR_kfXKN8O1wD2nR8EkDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52501052935-6cah8jph18v5t643issfa231rq1hifjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">صندوقچه</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splash_title">ختم قران</string>
+    <string name="has_been_red">ختم های خوانده شده</string>
+    <string name="user_profile">امیر حسین رجايی زاده</string>
+    <string name="intro_title1">پرداخت آنلاین </string>
+    <string name="intro_title2">مدیریت در زمان </string>
+    <string name="finishBtn">شروع برنامه</string>
+    <string name="login">ورود</string>
+    <string name="userName">نام کاربری</string>
+    <string name="password">رمز عبور</string></resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_host"
+    app:startDestination="@id/registerUserFragment">
+
+    <fragment
+        android:id="@+id/mainPageFragment"
+        tools:layout="@layout/fragment_main_page"
+        android:name="com.example.holyquran.ui.mainPage.MainPageFragment"
+        android:label="صفحه اصلی" />
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.holyquran.ui.registerUser.RegisterUserFragment"
+        android:label="صندوقچه"
+        tools:layout="@layout/fragment_register_user">
+        <action
+            android:id="@+id/action_registerUserFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+</navigation>
