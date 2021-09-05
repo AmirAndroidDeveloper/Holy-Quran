@@ -81,7 +81,7 @@ class UserAdapter() : ListAdapter<UserInfo, RecyclerView.ViewHolder>(BillDiffCal
 
 class BillDiffCallback : DiffUtil.ItemCallback<UserInfo>() {
     override fun areItemsTheSame(oldItem: UserInfo, newItem: UserInfo): Boolean {
-        return oldItem.infoId == newItem.infoId
+        return oldItem.userId == newItem.userId
     }
 
     override fun areContentsTheSame(
@@ -97,7 +97,7 @@ class AdapterListener(
     val deleteListener: (userInfo: UserInfo) -> Unit
 
 ) {
-    fun onclick(userInfo: UserInfo) = clickListener(userInfo.infoId)
+    fun onclick(userInfo: UserInfo) = clickListener(userInfo.userId)
     fun onDeleteClick(userInfo: UserInfo) = deleteListener(userInfo)
 
 }

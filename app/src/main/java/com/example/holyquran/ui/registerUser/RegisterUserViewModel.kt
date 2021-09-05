@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
+import java.util.*
 
 
 class RegisterUserViewModel(
@@ -20,17 +21,19 @@ class RegisterUserViewModel(
 
 
     fun insertUser(
-        name: String,
+        fullName: String,
+        phoneNumber: String,
         personalCode: String,
+        address: String,
         id: MutableList<UserInfo>,
     ) {
         uiScope.launch {
             //wait after 5 sec resum actions
             //delay(5_000)
             try {
-                val category = UserInfo(0L, name, personalCode)
+                val user = UserInfo(0L, fullName, phoneNumber,personalCode,address)
                 withContext(Dispatchers.IO) {
-                    val personalId = mUserInfoDAO.insert(category)
+                    val personalId = mUserInfoDAO.insert(user)
                     id.forEach {
                     }
                     mUserInfoDAO.insertList(id)

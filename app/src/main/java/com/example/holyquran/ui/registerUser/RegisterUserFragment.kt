@@ -48,8 +48,10 @@ class RegisterUserFragment : Fragment() {
             val userList: MutableList<UserInfo> = mutableListOf()
             if (it) {
                 mRegisterUserViewModel.insertUser(
-                    mRegisterUserBinding.edtName.text.toString(),
-                    mRegisterUserBinding.edtPassword.editText?.text.toString(),
+                    mRegisterUserBinding.fullName.text.toString(),
+                    mRegisterUserBinding.phoneNumber.text.toString(),
+                    mRegisterUserBinding.personalCode.text.toString(),
+                    mRegisterUserBinding.address.text.toString(),
                     userList
                 )
             }
