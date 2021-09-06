@@ -13,11 +13,11 @@ interface UserDAO {
 suspend fun insert(ui:UserInfo):Long
 
 @Insert
-suspend fun insertList(category: MutableList<UserInfo>)
+suspend fun insertList(ui: MutableList<UserInfo>)
 
     @Query("SELECT * from user_info WHERE user_id = :key")
     fun get(key: Long):  LiveData<UserInfo>?
 
-@Query("SELECT * FROM user_info ORDER BY UserName ASC")
+@Query("SELECT * FROM user_info ORDER BY full_name ASC")
 fun getAllUserInfo(): LiveData<List<UserInfo>>
 }

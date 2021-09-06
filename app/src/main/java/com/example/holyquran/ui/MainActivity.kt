@@ -13,8 +13,8 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.example.holyquran.databinding.ActivityIntroBinding
 import com.example.holyquran.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 //        this.supportActionBar?.hide();
+
         drawerLayout = binding.drawerLayout
         navController = this.findNavController(R.id.fragmentContainerView)
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
@@ -39,30 +40,34 @@ class MainActivity : AppCompatActivity() {
             }
         }
         NavigationUI.setupWithNavController(binding.navView, navController)
-    }
 
+
+
+    }
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.fragmentContainerView)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
-    override fun onBackPressed() {
-            if (lastBackPressTime < System.currentTimeMillis() - 4000) {
-                lastBackPressTime = System.currentTimeMillis()
-                val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-                builder.setIcon(R.drawable.warning)
-                builder.setTitle("خروج از برنامه ")
-                builder.setMessage("از برنامه خارج میشوید؟")
-                    .setCancelable(false)
-                    .setPositiveButton("بله",
-                        DialogInterface.OnClickListener { dialog, id -> finish() })
-                    .setNegativeButton("خیر",
-                        DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
-                val alert: AlertDialog = builder.create()
-                alert.show()
 
-            } else {
-                toast?.cancel()
-                super.onBackPressed()
+    override fun onBackPressed() {
+        if (lastBackPressTime < System.currentTimeMillis() - 4000) {
+            lastBackPressTime = System.currentTimeMillis()
+            val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+            builder.setIcon(R.drawable.warning)
+            builder.setTitle("خروج از برنامه ")
+            builder.setMessage("از برنامه خارج میشوید؟")
+                .setCancelable(false)
+                .setPositiveButton("بله",
+                    DialogInterface.OnClickListener { dialog, id -> finish() })
+                .setNegativeButton("خیر",
+                    DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+            val alert: AlertDialog = builder.create()
+            alert.show()
+
+        } else {
+            toast?.cancel()
+            super.onBackPressed()
         }
     }
 }
+

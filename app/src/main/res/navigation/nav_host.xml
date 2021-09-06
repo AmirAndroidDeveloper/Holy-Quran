@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_host"
-    app:startDestination="@id/registerUserFragment">
+    app:startDestination="@id/mainPageFragment">
 
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.example.holyquran.ui.mainPage.MainPageFragment"
         android:label="صفحه اصلی"
         tools:layout="@layout/fragment_main_page">
-
-
-
         <action
-            android:id="@+id/action_mainPageFragment_to_registerUserFragment"
-            app:destination="@id/registerUserFragment" />
+            android:id="@+id/action_mainPageFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registerUserFragment"
-        android:name="com.example.holyquran.ui.registerUser.RegisterUserFragment"
-        android:label="صندوقچه"
-        tools:layout="@layout/fragment_register_user">
+        android:id="@+id/userListFragment"
+        android:name="com.example.holyquran.ui.userList.UserListFragment"
+        tools:layout="@layout/fragment_user_list"
+        android:label="UserListFragment" >
 
         <action
-            android:id="@+id/action_registerUserFragment_to_mainPageFragment"
-            app:destination="@id/mainPageFragment" />
-
-
-
+            android:id="@+id/action_userListFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.example.holyquran.ui.addUser.AddUserFragment"
+        android:label="AddUserFragment"
+        tools:layout="@layout/fragment_add_user"/>
+
 </navigation>

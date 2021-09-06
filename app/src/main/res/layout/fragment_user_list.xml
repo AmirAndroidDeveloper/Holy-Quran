@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+    <variable
+        name="viewModel"
+        type="com.example.holyquran.ui.userList.UserListViewModel" />
+</data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        tools:context=".ui.userList.UserListFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFeed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+              android:id="@+id/floatingBtn"
+                android:layout_gravity="bottom"
+                android:onClick="@{() -> viewModel.goTOAddUser()}"
+                android:layout_marginBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_person"
+                app:backgroundTint="#1e45d1" />
+    </FrameLayout>
+</layout>

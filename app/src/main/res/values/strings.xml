@@ -9,4 +9,5 @@
     <string name="finishBtn">شروع برنامه</string>
     <string name="login">ورود</string>
     <string name="userName">نام کاربری</string>
-    <string name="password">رمز عبور</string></resources>
+    <string name="password">رمز عبور</string>
+</resources>

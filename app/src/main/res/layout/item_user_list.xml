@@ -65,7 +65,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_toEndOf="@id/idIVCourseImage"
                     android:layout_toRightOf="@id/idIVCourseImage"
-                    android:text="@{viewModel.userName}"
+                    android:text="@{viewModel.fullName}"
                     android:textColor="#000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
