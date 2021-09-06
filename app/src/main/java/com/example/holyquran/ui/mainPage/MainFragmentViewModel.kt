@@ -21,17 +21,9 @@ class MainFragmentViewModel(
 
 
     val userInfo = MutableLiveData<List<UserInfo>>()
-
-
     fun getUserList():LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
     }
-
-
-
-
-
-
 
     private val _userName = MutableLiveData<UserInfo>()
     val userName: LiveData<UserInfo>

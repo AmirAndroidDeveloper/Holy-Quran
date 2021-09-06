@@ -24,7 +24,6 @@ class MainPageFragment : Fragment() {
         mMainPageBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_main_page, container, false)
 
-
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val viewModelFactory = ViewModelProviderFactory(personalDAO, application)

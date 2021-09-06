@@ -20,8 +20,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"
+            app:userList="@{viewModel.userInfo}"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
               android:id="@+id/floatingBtn"

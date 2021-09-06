@@ -6,11 +6,13 @@
 
         <variable
             name="clickListener"
-            type="com.example.holyquran.ui.mainPage.AdapterListener" />
+            type="com.example.holyquran.ui.userList.AdapterListener" />
 
         <variable
-            name="viewModel"
+            name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
+
+
     </data>
 
 
@@ -27,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:cardCornerRadius="8dp"
+
             android:gravity="center"
             app:cardElevation="8dp"
             app:cardMaxElevation="10dp"
@@ -38,7 +41,6 @@
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="@{()->clickListener.onclick(viewModel)}"
                 android:orientation="vertical">
 
                 <ImageView
@@ -52,7 +54,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:contentDescription="@string/app_name"
-                    android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"
+                    android:onClick="@{()->clickListener.onDeleteClick(userInfo)}"
                     android:padding="5dp"
                     android:src="@drawable/ic_delete2" />
 
@@ -65,7 +67,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_toEndOf="@id/idIVCourseImage"
                     android:layout_toRightOf="@id/idIVCourseImage"
-                    android:text="@{viewModel.fullName}"
+                    android:text="@{userInfo.fullName}"
                     android:textColor="#000"
                     android:textSize="20sp"
                     android:textStyle="bold" />

@@ -26,34 +26,30 @@ class UserListViewModel(
     fun goTOAddUser() {
         _goTOAddUser.value = true
     }
-
-
-
-
-//    fun insertUser(
-//        fullName: String,
-//        phoneNumber: String,
-//        personalCode: String,
-//        address: String,
-//        id: MutableList<UserInfo>,
-//    ) {
-//        uiScope.launch {
-//            //wait after 5 sec resum actions
-//            //delay(5_000)
-//            try {
-//                val user = UserInfo(0L, fullName, phoneNumber,personalCode,address)
-//                withContext(Dispatchers.IO) {
-//                    val personalId = mUserInfoDAO.insert(user)
-//                    id.forEach {
-//                    }
-//                    mUserInfoDAO.insertList(id)
-//                }
-//            } catch (e: Exception) {
-//                Log.d("TAG", "insertContact: ${e.message}")
-//            }
-//        }
-//    }
-
+    val userInfo = MutableLiveData<List<UserInfo>>()
+    fun getUserList():LiveData<List<UserInfo>> {
+        return mUserInfoDAO.getAllUserInfo()
     }
+    fun deleteCategory(
+        userInfo: UserInfo
+    ) {
+        uiScope.launch {
+            try {
+                mUserInfoDAO.deleteCategory(userInfo)
+            } catch (e: Exception) {
+                Log.d("TAG", "deleteContact: ${e.message}")
+            }
+        }
+    }
+
+    private val _popUpWindow = MutableLiveData<Boolean>(false)
+    val popUpWindow: LiveData<Boolean>
+        get() = _popUpWindow
+
+    fun popUpWindow() {
+        _popUpWindow.value = true
+    }
+
+}
 
 
