@@ -52,8 +52,8 @@ class AddUserFragment : Fragment() {
                     mAddUserListBinding.edtAddress.text.toString(),
                     userList
                 )
-
-
+                this.findNavController().navigate(
+                    AddUserFragmentDirections.actionAddUserFragmentToUserListFragment())
 
             }
         })

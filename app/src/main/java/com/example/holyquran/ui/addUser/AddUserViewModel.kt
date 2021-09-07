@@ -50,5 +50,12 @@ class AddUserViewModel(
         _addUser.value = true
     }
 
+    private val _goToUserList = MutableLiveData<Boolean>(false)
+    val goToUserList: LiveData<Boolean>
+        get() = _goToUserList
+    fun goToUserList() {
+        _goToUserList.value = true
+    }
+
 
 }

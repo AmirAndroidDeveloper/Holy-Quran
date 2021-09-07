@@ -26,16 +26,31 @@
         <action
             android:id="@+id/action_userListFragment_to_popupWindowFragment"
             app:destination="@id/popupWindowFragment" />
+        <action
+            android:id="@+id/action_userListFragment_to_userOptionsFragment"
+            app:destination="@id/userOptionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.holyquran.ui.addUser.AddUserFragment"
         android:label="AddUserFragment"
-        tools:layout="@layout/fragment_add_user"/>
+        tools:layout="@layout/fragment_add_user">
+        <action
+            android:id="@+id/action_addUserFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/popupWindowFragment"
         android:name="com.example.holyquran.ui.userList.popupWindow.PopupWindowFragment"
         android:label="fragment_popop_window"
         tools:layout="@layout/fragment_popop_window" />
+
+    <fragment
+        android:id="@+id/userOptionsFragment"
+        tools:layout="@layout/fragment_user_options"
+        android:name="com.example.holyquran.ui.userList.userOptions.UserOptionsFragment"
+        android:label="UserOptionsFragment" >
+
+    </fragment>
 
 </navigation>

@@ -154,7 +154,6 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="30dp"
     android:onClick="@{() -> viewModel.addUser()}"
-
     android:layout_marginTop="20sp"
     android:layout_marginLeft="30dp"
     android:text="add"/>

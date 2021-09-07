@@ -1,10 +1,13 @@
 package com.example.holyquran.ui.userList
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -20,6 +23,10 @@ import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentUserListBinding
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
+import android.view.Gravity
+
+
+
 
 class UserListFragment : Fragment() {
     lateinit var mUserListBinding: FragmentUserListBinding
@@ -44,10 +51,20 @@ class UserListFragment : Fragment() {
             ).get(UserListViewModel::class.java)
         mUserListBinding.viewModel = mUserListViewModel
         this.also { mUserListBinding.lifecycleOwner = it }
+
+//        val popupView: View = LayoutInflater.from(activity).inflate(R.layout.fragment_popop_window, null)
+//        val popupWindow = PopupWindow(
+//            popupView,
+//            WindowManager.LayoutParams.WRAP_CONTENT,
+//            WindowManager.LayoutParams.WRAP_CONTENT
+//        )
+//        popupWindow.showAsDropDown(popupView, 0, 0)
+
+
         mUserListViewModel.popUpWindow.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                this.findNavController().navigate(
-                    UserListFragmentDirections.actionUserListFragmentToPopupWindowFragment()) } })
+
+            } })
 
         mUserListViewModel.goTOAddUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -58,13 +75,34 @@ class UserListFragment : Fragment() {
         })
 
         val mUserAdapter = UserAdapter()
-        mUserAdapter.setOnclickListener(AdapterListener {
+        mUserAdapter.setOnclickListener(AdapterListener ({
+            if (it != 0L)
+                this.findNavController().navigate(
+                    UserListFragmentDirections.actionUserListFragmentToUserOptionsFragment()
+                )
+        },{
             deleteDialog(it)
-        })
+        }
+        ))
+
+
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         viewHolder()
+
+
+
+
+
+
+
+
+
+
+
+
+
         return mUserListBinding.root
     }
 
