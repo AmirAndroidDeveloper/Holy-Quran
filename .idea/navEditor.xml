@@ -29,18 +29,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="increaseMoneyFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="128" />
-                            <option name="y" value="-486" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="mainPageFragment">
                     <value>
                       <LayoutPositions>
@@ -79,8 +67,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-247" />
-                            <option name="y" value="-36" />
+                            <option name="x" value="-273" />
+                            <option name="y" value="-48" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -110,8 +98,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="348" />
-                            <option name="y" value="-328" />
+                            <option name="x" value="248" />
+                            <option name="y" value="-346" />
                           </Point>
                         </option>
                       </LayoutPositions>

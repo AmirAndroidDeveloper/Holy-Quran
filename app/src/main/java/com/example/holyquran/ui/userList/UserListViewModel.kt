@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
@@ -12,6 +13,7 @@ import kotlinx.coroutines.*
 
 class UserListViewModel(
     val mUserInfoDAO: UserDAO,
+   val dataSourceTransactions: TransactionsDAO,
     application: Application
 ) :
     AndroidViewModel(application) {

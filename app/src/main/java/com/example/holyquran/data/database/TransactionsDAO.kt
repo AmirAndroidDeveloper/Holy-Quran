@@ -13,25 +13,24 @@ interface TransactionsDAO {
     suspend fun insert(ta: Transaction) : Long
 
     @Insert
-    suspend fun insertList(ta: MutableList<Transaction>)
+    suspend fun insertList(ta: List<Transaction>)
 
     @Update
     suspend fun update(ta: Transaction)
 
-    @Query("DELETE FROM `transaction` WHERE trans_id = :id")
-    fun deleteSubCategory(id: Long)
 
-    @Query("SELECT * from `transaction` WHERE trans_id = :key")
+
+    @Query("SELECT * from trans WHERE trans_id = :key")
     fun get(key: Long):  LiveData<Transaction>?
 
-    @Query("SELECT * from `transaction` WHERE user_id = :key")
+    @Query("SELECT * from trans WHERE user_id = :key")
     fun getTransActionWithUserId(key: Long):  LiveData<List<Transaction>>?
 
-    @Query("SELECT * FROM `transaction`  ORDER BY amount DESC")
+    @Query("SELECT * FROM trans  ORDER BY amount DESC")
     fun getAllTransAction(): LiveData<List<Transaction>>
 
 
-    @Query("SELECT * FROM `transaction` WHERE user_id=:key ")
+    @Query("SELECT * FROM trans WHERE user_id=:key ")
     fun getAllTransWithUserId(key: Long): LiveData<List<Transaction>>
 
 }

@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
@@ -12,8 +13,9 @@ import kotlinx.coroutines.Job
 
 class MainFragmentViewModel(
     val mUserInfoDAO: UserDAO,
+   val dataSourceTransactions: TransactionsDAO,
     application: Application
-    ) : AndroidViewModel(application) {
+) : AndroidViewModel(application) {
 
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
