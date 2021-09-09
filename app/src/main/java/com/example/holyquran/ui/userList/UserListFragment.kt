@@ -44,7 +44,8 @@ class UserListFragment : Fragment() {
             )
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, application)
+        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
+        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,application)
         mUserListViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -78,7 +79,7 @@ class UserListFragment : Fragment() {
         mUserAdapter.setOnclickListener(AdapterListener ({
             if (it != 0L)
                 this.findNavController().navigate(
-                    UserListFragmentDirections.actionUserListFragmentToUserOptionsFragment()
+                    UserListFragmentDirections.actionUserListFragmentToUserOptionsFragment(it)
                 )
         },{
             deleteDialog(it)
@@ -90,19 +91,6 @@ class UserListFragment : Fragment() {
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         viewHolder()
-
-
-
-
-
-
-
-
-
-
-
-
-
         return mUserListBinding.root
     }
 

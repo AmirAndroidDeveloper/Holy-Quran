@@ -51,6 +51,9 @@
         android:name="com.example.holyquran.ui.userList.userOptions.UserOptionsFragment"
         android:label="UserOptionsFragment" >
 
+        <argument
+            android:name="userId"
+            app:argType="long" />
     </fragment>
 
 </navigation>

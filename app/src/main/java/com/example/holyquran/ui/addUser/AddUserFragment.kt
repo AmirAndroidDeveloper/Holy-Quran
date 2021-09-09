@@ -31,7 +31,8 @@ class AddUserFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, application)
+        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
+        val viewModelFactory = ViewModelProviderFactory(personalDAO,transactionDAO,application)
         mAddUserViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
