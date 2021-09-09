@@ -9,7 +9,6 @@ import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.ItemUserListBinding
 
 class UserAdapter() : ListAdapter<UserInfo, RecyclerView.ViewHolder>(BillDiffCallback()) {
-
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

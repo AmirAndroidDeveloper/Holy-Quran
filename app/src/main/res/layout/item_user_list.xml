@@ -4,14 +4,18 @@
 
     <data>
 
+
         <variable
             name="clickListener"
             type="com.example.holyquran.ui.userList.AdapterListener" />
+
 
         <variable
             name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
     </data>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

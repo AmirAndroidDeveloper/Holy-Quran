@@ -19,9 +19,9 @@ data class Transaction(
     @ColumnInfo(name = "description")
     var description: String?,
     @ColumnInfo(name = "increase")
-    var increase: String,
+    var increase: String?,
     @ColumnInfo(name = "decrease")
-    var decrease: Long?,
+    var decrease: String?,
     @ColumnInfo(name = "loan_number")
     var loanNumber: Long?
 )

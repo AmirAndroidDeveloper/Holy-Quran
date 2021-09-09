@@ -27,8 +27,8 @@
             android:id="@+id/action_userListFragment_to_popupWindowFragment"
             app:destination="@id/popupWindowFragment" />
         <action
-            android:id="@+id/action_userListFragment_to_userOptionsFragment"
-            app:destination="@id/userOptionsFragment" />
+            android:id="@+id/action_userListFragment_to_increaseMoneyFragment"
+            app:destination="@id/increaseMoneyFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
@@ -46,11 +46,23 @@
         tools:layout="@layout/fragment_popop_window" />
 
     <fragment
-        android:id="@+id/userOptionsFragment"
-        tools:layout="@layout/fragment_user_options"
-        android:name="com.example.holyquran.ui.userList.userOptions.UserOptionsFragment"
+        android:id="@+id/increaseMoneyFragment"
+        tools:layout="@layout/fragment_increase_money"
+        android:name="com.example.holyquran.ui.userList.increaseMoney.IncreaseMoneyFragment"
         android:label="UserOptionsFragment" >
 
+        <argument
+            android:name="userId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_increaseMoneyFragment_to_decreaseMoneyFragment"
+            app:destination="@id/decreaseMoneyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/decreaseMoneyFragment"
+        tools:layout="@layout/fragment_decrease_money"
+        android:name="com.example.holyquran.ui.userList.decrease.DecreaseMoneyFragment"
+        android:label="DecreaseMoneyFragment" >
         <argument
             android:name="userId"
             app:argType="long" />

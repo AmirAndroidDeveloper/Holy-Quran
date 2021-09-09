@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.addUser.AddUserViewModel
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
-import com.example.holyquran.ui.userList.userOptions.UserOptionViewModel
+import com.example.holyquran.ui.userList.decrease.DecreaseViewModel
+import com.example.holyquran.ui.userList.increaseMoney.IncreaseMoneyViewModel
 
 class ViewModelProviderFactory (
     private val dataSourceUser: UserDAO,
@@ -24,8 +24,10 @@ class ViewModelProviderFactory (
             return MainFragmentViewModel(dataSourceUser,dataSourceTransactions, application) as T
         } else if (modelClass.isAssignableFrom(AddUserViewModel::class.java)) {
             return AddUserViewModel(dataSourceUser,dataSourceTransactions, application) as T
-        } else if (modelClass.isAssignableFrom(UserOptionViewModel::class.java)) {
-            return UserOptionViewModel(dataSourceUser,dataSourceTransactions,application) as T
+        } else if (modelClass.isAssignableFrom(IncreaseMoneyViewModel::class.java)) {
+            return IncreaseMoneyViewModel(dataSourceUser,dataSourceTransactions,application) as T
+        } else if (modelClass.isAssignableFrom(DecreaseViewModel::class.java)) {
+            return DecreaseViewModel(dataSourceUser,dataSourceTransactions,application) as T
 
         }
         throw IllegalArgumentException("Unknown ViewModel class")

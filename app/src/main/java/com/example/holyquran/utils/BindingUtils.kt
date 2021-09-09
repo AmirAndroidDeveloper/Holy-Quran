@@ -13,3 +13,4 @@ fun userList(
     (recyclerView.adapter as UserAdapter?)?.submitList(list)
     (recyclerView.adapter as UserAdapter?)?.notifyDataSetChanged()
 }
+
