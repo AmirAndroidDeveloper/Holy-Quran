@@ -24,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class IncreaseMoneyFragment : Fragment() {
     var id: Long = 0L
+    val five = 5
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -64,21 +65,26 @@ class IncreaseMoneyFragment : Fragment() {
                 id
             )
         }
-
-      mIncreaseMoneyBinding.decreaseBtn.setOnClickListener {
-          this.findNavController().navigate(
-              IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(1))
-
-      }
-        return mIncreaseMoneyBinding.root
-    }
-
-    private fun deleteDialog(trans: UserInfo) {
-        Snackbar.make(mIncreaseMoneyBinding.root, "آیا تمایل به حذف تراکنش دارید؟ ", Snackbar.LENGTH_LONG)
-            .setAction("حذف") {
-                mIncreaseMoneyViewModel.deleteTrans(trans)
+        mIncreaseMoneyBinding.decreaseBtn.setOnClickListener {
+            this.findNavController().navigate(
+                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(1)
+            )
+        }
+        mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mIncreaseMoneyViewModel.setIncrease(it)
             }
-            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
-            .show()
+        })
+        mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
+            if (it != null) {
+                if (id == mIncreaseMoneyViewModel.increase.value?.userId) {
+                    Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
+                    mIncreaseMoneyBinding.userMoney.text = it.increase
+                }
+                mIncreaseMoneyBinding.userMoney.text= mIncreaseMoneyViewModel.getTotal().toString()
+                //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
+            }
+        })
+        return mIncreaseMoneyBinding.root
     }
 }

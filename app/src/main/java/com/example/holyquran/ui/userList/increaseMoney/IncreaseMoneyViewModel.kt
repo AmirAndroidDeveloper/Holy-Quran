@@ -29,6 +29,22 @@ class IncreaseMoneyViewModel(
         _userName.value = mUserInfo
     }
 
+    private val _increase = MutableLiveData<Transaction>()
+    val increase: LiveData<Transaction>
+        get() = _increase
+
+    fun setIncrease(id: Long): LiveData<Transaction>? {
+        return mTransactionsDAO.get(id)
+    }
+
+    fun setIncrease(mTransInfo: Transaction) {
+        _increase.value = mTransInfo
+    }
+
+    fun getTotal(): Int {
+        return mTransactionsDAO.getTotalIncrease()
+    }
+
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
@@ -53,10 +69,6 @@ class IncreaseMoneyViewModel(
         }
     }
 
-    val transInfo = MutableLiveData<List<UserInfo>>()
-    fun getTransHistory():LiveData<List<UserInfo>> {
-        return mUserInfoDAO.getAllUserInfo()
-    }
     fun deleteTrans(
         transInfo: UserInfo
     ) {
@@ -68,6 +80,4 @@ class IncreaseMoneyViewModel(
             }
         }
     }
-
-
-    }
+}
