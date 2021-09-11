@@ -44,9 +44,14 @@ class DecreaseViewModel(
         _decrease.value = mTransInfo
     }
 
+    fun sumUserIncrease(id: Long): Int {
+        return mTransactionsDAO.sumUserIncrease(id)
+    }
+
     fun sumUserDecrease(id: Long): Int {
         return mTransactionsDAO.sumUserDecrease(id)
     }
+
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
@@ -64,7 +69,9 @@ class DecreaseViewModel(
                     null,
                     null,
                     amount,
-                    null
+                    null,
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId))
+
                 )
             )
 

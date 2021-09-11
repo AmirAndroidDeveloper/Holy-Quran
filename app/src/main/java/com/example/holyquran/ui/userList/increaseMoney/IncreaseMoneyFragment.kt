@@ -41,6 +41,8 @@ class IncreaseMoneyFragment : Fragment() {
             ViewModelProviders.of(
                 this, viewModelFactory
             ).get(IncreaseMoneyViewModel::class.java)
+
+        totalUserMoney()
         val arg = IncreaseMoneyFragmentArgs.fromBundle(requireArguments())
         id = arg.userIdIncrease
         Log.d("TAG", "onCreateView: $id")
@@ -52,27 +54,6 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.userName = it
             }
         })
-        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
-        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
-        val minus = "-"
-
-        try {
-            val expression = ExpressionBuilder(increase + minus + decrease).build()
-            val result = expression.evaluate()
-            val longResult = result.toLong()
-            if (result == longResult.toDouble())
-                mIncreaseMoneyBinding.totalMoney.text = longResult.toString()
-            else
-                mIncreaseMoneyBinding.totalMoney.text = result.toString()
-
-        } catch (e: Exception) {
-            Log.d("Exception", " message : " + e.message)
-        }
-
-
-
-
-
 
         mIncreaseMoneyBinding.finishBtn.setOnClickListener {
             mIncreaseMoneyViewModel.insertMoney(
@@ -101,11 +82,29 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.userMoney.text =
                     mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
 
-
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
 
         return mIncreaseMoneyBinding.root
+    }
+
+
+    fun totalUserMoney() {
+        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
+        val minus = "-"
+        try {
+            val expression = ExpressionBuilder(increase + minus + decrease).build()
+            val result = expression.evaluate()
+            val longResult = result.toLong()
+            if (result == longResult.toDouble())
+                mIncreaseMoneyBinding.totalMoney.text = longResult.toString()
+            else
+                mIncreaseMoneyBinding.totalMoney.text = result.toString()
+
+        } catch (e: Exception) {
+            Log.d("Exception", " message : " + e.message)
+        }
     }
 }

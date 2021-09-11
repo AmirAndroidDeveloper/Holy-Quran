@@ -23,5 +23,8 @@ data class Transaction(
     @ColumnInfo(name = "decrease")
     var decrease: String?,
     @ColumnInfo(name = "loan_number")
-    var loanNumber: Long?
-)
+    var loanNumber: Long?,
+    @ColumnInfo(name = "total")
+    var total :Int?
+
+    )

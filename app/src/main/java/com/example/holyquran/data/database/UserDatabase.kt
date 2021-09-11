@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 
-@Database(entities = [UserInfo::class, Transaction::class],version = 3,exportSchema = false)
+@Database(entities = [UserInfo::class, Transaction::class],version = 5,exportSchema = false)
 abstract class UserDatabase:RoomDatabase() {
     abstract val mUserDAO: UserDAO
     abstract val mTransactionsDAO: TransactionsDAO
