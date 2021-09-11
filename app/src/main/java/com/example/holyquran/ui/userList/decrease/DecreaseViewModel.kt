@@ -32,8 +32,23 @@ class DecreaseViewModel(
         _userName.value = mUserInfo
     }
 
+    private val _decrease = MutableLiveData<Transaction>()
+    val decrease: LiveData<Transaction>
+        get() = _decrease
+
+    fun setDecrease(id: Long): LiveData<Transaction>? {
+        return mTransactionsDAO.get(id)
+    }
+
+    fun setDecrease(mTransInfo: Transaction) {
+        _decrease.value = mTransInfo
+    }
+
+    fun sumUserDecrease(id: Long): Int {
+        return mTransactionsDAO.sumUserDecrease(id)
+    }
     var viewModelJob = Job()
-    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
         amount: String,
         userId: Long,

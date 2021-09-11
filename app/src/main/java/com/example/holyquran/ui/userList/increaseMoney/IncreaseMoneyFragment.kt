@@ -2,6 +2,7 @@ package com.example.holyquran.ui.userList.increaseMoney
 
 import android.os.Bundle
 import android.util.Log
+import net.objecthunter.exp4j.ExpressionBuilder
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +42,7 @@ class IncreaseMoneyFragment : Fragment() {
                 this, viewModelFactory
             ).get(IncreaseMoneyViewModel::class.java)
         val arg = IncreaseMoneyFragmentArgs.fromBundle(requireArguments())
-        id = arg.userId
+        id = arg.userIdIncrease
         Log.d("TAG", "onCreateView: $id")
         mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             mIncreaseMoneyViewModel.setUserName(it)
@@ -51,6 +52,27 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.userName = it
             }
         })
+        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
+        val minus = "-"
+
+        try {
+            val expression = ExpressionBuilder(increase + minus + decrease).build()
+            val result = expression.evaluate()
+            val longResult = result.toLong()
+            if (result == longResult.toDouble())
+                mIncreaseMoneyBinding.totalMoney.text = longResult.toString()
+            else
+                mIncreaseMoneyBinding.totalMoney.text = result.toString()
+
+        } catch (e: Exception) {
+            Log.d("Exception", " message : " + e.message)
+        }
+
+
+
+
+
 
         mIncreaseMoneyBinding.finishBtn.setOnClickListener {
             mIncreaseMoneyViewModel.insertMoney(
@@ -60,7 +82,9 @@ class IncreaseMoneyFragment : Fragment() {
         }
         mIncreaseMoneyBinding.decreaseBtn.setOnClickListener {
             this.findNavController().navigate(
-                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(1)
+                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
+                    id
+                )
             )
         }
         mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
@@ -74,12 +98,14 @@ class IncreaseMoneyFragment : Fragment() {
                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
                     mIncreaseMoneyBinding.userMoney.text = it.increase
                 }
-
                 mIncreaseMoneyBinding.userMoney.text =
                     mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+
+
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
+
         return mIncreaseMoneyBinding.root
     }
 }

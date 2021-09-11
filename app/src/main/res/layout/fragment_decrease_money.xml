@@ -7,6 +7,12 @@
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
+
+        <variable
+            name="transaction"
+            type="com.example.holyquran.data.model.Transaction" />
+
+
         <variable
             name="increaseMoneyViewModel"
             type="com.example.holyquran.ui.userList.increaseMoney.IncreaseMoneyViewModel" />
@@ -19,7 +25,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:orientation="vertical"
-        tools:context=".ui.userList.increaseMoney.IncreaseMoneyFragment">
+        tools:context=".ui.userList.decrease.IncreaseMoneyFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,6 +90,24 @@
                 android:text="تراکنش ها"
                 android:textColor="@color/black"
                 android:textSize="25sp" />
+
+
+            <Button
+                android:id="@+id/decreaseBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="برداشت از حساب" />
+
+            <TextView
+                android:id="@+id/userMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{transaction.decrease}"
+                android:layout_marginTop="20sp"
+                android:gravity="center"
+                tools:text="باقی مانده حساب" />
+
 
         </LinearLayout>
     </LinearLayout>

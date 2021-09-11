@@ -34,8 +34,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="177" />
-                            <option name="y" value="-488" />
+                            <option name="x" value="169" />
+                            <option name="y" value="-694" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -46,9 +46,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-3" />
-                            <option name="y" value="-352" />
+                            <option name="x" value="75" />
+                            <option name="y" value="-357" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_increaseMoneyFragment_to_decreaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
