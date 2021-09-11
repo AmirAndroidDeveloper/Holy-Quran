@@ -22,9 +22,14 @@ interface TransactionsDAO {
     @Query("SELECT * from trans WHERE trans_id = :key")
     fun get(key: Long): LiveData<Transaction>?
 
+
     @Query("SELECT * FROM trans ORDER BY increase ASC")
     fun getAllTransaction(): LiveData<List<Transaction>>
 
     @Query("SELECT SUM(increase)FROM trans")
     fun getTotalIncrease(): Int
+
+    @Query("SELECT SUM(increase) FROM trans WHERE user_id=:key")
+    fun sumUserIncrease(key: Long):Int
+
 }

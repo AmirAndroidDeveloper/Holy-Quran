@@ -41,8 +41,8 @@ class IncreaseMoneyViewModel(
         _increase.value = mTransInfo
     }
 
-    fun getTotal(): Int {
-        return mTransactionsDAO.getTotalIncrease()
+    fun sumUserIncrease(id: Long): Int {
+        return mTransactionsDAO.sumUserIncrease(id)
     }
 
     var viewModelJob = Job()

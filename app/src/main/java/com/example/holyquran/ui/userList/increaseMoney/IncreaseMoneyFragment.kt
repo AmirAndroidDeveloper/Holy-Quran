@@ -10,17 +10,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
-import com.example.holyquran.data.model.Transaction
-import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
-import com.example.holyquran.ui.addUser.AddUserFragmentDirections
-import com.example.holyquran.ui.userList.UserListFragmentDirections
-import com.google.android.material.snackbar.Snackbar
 
 class IncreaseMoneyFragment : Fragment() {
     var id: Long = 0L
@@ -81,7 +74,9 @@ class IncreaseMoneyFragment : Fragment() {
                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
                     mIncreaseMoneyBinding.userMoney.text = it.increase
                 }
-                mIncreaseMoneyBinding.userMoney.text= mIncreaseMoneyViewModel.getTotal().toString()
+
+                mIncreaseMoneyBinding.userMoney.text =
+                    mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
