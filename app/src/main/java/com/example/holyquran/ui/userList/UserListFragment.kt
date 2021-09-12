@@ -17,6 +17,7 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentUserListBinding
+import com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -37,7 +38,7 @@ class UserListFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,application)
+        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, application)
         mUserListViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -45,19 +46,11 @@ class UserListFragment : Fragment() {
         mUserListBinding.viewModel = mUserListViewModel
         this.also { mUserListBinding.lifecycleOwner = it }
 
-//        val popupView: View = LayoutInflater.from(activity).inflate(R.layout.fragment_popop_window, null)
-//        val popupWindow = PopupWindow(
-//            popupView,
-//            WindowManager.LayoutParams.WRAP_CONTENT,
-//            WindowManager.LayoutParams.WRAP_CONTENT
-//        )
-//        popupWindow.showAsDropDown(popupView, 0, 0)
-
-
         mUserListViewModel.popUpWindow.observe(viewLifecycleOwner, Observer {
             if (it == true) {
 
-            } })
+            }
+        })
 
         mUserListViewModel.goTOAddUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -66,29 +59,40 @@ class UserListFragment : Fragment() {
                 )
             }
         })
-
         val mUserAdapter = UserAdapter()
-        mUserAdapter.setOnclickListener(AdapterListener ({
+        mUserAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
                 this.findNavController().navigate(
                     UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)
                 )
-        },{
+        }, {
             deleteDialog(it)
         }
         ))
-
-
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
-        viewHolder()
+        userInfo()
+        userTotalMoney()
+
+
+       val mUserTotalMoney= UserTotalMoneyAdapter()
+
+
+
         return mUserListBinding.root
     }
 
-    private fun viewHolder() {
+    private fun userInfo() {
         mUserListViewModel.getUserList().observe(viewLifecycleOwner, {
             mUserListViewModel.userInfo.value = it
+            Log.d("TAG", "viewHolder: $it")
+        })
+    }
+
+    fun userTotalMoney() {
+        mUserListViewModel.getUserTotalMoney().observe(viewLifecycleOwner, {
+            mUserListViewModel.userTotalMoney.value = it
             Log.d("TAG", "viewHolder: $it")
         })
     }
