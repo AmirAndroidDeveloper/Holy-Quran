@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 
 class AddUserViewModel(
     val mUserInfoDAO: UserDAO,
-  val  dataSourceTransactions: TransactionsDAO,
+  val  mTransactionDAO: TransactionsDAO,
     application: Application
 ) :
     AndroidViewModel(application) {

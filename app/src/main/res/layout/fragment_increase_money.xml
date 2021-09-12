@@ -98,7 +98,6 @@
                 android:textColor="@color/black"
                 android:textSize="25sp" />
 
-
             <Button
                 android:id="@+id/decreaseBtn"
                 android:layout_width="match_parent"
@@ -106,15 +105,29 @@
                 android:layout_marginTop="100dp"
                 android:text="واریز به حساب" />
 
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_marginTop="35sp"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
             <TextView
                 android:id="@+id/userMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{transaction.increase}"
-                android:layout_marginTop="20sp"
+                android:textColor="@color/black"
                 android:gravity="center"
                 tools:text="باقی مانده حساب" />
-
+            <TextView
+                android:id="@+id/zero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                android:text="0"
+                android:gravity="center" />
+          </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>
