@@ -8,8 +8,8 @@ import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.ui.addUser.AddUserViewModel
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
-import com.example.holyquran.ui.userList.decrease.DecreaseViewModel
-import com.example.holyquran.ui.userList.increaseMoney.IncreaseMoneyViewModel
+import com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel
+import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
 
 class ViewModelProviderFactory (
     private val dataSourceUser: UserDAO,

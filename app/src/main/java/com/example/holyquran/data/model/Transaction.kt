@@ -25,6 +25,6 @@ data class Transaction(
     @ColumnInfo(name = "loan_number")
     var loanNumber: Long?,
     @ColumnInfo(name = "total")
-    var total :Int?
+    var total: Int
 
     )

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="clickListener"
             type="com.example.holyquran.ui.userList.AdapterListener" />
@@ -69,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-
                         <TextView
                             android:id="@+id/idTVCourseName"
                             android:layout_width="match_parent"
@@ -82,15 +80,12 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/userMoney"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            tools:text="User Money" />
-                    </LinearLayout>
-                    <!--                            android:text="@{transaction.total}"-->
+<!--                        <include android:id="@+id/news_title"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            layout="@layout/user_total_money"/>-->
 
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

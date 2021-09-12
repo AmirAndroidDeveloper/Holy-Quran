@@ -48,7 +48,6 @@ class UserAdapter() : ListAdapter<UserInfo, RecyclerView.ViewHolder>(BillDiffCal
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: UserInfo, adapterListener: AdapterListener) {
             binding.userInfo = item
-            binding.userInfo = item
             binding.clickListener = adapterListener
             binding.executePendingBindings()
         }

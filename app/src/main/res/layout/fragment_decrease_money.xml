@@ -15,7 +15,7 @@
 
         <variable
             name="increaseMoneyViewModel"
-            type="com.example.holyquran.ui.userList.increaseMoney.IncreaseMoneyViewModel" />
+            type="com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel" />
     </data>
 
     <LinearLayout
@@ -25,7 +25,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:orientation="vertical"
-        tools:context=".ui.userList.decrease.IncreaseMoneyFragment">
+        tools:context=".ui.userList.decreaseMoney.IncreaseMoneyFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

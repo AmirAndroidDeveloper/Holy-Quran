@@ -7,19 +7,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
 
 
 class UserListViewModel(
     val mUserInfoDAO: UserDAO,
-   val dataSourceTransactions: TransactionsDAO,
+   val mTransactionsDAO: TransactionsDAO,
     application: Application
 ) :
     AndroidViewModel(application) {
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
 
     private val _goTOAddUser = MutableLiveData<Boolean>(false)
     val goTOAddUser: LiveData<Boolean>
@@ -31,6 +31,10 @@ class UserListViewModel(
     val userInfo = MutableLiveData<List<UserInfo>>()
     fun getUserList():LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
+    }
+    val userTotalMoney = MutableLiveData<List<Transaction>>()
+    fun getUserTotalMoney():LiveData<List<Transaction>> {
+        return mTransactionsDAO.getAllTransaction()
     }
     fun deleteCategory(
         userInfo: UserInfo
