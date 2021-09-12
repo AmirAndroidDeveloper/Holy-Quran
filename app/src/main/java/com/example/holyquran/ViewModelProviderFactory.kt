@@ -10,7 +10,7 @@ import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
 import com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
-import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory.IncreaseHistoryViewModel
+import com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel
 
 class ViewModelProviderFactory (
     private val dataSourceUser: UserDAO,
@@ -29,8 +29,8 @@ class ViewModelProviderFactory (
             return IncreaseMoneyViewModel(dataSourceUser,dataSourceTransactions,application) as T
         } else if (modelClass.isAssignableFrom(DecreaseViewModel::class.java)) {
             return DecreaseViewModel(dataSourceUser,dataSourceTransactions,application) as T
-        } else if (modelClass.isAssignableFrom(IncreaseHistoryViewModel::class.java)) {
-            return IncreaseHistoryViewModel(dataSourceUser,dataSourceTransactions,application) as T
+        } else if (modelClass.isAssignableFrom(TransactionHistoryViewModel::class.java)) {
+            return TransactionHistoryViewModel(dataSourceUser,dataSourceTransactions,application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,4 +1,4 @@
-package com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory
+package com.example.holyquran.ui.userList.transactions.transactionHistory
 
 import android.os.Bundle
 import android.util.Log
@@ -8,21 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentIncreaseHistoryBinding
-import com.example.holyquran.ui.mainPage.MainFragmentViewModel
-import com.example.holyquran.ui.userList.UserListFragmentDirections
-import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragmentArgs
-import net.objecthunter.exp4j.ExpressionBuilder
 
-class IncreaseHistoryFragment : Fragment() {
+class TransactionHistoryFragment : Fragment() {
     lateinit var mIncreaseHistoryBinding: FragmentIncreaseHistoryBinding
-    lateinit var mIncreaseHistoryViewModel: IncreaseHistoryViewModel
+    lateinit var mTransactionHistoryViewModel: TransactionHistoryViewModel
     var id: Long = 0L
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +35,15 @@ class IncreaseHistoryFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, application)
-        mIncreaseHistoryViewModel =
+        mTransactionHistoryViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
-            ).get(IncreaseHistoryViewModel::class.java)
-        mIncreaseHistoryBinding.increaseHistoryViewModel = mIncreaseHistoryViewModel
+            ).get(TransactionHistoryViewModel::class.java)
+        mIncreaseHistoryBinding.increaseHistoryViewModel = mTransactionHistoryViewModel
         this.also { mIncreaseHistoryBinding.lifecycleOwner = it }
 
         val arg =
-            IncreaseHistoryFragmentArgs.fromBundle(
+            TransactionHistoryFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.userId
@@ -66,10 +61,10 @@ class IncreaseHistoryFragment : Fragment() {
         userInfo()
 
 
-        mIncreaseHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-            mIncreaseHistoryViewModel.setUserName(it)
+        mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            mTransactionHistoryViewModel.setUserName(it)
         })
-        mIncreaseHistoryViewModel.userName.observe(viewLifecycleOwner, {
+        mTransactionHistoryViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseHistoryBinding.userName = it
             }
@@ -78,9 +73,9 @@ class IncreaseHistoryFragment : Fragment() {
     }
 
     private fun userInfo() {
-        mIncreaseHistoryViewModel.getTransactionList(id).observe(viewLifecycleOwner, {
-            mIncreaseHistoryViewModel.transactionInfo.value = it
-            Log.d("TAG", "viewHolder: $it")
+        mTransactionHistoryViewModel.getTransactionList(id).observe(viewLifecycleOwner, {
+            Log.d("TAG", "userInfo2: ${it}")
+            mTransactionHistoryViewModel.transactionInfo.value = it
         })
     }
 }

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.userList.UserAdapter
-import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory.increaseHistoryAdapter
+import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistoryAdapter
 
 @BindingAdapter("userList")
 fun userList(

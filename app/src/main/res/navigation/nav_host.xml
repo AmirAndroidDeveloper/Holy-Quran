@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/increaseHistoryFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory.IncreaseHistoryFragment"
+        android:name="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryFragment"
         android:label="IncreaseHistoryFragment"
         tools:layout="@layout/fragment_increase_history">
         <argument

@@ -1,4 +1,4 @@
-package com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory
+package com.example.holyquran.ui.userList.transactions.transactionHistory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

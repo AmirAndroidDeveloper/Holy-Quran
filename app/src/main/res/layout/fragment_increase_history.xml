@@ -7,7 +7,7 @@
     <data>
         <variable
             name="increaseHistoryViewModel"
-            type="com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory.IncreaseHistoryViewModel" />
+            type="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel" />
    <variable
        name="userName"
        type="com.example.holyquran.data.model.UserInfo" />

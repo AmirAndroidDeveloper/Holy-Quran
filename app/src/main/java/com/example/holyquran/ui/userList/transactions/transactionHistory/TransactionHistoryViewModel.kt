@@ -1,4 +1,4 @@
-package com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistory
+package com.example.holyquran.ui.userList.transactions.transactionHistory
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,7 @@ import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 
-class IncreaseHistoryViewModel(
+class TransactionHistoryViewModel(
     val mUserInfoDAO: UserDAO,
     val mTransactionDAO: TransactionsDAO,
     application: Application
