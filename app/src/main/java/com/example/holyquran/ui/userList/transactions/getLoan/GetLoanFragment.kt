@@ -15,11 +15,13 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
+import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragmentArgs
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
 
 class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var mGetLoanBinding: FragmentGetLoanBinding
- lateinit var mGetLoanViewModel:GetLoanViewModel
+    lateinit var mGetLoanViewModel: GetLoanViewModel
+    var id: Long = 0L
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +38,8 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, loanDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, application)
 
         mGetLoanViewModel =
             ViewModelProviders.of(
@@ -46,6 +49,11 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         this.also { mGetLoanBinding.lifecycleOwner = it }
 
 
+        val arg =
+            GetLoanFragmentArgs.fromBundle(
+                requireArguments()
+            )
+        id = arg.userId
 
 
         val spinner: Spinner = mGetLoanBinding.spinner
@@ -61,6 +69,15 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             spinner.onItemSelectedListener = this
 
         }
+
+        mGetLoanBinding.finish.setOnClickListener {
+            mGetLoanViewModel.insertLoanTimeSpinner(
+                mGetLoanBinding.loanAmount.text.toString(),
+                mGetLoanBinding.loanSections.text.toString(),
+                        id
+            )
+        }
+
 
         return mGetLoanBinding.root
     }

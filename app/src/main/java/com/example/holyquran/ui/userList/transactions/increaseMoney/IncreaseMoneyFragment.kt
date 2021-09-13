@@ -35,7 +35,8 @@ class IncreaseMoneyFragment : Fragment() {
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
 
-        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, loanDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, application)
 
         mIncreaseMoneyViewModel =
             ViewModelProviders.of(
@@ -129,7 +130,7 @@ class IncreaseMoneyFragment : Fragment() {
             R.id.getLoan -> {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToGetLoanFragment(
-
+                        id
                     )
                 )
                 true

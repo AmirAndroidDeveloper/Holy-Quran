@@ -14,11 +14,11 @@ data class Loan(
     @ColumnInfo(name = "amount")
     var amount: String,
     @ColumnInfo(name = "create_date")
-    var createDate:String,
+    var createDate: String?,
     @ColumnInfo(name = "loan_sections")
-    var loanSections:Long,
+    var loanSections: String,
     @ColumnInfo(name = "expired_date")
-    var expiredDate:String
+    var expiredDate: String?
 
 
 )

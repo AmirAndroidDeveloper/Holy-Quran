@@ -89,6 +89,10 @@
         android:id="@+id/getLoanFragment"
         android:name="com.example.holyquran.ui.userList.transactions.getLoan.GetLoanFragment"
         tools:layout="@layout/fragment_get_loan"
-        android:label="GetLoanFragment" />
+        android:label="GetLoanFragment" >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>
