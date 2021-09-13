@@ -33,7 +33,9 @@ class IncreaseMoneyFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
-        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, application)
+        val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+
+        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, loanDAO,application)
 
         mIncreaseMoneyViewModel =
             ViewModelProviders.of(
@@ -42,7 +44,8 @@ class IncreaseMoneyFragment : Fragment() {
 
         val arg =
             IncreaseMoneyFragmentArgs.fromBundle(
-                requireArguments())
+                requireArguments()
+            )
         id = arg.userIdIncrease
         Log.d("TAG", "onCreateView: $id")
         mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
@@ -114,11 +117,21 @@ class IncreaseMoneyFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.loanMoney -> {
+            R.id.transactionHistory -> {
                 this.findNavController().navigate(
-                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(id)
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(
+                        id
+                    )
                 )
                 Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.getLoan -> {
+                this.findNavController().navigate(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToGetLoanFragment(
+
+                    )
+                )
                 true
             }
             else -> super.onOptionsItemSelected(item)

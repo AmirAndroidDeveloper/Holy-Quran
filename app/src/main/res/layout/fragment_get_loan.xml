@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.holyquran.ui.userList.transactions.getLoan.GetLoanViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.userList.transactions.getLoan.GetLoanFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="دریافت وام"
+                android:textColor="@color/black"
+                android:textSize="30dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:hint="مقدار وام" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="تعداد اقساط" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="فاصله اقساط"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="8dp"
+/>                </LinearLayout>
+
+<!--                android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}" />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

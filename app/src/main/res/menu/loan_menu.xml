@@ -2,11 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/loanMoney"
+        android:id="@+id/transactionHistory"
         android:icon="@drawable/loan_money"
         android:title="تاریخچه تراکنش ها" />
 
 
-    <item android:title="دریافت وام" />
+    <item android:title="دریافت وام"
+        android:id="@+id/getLoan"/>
 
 </menu>

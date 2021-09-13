@@ -32,7 +32,9 @@ class DecreaseMoneyFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
-        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, application)
+        val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+
+        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO,loanDAO, application)
 
         mDecreaseMoneyViewModel =
             ViewModelProviders.of(
