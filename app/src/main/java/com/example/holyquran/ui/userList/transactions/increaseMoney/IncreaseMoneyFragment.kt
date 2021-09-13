@@ -135,6 +135,14 @@ class IncreaseMoneyFragment : Fragment() {
                 )
                 true
             }
+            R.id.loanHistory->{
+                this.findNavController().navigate(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToLoanHistoryFragment(
+                        id
+                    )
+                )
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

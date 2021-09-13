@@ -9,6 +9,7 @@ import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
 
 
+
 class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1

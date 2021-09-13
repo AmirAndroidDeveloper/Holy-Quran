@@ -10,8 +10,9 @@ import com.example.holyquran.ui.addUser.AddUserViewModel
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
 import com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel
-import com.example.holyquran.ui.userList.transactions.getLoan.GetLoanViewModel
+import com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanViewModel
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
+import com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanHistoryViewModel
 import com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel
 
 class ViewModelProviderFactory (
@@ -37,6 +38,8 @@ class ViewModelProviderFactory (
             return TransactionHistoryViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan,application) as T
         } else if (modelClass.isAssignableFrom(GetLoanViewModel::class.java)) {
             return GetLoanViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan,application) as T
+        } else if (modelClass.isAssignableFrom(LoanHistoryViewModel::class.java)) {
+            return LoanHistoryViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan,application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

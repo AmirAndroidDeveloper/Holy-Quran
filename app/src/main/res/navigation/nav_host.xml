@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_increaseMoneyFragment_to_getLoanFragment"
             app:destination="@id/getLoanFragment" />
+        <action
+            android:id="@+id/action_increaseMoneyFragment_to_loanHistoryFragment"
+            app:destination="@id/loanHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
@@ -87,9 +90,18 @@
     </fragment>
     <fragment
         android:id="@+id/getLoanFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.getLoan.GetLoanFragment"
+        android:name="com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanFragment"
         tools:layout="@layout/fragment_get_loan"
         android:label="GetLoanFragment" >
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanHistoryFragment"
+        tools:layout="@layout/fragment_loan_history"
+        android:name="com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanHistoryFragment"
+        android:label="LoanHistoryFragment">
         <argument
             android:name="userId"
             app:argType="long" />

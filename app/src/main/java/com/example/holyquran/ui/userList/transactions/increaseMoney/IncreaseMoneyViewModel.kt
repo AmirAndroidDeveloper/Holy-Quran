@@ -16,7 +16,6 @@ class IncreaseMoneyViewModel(
     private val mUserInfoDAO: UserDAO,
     val mTransactionsDAO: TransactionsDAO,
     val mLoan: LoanDAO,
-
     application: Application,
 ) :
     AndroidViewModel(application) {
