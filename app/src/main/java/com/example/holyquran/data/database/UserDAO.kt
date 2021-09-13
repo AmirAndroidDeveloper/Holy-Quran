@@ -19,6 +19,6 @@ interface UserDAO {
     @Query("SELECT * from user_info WHERE user_id = :key")
     fun get(key: Long): LiveData<UserInfo>?
 
-    @Query("SELECT * FROM user_info ORDER BY full_name ASC")
+    @Query("SELECT * FROM user_info ORDER BY full_name DESC")
     fun getAllUserInfo(): LiveData<List<UserInfo>>
 }

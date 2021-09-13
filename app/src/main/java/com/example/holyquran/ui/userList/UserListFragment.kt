@@ -17,7 +17,6 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentUserListBinding
-import com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -73,13 +72,6 @@ class UserListFragment : Fragment() {
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
-        userTotalMoney()
-
-
-       val mUserTotalMoney= UserTotalMoneyAdapter()
-
-
-
         return mUserListBinding.root
     }
 
@@ -90,12 +82,6 @@ class UserListFragment : Fragment() {
         })
     }
 
-    fun userTotalMoney() {
-        mUserListViewModel.getUserTotalMoney().observe(viewLifecycleOwner, {
-            mUserListViewModel.userTotalMoney.value = it
-            Log.d("TAG", "viewHolder: $it")
-        })
-    }
 
     private fun deleteDialog(userInfo: UserInfo) {
         Snackbar.make(mUserListBinding.root, "آیا تمایل به حذف عضو دارید؟ ", Snackbar.LENGTH_LONG)

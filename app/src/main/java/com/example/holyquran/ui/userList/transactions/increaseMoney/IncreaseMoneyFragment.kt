@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import net.objecthunter.exp4j.ExpressionBuilder
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -14,11 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
+import android.view.*
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
+
 
 class IncreaseMoneyFragment : Fragment() {
     var id: Long = 0L
-    val five = 5
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -44,8 +42,7 @@ class IncreaseMoneyFragment : Fragment() {
 
         val arg =
             IncreaseMoneyFragmentArgs.fromBundle(
-                requireArguments()
-            )
+                requireArguments())
         id = arg.userIdIncrease
         Log.d("TAG", "onCreateView: $id")
         mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
@@ -94,20 +91,37 @@ class IncreaseMoneyFragment : Fragment() {
             if (it != null) {
                 if (id == mIncreaseMoneyViewModel.increase.value?.userId) {
                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
-                    mIncreaseMoneyBinding.userMoney.text = "+" + it.increase
+                    mIncreaseMoneyBinding.userMoney.text = it.increase
 
                     if (mIncreaseMoneyBinding.totalMoney.text == "0") {
                         mIncreaseMoneyBinding.userMoney.text = it.increase
-
                     }
                 }
                 mIncreaseMoneyBinding.userMoney.text =
                     mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
-
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
-
+        setHasOptionsMenu(true)
         return mIncreaseMoneyBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.loan_menu, menu);
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.loanMoney -> {
+                this.findNavController().navigate(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(id)
+                )
+                Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
