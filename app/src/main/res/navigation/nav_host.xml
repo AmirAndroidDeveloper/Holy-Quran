@@ -62,7 +62,7 @@
             app:destination="@id/userListFragment" />
         <action
             android:id="@+id/action_increaseMoneyFragment_to_increaseHistoryFragment"
-            app:destination="@id/increaseHistoryFragment" />
+            app:destination="@id/TransactionHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
@@ -74,7 +74,7 @@
             app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/increaseHistoryFragment"
+        android:id="@+id/TransactionHistoryFragment"
         android:name="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryFragment"
         android:label="IncreaseHistoryFragment"
         tools:layout="@layout/fragment_increase_history">
