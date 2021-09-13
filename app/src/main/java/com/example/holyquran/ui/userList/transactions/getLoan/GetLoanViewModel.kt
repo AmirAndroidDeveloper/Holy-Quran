@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class GetLoanViewModel(
     val mUserInfoDAO: UserDAO,
     val mTransactionsDAO: TransactionsDAO,
-    val mGetLoanDAO: LoanDAO,
+    private val mGetLoanDAO: LoanDAO,
 
     application: Application
 ) :
@@ -30,24 +30,16 @@ class GetLoanViewModel(
     fun insertLoanTimeSpinner(
         amount: String,
         loanSection: String,
-        userId: Long
-        ) {
-
-
+        userId: Long,
+    ) {
         uiScope.launch {
-            mGetLoanDAO.insert(Loan(0L, userId, amount, null, loanSection, null))
+            mGetLoanDAO.insert(Loan(0L, userId, amount, null, loanSection, null, selectedItemPosition))
         }
     }
-
-
-    private val _userList = MutableLiveData<List<UserInfo>>()
-    val userList: LiveData<List<UserInfo>>
-        get() = _userList
-
     var selectedItemPosition = 0
     fun onSelectItem(position: Int) {
         selectedItemPosition = position;
-        Log.d("position", "onSelectItem: $position")
+        Log.d("position", "onSelectItem: $selectedItemPosition")
     }
 
 }

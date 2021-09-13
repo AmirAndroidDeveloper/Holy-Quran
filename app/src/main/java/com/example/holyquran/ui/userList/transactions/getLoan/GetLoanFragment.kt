@@ -17,6 +17,7 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragmentArgs
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
+import kotlinx.android.synthetic.main.fragment_get_loan.*
 
 class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var mGetLoanBinding: FragmentGetLoanBinding
@@ -67,28 +68,25 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
             spinner.onItemSelectedListener = this
-
         }
 
         mGetLoanBinding.finish.setOnClickListener {
             mGetLoanViewModel.insertLoanTimeSpinner(
                 mGetLoanBinding.loanAmount.text.toString(),
                 mGetLoanBinding.loanSections.text.toString(),
-                        id
+                id
             )
         }
-
-
         return mGetLoanBinding.root
     }
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        Log.d("TAG", "onItemSelected: $p3")
+
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
-        Log.d("TAG", "onItemSelected: $p0")
     }
+
 }
 
 
