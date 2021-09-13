@@ -5,8 +5,10 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
@@ -14,7 +16,9 @@ import kotlinx.coroutines.*
 
 class UserListViewModel(
     val mUserInfoDAO: UserDAO,
-   val mTransactionsDAO: TransactionsDAO,
+    val mTransactionsDAO: TransactionsDAO,
+    val mLoan: LoanDAO,
+
     application: Application
 ) :
     AndroidViewModel(application) {
@@ -28,14 +32,17 @@ class UserListViewModel(
     fun goTOAddUser() {
         _goTOAddUser.value = true
     }
+
     val userInfo = MutableLiveData<List<UserInfo>>()
-    fun getUserList():LiveData<List<UserInfo>> {
+    fun getUserList(): LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
     }
+
     val userTotalMoney = MutableLiveData<List<Transaction>>()
-    fun getUserTotalMoney():LiveData<List<Transaction>> {
+    fun getUserTotalMoney(): LiveData<List<Transaction>> {
         return mTransactionsDAO.getAllTransaction()
     }
+
     fun deleteCategory(
         userInfo: UserInfo
     ) {

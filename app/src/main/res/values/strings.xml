@@ -10,4 +10,20 @@
     <string name="login">ورود</string>
     <string name="userName">نام کاربری</string>
     <string name="password">رمز عبور</string>
+
+    <string-array name="planets_array">
+        <item>۱ هفته</item>
+        <item>۲ هفته</item>
+        <item>۳ هفته</item>
+        <item>۱ ماه</item>
+        <item>۲ ماه</item>
+        <item>۳ ماه</item>
+        <item>۴ ماه</item>
+        <item>۵ ماه</item>
+        <item>۶ ماه</item>
+    </string-array>
+
+
+
+
 </resources>

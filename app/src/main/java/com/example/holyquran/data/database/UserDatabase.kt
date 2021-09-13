@@ -4,13 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 
-@Database(entities = [UserInfo::class, Transaction::class],version = 5,exportSchema = false)
-abstract class UserDatabase:RoomDatabase() {
+@Database(
+    entities = [UserInfo::class, Transaction::class, Loan::class],
+    version = 6,
+    exportSchema = false
+)
+abstract class UserDatabase : RoomDatabase() {
     abstract val mUserDAO: UserDAO
     abstract val mTransactionsDAO: TransactionsDAO
+    abstract val mLoanDAO: LoanDAO
 
     companion object {
         @Volatile
@@ -33,4 +39,4 @@ abstract class UserDatabase:RoomDatabase() {
             }
         }
     }
-    }
+}

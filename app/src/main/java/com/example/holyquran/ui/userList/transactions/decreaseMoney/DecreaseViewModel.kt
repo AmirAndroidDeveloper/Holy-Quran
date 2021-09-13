@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Transaction
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class DecreaseViewModel(
     private val mUserInfoDAO: UserDAO,
     private val mTransactionsDAO: TransactionsDAO,
+    val mLoan: LoanDAO,
 
     application: Application,
 ) :

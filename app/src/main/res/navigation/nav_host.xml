@@ -17,8 +17,8 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.example.holyquran.ui.userList.UserListFragment"
-        tools:layout="@layout/fragment_user_list"
-        android:label="UserListFragment" >
+        android:label="UserListFragment"
+        tools:layout="@layout/fragment_user_list">
 
         <action
             android:id="@+id/action_userListFragment_to_addUserFragment"
@@ -47,9 +47,9 @@
 
     <fragment
         android:id="@+id/increaseMoneyFragment"
-        tools:layout="@layout/fragment_increase_money"
         android:name="com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragment"
-        android:label="UserOptionsFragment" >
+        android:label="UserOptionsFragment"
+        tools:layout="@layout/fragment_increase_money">
 
         <argument
             android:name="userIdIncrease"
@@ -63,12 +63,15 @@
         <action
             android:id="@+id/action_increaseMoneyFragment_to_increaseHistoryFragment"
             app:destination="@id/TransactionHistoryFragment" />
+        <action
+            android:id="@+id/action_increaseMoneyFragment_to_getLoanFragment"
+            app:destination="@id/getLoanFragment" />
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
-        tools:layout="@layout/fragment_decrease_money"
         android:name="com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseMoneyFragment"
-        android:label="DecreaseMoneyFragment" >
+        android:label="DecreaseMoneyFragment"
+        tools:layout="@layout/fragment_decrease_money">
         <argument
             android:name="userIdDecrease"
             app:argType="long" />
@@ -82,5 +85,10 @@
             android:name="userId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/getLoanFragment"
+        android:name="com.example.holyquran.ui.userList.transactions.getLoan.GetLoanFragment"
+        tools:layout="@layout/fragment_get_loan"
+        android:label="GetLoanFragment" />
 
 </navigation>
