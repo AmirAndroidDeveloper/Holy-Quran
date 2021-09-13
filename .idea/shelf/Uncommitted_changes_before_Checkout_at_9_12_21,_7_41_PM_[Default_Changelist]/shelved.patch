@@ -1,0 +1,1375 @@
+Index: app/src/main/res/layout/fragment_increase_money.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<layout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\">\n\n    <data>\n\n        <variable\n            name=\"userName\"\n            type=\"com.example.holyquran.data.model.UserInfo\" />\n        <variable\n            name=\"transaction\"\n            type=\"com.example.holyquran.data.model.Transaction\" />\n\n        <variable\n            name=\"increaseMoneyViewModel\"\n            type=\"com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel\" />\n    </data>\n\n    <LinearLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        android:layout_marginLeft=\"30dp\"\n        android:layout_marginTop=\"40dp\"\n        android:layout_marginRight=\"30dp\"\n        android:orientation=\"vertical\"\n        tools:context=\".ui.userList.decreaseMoney.IncreaseMoneyFragment\">\n\n        <LinearLayout\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:orientation=\"vertical\">\n\n            <TextView\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:gravity=\"center\"\n                android:text=\"@{userName.fullName}\"\n                android:textColor=\"@color/black\"\n                android:textSize=\"35sp\"\n                tools:text=\"UserName\" />\n\n            <TextView\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:gravity=\"center\"\n                android:text=\"@{userName.mobileNumber}\"\n                android:textColor=\"@color/black\"\n                android:textSize=\"16sp\"\n                tools:text=\"UserName\" />\n            <TextView\n              android:id=\"@+id/totalMoney\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:gravity=\"center\"\n                android:text=\"Total Money\"\n                android:textColor=\"@color/black\"\n                android:textSize=\"16sp\" />\n\n            <TextView\n                android:id=\"@+id/increaseMoney\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"50dp\"\n                android:gravity=\"center\"\n                android:text=\"ثبت واریز\"\n                android:textColor=\"@color/black\"\n                android:textSize=\"35sp\" />\n\n\n            <EditText\n                android:id=\"@+id/increaseEDT\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"50dp\"\n                android:hint=\"amount\" />\n\n            <Button\n                android:id=\"@+id/finishBtn\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:text=\"تایید\" />\n\n\n        </LinearLayout>\n\n        <LinearLayout\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"match_parent\"\n            android:layout_marginTop=\"10dp\"\n            android:orientation=\"vertical\">\n\n            <TextView\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:gravity=\"center\"\n                android:text=\"تراکنش ها\"\n                android:textColor=\"@color/black\"\n                android:textSize=\"25sp\" />\n\n\n            <Button\n                android:id=\"@+id/decreaseBtn\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"100dp\"\n                android:text=\"واریز به حساب\" />\n\n            <TextView\n                android:id=\"@+id/userMoney\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:text=\"@{transaction.increase}\"\n                android:layout_marginTop=\"20sp\"\n                android:gravity=\"center\"\n                tools:text=\"باقی مانده حساب\" />\n\n        </LinearLayout>\n    </LinearLayout>\n</layout>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_increase_money.xml b/app/src/main/res/layout/fragment_increase_money.xml
+--- a/app/src/main/res/layout/fragment_increase_money.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/res/layout/fragment_increase_money.xml	(date 1631459417144)
+@@ -98,7 +98,6 @@
+                 android:textColor="@color/black"
+                 android:textSize="25sp" />
+ 
+-
+             <Button
+                 android:id="@+id/decreaseBtn"
+                 android:layout_width="match_parent"
+@@ -106,15 +105,29 @@
+                 android:layout_marginTop="100dp"
+                 android:text="واریز به حساب" />
+ 
++          <LinearLayout
++              android:layout_width="match_parent"
++              android:layout_marginTop="35sp"
++              android:layout_height="wrap_content"
++              android:orientation="vertical">
++
+             <TextView
+                 android:id="@+id/userMoney"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@{transaction.increase}"
+-                android:layout_marginTop="20sp"
++                android:textColor="@color/black"
+                 android:gravity="center"
+                 tools:text="باقی مانده حساب" />
+-
++            <TextView
++                android:id="@+id/zero"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:textColor="@color/black"
++                android:visibility="visible"
++                android:text="0"
++                android:gravity="center" />
++          </LinearLayout>
+         </LinearLayout>
+     </LinearLayout>
+ </layout>
+Index: app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.ui.userList.transactions.increaseMoney\n\nimport android.os.Bundle\nimport android.util.Log\nimport net.objecthunter.exp4j.ExpressionBuilder\nimport androidx.fragment.app.Fragment\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.Toast\nimport androidx.databinding.DataBindingUtil\nimport androidx.lifecycle.ViewModelProviders\nimport androidx.navigation.fragment.findNavController\nimport com.example.holyquran.R\nimport com.example.holyquran.ViewModelProviderFactory\nimport com.example.holyquran.data.database.UserDatabase\nimport com.example.holyquran.databinding.FragmentIncreaseMoneyBinding\n\nclass IncreaseMoneyFragment : Fragment() {\n    var id: Long = 0L\n    val five = 5\n    lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding\n    lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View? {\n        mIncreaseMoneyBinding =\n            DataBindingUtil.inflate(\n                layoutInflater,\n                R.layout.fragment_increase_money,\n                container,\n                false\n            )\n        val application = requireNotNull(this.activity).application\n        val userDAO = UserDatabase.getInstance(application).mUserDAO\n        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO\n        val viewModelFactory = ViewModelProviderFactory(userDAO, transactionDAO, application)\n\n        mIncreaseMoneyViewModel =\n            ViewModelProviders.of(\n                this, viewModelFactory\n            ).get(IncreaseMoneyViewModel::class.java)\n\n        val arg =\n            IncreaseMoneyFragmentArgs.fromBundle(\n                requireArguments()\n            )\n        id = arg.userIdIncrease\n        Log.d(\"TAG\", \"onCreateView: $id\")\n        mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {\n            mIncreaseMoneyViewModel.setUserName(it)\n        })\n        mIncreaseMoneyViewModel.userName.observe(viewLifecycleOwner, {\n            if (it != null) {\n                mIncreaseMoneyBinding.userName = it\n            }\n        })\n        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()\n        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()\n        val minus = \"-\"\n        try {\n            val expression = ExpressionBuilder(increase + minus + decrease).build()\n            val result = expression.evaluate()\n            val longResult = result.toLong()\n            if (result == longResult.toDouble())\n                mIncreaseMoneyBinding.totalMoney.text = longResult.toString()\n            else\n                mIncreaseMoneyBinding.totalMoney.text = result.toString()\n\n        } catch (e: Exception) {\n            Log.d(\"Exception\", \" message : \" + e.message)\n        }\n\n        mIncreaseMoneyBinding.finishBtn.setOnClickListener {\n            mIncreaseMoneyViewModel.insertMoney(\n                mIncreaseMoneyBinding.increaseEDT.text.toString(),\n                id\n            )\n        }\n        mIncreaseMoneyBinding.decreaseBtn.setOnClickListener {\n            this.findNavController().navigate(\n                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(\n                    id\n                )\n            )\n        }\n        mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {\n            if (it != null) {\n                mIncreaseMoneyViewModel.setIncrease(it)\n            }\n        })\n        mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {\n            if (it != null) {\n                if (id == mIncreaseMoneyViewModel.increase.value?.userId) {\n                    Toast.makeText(activity, \"Match\", Toast.LENGTH_SHORT).show()\n                    mIncreaseMoneyBinding.userMoney.text = \"+\" + it.increase\n\n                    if (mIncreaseMoneyBinding.totalMoney.text == \"0\") {\n                        mIncreaseMoneyBinding.userMoney.text = it.increase\n\n                    }\n                }\n                mIncreaseMoneyBinding.userMoney.text =\n                    mIncreaseMoneyViewModel.sumUserIncrease(id).toString()\n\n                //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()\n            }\n        })\n\n        return mIncreaseMoneyBinding.root\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt b/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt
+--- a/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt	(date 1631459417360)
+@@ -4,9 +4,6 @@
+ import android.util.Log
+ import net.objecthunter.exp4j.ExpressionBuilder
+ import androidx.fragment.app.Fragment
+-import android.view.LayoutInflater
+-import android.view.View
+-import android.view.ViewGroup
+ import android.widget.Toast
+ import androidx.databinding.DataBindingUtil
+ import androidx.lifecycle.ViewModelProviders
+@@ -14,11 +11,12 @@
+ import com.example.holyquran.R
+ import com.example.holyquran.ViewModelProviderFactory
+ import com.example.holyquran.data.database.UserDatabase
++import android.view.*
+ import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
+ 
++
+ class IncreaseMoneyFragment : Fragment() {
+     var id: Long = 0L
+-    val five = 5
+     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
+     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
+     override fun onCreateView(
+@@ -44,8 +42,7 @@
+ 
+         val arg =
+             IncreaseMoneyFragmentArgs.fromBundle(
+-                requireArguments()
+-            )
++                requireArguments())
+         id = arg.userIdIncrease
+         Log.d("TAG", "onCreateView: $id")
+         mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+@@ -94,20 +91,37 @@
+             if (it != null) {
+                 if (id == mIncreaseMoneyViewModel.increase.value?.userId) {
+                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
+-                    mIncreaseMoneyBinding.userMoney.text = "+" + it.increase
++                    mIncreaseMoneyBinding.userMoney.text = it.increase
+ 
+                     if (mIncreaseMoneyBinding.totalMoney.text == "0") {
+                         mIncreaseMoneyBinding.userMoney.text = it.increase
+-
+                     }
+                 }
+                 mIncreaseMoneyBinding.userMoney.text =
+                     mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+-
+                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
+             }
+         })
+-
++        setHasOptionsMenu(true)
+         return mIncreaseMoneyBinding.root
+     }
++
++    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
++        inflater.inflate(R.menu.loan_menu, menu);
++
++        super.onCreateOptionsMenu(menu, inflater)
++    }
++
++    override fun onOptionsItemSelected(item: MenuItem): Boolean {
++        return when (item.itemId) {
++            R.id.loanMoney -> {
++                this.findNavController().navigate(
++                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(id)
++                )
++                Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
++                true
++            }
++            else -> super.onOptionsItemSelected(item)
++        }
++    }
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/user_total_money.xml
+===================================================================
+diff --git a/app/src/main/res/layout/user_total_money.xml b/app/src/main/res/layout/user_total_money.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/user_total_money.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ /dev/null	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
+@@ -1,28 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools">
+-
+-    <data>
+-
+-        <variable
+-            name="clickListener"
+-            type="com.example.holyquran.ui.userList.transactions.AdapterListener" />
+-
+-        <variable
+-            name="transaction"
+-            type="com.example.holyquran.data.model.Transaction" />
+-    </data>
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content">
+-
+-        <TextView
+-            android:id="@+id/userMoney"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:gravity="right"
+-            android:text="@{transaction.total}"
+-            tools:text="User Money" />
+-    </LinearLayout>
+-</layout>
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_1.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_1.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_1.xml
+new file mode 100644
+--- /dev/null	(date 1631459417160)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_1.xml	(date 1631459417160)
+@@ -0,0 +1,59 @@
++<changelist name="Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1" date="1631441607241" recycled="true" deleted="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 9/12/21, 2:43 PM [Default Changelist]" />
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
++    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/buildOutputCleanup.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/buildOutputCleanup.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/fileHashes/fileHashes.lock" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/fileHashes/fileHashes.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/fileHashes.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/javaCompile/taskHistory.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/javaCompile/taskHistory.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/taskHistory.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/executionHistory/executionHistory.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/executionHistory/executionHistory.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/executionHistory.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/fileHashes/fileHashes.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/fileHashes/fileHashes.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/fileHashes.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/javaCompile/classAnalysis.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/javaCompile/classAnalysis.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/classAnalysis.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/javaCompile/javaCompile.lock" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/javaCompile/javaCompile.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/javaCompile.lock" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/fileHashes/resourceHashesCache.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/fileHashes/resourceHashesCache.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/resourceHashesCache.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/buildOutputCleanup/outputFiles.bin" />
++    <option name="AFTER_PATH" value=".gradle/buildOutputCleanup/outputFiles.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/outputFiles.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/javaCompile/jarAnalysis.bin" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/javaCompile/jarAnalysis.bin" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/jarAnalysis.bin" />
++  </binary>
++  <binary>
++    <option name="BEFORE_PATH" value=".gradle/7.0.2/executionHistory/executionHistory.lock" />
++    <option name="AFTER_PATH" value=".gradle/7.0.2/executionHistory/executionHistory.lock" />
++    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/executionHistory.lock" />
++  </binary>
++</changelist>
+\ No newline at end of file
+Index: .idea/navEditor.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"navEditor-manualLayoutAlgorithm2\">\n    <option name=\"myPositions\">\n      <map>\n        <entry key=\"nav_host.xml\">\n          <value>\n            <LayoutPositions>\n              <option name=\"myPositions\">\n                <map>\n                  <entry key=\"addUserFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"-293\" />\n                            <option name=\"y\" value=\"-414\" />\n                          </Point>\n                        </option>\n                        <option name=\"myPositions\">\n                          <map>\n                            <entry key=\"action_addUserFragment_to_userListFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                          </map>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                  <entry key=\"decreaseMoneyFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"169\" />\n                            <option name=\"y\" value=\"-694\" />\n                          </Point>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                  <entry key=\"increaseMoneyFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"75\" />\n                            <option name=\"y\" value=\"-357\" />\n                          </Point>\n                        </option>\n                        <option name=\"myPositions\">\n                          <map>\n                            <entry key=\"action_increaseMoneyFragment_to_decreaseMoneyFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                          </map>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                  <entry key=\"mainPageFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"12\" />\n                            <option name=\"y\" value=\"12\" />\n                          </Point>\n                        </option>\n                        <option name=\"myPositions\">\n                          <map>\n                            <entry key=\"action_mainPageFragment_to_userListFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                          </map>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                  <entry key=\"popupWindowFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"-75\" />\n                            <option name=\"y\" value=\"-738\" />\n                          </Point>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                  <entry key=\"userListFragment\">\n                    <value>\n                      <LayoutPositions>\n                        <option name=\"myPosition\">\n                          <Point>\n                            <option name=\"x\" value=\"-273\" />\n                            <option name=\"y\" value=\"-48\" />\n                          </Point>\n                        </option>\n                        <option name=\"myPositions\">\n                          <map>\n                            <entry key=\"action_userListFragment_to_addUserFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                            <entry key=\"action_userListFragment_to_increaseMoneyFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                            <entry key=\"action_userListFragment_to_popupWindowFragment\">\n                              <value>\n                                <LayoutPositions />\n                              </value>\n                            </entry>\n                          </map>\n                        </option>\n                      </LayoutPositions>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </LayoutPositions>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/navEditor.xml b/.idea/navEditor.xml
+--- a/.idea/navEditor.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/.idea/navEditor.xml	(date 1631459417120)
+@@ -41,6 +41,18 @@
+                       </LayoutPositions>
+                     </value>
+                   </entry>
++                  <entry key="increaseHistoryFragment">
++                    <value>
++                      <LayoutPositions>
++                        <option name="myPosition">
++                          <Point>
++                            <option name="x" value="305" />
++                            <option name="y" value="-329" />
++                          </Point>
++                        </option>
++                      </LayoutPositions>
++                    </value>
++                  </entry>
+                   <entry key="increaseMoneyFragment">
+                     <value>
+                       <LayoutPositions>
+@@ -53,6 +65,11 @@
+                         <option name="myPositions">
+                           <map>
+                             <entry key="action_increaseMoneyFragment_to_decreaseMoneyFragment">
++                              <value>
++                                <LayoutPositions />
++                              </value>
++                            </entry>
++                            <entry key="action_increaseMoneyFragment_to_userListFragment">
+                               <value>
+                                 <LayoutPositions />
+                               </value>
+Index: app/src/main/res/navigation/nav_host.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<navigation xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/nav_host\"\n    app:startDestination=\"@id/mainPageFragment\">\n\n    <fragment\n        android:id=\"@+id/mainPageFragment\"\n        android:name=\"com.example.holyquran.ui.mainPage.MainPageFragment\"\n        android:label=\"صفحه اصلی\"\n        tools:layout=\"@layout/fragment_main_page\">\n        <action\n            android:id=\"@+id/action_mainPageFragment_to_userListFragment\"\n            app:destination=\"@id/userListFragment\" />\n    </fragment>\n    <fragment\n        android:id=\"@+id/userListFragment\"\n        android:name=\"com.example.holyquran.ui.userList.UserListFragment\"\n        tools:layout=\"@layout/fragment_user_list\"\n        android:label=\"UserListFragment\" >\n\n        <action\n            android:id=\"@+id/action_userListFragment_to_addUserFragment\"\n            app:destination=\"@id/addUserFragment\" />\n        <action\n            android:id=\"@+id/action_userListFragment_to_popupWindowFragment\"\n            app:destination=\"@id/popupWindowFragment\" />\n        <action\n            android:id=\"@+id/action_userListFragment_to_increaseMoneyFragment\"\n            app:destination=\"@id/increaseMoneyFragment\" />\n    </fragment>\n    <fragment\n        android:id=\"@+id/addUserFragment\"\n        android:name=\"com.example.holyquran.ui.addUser.AddUserFragment\"\n        android:label=\"AddUserFragment\"\n        tools:layout=\"@layout/fragment_add_user\">\n        <action\n            android:id=\"@+id/action_addUserFragment_to_userListFragment\"\n            app:destination=\"@id/userListFragment\" />\n    </fragment>\n    <fragment\n        android:id=\"@+id/popupWindowFragment\"\n        android:name=\"com.example.holyquran.ui.userList.transactions.popupWindow.PopupWindowFragment\"\n        android:label=\"fragment_popop_window\"\n        tools:layout=\"@layout/fragment_popop_window\" />\n\n    <fragment\n        android:id=\"@+id/increaseMoneyFragment\"\n        tools:layout=\"@layout/fragment_increase_money\"\n        android:name=\"com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragment\"\n        android:label=\"UserOptionsFragment\" >\n\n        <argument\n            android:name=\"userIdIncrease\"\n            app:argType=\"long\" />\n        <action\n            android:id=\"@+id/action_increaseMoneyFragment_to_decreaseMoneyFragment\"\n            app:destination=\"@id/decreaseMoneyFragment\" />\n        <action\n            android:id=\"@+id/action_increaseMoneyFragment_to_userListFragment\"\n            app:destination=\"@id/userListFragment\" />\n    </fragment>\n    <fragment\n        android:id=\"@+id/decreaseMoneyFragment\"\n        tools:layout=\"@layout/fragment_decrease_money\"\n        android:name=\"com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseMoneyFragment\"\n        android:label=\"DecreaseMoneyFragment\" >\n        <argument\n            android:name=\"userIdDecrease\"\n            app:argType=\"long\" />\n    </fragment>\n\n</navigation>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/navigation/nav_host.xml b/app/src/main/res/navigation/nav_host.xml
+--- a/app/src/main/res/navigation/nav_host.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/res/navigation/nav_host.xml	(date 1631459417076)
+@@ -60,6 +60,9 @@
+         <action
+             android:id="@+id/action_increaseMoneyFragment_to_userListFragment"
+             app:destination="@id/userListFragment" />
++        <action
++            android:id="@+id/action_increaseMoneyFragment_to_increaseHistoryFragment"
++            app:destination="@id/increaseHistoryFragment" />
+     </fragment>
+     <fragment
+         android:id="@+id/decreaseMoneyFragment"
+@@ -70,5 +73,14 @@
+             android:name="userIdDecrease"
+             app:argType="long" />
+     </fragment>
++    <fragment
++        android:id="@+id/increaseHistoryFragment"
++        android:name="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryFragment"
++        android:label="IncreaseHistoryFragment"
++        tools:layout="@layout/fragment_increase_history">
++        <argument
++            android:name="userId"
++            app:argType="long" />
++    </fragment>
+ 
+ </navigation>
+\ No newline at end of file
+Index: app/src/main/java/com/example/holyquran/ui/userList/transactions/UserTotalMoneyAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/transactions/UserTotalMoneyAdapter.kt b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TrasnactionHistory.kt
+rename from app/src/main/java/com/example/holyquran/ui/userList/transactions/UserTotalMoneyAdapter.kt
+rename to app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TrasnactionHistory.kt
+--- a/app/src/main/java/com/example/holyquran/ui/userList/transactions/UserTotalMoneyAdapter.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TrasnactionHistory.kt	(date 1631459417216)
+@@ -1,4 +1,4 @@
+-package com.example.holyquran.ui.userList.transactions
++package com.example.holyquran.ui.userList.transactions.transactionHistory
+ 
+ import android.view.LayoutInflater
+ import android.view.ViewGroup
+@@ -6,9 +6,10 @@
+ import androidx.recyclerview.widget.ListAdapter
+ import androidx.recyclerview.widget.RecyclerView
+ import com.example.holyquran.data.model.Transaction
+-import com.example.holyquran.databinding.UserTotalMoneyBinding
++import com.example.holyquran.databinding.ItemUserTransactionListBinding
+ 
+-class UserTotalMoneyAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
++
++class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
+     private val ITEM_VIEW_TYPE_EMPTY = 0
+     private val ITEM_VIEW_TYPE_ITEM = 1
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+@@ -31,8 +32,8 @@
+         }
+     }
+ 
+-    lateinit var clickListener: AdapterListener
+-    fun setOnclickListener(listener: AdapterListener) {
++    lateinit var clickListener: AdapterListener2
++    fun setOnclickListener(listener: AdapterListener2) {
+         clickListener = listener
+     }
+ 
+@@ -44,25 +45,24 @@
+             ITEM_VIEW_TYPE_EMPTY
+     }
+ 
+-    class ViewHolder private constructor(val binding: UserTotalMoneyBinding ) :
++    class ViewHolder private constructor(val binding: ItemUserTransactionListBinding) :
+         RecyclerView.ViewHolder(binding.root) {
+-        fun bind(item: Transaction, adapterListener: AdapterListener) {
++        fun bind(item: Transaction, adapterListener2: AdapterListener2) {
+             binding.transaction = item
+-            binding.transaction = item
+-            binding.clickListener = adapterListener
++            binding.clickListener = adapterListener2
+             binding.executePendingBindings()
+         }
+ 
+         companion object {
+             fun from(parent: ViewGroup): ViewHolder {
+                 val layoutInflater = LayoutInflater.from(parent.context)
+-                val binding = UserTotalMoneyBinding.inflate(layoutInflater, parent, false)
++                val binding = ItemUserTransactionListBinding.inflate(layoutInflater, parent, false)
+                 return ViewHolder(binding)
+             }
+         }
+     }
+ 
+-    class EmptyViewHolder private constructor(val binding: UserTotalMoneyBinding) :
++    class EmptyViewHolder private constructor(val binding: ItemUserTransactionListBinding) :
+         RecyclerView.ViewHolder(binding.root) {
+         fun bind() {
+             binding.executePendingBindings()
+@@ -71,7 +71,7 @@
+         companion object {
+             fun from(parent: ViewGroup): EmptyViewHolder {
+                 val layoutInflater = LayoutInflater.from(parent.context)
+-                val binding = UserTotalMoneyBinding.inflate(layoutInflater, parent, false)
++                val binding = ItemUserTransactionListBinding.inflate(layoutInflater, parent, false)
+                 return EmptyViewHolder(binding)
+             }
+         }
+@@ -80,7 +80,7 @@
+ 
+ class BillDiffCallback : DiffUtil.ItemCallback<Transaction>() {
+     override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
+-        return oldItem.userId == newItem.userId
++        return oldItem.transId == newItem.transId
+     }
+ 
+     override fun areContentsTheSame(
+@@ -91,7 +91,7 @@
+     }
+ }
+ 
+-class AdapterListener(
++class AdapterListener2(
+     val clickListener: (id: Long) -> Unit,
+     val deleteListener: (category: Transaction) -> Unit
+ 
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_.xml
+new file mode 100644
+--- /dev/null	(date 1631459417152)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_.xml	(date 1631459417152)
+@@ -0,0 +1,4 @@
++<changelist name="Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]" date="1631441588244" recycled="false" toDelete="true">
++  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch" />
++  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 9/12/21, 2:43 PM [Default Changelist]" />
++</changelist>
+\ No newline at end of file
+Index: app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.ui.userList\n\nimport android.os.Bundle\nimport android.util.Log\nimport androidx.fragment.app.Fragment\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport androidx.databinding.DataBindingUtil\nimport androidx.lifecycle.Observer\nimport androidx.lifecycle.ViewModelProviders\nimport androidx.navigation.fragment.findNavController\nimport androidx.recyclerview.widget.LinearLayoutManager\nimport androidx.recyclerview.widget.RecyclerView\nimport com.example.holyquran.R\nimport com.example.holyquran.ViewModelProviderFactory\nimport com.example.holyquran.data.database.UserDatabase\nimport com.example.holyquran.data.model.UserInfo\nimport com.example.holyquran.databinding.FragmentUserListBinding\nimport com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter\nimport com.google.android.material.snackbar.Snackbar\n\n\nclass UserListFragment : Fragment() {\n    lateinit var mUserListBinding: FragmentUserListBinding\n    lateinit var mUserListViewModel: UserListViewModel\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View? {\n        mUserListBinding =\n            DataBindingUtil.inflate(\n                layoutInflater,\n                R.layout.fragment_user_list,\n                container,\n                false\n            )\n        val application = requireNotNull(this.activity).application\n        val personalDAO = UserDatabase.getInstance(application).mUserDAO\n        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO\n        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, application)\n        mUserListViewModel =\n            ViewModelProviders.of(\n                this, viewModelFactory\n            ).get(UserListViewModel::class.java)\n        mUserListBinding.viewModel = mUserListViewModel\n        this.also { mUserListBinding.lifecycleOwner = it }\n\n        mUserListViewModel.popUpWindow.observe(viewLifecycleOwner, Observer {\n            if (it == true) {\n\n            }\n        })\n\n        mUserListViewModel.goTOAddUser.observe(viewLifecycleOwner, Observer {\n            if (it == true) {\n                this.findNavController().navigate(\n                    UserListFragmentDirections.actionUserListFragmentToAddUserFragment()\n                )\n            }\n        })\n        val mUserAdapter = UserAdapter()\n        mUserAdapter.setOnclickListener(AdapterListener({\n            if (it != 0L)\n                this.findNavController().navigate(\n                    UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)\n                )\n        }, {\n            deleteDialog(it)\n        }\n        ))\n        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)\n        mUserListBinding.rvFeed.adapter = mUserAdapter\n        mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager\n        userInfo()\n        userTotalMoney()\n\n\n       val mUserTotalMoney= UserTotalMoneyAdapter()\n\n\n\n        return mUserListBinding.root\n    }\n\n    private fun userInfo() {\n        mUserListViewModel.getUserList().observe(viewLifecycleOwner, {\n            mUserListViewModel.userInfo.value = it\n            Log.d(\"TAG\", \"viewHolder: $it\")\n        })\n    }\n\n    fun userTotalMoney() {\n        mUserListViewModel.getUserTotalMoney().observe(viewLifecycleOwner, {\n            mUserListViewModel.userTotalMoney.value = it\n            Log.d(\"TAG\", \"viewHolder: $it\")\n        })\n    }\n\n    private fun deleteDialog(userInfo: UserInfo) {\n        Snackbar.make(mUserListBinding.root, \"آیا تمایل به حذف عضو دارید؟ \", Snackbar.LENGTH_LONG)\n            .setAction(\"حذف\") {\n                mUserListViewModel.deleteCategory(userInfo)\n            }\n            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))\n            .show()\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt b/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt
+--- a/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt	(date 1631459417132)
+@@ -17,7 +17,6 @@
+ import com.example.holyquran.data.database.UserDatabase
+ import com.example.holyquran.data.model.UserInfo
+ import com.example.holyquran.databinding.FragmentUserListBinding
+-import com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter
+ import com.google.android.material.snackbar.Snackbar
+ 
+ 
+@@ -73,13 +72,6 @@
+         mUserListBinding.rvFeed.adapter = mUserAdapter
+         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
+         userInfo()
+-        userTotalMoney()
+-
+-
+-       val mUserTotalMoney= UserTotalMoneyAdapter()
+-
+-
+-
+         return mUserListBinding.root
+     }
+ 
+@@ -90,12 +82,6 @@
+         })
+     }
+ 
+-    fun userTotalMoney() {
+-        mUserListViewModel.getUserTotalMoney().observe(viewLifecycleOwner, {
+-            mUserListViewModel.userTotalMoney.value = it
+-            Log.d("TAG", "viewHolder: $it")
+-        })
+-    }
+ 
+     private fun deleteDialog(userInfo: UserInfo) {
+         Snackbar.make(mUserListBinding.root, "آیا تمایل به حذف عضو دارید؟ ", Snackbar.LENGTH_LONG)
+Index: app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.ui.addUser\n\nimport android.app.Application\nimport android.util.Log\nimport androidx.lifecycle.AndroidViewModel\nimport androidx.lifecycle.LiveData\nimport androidx.lifecycle.MutableLiveData\nimport com.example.holyquran.data.database.TransactionsDAO\nimport com.example.holyquran.data.database.UserDAO\nimport com.example.holyquran.data.model.UserInfo\nimport kotlinx.coroutines.*\n\nclass AddUserViewModel(\n    val mUserInfoDAO: UserDAO,\n  val  dataSourceTransactions: TransactionsDAO,\n    application: Application\n) :\n    AndroidViewModel(application) {\n    var viewModelJob = Job()\n    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)\n\n    fun insertUser(\n        fullName: String,\n        accountId:String,\n        mobileNumber:String,\n        phoneNumber: String,\n        dateOfCreation: String,\n        address: String,\n        id: MutableList<UserInfo>,\n    ) {\n        uiScope.launch {\n            try {\n                Log.d(\"TAG\", \"insertTest\")\n                val user = UserInfo(0L, fullName, accountId,mobileNumber,phoneNumber,dateOfCreation,address)\n                withContext(Dispatchers.IO) {\n                    val personalId = mUserInfoDAO.insert(user)\n                    id.forEach {\n                    }\n                    mUserInfoDAO.insertList(id)\n                    Log.d(\"TAG\", \"insertUser: $fullName\")\n                }\n            } catch (e: Exception) {\n                Log.d(\"TAG\", \"insertContact: ${e.message}\")\n            }\n        }\n    }\n\n    private val _addUser = MutableLiveData<Boolean>(false)\n    val addUser: LiveData<Boolean>\n        get() = _addUser\n    fun addUser() {\n        _addUser.value = true\n    }\n\n    private val _goToUserList = MutableLiveData<Boolean>(false)\n    val goToUserList: LiveData<Boolean>\n        get() = _goToUserList\n    fun goToUserList() {\n        _goToUserList.value = true\n    }\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt b/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt
+--- a/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt	(date 1631459417180)
+@@ -12,7 +12,7 @@
+ 
+ class AddUserViewModel(
+     val mUserInfoDAO: UserDAO,
+-  val  dataSourceTransactions: TransactionsDAO,
++  val  mTransactionDAO: TransactionsDAO,
+     application: Application
+ ) :
+     AndroidViewModel(application) {
+Index: app/src/main/res/menu/navdrawer_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<menu xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:android=\"http://schemas.android.com/apk/res/android\">\n\n\n    <item android:title=\"اعضا\"\n        android:id=\"@+id/userListFragment\"\n        android:icon=\"@drawable/ic_people\"/>\n\n\n\n</menu>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/navdrawer_menu.xml b/app/src/main/res/menu/navdrawer_menu.xml
+--- a/app/src/main/res/menu/navdrawer_menu.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/res/menu/navdrawer_menu.xml	(date 1631459417288)
+@@ -1,12 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <menu xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:android="http://schemas.android.com/apk/res/android">
+-
+-
+     <item android:title="اعضا"
+         android:id="@+id/userListFragment"
+         android:icon="@drawable/ic_people"/>
+-
+-
+-
+ </menu>
+\ No newline at end of file
+Index: .idea/assetWizardSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"WizardSettings\">\n    <option name=\"children\">\n      <map>\n        <entry key=\"vectorWizard\">\n          <value>\n            <PersistentState>\n              <option name=\"children\">\n                <map>\n                  <entry key=\"vectorAssetStep\">\n                    <value>\n                      <PersistentState>\n                        <option name=\"children\">\n                          <map>\n                            <entry key=\"clipartAsset\">\n                              <value>\n                                <PersistentState>\n                                  <option name=\"values\">\n                                    <map>\n                                      <entry key=\"url\" value=\"file:$USER_HOME$/sdk/sdk%20last/sdk/icons/material/materialicons/person_add_alt_1/baseline_person_add_alt_1_24.xml\" />\n                                    </map>\n                                  </option>\n                                </PersistentState>\n                              </value>\n                            </entry>\n                          </map>\n                        </option>\n                        <option name=\"values\">\n                          <map>\n                            <entry key=\"autoMirrored\" value=\"true\" />\n                            <entry key=\"color\" value=\"ffffff\" />\n                            <entry key=\"outputName\" value=\"ic_add_person\" />\n                          </map>\n                        </option>\n                      </PersistentState>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </PersistentState>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/assetWizardSettings.xml b/.idea/assetWizardSettings.xml
+--- a/.idea/assetWizardSettings.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/.idea/assetWizardSettings.xml	(date 1631459417308)
+@@ -18,7 +18,7 @@
+                                 <PersistentState>
+                                   <option name="values">
+                                     <map>
+-                                      <entry key="url" value="file:$USER_HOME$/sdk/sdk%20last/sdk/icons/material/materialicons/person_add_alt_1/baseline_person_add_alt_1_24.xml" />
++                                      <entry key="url" value="file:$USER_HOME$/sdk/sdk%20last/sdk/icons/material/materialicons/attach_money/baseline_attach_money_24.xml" />
+                                     </map>
+                                   </option>
+                                 </PersistentState>
+@@ -30,7 +30,7 @@
+                           <map>
+                             <entry key="autoMirrored" value="true" />
+                             <entry key="color" value="ffffff" />
+-                            <entry key="outputName" value="ic_add_person" />
++                            <entry key="outputName" value="loan_money" />
+                           </map>
+                         </option>
+                       </PersistentState>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"DesignSurface\">\n    <option name=\"filePathToZoomLevelMap\">\n      <map>\n        <entry key=\"app/src/main/res/drawable/forground_popup.xml\" value=\"0.3425925925925926\" />\n        <entry key=\"app/src/main/res/drawable/ic_add_person.xml\" value=\"0.3638888888888889\" />\n        <entry key=\"app/src/main/res/drawable/ic_delete2.xml\" value=\"0.3008438818565401\" />\n        <entry key=\"app/src/main/res/drawable/ic_people.xml\" value=\"0.3012658227848101\" />\n        <entry key=\"app/src/main/res/layout/activity_main.xml\" value=\"0.2877637130801688\" />\n        <entry key=\"app/src/main/res/layout/fragment_add_user.xml\" value=\"0.33\" />\n        <entry key=\"app/src/main/res/layout/fragment_decrease_money.xml\" value=\"0.3692708333333333\" />\n        <entry key=\"app/src/main/res/layout/fragment_increase_money.xml\" value=\"0.33\" />\n        <entry key=\"app/src/main/res/layout/fragment_main_page.xml\" value=\"0.25\" />\n        <entry key=\"app/src/main/res/layout/fragment_popop_window.xml\" value=\"0.25\" />\n        <entry key=\"app/src/main/res/layout/fragment_register_user.xml\" value=\"0.33796296296296297\" />\n        <entry key=\"app/src/main/res/layout/fragment_user_list.xml\" value=\"0.34487179487179487\" />\n        <entry key=\"app/src/main/res/layout/fragment_user_options.xml\" value=\"0.33\" />\n        <entry key=\"app/src/main/res/layout/item_trans_history.xml\" value=\"0.3692708333333333\" />\n        <entry key=\"app/src/main/res/layout/item_user_list.xml\" value=\"0.2914529914529915\" />\n        <entry key=\"app/src/main/res/layout/user_total.xml\" value=\"0.3697916666666667\" />\n        <entry key=\"app/src/main/res/layout/user_total_money.xml\" value=\"0.17708333333333334\" />\n        <entry key=\"app/src/main/res/menu/navdrawer_menu.xml\" value=\"0.2918803418803419\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\" />\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/.idea/misc.xml	(date 1631459417316)
+@@ -10,6 +10,7 @@
+         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2877637130801688" />
+         <entry key="app/src/main/res/layout/fragment_add_user.xml" value="0.33" />
+         <entry key="app/src/main/res/layout/fragment_decrease_money.xml" value="0.3692708333333333" />
++        <entry key="app/src/main/res/layout/fragment_increase_history.xml" value="0.33" />
+         <entry key="app/src/main/res/layout/fragment_increase_money.xml" value="0.33" />
+         <entry key="app/src/main/res/layout/fragment_main_page.xml" value="0.25" />
+         <entry key="app/src/main/res/layout/fragment_popop_window.xml" value="0.25" />
+@@ -18,8 +19,11 @@
+         <entry key="app/src/main/res/layout/fragment_user_options.xml" value="0.33" />
+         <entry key="app/src/main/res/layout/item_trans_history.xml" value="0.3692708333333333" />
+         <entry key="app/src/main/res/layout/item_user_list.xml" value="0.2914529914529915" />
++        <entry key="app/src/main/res/layout/item_user_transaction_list.xml" value="0.33" />
+         <entry key="app/src/main/res/layout/user_total.xml" value="0.3697916666666667" />
+         <entry key="app/src/main/res/layout/user_total_money.xml" value="0.17708333333333334" />
++        <entry key="app/src/main/res/menu/loan_menu.xml" value="0.34739583333333335" />
++        <entry key="app/src/main/res/menu/loan_option.xml" value="0.3697916666666667" />
+         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.2918803418803419" />
+       </map>
+     </option>
+Index: app/src/main/res/layout/item_user_transaction_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_user_transaction_list.xml b/app/src/main/res/layout/item_user_transaction_list.xml
+new file mode 100644
+--- /dev/null	(date 1631459417336)
++++ b/app/src/main/res/layout/item_user_transaction_list.xml	(date 1631459417336)
+@@ -0,0 +1,196 @@
++<layout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools">
++
++    <data>
++
++        <variable
++            name="clickListener"
++            type="com.example.holyquran.ui.userList.transactions.transactionHistory.AdapterListener2" />
++
++        <variable
++            name="userInfo"
++            type="com.example.holyquran.data.model.UserInfo" />
++
++        <variable
++            name="transaction"
++            type="com.example.holyquran.data.model.Transaction" />
++    </data>
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="5dp"
++        android:layout_marginRight="5dp"
++        android:gravity="center"
++        android:orientation="vertical">
++
++
++        <androidx.cardview.widget.CardView
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_margin="10dp"
++            android:gravity="center"
++            app:cardCornerRadius="8dp"
++            app:cardElevation="8dp"
++            app:cardMaxElevation="10dp"
++            app:cardPreventCornerOverlap="true">
++
++            <LinearLayout
++                android:layout_width="match_parent"
++                android:layout_height="87dp"
++                android:layout_margin="10dp"
++                android:clickable="true"
++                android:focusable="true"
++                android:orientation="vertical">
++
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:gravity="center"
++                    android:orientation="horizontal">
++
++
++                <TextView
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:text="برداشت"
++                    android:layout_marginRight="192dp"
++                    android:textColor="@color/black"
++                    android:textSize="20sp" />
++
++                <TextView
++                    android:layout_width="wrap_content"
++                    android:layout_height="wrap_content"
++                    android:text="واریز"
++                    android:layout_gravity=""
++                    android:textColor="@color/black"
++                    android:textSize="18sp" />
++
++                </LinearLayout>
++
++                <LinearLayout
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:gravity="center"
++                    android:orientation="horizontal">
++
++                    <TextView
++                        android:layout_width="wrap_content"
++                        android:layout_height="wrap_content"
++                        android:layout_marginEnd="200dp"
++                        android:text="@{transaction.decrease}"
++                        android:textColor="@color/black"
++                        android:textSize="18sp"
++                        tools:text="5000" />
++
++                    <TextView
++                        android:layout_width="wrap_content"
++                        android:layout_height="wrap_content"
++                        android:text="@{transaction.increase}"
++                        android:textColor="@color/black"
++                        android:textSize="20sp"
++                        tools:text="5000" />
++
++                </LinearLayout>
++            </LinearLayout>
++        </androidx.cardview.widget.CardView>
++    </LinearLayout>
++</layout>
++
++
++    <!--    <LinearLayout-->
++    <!--        android:layout_width="match_parent"-->
++    <!--        android:layout_height="wrap_content"-->
++    <!--        android:layout_marginLeft="10dp"-->
++    <!--        android:layout_marginRight="10dp">-->
++
++
++    <!--    <androidx.cardview.widget.CardView-->
++    <!--        android:layout_width="match_parent"-->
++    <!--        android:layout_height="wrap_content"-->
++    <!--        android:layout_margin="5dp"-->
++    <!--        app:cardCornerRadius="8dp"-->
++    <!--        app:cardElevation="8dp"-->
++    <!--        app:cardMaxElevation="10dp"-->
++    <!--        app:cardPreventCornerOverlap="true">-->
++
++
++    <!--        <RelativeLayout-->
++    <!--            android:layout_width="match_parent"-->
++    <!--            android:layout_height="87dp"-->
++    <!--            android:layout_margin="10dp"-->
++    <!--            android:clickable="true"-->
++    <!--            android:focusable="true"-->
++    <!--            android:onClick="@{()->clickListener.onclick(viewModel)}"-->
++    <!--            android:orientation="vertical">-->
++
++    <!--            <ImageView-->
++    <!--                android:id="@+id/idIVCourseImage"-->
++    <!--                android:layout_width="45sp"-->
++    <!--                android:layout_height="45sp"-->
++    <!--                android:layout_marginStart="10dp"-->
++    <!--                android:layout_marginLeft="10dp"-->
++    <!--                android:layout_marginTop="25dp"-->
++    <!--                android:layout_marginEnd="10dp"-->
++    <!--                android:layout_marginRight="10dp"-->
++    <!--                android:layout_marginBottom="10dp"-->
++    <!--                android:contentDescription="@string/app_name"-->
++    <!--                android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"-->
++    <!--                android:padding="5dp"-->
++    <!--                android:src="@drawable/ic_delete2" />-->
++
++    <!--            <TextView-->
++    <!--                android:id="@+id/idTVCourseName"-->
++    <!--                android:layout_width="286dp"-->
++    <!--                android:layout_height="wrap_content"-->
++    <!--                android:layout_marginStart="10dp"-->
++    <!--                android:layout_marginLeft="10dp"-->
++    <!--                android:layout_marginTop="10dp"-->
++    <!--                android:layout_marginRight="25dp"-->
++    <!--                android:layout_toEndOf="@id/idIVCourseImage"-->
++    <!--                android:layout_toRightOf="@id/idIVCourseImage"-->
++    <!--                android:text="@{viewModel.categoryString}"-->
++    <!--                android:textColor="#000"-->
++    <!--                android:textSize="20sp"-->
++    <!--                android:textStyle="bold" />-->
++
++
++    <!--        </RelativeLayout>-->
++    <!--    </androidx.cardview.widget.CardView>-->
++    <!--    </LinearLayout>-->
++
++    <!--    <LinearLayout-->
++    <!--        android:clickable="true"-->
++    <!--        android:onClick="@{()->clickListener.onclick(viewModel)}"-->
++    <!--        android:gravity="center_vertical"-->
++    <!--        android:layout_margin="10dp"-->
++    <!--        android:orientation="horizontal"-->
++    <!--        android:layout_width="match_parent"-->
++    <!--        android:layout_height="wrap_content">-->
++
++    <!--        <ImageView-->
++    <!--            android:onClick="@{()->clickListener.onDeleteClick(viewModel)}"-->
++    <!--            android:layout_width="25dp"-->
++    <!--            android:layout_height="25dp"-->
++    <!--            android:layout_marginLeft="16dp"-->
++    <!--            android:src="@drawable/ic_delete2"-->
++    <!--            android:focusable="true"-->
++    <!--            android:layout_marginStart="16dp" />-->
++    <!--        <TextView-->
++    <!--            android:layout_width="match_parent"-->
++    <!--            android:layout_height="wrap_content"-->
++    <!--            android:layout_marginLeft="25dp"-->
++    <!--            android:layout_marginRight="15dp"-->
++    <!--            android:layout_weight="1"-->
++    <!--            android:ellipsize="end"-->
++    <!--            android:singleLine="true"-->
++    <!--            android:text="@{viewModel.categoryString}"-->
++    <!--            android:textColor="@color/gray600"-->
++    <!--            android:textSize="20sp"-->
++    <!--            tools:text="موبایل" />-->
++
++    <!--        <FrameLayout-->
++    <!--            android:layout_width="wrap_content"-->
++    <!--            android:layout_height="wrap_content">-->
++    <!--        </FrameLayout>-->
+Index: app/src/main/res/drawable/loan_money.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/loan_money.xml b/app/src/main/res/drawable/loan_money.xml
+new file mode 100644
+--- /dev/null	(date 1631459417348)
++++ b/app/src/main/res/drawable/loan_money.xml	(date 1631459417348)
+@@ -0,0 +1,5 @@
++<vector android:autoMirrored="true" android:height="24dp"
++    android:tint="#FFFFFF" android:viewportHeight="24"
++    android:viewportWidth="24" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M11.8,10.9c-2.27,-0.59 -3,-1.2 -3,-2.15 0,-1.09 1.01,-1.85 2.7,-1.85 1.78,0 2.44,0.85 2.5,2.1h2.21c-0.07,-1.72 -1.12,-3.3 -3.21,-3.81V3h-3v2.16c-1.94,0.42 -3.5,1.68 -3.5,3.61 0,2.31 1.91,3.46 4.7,4.13 2.5,0.6 3,1.48 3,2.41 0,0.69 -0.49,1.79 -2.7,1.79 -2.06,0 -2.87,-0.92 -2.98,-2.1h-2.2c0.12,2.19 1.76,3.42 3.68,3.83V21h3v-2.15c1.95,-0.37 3.5,-1.5 3.5,-3.55 0,-2.84 -2.43,-3.81 -4.7,-4.4z"/>
++</vector>
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch
+new file mode 100644
+--- /dev/null	(date 1631459417416)
++++ b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch	(date 1631459417416)
+@@ -0,0 +1,57 @@
++Index: app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+>package com.example.holyquran.data.database\n\nimport android.content.Context\nimport androidx.room.Database\nimport androidx.room.Room\nimport androidx.room.RoomDatabase\nimport com.example.holyquran.data.model.Transaction\nimport com.example.holyquran.data.model.UserInfo\n\n@Database(entities = [UserInfo::class, Transaction::class],version = 1,exportSchema = false)\nabstract class UserDatabase:RoomDatabase() {\n    abstract val mUserDAO: UserDAO\n    abstract val mTransactionsDAO: TransactionsDAO\n\n    companion object {\n        @Volatile\n        private var INSTANCE: UserDatabase? = null\n        fun getInstance(context: Context): UserDatabase {\n            synchronized(this) {\n                var instance = INSTANCE\n                if (instance == null) {\n                    instance = Room.databaseBuilder(\n                        context.applicationContext,\n                        UserDatabase::class.java,\n                        \"user_database\"\n                    )\n                        .allowMainThreadQueries()\n                        .fallbackToDestructiveMigration()\n                        .build()\n                    INSTANCE = instance\n                }\n                return instance\n            }\n        }\n    }\n    }
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt b/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt
++--- a/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt	
+++++ b/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt	
++@@ -7,7 +7,7 @@
++ import com.example.holyquran.data.model.Transaction
++ import com.example.holyquran.data.model.UserInfo
++ 
++-@Database(entities = [UserInfo::class, Transaction::class],version = 1,exportSchema = false)
+++@Database(entities = [UserInfo::class, Transaction::class],version = 2,exportSchema = false)
++ abstract class UserDatabase:RoomDatabase() {
++     abstract val mUserDAO: UserDAO
++     abstract val mTransactionsDAO: TransactionsDAO
++Index: .idea/workspace.xml
++IDEA additional info:
++Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
++<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AndroidLayouts\">\n    <shared>\n      <config>\n        <device id=\"pixel\" />\n        <device id=\"pixel_4_xl\" />\n        <device id=\"pixel_xl\" />\n        <device id=\"Nexus 9\" />\n        <device id=\"pixel_5\" />\n        <device id=\"pixel_4a\" />\n        <device id=\"pixel_3a\" />\n        <device id=\"Nexus 5X\" />\n        <device id=\"Nexus 7\" />\n        <device id=\"tv_720p\" />\n      </config>\n    </shared>\n  </component>\n  <component name=\"AndroidLogFilters\">\n    <option name=\"TOOL_WINDOW_LOG_LEVEL\" value=\"verbose\" />\n    <option name=\"TOOL_WINDOW_CONFIGURED_FILTER\" value=\"No Filters\" />\n  </component>\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"NONE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c6dab7ab-bc18-4e05-b454-393bdca7acd1\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/resourceHashesCache.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/resourceHashesCache.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/UserConvertor.kt\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseMoneyFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseMoneyFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/popupWindow/PopupWindowFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/popupWindow/PopupWindowFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[/home/amir/.android/avd/Pixel_4_XL_API_31.avd]\" />\n  <component name=\"ExternalProjectsData\">\n    <projectState path=\"$PROJECT_DIR$\">\n      <ProjectState />\n    </projectState>\n  </component>\n  <component name=\"ExternalProjectsManager\">\n    <system id=\"GRADLE\">\n      <state>\n        <projects_view>\n          <tree_state>\n            <expand>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n                <item name=\"Dependencies\" type=\"6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode\" />\n              </path>\n            </expand>\n            <select />\n          </tree_state>\n        </projects_view>\n      </state>\n    </system>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"navigationResourceFile\" />\n        <option value=\"valueResourceFile\" />\n        <option value=\"resourceFile\" />\n        <option value=\"Kotlin Interface\" />\n        <option value=\"Kotlin Class\" />\n        <option value=\"layoutResourceFile\" />\n        <option value=\"Kotlin File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <excluded-from-favorite>\n      <branch-storage>\n        <map>\n          <entry type=\"LOCAL\">\n            <value>\n              <list>\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"master\" />\n              </list>\n            </value>\n          </entry>\n        </map>\n      </branch-storage>\n    </excluded-from-favorite>\n    <favorite-branches>\n      <branch-storage>\n        <map>\n          <entry type=\"LOCAL\">\n            <value>\n              <list>\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"main\" />\n              </list>\n            </value>\n          </entry>\n        </map>\n      </branch-storage>\n    </favorite-branches>\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"ProjectId\" id=\"1xRccCyjLabNihrl7yEpCCFGD0e\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ResourceManagerPrefKey.ResourceType\" value=\"ANIM\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.cidr.known.project.marker\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/ui/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/ui/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"cidr.known.project.marker\" value=\"true\" />\n    <property name=\"com.android.tools.idea.sqlite.queryhistory\" value=\"SELECT * from user_info WHERE user_id = '1'\" />\n    <property name=\"last_directory_selection\" value=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"memory.settings.postsync.last.time.stamp\" value=\"1631370940536\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"application.passwordSafe\" />\n    <property name=\"show.do.not.copy.http.proxy.settings.to.gradle\" value=\"true\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\n      <recent name=\"$PROJECT_DIR$/app\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/res/layout\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages\" />\n    </key>\n    <key name=\"CopyKotlinDeclarationDialog.RECENTS_KEY\">\n      <recent name=\"com.example.holyquran.holyQuran.ui.introPages\" />\n      <recent name=\"com.example.holyquran.ui\" />\n      <recent name=\"com.example.holyquran.ui.mainPage\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\" activateToolWindowBeforeRun=\"false\">\n      <module name=\"Holy_Quran.app\" />\n      <option name=\"DEPLOY\" value=\"true\" />\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\n      <option name=\"ALL_USERS\" value=\"false\" />\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\n      <option name=\"MODE\" value=\"default_activity\" />\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\n      <Auto>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Auto>\n      <Hybrid>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Hybrid>\n      <Java />\n      <Native>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Native>\n      <Profilers>\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Sample Java Methods\" />\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\n      </Profilers>\n      <option name=\"DEEP_LINK\" value=\"\" />\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\n      <method v=\"2\">\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration>$USER_HOME$/.subversion</configuration>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c6dab7ab-bc18-4e05-b454-393bdca7acd1\" name=\"Default Changelist\" comment=\"\" />\n      <created>1630321418489</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1630321418489</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n</project>
++Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
++<+>UTF-8
++===================================================================
++diff --git a/.idea/workspace.xml b/.idea/workspace.xml
++--- a/.idea/workspace.xml	
+++++ b/.idea/workspace.xml	
++@@ -36,27 +36,8 @@
++       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
++       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
++       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" afterDir="false" />
++       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/UserConvertor.kt" beforeDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseMoneyFragment.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseViewModel.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyViewModel.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/popupWindow/PopupWindowFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/popupWindow/PopupWindowFragment.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" afterDir="false" />
++-      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" afterDir="false" />
++     </list>
++     <option name="SHOW_DIALOG" value="false" />
++     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+Index: app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryFragment.kt b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryFragment.kt
+new file mode 100644
+--- /dev/null	(date 1631459417204)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryFragment.kt	(date 1631459417204)
+@@ -0,0 +1,82 @@
++package com.example.holyquran.ui.userList.transactions.transactionHistory
++
++import android.os.Bundle
++import android.util.Log
++import androidx.fragment.app.Fragment
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import androidx.databinding.DataBindingUtil
++import androidx.lifecycle.ViewModelProviders
++import androidx.recyclerview.widget.LinearLayoutManager
++import androidx.recyclerview.widget.RecyclerView
++import com.example.holyquran.R
++import com.example.holyquran.ViewModelProviderFactory
++import com.example.holyquran.data.database.UserDatabase
++import com.example.holyquran.databinding.FragmentIncreaseHistoryBinding
++
++class TransactionHistoryFragment : Fragment() {
++    lateinit var mIncreaseHistoryBinding: FragmentIncreaseHistoryBinding
++    lateinit var mTransactionHistoryViewModel: TransactionHistoryViewModel
++    var id: Long = 0L
++    override fun onCreateView(
++        inflater: LayoutInflater, container: ViewGroup?,
++        savedInstanceState: Bundle?
++    ): View? {
++        mIncreaseHistoryBinding =
++            DataBindingUtil.inflate(
++                layoutInflater,
++                R.layout.fragment_increase_history,
++                container,
++                false
++            )
++
++        val application = requireNotNull(this.activity).application
++        val personalDAO = UserDatabase.getInstance(application).mUserDAO
++        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
++        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, application)
++        mTransactionHistoryViewModel =
++            ViewModelProviders.of(
++                this, viewModelFactory
++            ).get(TransactionHistoryViewModel::class.java)
++        mIncreaseHistoryBinding.increaseHistoryViewModel = mTransactionHistoryViewModel
++        this.also { mIncreaseHistoryBinding.lifecycleOwner = it }
++
++        val arg =
++            TransactionHistoryFragmentArgs.fromBundle(
++                requireArguments()
++            )
++        id = arg.userId
++        val mIncreaseHistoryAdapter = increaseHistoryAdapter()
++        mIncreaseHistoryAdapter.setOnclickListener(AdapterListener2({
++            if (it != 0L)
++                null
++        }, {
++//            deleteDialog(it)
++        }
++        ))
++        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
++        mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
++        mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
++        userInfo()
++
++
++        mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
++            mTransactionHistoryViewModel.setUserName(it)
++        })
++        mTransactionHistoryViewModel.userName.observe(viewLifecycleOwner, {
++            if (it != null) {
++                mIncreaseHistoryBinding.userName = it
++            }
++        })
++        return mIncreaseHistoryBinding.root
++    }
++
++    private fun userInfo() {
++        mTransactionHistoryViewModel.getTransactionList(id).observe(viewLifecycleOwner, {
++            Log.d("TAG", "userInfo2: ${it}")
++            mTransactionHistoryViewModel.transactionInfo.value = it
++        })
++    }
++}
++
+Index: app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryViewModel.kt b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryViewModel.kt
+new file mode 100644
+--- /dev/null	(date 1631459417276)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryViewModel.kt	(date 1631459417276)
+@@ -0,0 +1,37 @@
++package com.example.holyquran.ui.userList.transactions.transactionHistory
++
++import android.app.Application
++import androidx.lifecycle.AndroidViewModel
++import androidx.lifecycle.LiveData
++import androidx.lifecycle.MutableLiveData
++import com.example.holyquran.data.database.TransactionsDAO
++import com.example.holyquran.data.database.UserDAO
++import com.example.holyquran.data.model.Transaction
++import com.example.holyquran.data.model.UserInfo
++
++class TransactionHistoryViewModel(
++    val mUserInfoDAO: UserDAO,
++    val mTransactionDAO: TransactionsDAO,
++    application: Application
++) :
++    AndroidViewModel(application) {
++
++    private val _userName = MutableLiveData<UserInfo>()
++    val userName: LiveData<UserInfo>
++        get() = _userName
++
++    fun setUserName(id: Long): LiveData<UserInfo>? {
++        return mUserInfoDAO.get(id)
++    }
++
++    fun setUserName(mUserInfo: UserInfo) {
++        _userName.value = mUserInfo
++    }
++
++
++    val transactionInfo = MutableLiveData<List<Transaction>>()
++    fun getTransactionList(id: Long): LiveData<List<Transaction>> {
++        return mTransactionDAO.getAllTransactionByUserId(id)
++    }
++
++}
+Index: app/src/main/java/com/example/holyquran/ui/userList/transactions/No.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ui/userList/transactions/No.kt b/app/src/main/java/com/example/holyquran/ui/userList/transactions/No.kt
+new file mode 100644
+--- /dev/null	(date 1631459417296)
++++ b/app/src/main/java/com/example/holyquran/ui/userList/transactions/No.kt	(date 1631459417296)
+@@ -0,0 +1,4 @@
++package com.example.holyquran.ui.userList.transactions
++
++class No {
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_increase_history.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_increase_history.xml b/app/src/main/res/layout/fragment_increase_history.xml
+new file mode 100644
+--- /dev/null	(date 1631459417324)
++++ b/app/src/main/res/layout/fragment_increase_history.xml	(date 1631459417324)
+@@ -0,0 +1,62 @@
++<?xml version="1.0" encoding="utf-8"?>
++
++<layout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    xmlns:app="http://schemas.android.com/apk/res-auto">
++
++    <data>
++        <variable
++            name="increaseHistoryViewModel"
++            type="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel" />
++   <variable
++       name="userName"
++       type="com.example.holyquran.data.model.UserInfo" />
++    </data>
++
++    <LinearLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_marginTop="16dp"
++        android:orientation="vertical"
++        tools:context=".ui.userList.transactions.transactionHistory.increaseHistory.IncreaseHistoryFragment">
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center"
++            android:gravity="center"
++            android:orientation="horizontal">
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginEnd="2dp"
++                android:text="@{userName.fullName}"
++                android:textColor="@color/black"
++                android:textSize="20sp"
++                tools:text="امیر حسین رجايی زاده‌" />
++
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:text="لیست تراکنش های جناب آقای"
++                android:textColor="@color/black"
++                android:textSize="18sp" />
++        </LinearLayout>
++
++        <LinearLayout
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="15sp">
++
++            <androidx.recyclerview.widget.RecyclerView
++                android:id="@+id/rvFeed"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:nestedScrollingEnabled="false"
++                app:increaseList="@{increaseHistoryViewModel.transactionInfo}"/>
++        </LinearLayout>
++
++
++    </LinearLayout>
++</layout>
+Index: app/src/main/java/com/example/holyquran/utils/BindingUtils.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.utils\n\nimport androidx.databinding.BindingAdapter\nimport androidx.recyclerview.widget.RecyclerView\nimport com.example.holyquran.data.model.Transaction\nimport com.example.holyquran.data.model.UserInfo\nimport com.example.holyquran.ui.userList.UserAdapter\nimport com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter\n\n@BindingAdapter(\"userList\")\nfun userList(\n    recyclerView: RecyclerView,\n    list: List<UserInfo>?\n) {\n    (recyclerView.adapter as UserAdapter?)?.submitList(list)\n    (recyclerView.adapter as UserAdapter?)?.notifyDataSetChanged()\n}\n\nfun userTotalMoney(\n    recyclerView: RecyclerView,\n    list: List<Transaction>?\n) {\n    (recyclerView.adapter as UserTotalMoneyAdapter?)?.submitList(list)\n    (recyclerView.adapter as UserTotalMoneyAdapter?)?.notifyDataSetChanged()\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt b/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt
+--- a/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt	(date 1631459417088)
+@@ -5,7 +5,7 @@
+ import com.example.holyquran.data.model.Transaction
+ import com.example.holyquran.data.model.UserInfo
+ import com.example.holyquran.ui.userList.UserAdapter
+-import com.example.holyquran.ui.userList.transactions.UserTotalMoneyAdapter
++import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistoryAdapter
+ 
+ @BindingAdapter("userList")
+ fun userList(
+@@ -16,11 +16,12 @@
+     (recyclerView.adapter as UserAdapter?)?.notifyDataSetChanged()
+ }
+ 
+-fun userTotalMoney(
++@BindingAdapter("increaseList")
++fun increaseList(
+     recyclerView: RecyclerView,
+     list: List<Transaction>?
+ ) {
+-    (recyclerView.adapter as UserTotalMoneyAdapter?)?.submitList(list)
+-    (recyclerView.adapter as UserTotalMoneyAdapter?)?.notifyDataSetChanged()
++    (recyclerView.adapter as increaseHistoryAdapter?)?.submitList(list)
++    (recyclerView.adapter as increaseHistoryAdapter?)?.notifyDataSetChanged()
+ }
+ 
+Index: app/src/main/res/menu/loan_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/menu/loan_menu.xml b/app/src/main/res/menu/loan_menu.xml
+new file mode 100644
+--- /dev/null	(date 1631459417196)
++++ b/app/src/main/res/menu/loan_menu.xml	(date 1631459417196)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="utf-8"?>
++<menu xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto">
++    <item
++        android:id="@+id/loanMoney"
++        android:icon="@drawable/loan_money"
++        android:title="تاریخچه تراکنش ها" />
++
++
++    <item android:title="دریافت وام" />
++
++</menu>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AndroidLayouts\">\n    <shared>\n      <config>\n        <device id=\"pixel\" />\n        <device id=\"pixel_4_xl\" />\n        <device id=\"pixel_xl\" />\n        <device id=\"Nexus 9\" />\n        <device id=\"pixel_5\" />\n        <device id=\"pixel_4a\" />\n        <device id=\"pixel_3a\" />\n        <device id=\"Nexus 5X\" />\n        <device id=\"Nexus 7\" />\n        <device id=\"tv_720p\" />\n      </config>\n    </shared>\n  </component>\n  <component name=\"AndroidLogFilters\">\n    <option name=\"TOOL_WINDOW_LOG_LEVEL\" value=\"verbose\" />\n    <option name=\"TOOL_WINDOW_CONFIGURED_FILTER\" value=\"No Filters\" />\n  </component>\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"NONE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c6dab7ab-bc18-4e05-b454-393bdca7acd1\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/resourceHashesCache.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/fileHashes/resourceHashesCache.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/UserConvertor.kt\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseMoneyFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseMoneyFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyViewModel.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyViewModel.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/popupWindow/PopupWindowFragment.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/popupWindow/PopupWindowFragment.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ExecutionTargetManager\" SELECTED_TARGET=\"device_and_snapshot_combo_box_target[/home/amir/.android/avd/Pixel_4_XL_API_31.avd]\" />\n  <component name=\"ExternalProjectsData\">\n    <projectState path=\"$PROJECT_DIR$\">\n      <ProjectState />\n    </projectState>\n  </component>\n  <component name=\"ExternalProjectsManager\">\n    <system id=\"GRADLE\">\n      <state>\n        <projects_view>\n          <tree_state>\n            <expand>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n              </path>\n              <path>\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\n                <item name=\"Holy Quran\" type=\"f1a62948:ProjectNode\" />\n                <item name=\"app\" type=\"2d1252cf:ModuleNode\" />\n                <item name=\"Dependencies\" type=\"6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode\" />\n              </path>\n            </expand>\n            <select />\n          </tree_state>\n        </projects_view>\n      </state>\n    </system>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"navigationResourceFile\" />\n        <option value=\"valueResourceFile\" />\n        <option value=\"resourceFile\" />\n        <option value=\"Kotlin Interface\" />\n        <option value=\"Kotlin Class\" />\n        <option value=\"layoutResourceFile\" />\n        <option value=\"Kotlin File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <excluded-from-favorite>\n      <branch-storage>\n        <map>\n          <entry type=\"LOCAL\">\n            <value>\n              <list>\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"master\" />\n              </list>\n            </value>\n          </entry>\n        </map>\n      </branch-storage>\n    </excluded-from-favorite>\n    <favorite-branches>\n      <branch-storage>\n        <map>\n          <entry type=\"LOCAL\">\n            <value>\n              <list>\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"main\" />\n              </list>\n            </value>\n          </entry>\n        </map>\n      </branch-storage>\n    </favorite-branches>\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"ProjectId\" id=\"1xRccCyjLabNihrl7yEpCCFGD0e\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ResourceManagerPrefKey.ResourceType\" value=\"ANIM\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.cidr.known.project.marker\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/ui/introPages/IndicatorLayout.kt_IndicatorLayout_DIMENSIONS\" value=\"1080&#10;1920\" />\n    <property name=\"android-custom-view/home/amir/AndroidStudioProjects/HolyQuran/app/src/main/java/com/example/holyquran/ui/introPages/IndicatorLayout.kt_SELECTED\" value=\"IndicatorLayout\" />\n    <property name=\"cidr.known.project.marker\" value=\"true\" />\n    <property name=\"com.android.tools.idea.sqlite.queryhistory\" value=\"SELECT * from user_info WHERE user_id = '1'\" />\n    <property name=\"last_directory_selection\" value=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n    <property name=\"memory.settings.postsync.last.time.stamp\" value=\"1631370940536\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"application.passwordSafe\" />\n    <property name=\"show.do.not.copy.http.proxy.settings.to.gradle\" value=\"true\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/res/drawable\" />\n      <recent name=\"$PROJECT_DIR$/app\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/res/layout\" />\n      <recent name=\"$PROJECT_DIR$/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages\" />\n    </key>\n    <key name=\"CopyKotlinDeclarationDialog.RECENTS_KEY\">\n      <recent name=\"com.example.holyquran.holyQuran.ui.introPages\" />\n      <recent name=\"com.example.holyquran.ui\" />\n      <recent name=\"com.example.holyquran.ui.mainPage\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"app\" type=\"AndroidRunConfigurationType\" factoryName=\"Android App\" activateToolWindowBeforeRun=\"false\">\n      <module name=\"Holy_Quran.app\" />\n      <option name=\"DEPLOY\" value=\"true\" />\n      <option name=\"DEPLOY_APK_FROM_BUNDLE\" value=\"false\" />\n      <option name=\"DEPLOY_AS_INSTANT\" value=\"false\" />\n      <option name=\"ARTIFACT_NAME\" value=\"\" />\n      <option name=\"PM_INSTALL_OPTIONS\" value=\"\" />\n      <option name=\"ALL_USERS\" value=\"false\" />\n      <option name=\"ALWAYS_INSTALL_WITH_PM\" value=\"false\" />\n      <option name=\"DYNAMIC_FEATURES_DISABLED_LIST\" value=\"\" />\n      <option name=\"ACTIVITY_EXTRA_FLAGS\" value=\"\" />\n      <option name=\"MODE\" value=\"default_activity\" />\n      <option name=\"CLEAR_LOGCAT\" value=\"false\" />\n      <option name=\"SHOW_LOGCAT_AUTOMATICALLY\" value=\"false\" />\n      <option name=\"SKIP_NOOP_APK_INSTALLATIONS\" value=\"true\" />\n      <option name=\"FORCE_STOP_RUNNING_APP\" value=\"true\" />\n      <option name=\"TARGET_SELECTION_MODE\" value=\"DEVICE_AND_SNAPSHOT_COMBO_BOX\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_CONFIGURATION_ID\" value=\"-1\" />\n      <option name=\"SELECTED_CLOUD_MATRIX_PROJECT_ID\" value=\"\" />\n      <option name=\"DEBUGGER_TYPE\" value=\"Auto\" />\n      <Auto>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Auto>\n      <Hybrid>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Hybrid>\n      <Java />\n      <Native>\n        <option name=\"USE_JAVA_AWARE_DEBUGGER\" value=\"false\" />\n        <option name=\"SHOW_STATIC_VARS\" value=\"true\" />\n        <option name=\"WORKING_DIR\" value=\"\" />\n        <option name=\"TARGET_LOGGING_CHANNELS\" value=\"lldb process:gdb-remote packets\" />\n        <option name=\"SHOW_OPTIMIZED_WARNING\" value=\"true\" />\n      </Native>\n      <Profilers>\n        <option name=\"ADVANCED_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"STARTUP_CPU_PROFILING_CONFIGURATION_NAME\" value=\"Sample Java Methods\" />\n        <option name=\"STARTUP_NATIVE_MEMORY_PROFILING_ENABLED\" value=\"false\" />\n        <option name=\"NATIVE_MEMORY_SAMPLE_RATE_BYTES\" value=\"2048\" />\n      </Profilers>\n      <option name=\"DEEP_LINK\" value=\"\" />\n      <option name=\"ACTIVITY_CLASS\" value=\"\" />\n      <option name=\"SEARCH_ACTIVITY_IN_GLOBAL_SCOPE\" value=\"false\" />\n      <option name=\"SKIP_ACTIVITY_VALIDATION\" value=\"false\" />\n      <method v=\"2\">\n        <option name=\"Android.Gradle.BeforeRunTask\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration>$USER_HOME$/.subversion</configuration>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c6dab7ab-bc18-4e05-b454-393bdca7acd1\" name=\"Default Changelist\" comment=\"\" />\n      <created>1630321418489</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1630321418489</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/.idea/workspace.xml	(date 1631459417380)
+@@ -4,19 +4,20 @@
+     <shared>
+       <config>
+         <device id="pixel" />
++        <device id="pixel_3_xl" />
++        <device id="pixel_2" />
+         <device id="pixel_4_xl" />
++        <device id="Nexus 7" />
++        <device id="pixel_5" />
+         <device id="pixel_xl" />
+         <device id="Nexus 9" />
+-        <device id="pixel_5" />
+         <device id="pixel_4a" />
+         <device id="pixel_3a" />
+-        <device id="Nexus 5X" />
+-        <device id="Nexus 7" />
+-        <device id="tv_720p" />
+       </config>
+     </shared>
+   </component>
+   <component name="AndroidLogFilters">
++    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="userInfo2" />
+     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+   </component>
+@@ -25,6 +26,39 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="c6dab7ab-bc18-4e05-b454-393bdca7acd1" name="Default Changelist" comment="">
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/buildOutputCleanup.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/classAnalysis.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/executionHistory.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/executionHistory.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/fileHashes.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/fileHashes.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/jarAnalysis.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/javaCompile.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/outputFiles.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/resourceHashesCache.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/shelved.patch" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]/taskHistory.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/buildOutputCleanup.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/classAnalysis.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/executionHistory.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/executionHistory.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/fileHashes.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/fileHashes.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/jarAnalysis.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/javaCompile.lock" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/outputFiles.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/resourceHashesCache.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/shelved.patch" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/taskHistory.bin" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21__2_43_PM__Default_Changelist_1.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/No.kt" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryFragment.kt" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TransactionHistoryViewModel.kt" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/loan_money.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_history.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_transaction_list.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/loan_menu.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/executionHistory/executionHistory.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/fileHashes/fileHashes.bin" afterDir="false" />
+@@ -36,26 +70,21 @@
+       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Transaction.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/UserConvertor.kt" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/MainActivity.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseMoneyFragment.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/decrease/DecreaseViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/decreaseMoney/DecreaseViewModel.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/increaseMoney/IncreaseMoneyViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyViewModel.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/popupWindow/PopupWindowFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/popupWindow/PopupWindowFragment.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/UserTotalMoneyAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory/TrasnactionHistory.kt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/increaseMoney/IncreaseMoneyFragment.kt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/BindingUtils.kt" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/user_total_money.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/navdrawer_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navdrawer_menu.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -102,11 +131,11 @@
+       <list>
+         <option value="navigationResourceFile" />
+         <option value="valueResourceFile" />
+-        <option value="resourceFile" />
+         <option value="Kotlin Interface" />
+-        <option value="Kotlin Class" />
+         <option value="layoutResourceFile" />
+         <option value="Kotlin File" />
++        <option value="resourceFile" />
++        <option value="Kotlin Class" />
+       </list>
+     </option>
+   </component>
+@@ -139,7 +168,7 @@
+     </favorite-branches>
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="main" />
++        <entry key="$PROJECT_DIR$" value="dev" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -173,18 +202,18 @@
+     <property name="cidr.known.project.marker" value="true" />
+     <property name="com.android.tools.idea.sqlite.queryhistory" value="SELECT * from user_info WHERE user_id = '1'" />
+     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory" />
+     <property name="memory.settings.postsync.last.time.stamp" value="1631370940536" />
+-    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
++    <property name="settings.editor.selected.configurable" value="emulator" />
+     <property name="show.do.not.copy.http.proxy.settings.to.gradle" value="true" />
+   </component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory" />
++      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+       <recent name="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList" />
+       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
+       <recent name="$PROJECT_DIR$/app" />
+-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
+-      <recent name="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/holyQuran/ui/introPages" />
+     </key>
+     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+       <recent name="com.example.holyquran.holyQuran.ui.introPages" />
+Index: app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran\n\nimport android.app.Application\nimport androidx.lifecycle.ViewModel\nimport androidx.lifecycle.ViewModelProvider\nimport com.example.holyquran.data.database.TransactionsDAO\nimport com.example.holyquran.data.database.UserDAO\nimport com.example.holyquran.ui.addUser.AddUserViewModel\nimport com.example.holyquran.ui.mainPage.MainFragmentViewModel\nimport com.example.holyquran.ui.userList.UserListViewModel\nimport com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel\nimport com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel\n\nclass ViewModelProviderFactory (\n    private val dataSourceUser: UserDAO,\n    private val dataSourceTransactions: TransactionsDAO,\n    private val application: Application\n    ): ViewModelProvider.Factory{\n    @Suppress(\"unchecked_cast\")\n    override fun <T : ViewModel?> create(modelClass: Class<T>): T {\n        if (modelClass.isAssignableFrom(UserListViewModel::class.java)) {\n            return UserListViewModel(dataSourceUser,dataSourceTransactions, application) as T\n        } else if (modelClass.isAssignableFrom(MainFragmentViewModel::class.java)) {\n            return MainFragmentViewModel(dataSourceUser,dataSourceTransactions, application) as T\n        } else if (modelClass.isAssignableFrom(AddUserViewModel::class.java)) {\n            return AddUserViewModel(dataSourceUser,dataSourceTransactions, application) as T\n        } else if (modelClass.isAssignableFrom(IncreaseMoneyViewModel::class.java)) {\n            return IncreaseMoneyViewModel(dataSourceUser,dataSourceTransactions,application) as T\n        } else if (modelClass.isAssignableFrom(DecreaseViewModel::class.java)) {\n            return DecreaseViewModel(dataSourceUser,dataSourceTransactions,application) as T\n\n        }\n        throw IllegalArgumentException(\"Unknown ViewModel class\")\n    }\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt b/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt
+--- a/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt	(date 1631459417100)
+@@ -10,6 +10,7 @@
+ import com.example.holyquran.ui.userList.UserListViewModel
+ import com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel
+ import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
++import com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel
+ 
+ class ViewModelProviderFactory (
+     private val dataSourceUser: UserDAO,
+@@ -28,7 +29,8 @@
+             return IncreaseMoneyViewModel(dataSourceUser,dataSourceTransactions,application) as T
+         } else if (modelClass.isAssignableFrom(DecreaseViewModel::class.java)) {
+             return DecreaseViewModel(dataSourceUser,dataSourceTransactions,application) as T
+-
++        } else if (modelClass.isAssignableFrom(TransactionHistoryViewModel::class.java)) {
++            return TransactionHistoryViewModel(dataSourceUser,dataSourceTransactions,application) as T
+         }
+         throw IllegalArgumentException("Unknown ViewModel class")
+     }
+Index: app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.data.database\n\nimport androidx.lifecycle.LiveData\nimport androidx.room.*\nimport com.example.holyquran.data.model.Transaction\nimport com.example.holyquran.data.model.UserInfo\n\n@Dao\ninterface TransactionsDAO {\n    @Insert\n    suspend fun insert(ta: Transaction): Long\n    @Update\n    suspend fun update(ta: Transaction)\n\n    @Delete\n    suspend fun deleteTrans(ta: Transaction)\n\n    @Query(\"SELECT * from trans WHERE trans_id = :key\")\n    fun get(key: Long): LiveData<Transaction>?\n\n    @Query(\"SELECT * FROM trans ORDER BY increase ASC\")\n    fun getAllTransaction(): LiveData<List<Transaction>>\n\n    @Query(\"SELECT SUM(increase)FROM trans\")\n    fun getTotalIncrease(): Int\n\n    @Query(\"SELECT SUM(increase) FROM trans WHERE user_id=:key\")\n    fun sumUserIncrease(key: Long): Int\n\n    @Query(\"SELECT SUM(decrease) FROM trans WHERE user_id=:key\")\n    fun sumUserDecrease(key: Long): Int\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt b/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt
+--- a/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt	(date 1631459417388)
+@@ -18,6 +18,9 @@
+     @Query("SELECT * from trans WHERE trans_id = :key")
+     fun get(key: Long): LiveData<Transaction>?
+ 
++    @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY increase ,decrease DESC")
++    fun getAllTransactionByUserId(key: Long): LiveData<List<Transaction>>
++
+     @Query("SELECT * FROM trans ORDER BY increase ASC")
+     fun getAllTransaction(): LiveData<List<Transaction>>
+ 
+Index: app/src/main/java/com/example/holyquran/data/database/UserDAO.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.holyquran.data.database\n\nimport androidx.lifecycle.LiveData\nimport androidx.room.*\nimport com.example.holyquran.data.model.UserInfo\n\n@Dao\ninterface UserDAO {\n\n    @Insert\n    suspend fun insert(ui: UserInfo): Long\n\n    @Insert\n    suspend fun insertList(ui: MutableList<UserInfo>)\n\n    @Delete\n    suspend fun deleteCategory(ui: UserInfo )\n\n    @Query(\"SELECT * from user_info WHERE user_id = :key\")\n    fun get(key: Long): LiveData<UserInfo>?\n\n    @Query(\"SELECT * FROM user_info ORDER BY full_name ASC\")\n    fun getAllUserInfo(): LiveData<List<UserInfo>>\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt b/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt
+--- a/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt	(revision 68e6a0a674989e95433be9ac5fb7ba1aa52ba5ab)
++++ b/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt	(date 1631459417400)
+@@ -19,6 +19,6 @@
+     @Query("SELECT * from user_info WHERE user_id = :key")
+     fun get(key: Long): LiveData<UserInfo>?
+ 
+-    @Query("SELECT * FROM user_info ORDER BY full_name ASC")
++    @Query("SELECT * FROM user_info ORDER BY full_name DESC")
+     fun getAllUserInfo(): LiveData<List<UserInfo>>
+ }
+\ No newline at end of file
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_12_21,_2_43_PM_[Default_Changelist]1/shelved.patch
+new file mode 100644
