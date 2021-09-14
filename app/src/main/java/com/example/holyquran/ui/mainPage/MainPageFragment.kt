@@ -11,6 +11,15 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
+import android.widget.Toast
+
+import com.example.holyquran.ui.MainActivity
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+
+
+
 
 class MainPageFragment : Fragment() {
     var id: Long = 0L
@@ -29,7 +38,8 @@ class MainPageFragment : Fragment() {
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
 
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,loanDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, application)
         mMainViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -37,8 +47,33 @@ class MainPageFragment : Fragment() {
         mMainPageBinding.viewModel = mMainViewModel
         this.also { mMainPageBinding.lifecycleOwner = it }
 
-return mMainPageBinding.root
+
+
+//        val now = PersianCalendar()
+//        val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+//            object : DatePickerDialog.OnDateSetListener {
+//                override fun onDateSet(
+//                    view: DatePickerDialog?,
+//                    year: Int,
+//                    monthOfYear: Int,
+//                    dayOfMonth: Int
+//                ) {
+//                    Toast.makeText(
+//                        activity,
+//                        "$year/$monthOfYear/$dayOfMonth",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//            },
+//            now.persianYear,
+//            now.persianMonth,
+//            now.persianDay
+//        )
+//        dpd.setThemeDark(false)
+//        dpd.show(requireActivity().fragmentManager, "FuLLKade")
+//
+
+        return mMainPageBinding.root
+
     }
-
-
 }

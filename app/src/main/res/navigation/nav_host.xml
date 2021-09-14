@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_addUserFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_addUserFragment_to_dataPicker"
+            app:destination="@id/dataPicker" />
     </fragment>
     <fragment
         android:id="@+id/popupWindowFragment"
@@ -106,5 +109,9 @@
             android:name="userId"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/dataPicker"
+        android:name="com.example.holyquran.ui.addUser.DataPicker"
+        android:label="DataPicker" />
 
 </navigation>
