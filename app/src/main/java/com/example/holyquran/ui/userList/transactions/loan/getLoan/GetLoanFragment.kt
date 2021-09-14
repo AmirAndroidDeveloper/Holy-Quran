@@ -9,15 +9,22 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
+import com.example.holyquran.ui.addUser.AddUserFragmentDirections
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragmentArgs
 import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import kotlinx.android.synthetic.main.fragment_get_loan.*
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var mGetLoanBinding: FragmentGetLoanBinding
@@ -73,10 +80,63 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mGetLoanBinding.finish.setOnClickListener {
             mGetLoanViewModel.insertLoanTimeSpinner(
                 mGetLoanBinding.loanAmount.text.toString(),
+                mGetLoanBinding.loanDate.text.toString(),
                 mGetLoanBinding.loanSections.text.toString(),
                 id
             )
+        mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
+            if (it != null) {
+
+                mGetLoanBinding.userName = it
+            }
+           Toast.makeText(activity,"  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",Toast.LENGTH_LONG).show()
+            this.findNavController().navigate(
+                GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(id)
+            )
+        })
         }
+
+        val pdate = PersianDate()
+        val pdformater1 = PersianDateFormat("Y/m/d")
+        pdformater1.format(pdate) //1396/05/20
+
+        mGetLoanBinding.loanDate.text = pdformater1.format(pdate)
+        mGetLoanBinding.loanDate.setOnClickListener {
+            val now = PersianCalendar()
+            val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+                object : DatePickerDialog.OnDateSetListener {
+                    override fun onDateSet(
+                        view: DatePickerDialog?,
+                        year: Int,
+                        monthOfYear: Int,
+                        dayOfMonth: Int
+
+                    ) {
+                        val month = monthOfYear + 1
+                        mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
+                    }
+                },
+                now.persianYear,
+                now.persianMonth,
+                now.persianDay
+            )
+            dpd.setThemeDark(false)
+            dpd.show(requireActivity().fragmentManager, "FuLLKade")
+        }
+
+
+        mGetLoanViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            mGetLoanViewModel.setUserName(it)
+        })
+        mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
+            if (it != null) {
+
+                mGetLoanBinding.userName = it
+            }
+        })
+
+
+
         return mGetLoanBinding.root
     }
 

@@ -7,48 +7,116 @@
         <variable
             name="viewModel"
             type="com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanViewModel" />
+
+        <variable
+            name="userName"
+            type="com.example.holyquran.data.model.UserInfo" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.userList.transactions.loan.getLoan.GetLoanFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="دریافت وام"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical">
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{userName.fullName}"
+                android:textColor="@color/gray600"
+                android:textSize="20sp"
+                tools:text="امیر حسین رجایی" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="دریافت وام"
+                android:text=" وام گیرنده:"
                 android:textColor="@color/black"
-                android:textSize="30dp" />
+                android:textSize="20sp" />
+        </LinearLayout>
 
-            <EditText
-                android:id="@+id/loanAmount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:hint="مقدار وام" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20sp"
+                android:orientation="horizontal">
+
+                <TextView
+                  android:id="@+id/loanDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="99/5/4"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="تاریخ اعطای وام:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:orientation="horizontal">
+
+            <EditText
+               android:id="@+id/loanAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+
+                android:textColor="@color/gray600"
+                android:textSize="20sp"
+                tools:text="50000000" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" مبلغ وام:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/loanSections"
                     android:layout_width="wrap_content"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:hint="تعداد اقساط" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -74,11 +142,11 @@
             </LinearLayout>
 
             <Button
-               android:id="@+id/finish"
+                android:id="@+id/finish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="150dp"
-                android:text="تایید"/>
+                android:text="تایید" />
         </LinearLayout>
     </LinearLayout>
 </layout>

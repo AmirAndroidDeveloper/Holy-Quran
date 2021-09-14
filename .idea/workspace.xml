@@ -33,9 +33,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_user.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,8 +118,8 @@
           <entry type="LOCAL">
             <value>
               <list>
-                <branch-info repo="$PROJECT_DIR$" source="main" />
                 <branch-info repo="$PROJECT_DIR$" source="dev" />
+                <branch-info repo="$PROJECT_DIR$" source="main" />
               </list>
             </value>
           </entry>

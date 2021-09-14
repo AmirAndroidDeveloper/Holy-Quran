@@ -25,8 +25,6 @@ class AddUserFragment : Fragment() {
 
     lateinit var mAddUserListBinding: FragmentAddUserBinding
     lateinit var mAddUserViewModel: AddUserViewModel
-    val plus = "+"
-    val minus = "-"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,12 +70,10 @@ class AddUserFragment : Fragment() {
         pdformater1.format(pdate) //1396/05/20
 
         mAddUserListBinding.createdDate.text = pdformater1.format(pdate)
-
         mAddUserListBinding.createdDate.setOnClickListener {
             val now = PersianCalendar()
             val dpd: DatePickerDialog = DatePickerDialog.newInstance(
                 object : DatePickerDialog.OnDateSetListener {
-
                     override fun onDateSet(
 
                         view: DatePickerDialog?,
@@ -92,7 +88,6 @@ class AddUserFragment : Fragment() {
                             "$year/${month}/$dayOfMonth",
                             Toast.LENGTH_LONG
                         ).show()
-
                         mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
                     }
                 },
@@ -102,7 +97,7 @@ class AddUserFragment : Fragment() {
             )
             dpd.setThemeDark(false)
             dpd.show(requireActivity().fragmentManager, "FuLLKade")
-//
+
         }
         return mAddUserListBinding.root
 

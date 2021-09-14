@@ -55,11 +55,16 @@ class AddUserViewModel(
         _addUser.value = true
     }
 
-    private val _goToUserList = MutableLiveData<Boolean>(false)
-    val goToUserList: LiveData<Boolean>
-        get() = _goToUserList
-    fun goToUserList() {
-        _goToUserList.value = true
+    private val _userName = MutableLiveData<UserInfo>()
+    val userName: LiveData<UserInfo>
+        get() = _userName
+
+    fun setUserName(id: Long): LiveData<UserInfo>? {
+        return mUserInfoDAO.get(id)
+    }
+
+    fun setUserName(mUser: UserInfo) {
+        _userName.value = mUser
     }
 
 

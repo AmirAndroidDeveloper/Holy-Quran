@@ -29,17 +29,29 @@ class GetLoanViewModel(
 
     fun insertLoanTimeSpinner(
         amount: String,
+        createdDate: String,
         loanSection: String,
         userId: Long,
     ) {
         uiScope.launch {
-            mGetLoanDAO.insert(Loan(0L, userId, amount, null, loanSection, null, selectedItemPosition))
+            mGetLoanDAO.insert(Loan(0L, userId, amount, createdDate, loanSection, null, selectedItemPosition))
         }
     }
     var selectedItemPosition = 0
     fun onSelectItem(position: Int) {
         selectedItemPosition = position;
         Log.d("position", "onSelectItem: $selectedItemPosition")
+    }
+    private val _userName = MutableLiveData<UserInfo>()
+    val userName: LiveData<UserInfo>
+        get() = _userName
+
+    fun setUserName(id: Long): LiveData<UserInfo>? {
+        return mUserInfoDAO.get(id)
+    }
+
+    fun setUserName(mUser: UserInfo) {
+        _userName.value = mUser
     }
 
 }

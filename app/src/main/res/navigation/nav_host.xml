@@ -38,9 +38,6 @@
         <action
             android:id="@+id/action_addUserFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
-        <action
-            android:id="@+id/action_addUserFragment_to_dataPicker"
-            app:destination="@id/dataPicker" />
     </fragment>
     <fragment
         android:id="@+id/popupWindowFragment"
@@ -99,6 +96,9 @@
         <argument
             android:name="userId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_getLoanFragment_to_increaseMoneyFragment"
+            app:destination="@id/increaseMoneyFragment" />
     </fragment>
     <fragment
         android:id="@+id/loanHistoryFragment"
@@ -109,9 +109,5 @@
             android:name="userId"
             app:argType="long" />
     </fragment>
-    <fragment
-        android:id="@+id/dataPicker"
-        android:name="com.example.holyquran.ui.addUser.DataPicker"
-        android:label="DataPicker" />
 
 </navigation>
