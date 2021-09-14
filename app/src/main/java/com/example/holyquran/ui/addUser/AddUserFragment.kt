@@ -25,6 +25,8 @@ class AddUserFragment : Fragment() {
 
     lateinit var mAddUserListBinding: FragmentAddUserBinding
     lateinit var mAddUserViewModel: AddUserViewModel
+    val plus = "+"
+    val minus = "-"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,33 +73,37 @@ class AddUserFragment : Fragment() {
 
         mAddUserListBinding.createdDate.text = pdformater1.format(pdate)
 
-      mAddUserListBinding.createdDate.setOnClickListener {
-                  val now = PersianCalendar()
-        val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-            object : DatePickerDialog.OnDateSetListener {
-                override fun onDateSet(
-                    view: DatePickerDialog?,
-                    year: Int,
-                    monthOfYear: Int,
-                    dayOfMonth: Int
-                ) {
-                    Toast.makeText(
-                        activity,
-                        "$year/$monthOfYear/$dayOfMonth",
-                        Toast.LENGTH_LONG
-                    ).show()
+        mAddUserListBinding.createdDate.setOnClickListener {
+            val now = PersianCalendar()
+            val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+                object : DatePickerDialog.OnDateSetListener {
 
-                mAddUserListBinding.createdDate.text="$year/$monthOfYear/$dayOfMonth"
-                }
-            },
-            now.persianYear,
-            now.persianMonth,
-            now.persianDay
-        )
-        dpd.setThemeDark(false)
-        dpd.show(requireActivity().fragmentManager, "FuLLKade")
+                    override fun onDateSet(
+
+                        view: DatePickerDialog?,
+                        year: Int,
+                        monthOfYear: Int,
+                        dayOfMonth: Int
+
+                    ) {
+                        val month = monthOfYear + 1
+                        Toast.makeText(
+                            activity,
+                            "$year/${month}/$dayOfMonth",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
+                    }
+                },
+                now.persianYear,
+                now.persianMonth,
+                now.persianDay
+            )
+            dpd.setThemeDark(false)
+            dpd.show(requireActivity().fragmentManager, "FuLLKade")
 //
-      }
+        }
         return mAddUserListBinding.root
 
     }
