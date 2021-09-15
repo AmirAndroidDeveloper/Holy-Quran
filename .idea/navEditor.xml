@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="270" />
+                            <option name="y" value="28" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -41,18 +41,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="dataPicker">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="287" />
-                            <option name="y" value="54" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="decreaseMoneyFragment">
                     <value>
                       <LayoutPositions>
@@ -73,6 +61,15 @@
                             <option name="x" value="384" />
                             <option name="y" value="-281" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_getLoanFragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -118,13 +115,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="loanDetailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="611" />
+                            <option name="y" value="-565" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="loanHistoryFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="399" />
+                            <option name="y" value="-579" />
                           </Point>
                         </option>
                       </LayoutPositions>

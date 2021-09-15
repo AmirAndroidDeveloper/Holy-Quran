@@ -17,12 +17,8 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
-import com.example.holyquran.ui.addUser.AddUserFragmentDirections
-import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragmentArgs
-import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
-import kotlinx.android.synthetic.main.fragment_get_loan.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 
@@ -58,7 +54,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
         val arg =
-            com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanFragmentArgs.fromBundle(
+            GetLoanFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.userId
@@ -84,16 +80,20 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 mGetLoanBinding.loanSections.text.toString(),
                 id
             )
-        mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
-            if (it != null) {
+            mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
+                if (it != null) {
 
-                mGetLoanBinding.userName = it
-            }
-           Toast.makeText(activity,"  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",Toast.LENGTH_LONG).show()
-            this.findNavController().navigate(
-                GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(id)
-            )
-        })
+                    mGetLoanBinding.userName = it
+                }
+                Toast.makeText(
+                    activity,
+                    "  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",
+                    Toast.LENGTH_LONG
+                ).show()
+                this.findNavController().navigate(
+                    GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(id)
+                )
+            })
         }
 
         val pdate = PersianDate()
@@ -134,9 +134,32 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 mGetLoanBinding.userName = it
             }
         })
+        mGetLoanBinding.calculate.setOnClickListener {
+
+            val loanAmount: String = mGetLoanBinding.loanAmount.getText().toString()
+            val convertLoanAmount = loanAmount.toLong()
+
+            val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
+            val convertBenefitPercent = benefitPercent.toLong()
+
+            val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
+            val convertSectionTime = sectionTime
+            val division: Long = 2400
+
+            val amount: Long = convertLoanAmount.toLong()
+            val benefit: Long = convertBenefitPercent
+            val section: Long = convertSectionTime.toLong()
+            val division2: Long = division
+            val result:Long= section.plus(1)*benefit*amount/division2
+            val result2:Long=(result+amount)/section
+            val result3:Long=amount+result
+
+            mGetLoanBinding.loanBenefit.text = result.toString()
+            mGetLoanBinding.sectionPrice.text = result2.toString()
+            mGetLoanBinding.totalLoan.text = result3.toString()
 
 
-
+        }
         return mGetLoanBinding.root
     }
 
@@ -146,7 +169,34 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
-
 }
 
-
+//        val benefitPresent: String = mGetLoanBinding.spinner.getSelectedItem().toString()
+//            val division = "/"
+//            val time = "*"
+//            val minus = "-"
+//            val plus = "+"
+//            val loanAmount = mGetLoanBinding.loanAmount.text.toString()
+//            val loanSections = mGetLoanBinding.loanSections.text.toString()
+//            val benefitPresent = mGetLoanBinding.benefitPrecent.text.toString()
+//
+//            val loanBenefit =
+//                loanSections + time + benefitPresent + time + loanAmount + division + 2400
+//            val test = loanBenefit + plus + loanAmount
+//            val lastResult = test + division + 12
+//
+//            Log.d("TAG", "calculateTest: $lastResult")
+//            try {
+//                val expression = ExpressionBuilder(lastResult).build()
+//                val result = expression.evaluate()
+//                val longResult = result.toLong()
+//                if (result == longResult.toDouble())
+//                    mGetLoanBinding.sectionPrice.text = longResult.toString()
+//                else
+//                    Toast.makeText(activity, "$result", Toast.LENGTH_LONG).show()
+//
+//                mGetLoanBinding.sectionPrice.text = result.toString()
+//
+//            } catch (e: Exception) {
+//                Log.d("Exception", " message : " + e.message)
+//            }

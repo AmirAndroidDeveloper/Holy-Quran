@@ -108,6 +108,14 @@
         <argument
             android:name="userId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_loanHistoryFragment_to_loanDetailFragment"
+            app:destination="@id/loanDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loanDetailFragment"
+        tools:layout="@layout/fragment_loan_detail"
+        android:name="com.example.holyquran.ui.userList.transactions.loan.loanDetails.LoanDetailFragment"
+        android:label="LoanDetailFragment" />
 
 </navigation>
