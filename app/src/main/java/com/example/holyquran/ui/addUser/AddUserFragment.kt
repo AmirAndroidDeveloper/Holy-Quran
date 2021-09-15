@@ -19,6 +19,10 @@ import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import saman.zamani.persiandate.PersianDateFormat
 import saman.zamani.persiandate.PersianDate
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.navigation.findNavController
+import com.example.holyquran.ui.userList.UserListFragmentDirections
 
 
 class AddUserFragment : Fragment() {
@@ -99,6 +103,13 @@ class AddUserFragment : Fragment() {
             dpd.show(requireActivity().fragmentManager, "FuLLKade")
 
         }
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            view?.findNavController()
+                ?.navigate(R.id.action_addUserFragment_to_userListFragment2)
+        }
+
+
         return mAddUserListBinding.root
 
     }

@@ -47,23 +47,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (lastBackPressTime < System.currentTimeMillis() - 4000) {
-            lastBackPressTime = System.currentTimeMillis()
-            val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-            builder.setIcon(R.drawable.warning)
-            builder.setTitle("خروج از برنامه ")
-            builder.setMessage("از برنامه خارج میشوید؟")
-                .setCancelable(false)
-                .setPositiveButton("بله",
-                    DialogInterface.OnClickListener { dialog, id -> finish() })
-                .setNegativeButton("خیر",
-                    DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
-            val alert: AlertDialog = builder.create()
-            alert.show()
+        if (navController.currentDestination?.label?.equals("fragment_main") == true) {
+            if (lastBackPressTime < System.currentTimeMillis() - 4000) {
+                lastBackPressTime = System.currentTimeMillis()
+                val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+                builder.setIcon(R.drawable.warning)
+                builder.setTitle("خروج از برنامه ")
+                builder.setMessage("از برنامه خارج میشوید؟")
+                    .setCancelable(false)
+                    .setPositiveButton("بله",
+                        DialogInterface.OnClickListener { dialog, id -> finish() })
+                    .setNegativeButton("خیر",
+                        DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+                val alert: AlertDialog = builder.create()
+                alert.show()
 
+            } else {
+                toast?.cancel()
+                super.onBackPressed()
+            }
         } else {
-            toast?.cancel()
-            super.onBackPressed()
+            super.onBackPressed();
         }
     }
 
