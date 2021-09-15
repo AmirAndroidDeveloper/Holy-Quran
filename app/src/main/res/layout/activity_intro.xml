@@ -13,6 +13,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layoutDirection="ltr"
+
         android:layout_marginTop="30dp"
         tools:context=".holyQuran.intruPages.IntroSliderActivity">
 
@@ -25,6 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30sp"
+            android:layoutDirection="ltr"
+
             android:layout_marginTop="22dp"
             android:layout_marginRight="30sp">
 
@@ -42,11 +46,15 @@
             android:id="@+id/button_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+
             android:layout_gravity="bottom">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layoutDirection="ltr"
+
                 android:layout_centerInParent="true"
                 android:orientation="horizontal">
 

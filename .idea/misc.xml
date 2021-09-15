@@ -8,11 +8,14 @@
         <entry key="app/src/main/res/drawable/ic_add_person.xml" value="0.3638888888888889" />
         <entry key="app/src/main/res/drawable/ic_delete2.xml" value="0.3008438818565401" />
         <entry key="app/src/main/res/drawable/ic_people.xml" value="0.3012658227848101" />
+        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2877637130801688" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/fragment_add_user.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_date_picker.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_decrease_money.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/fragment_get_loan.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_increase_history.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_increase_money.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_loan_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_loan_history.xml" value="0.34205128205128205" />
@@ -24,6 +27,8 @@
         <entry key="app/src/main/res/layout/fragment_user_options.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_trans_history.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/item_user_list.xml" value="0.2914529914529915" />
+        <entry key="app/src/main/res/layout/item_user_loan_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_user_transaction_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/user_total.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/user_total_money.xml" value="0.17708333333333334" />
         <entry key="app/src/main/res/menu/loan_menu.xml" value="0.465625" />

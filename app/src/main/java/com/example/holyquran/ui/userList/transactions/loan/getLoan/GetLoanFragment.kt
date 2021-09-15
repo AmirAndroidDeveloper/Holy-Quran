@@ -134,41 +134,48 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 mGetLoanBinding.userName = it
             }
         })
+
         mGetLoanBinding.calculate.setOnClickListener {
-
-            val loanAmount: String = mGetLoanBinding.loanAmount.getText().toString()
-            val convertLoanAmount = loanAmount.toLong()
-
-            val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
-            val convertBenefitPercent = benefitPercent.toLong()
-
-            val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
-            val convertSectionTime = sectionTime
-            val division: Long = 2400
-
-            val amount: Long = convertLoanAmount.toLong()
-            val benefit: Long = convertBenefitPercent
-            val section: Long = convertSectionTime.toLong()
-            val division2: Long = division
-            val result:Long= section.plus(1)*benefit*amount/division2
-            val result2:Long=(result+amount)/section
-            val result3:Long=amount+result
-
-            mGetLoanBinding.loanBenefit.text = result.toString()
-            mGetLoanBinding.sectionPrice.text = result2.toString()
-            mGetLoanBinding.totalLoan.text = result3.toString()
-
-
+            if (mGetLoanBinding.loanSections.text.isEmpty()
+                    .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
+                    .or(mGetLoanBinding.loanAmount.text.isEmpty())
+            ) {
+            } else {
+                CalculateDate()
+            }
         }
         return mGetLoanBinding.root
     }
-
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
+
+    private fun CalculateDate() {
+        val loanAmount: String = mGetLoanBinding.loanAmount.getText().toString()
+        val convertLoanAmount = loanAmount.toLong()
+
+        val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
+        val convertBenefitPercent = benefitPercent.toLong()
+
+        val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
+        val convertSectionTime = sectionTime
+        val division: Long = 2400
+
+        val amount: Long = convertLoanAmount.toLong()
+        val benefit: Long = convertBenefitPercent
+        val section: Long = convertSectionTime.toLong()
+        val division2: Long = division
+        val result: Long = section.plus(1) * benefit * amount / division2
+        val result2: Long = (result + amount) / section
+        val result3: Long = amount + result
+
+        mGetLoanBinding.loanBenefit.text = result.toString()
+        mGetLoanBinding.sectionPrice.text = result2.toString()
+        mGetLoanBinding.totalLoan.text = result3.toString()
+    }
+
 }
 
 //        val benefitPresent: String = mGetLoanBinding.spinner.getSelectedItem().toString()

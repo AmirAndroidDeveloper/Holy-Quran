@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="clickListener"
             type="com.example.holyquran.ui.userList.AdapterListener" />
@@ -22,6 +23,8 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center"
+
+        android:layoutDirection="ltr"
         android:orientation="vertical">
 
 
@@ -39,6 +42,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="87dp"
                 android:layout_margin="10dp"
+                android:layoutDirection="ltr"
+
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="vertical">
@@ -46,6 +51,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layoutDirection="ltr"
+
                     android:orientation="horizontal">
 
                     <ImageView
@@ -66,6 +73,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layoutDirection="ltr"
+
                         android:orientation="vertical">
 
                         <TextView
@@ -80,10 +89,10 @@
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
-<!--                        <include android:id="@+id/news_title"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            layout="@layout/user_total_money"/>-->
+                        <!--                        <include android:id="@+id/news_title"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            layout="@layout/user_total_money"/>-->
 
                     </LinearLayout>
                 </LinearLayout>
