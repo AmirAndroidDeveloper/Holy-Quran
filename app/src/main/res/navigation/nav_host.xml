@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_userListFragment_to_increaseMoneyFragment"
             app:destination="@id/increaseMoneyFragment" />
+        <action
+            android:id="@+id/action_userListFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
