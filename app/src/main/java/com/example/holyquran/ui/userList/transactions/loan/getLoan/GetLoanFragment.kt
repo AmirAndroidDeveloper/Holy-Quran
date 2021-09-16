@@ -11,12 +11,15 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
+import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentGetLoanBinding
+import com.example.holyquran.ui.addUser.AddUserFragmentDirections
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import saman.zamani.persiandate.PersianDate
@@ -73,28 +76,30 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             spinner.onItemSelectedListener = this
         }
 
-        mGetLoanBinding.finish.setOnClickListener {
-            mGetLoanViewModel.insertLoanTimeSpinner(
-                mGetLoanBinding.loanAmount.text.toString(),
-                mGetLoanBinding.loanDate.text.toString(),
-                mGetLoanBinding.loanSections.text.toString(),
-                id
-            )
-            mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
-                if (it != null) {
-
-                    mGetLoanBinding.userName = it
-                }
-                Toast.makeText(
-                    activity,
-                    "  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",
-                    Toast.LENGTH_LONG
-                ).show()
-                this.findNavController().navigate(
-                    GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(id)
+        mGetLoanViewModel.getLoan.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                mGetLoanViewModel.insertLoanTimeSpinner(
+                    mGetLoanBinding.loanAmount.text.toString(),
+                    mGetLoanBinding.loanDate.text.toString(),
+                    mGetLoanBinding.loanSections.text.toString(),
+                    id
                 )
-            })
-        }
+                mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
+                    if (it != null) {
+
+                        mGetLoanBinding.userName = it
+                    }
+                    Toast.makeText(
+                        activity,
+                        "  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    this.findNavController().navigate(
+                        GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(id)
+                    )
+                })
+            }
+        })
 
         val pdate = PersianDate()
         val pdformater1 = PersianDateFormat("Y/m/d")
@@ -135,24 +140,27 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         })
 
-        mGetLoanBinding.calculate.setOnClickListener {
-            if (mGetLoanBinding.loanSections.text.isEmpty()
-                    .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
-                    .or(mGetLoanBinding.loanAmount.text.isEmpty())
-            ) {
-            } else {
-                CalculateDate()
+        mGetLoanViewModel.calculateLoan.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                if (mGetLoanBinding.loanSections.text.isEmpty()
+                        .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
+                        .or(mGetLoanBinding.loanAmount.text.isEmpty())
+                ) {
+                } else {
+                    calculateData()
+                }
             }
-        }
+        })
         return mGetLoanBinding.root
     }
+
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
     }
 
-    private fun CalculateDate() {
+    private fun calculateData() {
         val loanAmount: String = mGetLoanBinding.loanAmount.getText().toString()
         val convertLoanAmount = loanAmount.toLong()
 

@@ -53,5 +53,16 @@ class GetLoanViewModel(
     fun setUserName(mUser: UserInfo) {
         _userName.value = mUser
     }
-
+    private val _getLoan = MutableLiveData<Boolean>(false)
+    val getLoan: LiveData<Boolean>
+        get() = _getLoan
+    fun getLoan() {
+        _getLoan.value = true
+    }
+    private val _calculateLoan = MutableLiveData<Boolean>(false)
+    val calculateLoan: LiveData<Boolean>
+        get() = _calculateLoan
+    fun calculateLoan() {
+        _calculateLoan.value = true
+    }
 }

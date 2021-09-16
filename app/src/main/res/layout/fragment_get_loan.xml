@@ -266,14 +266,14 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/finish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:onClick="@{() -> viewModel.getLoan()}"
                 android:text="تایید" />
 
             <Button
-                android:id="@+id/calculate"
+                android:onClick="@{() -> viewModel.calculateLoan()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="محاسبه" />
