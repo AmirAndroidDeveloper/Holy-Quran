@@ -43,7 +43,7 @@
                 android:layout_height="87dp"
                 android:layout_margin="10dp"
                 android:layoutDirection="ltr"
-
+                android:onClick="@{()->clickListener.onclick(userInfo)}"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="vertical">
@@ -52,7 +52,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layoutDirection="ltr"
-
                     android:orientation="horizontal">
 
                     <ImageView
@@ -74,25 +73,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layoutDirection="ltr"
-
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/idTVCourseName"
+                            android:id="@+id/userName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:onClick="@{()->clickListener.onclick(userInfo)}"
                             android:text="@{userInfo.fullName}"
                             android:textColor="#000"
                             android:textSize="20sp"
                             android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:text="@{userInfo.mobileNumber}"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-                        <!--                        <include android:id="@+id/news_title"-->
-                        <!--                            android:layout_width="match_parent"-->
-                        <!--                            android:layout_height="wrap_content"-->
-                        <!--                            layout="@layout/user_total_money"/>-->
+
 
                     </LinearLayout>
                 </LinearLayout>

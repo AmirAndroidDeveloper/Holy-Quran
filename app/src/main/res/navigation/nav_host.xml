@@ -81,6 +81,9 @@
         <argument
             android:name="userIdDecrease"
             app:argType="long" />
+        <action
+            android:id="@+id/action_decreaseMoneyFragment_to_increaseMoneyFragment"
+            app:destination="@id/increaseMoneyFragment" />
     </fragment>
     <fragment
         android:id="@+id/TransactionHistoryFragment"

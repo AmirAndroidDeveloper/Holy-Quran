@@ -14,8 +14,8 @@
 
 
         <variable
-            name="increaseMoneyViewModel"
-            type="com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel" />
+            name="decreaseMoneyViewModel"
+            type="com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel" />
     </data>
 
     <LinearLayout
@@ -62,14 +62,14 @@
 
 
             <EditText
-                android:id="@+id/increaseEDT"
+                android:id="@+id/decreaseEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:hint="amount" />
 
             <Button
-                android:id="@+id/finishBtn"
+                android:onClick="@{() -> decreaseMoneyViewModel.decreaseMoney()}"
                 android:layout_width="match_parent"
                 android:text="تایید"
                 android:layout_height="wrap_content" />

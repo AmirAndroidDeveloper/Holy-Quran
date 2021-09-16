@@ -51,6 +51,22 @@ class IncreaseMoneyViewModel(
         return mTransactionsDAO.sumUserDecrease(id)
     }
 
+    private val _increaseMoney = MutableLiveData<Boolean>(false)
+    val increaseMoney: LiveData<Boolean>
+        get() = _increaseMoney
+
+    fun increaseMoney() {
+        _increaseMoney.value = true
+    }
+
+    private val _gotToDecreaseMoney = MutableLiveData<Boolean>(false)
+    val gotToDecreaseMoney: LiveData<Boolean>
+        get() = _gotToDecreaseMoney
+
+    fun gotToDecreaseMoney() {
+        _gotToDecreaseMoney.value = true
+    }
+
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
@@ -69,7 +85,7 @@ class IncreaseMoneyViewModel(
                     amount,
                     null,
                     null,
-                   sumUserIncrease(userId).minus(sumUserDecrease(userId))
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId))
                 )
             )
 

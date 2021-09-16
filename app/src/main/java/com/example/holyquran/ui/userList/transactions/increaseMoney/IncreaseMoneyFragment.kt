@@ -12,7 +12,12 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
+import androidx.activity.addCallback
+import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
+import com.example.holyquran.ui.addUser.AddUserFragmentDirections
 
 
 class IncreaseMoneyFragment : Fragment() {
@@ -34,14 +39,14 @@ class IncreaseMoneyFragment : Fragment() {
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-
         val viewModelFactory =
             ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, application)
-
         mIncreaseMoneyViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
             ).get(IncreaseMoneyViewModel::class.java)
+        mIncreaseMoneyBinding.increaseMoneyViewModel = mIncreaseMoneyViewModel
+        this.also { mIncreaseMoneyBinding.lifecycleOwner = it }
 
         val arg =
             IncreaseMoneyFragmentArgs.fromBundle(
@@ -73,19 +78,29 @@ class IncreaseMoneyFragment : Fragment() {
             Log.d("Exception", " message : " + e.message)
         }
 
-        mIncreaseMoneyBinding.finishBtn.setOnClickListener {
-            mIncreaseMoneyViewModel.insertMoney(
-                mIncreaseMoneyBinding.increaseEDT.text.toString(),
-                id
-            )
-        }
-        mIncreaseMoneyBinding.decreaseBtn.setOnClickListener {
-            this.findNavController().navigate(
-                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
+
+        mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                mIncreaseMoneyViewModel.insertMoney(
+                    mIncreaseMoneyBinding.increaseEdt.text.toString(),
                     id
                 )
-            )
+            }
+        })
+          mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
+              if (it == true) {
+                  this.findNavController().navigate(
+                      IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
+                          id
+                      )
+                  )
+              }
+          })
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            view?.findNavController()
+                ?.navigate(R.id.action_increaseMoneyFragment_to_userListFragment)
         }
+
         mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyViewModel.setIncrease(it)
@@ -135,7 +150,7 @@ class IncreaseMoneyFragment : Fragment() {
                 )
                 true
             }
-            R.id.loanHistory->{
+            R.id.loanHistory -> {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToLoanHistoryFragment(
                         id

@@ -73,15 +73,16 @@
 
 
             <EditText
-                android:id="@+id/increaseEDT"
+                android:id="@+id/increaseEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:hint="amount" />
 
             <Button
-                android:id="@+id/finishBtn"
+                android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
                 android:layout_width="match_parent"
+                android:layout_marginTop="20sp"
                 android:layout_height="wrap_content"
                 android:text="تایید" />
 
@@ -93,22 +94,14 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layoutDirection="ltr"
-
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="تراکنش ها"
-                android:textColor="@color/black"
-                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/decreaseBtn"
                 android:layout_width="match_parent"
+                android:onClick="@{() -> increaseMoneyViewModel.gotToDecreaseMoney()}"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
                 android:text="واریز به حساب" />
 
           <LinearLayout
