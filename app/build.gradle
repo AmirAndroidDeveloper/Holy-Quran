@@ -47,6 +47,7 @@ dependencies {
     implementation 'net.objecthunter:exp4j:0.4.8'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
+    implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
 
     def room_version = "2.3.0"
     implementation("androidx.room:room-runtime:$room_version")

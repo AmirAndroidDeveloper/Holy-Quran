@@ -17,9 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
-import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentGetLoanBinding
-import com.example.holyquran.ui.addUser.AddUserFragmentDirections
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import saman.zamani.persiandate.PersianDate
@@ -54,8 +52,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             ).get(GetLoanViewModel::class.java)
         mGetLoanBinding.viewModel = mGetLoanViewModel
         this.also { mGetLoanBinding.lifecycleOwner = it }
-
-
         val arg =
             GetLoanFragmentArgs.fromBundle(
                 requireArguments()
@@ -82,6 +78,8 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mGetLoanBinding.loanAmount.text.toString(),
                     mGetLoanBinding.loanDate.text.toString(),
                     mGetLoanBinding.loanSections.text.toString(),
+                    mGetLoanBinding.spinner.selectedItem.toString(),
+                    mGetLoanBinding.sectionPayment.text.toString(),
                     id
                 )
                 mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
@@ -104,38 +102,38 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val pdate = PersianDate()
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
-
         mGetLoanBinding.loanDate.text = pdformater1.format(pdate)
-        mGetLoanBinding.loanDate.setOnClickListener {
-            val now = PersianCalendar()
-            val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-                object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(
-                        view: DatePickerDialog?,
-                        year: Int,
-                        monthOfYear: Int,
-                        dayOfMonth: Int
 
-                    ) {
-                        val month = monthOfYear + 1
-                        mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
-                    }
-                },
-                now.persianYear,
-                now.persianMonth,
-                now.persianDay
-            )
-            dpd.setThemeDark(false)
-            dpd.show(requireActivity().fragmentManager, "FuLLKade")
-        }
+        mGetLoanViewModel.openCalender.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                val now = PersianCalendar()
+                val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+                    object : DatePickerDialog.OnDateSetListener {
+                        override fun onDateSet(
+                            view: DatePickerDialog?,
+                            year: Int,
+                            monthOfYear: Int,
+                            dayOfMonth: Int
 
+                        ) {
+                            val month = monthOfYear + 1
+                            mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
+                        }
+                    },
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+                )
+                dpd.setThemeDark(false)
+                dpd.show(requireActivity().fragmentManager, "FuLLKade")
+            }
+        })
 
         mGetLoanViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             mGetLoanViewModel.setUserName(it)
         })
         mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
-
                 mGetLoanBinding.userName = it
             }
         })
@@ -180,7 +178,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val result3: Long = amount + result
 
         mGetLoanBinding.loanBenefit.text = result.toString()
-        mGetLoanBinding.sectionPrice.text = result2.toString()
+        mGetLoanBinding.sectionPayment.text = result2.toString()
         mGetLoanBinding.totalLoan.text = result3.toString()
     }
 

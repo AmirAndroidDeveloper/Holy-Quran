@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layoutDirection="ltr"
-
         android:layout_marginRight="5dp"
         android:gravity="center"
         android:orientation="vertical">
@@ -38,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="87dp"
                 android:layoutDirection="ltr"
-
+                android:onClick="@{()->clickListener.onclick(loan)}"
                 android:layout_margin="10dp"
                 android:clickable="true"
                 android:focusable="true"

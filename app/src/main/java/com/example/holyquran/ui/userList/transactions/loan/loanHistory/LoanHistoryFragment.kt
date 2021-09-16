@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanHistoryBinding
+import com.example.holyquran.ui.userList.UserListFragmentDirections
 
 class LoanHistoryFragment : Fragment() {
     lateinit var mLoanHistoryBinding: FragmentLoanHistoryBinding
@@ -51,7 +53,9 @@ class LoanHistoryFragment : Fragment() {
         val mLoanAdapter = LoanAdapter()
         mLoanAdapter.setOnclickListener(AdapterListener3({
             if (it != 0L)
-                null
+                this.findNavController().navigate(
+                    LoanHistoryFragmentDirections.actionLoanHistoryFragmentToLoanDetailFragment(it) )
+            Log.d("TAG", "navTeat $it ")
         }, {
 //            deleteDialog(it)
         }

@@ -125,6 +125,10 @@
         android:id="@+id/loanDetailFragment"
         tools:layout="@layout/fragment_loan_detail"
         android:name="com.example.holyquran.ui.userList.transactions.loan.loanDetails.LoanDetailFragment"
-        android:label="LoanDetailFragment" />
+        android:label="LoanDetailFragment" >
+        <argument
+            android:name="loanId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

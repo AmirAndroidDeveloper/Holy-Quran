@@ -69,6 +69,8 @@ class UserListFragment : Fragment() {
                 this.findNavController().navigate(
                     UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)
                 )
+            Log.d("TAG", "navTeat $it ")
+
         }, {
             deleteDialog(it)
         }

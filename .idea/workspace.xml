@@ -36,10 +36,29 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ViewModelProviderFactory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/LoanDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/LoanDAO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Loan.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/model/Loan.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/getLoan/GetLoanViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanDetails/LoanDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanDetails/LoanDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanHistory/LoanAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanHistory/LoanAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanHistory/LoanHistoryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/loan/loanHistory/LoanHistoryFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_loan_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_loan_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_loan_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/nav_host.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,18 +176,18 @@
     <property name="cidr.known.project.marker" value="true" />
     <property name="com.android.tools.idea.sqlite.queryhistory" value="SELECT * from user_info WHERE user_id = '1'" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/font" />
     <property name="memory.settings.postsync.last.time.stamp" value="1631514394913" />
     <property name="settings.editor.selected.configurable" value="emulator" />
     <property name="show.do.not.copy.http.proxy.settings.to.gradle" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/font" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/transactions/transactionHistory" />
       <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/app" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.example.holyquran.data.database" />

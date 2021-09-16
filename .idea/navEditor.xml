@@ -55,6 +55,15 @@
                             <option name="y" value="-694" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_decreaseMoneyFragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -125,8 +134,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="611" />
-                            <option name="y" value="-565" />
+                            <option name="x" value="614" />
+                            <option name="y" value="-680" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -203,6 +212,11 @@
                               </value>
                             </entry>
                             <entry key="action_userListFragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_userListFragment_to_mainPageFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

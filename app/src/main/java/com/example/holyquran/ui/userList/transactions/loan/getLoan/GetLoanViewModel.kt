@@ -31,10 +31,12 @@ class GetLoanViewModel(
         amount: String,
         createdDate: String,
         loanSection: String,
+        spinnerSectionSpace: String,
+        payment: String,
         userId: Long,
     ) {
         uiScope.launch {
-            mGetLoanDAO.insert(Loan(0L, userId, amount, createdDate, loanSection, null, selectedItemPosition))
+            mGetLoanDAO.insert(Loan(0L, userId, amount, createdDate, loanSection, null, spinnerSectionSpace,payment))
         }
     }
     var selectedItemPosition = 0
@@ -64,5 +66,11 @@ class GetLoanViewModel(
         get() = _calculateLoan
     fun calculateLoan() {
         _calculateLoan.value = true
+    }
+    private val _openCalender = MutableLiveData<Boolean>(false)
+    val openCalender: LiveData<Boolean>
+        get() = _openCalender
+    fun openCalender() {
+        _openCalender.value = true
     }
 }

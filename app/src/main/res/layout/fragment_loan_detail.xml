@@ -1,20 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.userList.transactions.loan.loanDetails.LoanDetailFragment">
+    <data>
+        <variable
+            name="loanDetailViewModel"
+            type="com.example.holyquran.ui.userList.transactions.loan.loanDetails.LoanDetailViewModel" />
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
+        <variable
+            name="loanInfo"
+            type="com.example.holyquran.data.model.Loan" />
+    </data>
 
 
-   </LinearLayout>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical"
+        tools:context=".ui.userList.transactions.loan.loanDetails.LoanDetailFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{loanInfo.amount}"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp"
+                        tools:text="5000" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=" مبلغ وام:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{loanInfo.createDate}"
+                    android:textColor="@color/gray600"
+                    android:textSize="20sp"
+                    tools:text="99/5/4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" تاریخ وام:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <TextView
+                 android:id="@+id/loanExpiredAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray600"
+                    android:textSize="20sp"
+                    tools:text="00/5/4" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" تاریخ انقضای وام:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{loanInfo.loanSections}"
+                    android:textColor="@color/gray600"
+                    android:textSize="20sp"
+                    tools:text="12" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" تعداد قسط ها:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{loanInfo.payment}"
+                    android:textColor="@color/gray600"
+                    android:textSize="20sp"
+                    tools:text="۱۰۰۰۰" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" مبلغ هر قسط:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="@{loanInfo.sectionTime}"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray600"
+                    android:textSize="20sp"
+                    tools:text="1 ماه" />
+
+                <TextView
+                  android:id="@+id/sectionSpace"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=" فاصله هر قسط:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20sp"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvFeed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </layout>

@@ -20,8 +20,7 @@ data class Loan(
     @ColumnInfo(name = "expired_date")
     var expiredDate: String?,
     @ColumnInfo(name = "section_time")
-    var sectionTime: Int
-
-
-
+    var sectionTime: String,
+    @ColumnInfo(name = "payment")
+    var payment: String
 )
