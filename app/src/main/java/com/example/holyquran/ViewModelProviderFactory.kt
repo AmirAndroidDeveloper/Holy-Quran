@@ -9,12 +9,12 @@ import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.ui.addUser.AddUserViewModel
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
-import com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseViewModel
-import com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanViewModel
-import com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel
-import com.example.holyquran.ui.userList.transactions.loan.loanDetails.LoanDetailViewModel
-import com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanHistoryViewModel
-import com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryViewModel
+import com.example.holyquran.ui.decreaseMoney.DecreaseViewModel
+import com.example.holyquran.ui.loan.getLoan.GetLoanViewModel
+import com.example.holyquran.ui.increaseMoney.IncreaseMoneyViewModel
+import com.example.holyquran.ui.loan.loanDetails.LoanDetailViewModel
+import com.example.holyquran.ui.loan.loanHistory.LoanHistoryViewModel
+import com.example.holyquran.ui.transactionHistory.TransactionHistoryViewModel
 
 class ViewModelProviderFactory (
     private val dataSourceUser: UserDAO,

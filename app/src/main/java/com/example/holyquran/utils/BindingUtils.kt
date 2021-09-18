@@ -7,9 +7,9 @@ import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.userList.UserAdapter
-import com.example.holyquran.ui.userList.transactions.loan.loanDetails.PaymentAdapter
-import com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanAdapter
-import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistoryAdapter
+import com.example.holyquran.ui.loan.loanDetails.PaymentAdapter
+import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
+import com.example.holyquran.ui.transactionHistory.increaseHistoryAdapter
 
 @BindingAdapter("userList")
 fun userList(

@@ -61,14 +61,12 @@ class AddUserFragment : Fragment() {
                     mAddUserListBinding.createdDate.text.toString(),
                     mAddUserListBinding.edtAddress.text.toString(),
                 )
-
+                findNavController().popBackStack()
             }
         })
-
         val pdate = PersianDate()
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
-
         mAddUserListBinding.createdDate.text = pdformater1.format(pdate)
         mAddUserListBinding.createdDate.setOnClickListener {
             val now = PersianCalendar()

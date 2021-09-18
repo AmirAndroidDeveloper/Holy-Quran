@@ -21,9 +21,6 @@
         tools:layout="@layout/fragment_user_list">
 
         <action
-            android:id="@+id/action_userListFragment_to_popupWindowFragment"
-            app:destination="@id/popupWindowFragment" />
-        <action
             android:id="@+id/action_userListFragment_to_increaseMoneyFragment"
             app:destination="@id/increaseMoneyFragment" />
         <action
@@ -35,15 +32,10 @@
         android:name="com.example.holyquran.ui.addUser.AddUserFragment"
         android:label="AddUserFragment"
         tools:layout="@layout/fragment_add_user"/>
-    <fragment
-        android:id="@+id/popupWindowFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.popupWindow.PopupWindowFragment"
-        android:label="fragment_popop_window"
-        tools:layout="@layout/fragment_popop_window" />
 
     <fragment
         android:id="@+id/increaseMoneyFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyFragment"
+        android:name="com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragment"
         android:label="UserOptionsFragment"
         tools:layout="@layout/fragment_increase_money">
 
@@ -68,19 +60,16 @@
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.decreaseMoney.DecreaseMoneyFragment"
+        android:name="com.example.holyquran.ui.decreaseMoney.DecreaseMoneyFragment"
         android:label="DecreaseMoneyFragment"
         tools:layout="@layout/fragment_decrease_money">
         <argument
             android:name="userIdDecrease"
             app:argType="long" />
-        <action
-            android:id="@+id/action_decreaseMoneyFragment_to_increaseMoneyFragment"
-            app:destination="@id/increaseMoneyFragment" />
     </fragment>
     <fragment
         android:id="@+id/TransactionHistoryFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.transactionHistory.TransactionHistoryFragment"
+        android:name="com.example.holyquran.ui.transactionHistory.TransactionHistoryFragment"
         android:label="IncreaseHistoryFragment"
         tools:layout="@layout/fragment_increase_history">
         <argument
@@ -89,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/getLoanFragment"
-        android:name="com.example.holyquran.ui.userList.transactions.loan.getLoan.GetLoanFragment"
+        android:name="com.example.holyquran.ui.loan.getLoan.GetLoanFragment"
         tools:layout="@layout/fragment_get_loan"
         android:label="GetLoanFragment" >
         <argument
@@ -102,7 +91,7 @@
     <fragment
         android:id="@+id/loanHistoryFragment"
         tools:layout="@layout/fragment_loan_history"
-        android:name="com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanHistoryFragment"
+        android:name="com.example.holyquran.ui.loan.loanHistory.LoanHistoryFragment"
         android:label="LoanHistoryFragment">
         <argument
             android:name="userId"
@@ -114,7 +103,7 @@
     <fragment
         android:id="@+id/loanDetailFragment"
         tools:layout="@layout/fragment_loan_detail"
-        android:name="com.example.holyquran.ui.userList.transactions.loan.loanDetails.LoanDetailFragment"
+        android:name="com.example.holyquran.ui.loan.loanDetails.LoanDetailFragment"
         android:label="LoanDetailFragment" >
         <argument
             android:name="loanId"

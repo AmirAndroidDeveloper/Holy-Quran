@@ -14,7 +14,7 @@
 
         <variable
             name="increaseMoneyViewModel"
-            type="com.example.holyquran.ui.userList.transactions.increaseMoney.IncreaseMoneyViewModel" />
+            type="com.example.holyquran.ui.increaseMoney.IncreaseMoneyViewModel" />
     </data>
 
     <LinearLayout

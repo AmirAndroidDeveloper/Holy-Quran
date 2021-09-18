@@ -7,7 +7,7 @@
     <data>
         <variable
             name="increaseHistoryViewModel"
-            type="com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanHistoryViewModel" />
+            type="com.example.holyquran.ui.loan.loanHistory.LoanHistoryViewModel" />
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />

@@ -6,7 +6,7 @@
 
         <variable
             name="clickListener"
-            type="com.example.holyquran.ui.userList.transactions.transactionHistory.AdapterListener2" />
+            type="com.example.holyquran.ui.transactionHistory.AdapterListener2" />
 
         <variable
             name="userInfo"
