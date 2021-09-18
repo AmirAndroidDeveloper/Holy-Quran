@@ -11,14 +11,7 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-
-import com.example.holyquran.ui.MainActivity
-import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
-
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
-import kotlinx.android.synthetic.main.fragment_main_page.*
 
 
 class MainPageFragment : Fragment() {
@@ -44,34 +37,6 @@ class MainPageFragment : Fragment() {
             ).get(MainFragmentViewModel::class.java)
         mMainPageBinding.viewModel = mMainViewModel
         this.also { mMainPageBinding.lifecycleOwner = it }
-
-
-        mMainPageBinding.txtTitle.setOnClickListener {
-            findNavController().navigate(MainPageFragmentDirections.actionMainPageFragmentToUserListFragment())
-        }
-//        val now = PersianCalendar()
-//        val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-//            object : DatePickerDialog.OnDateSetListener {
-//                override fun onDateSet(
-//                    view: DatePickerDialog?,
-//                    year: Int,
-//                    monthOfYear: Int,
-//                    dayOfMonth: Int
-//                ) {
-//                    Toast.makeText(
-//                        activity,
-//                        "$year/$monthOfYear/$dayOfMonth",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//            },
-//            now.persianYear,
-//            now.persianMonth,
-//            now.persianDay
-//        )
-//        dpd.setThemeDark(false)
-//        dpd.show(requireActivity().fragmentManager, "FuLLKade")
-
         return mMainPageBinding.root
 
     }

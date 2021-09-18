@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.holyquran.R
 import com.example.holyquran.databinding.FragmentSlider3Binding
-import com.example.holyquran.ui.MainActivity
+import com.example.holyquran.ui.mainPage.MainActivity
 
 class SliderFragment3 : Fragment() {
     val pref_show_intro = "Intro"

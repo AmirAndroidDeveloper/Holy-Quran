@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import com.example.holyquran.R
 import com.example.holyquran.databinding.ActivityIntroBinding
-import com.example.holyquran.ui.MainActivity
+import com.example.holyquran.ui.mainPage.MainActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 
 class IntroActivity : AppCompatActivity() {
@@ -40,7 +40,7 @@ class IntroActivity : AppCompatActivity() {
         preference = getSharedPreferences("IntroSlider", MODE_PRIVATE)
         this.supportActionBar?.hide();
         if (!preference.getBoolean(pref_show_intro, true)) {
-            startActivity(Intent(this@IntroActivity, MainActivity::class.java))
+            startActivity(Intent(this@IntroActivity,MainActivity::class.java))
             finish()
         }
         adapter = IntroAdapter(

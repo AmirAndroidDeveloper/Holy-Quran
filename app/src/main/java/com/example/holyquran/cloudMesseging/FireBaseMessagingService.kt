@@ -12,18 +12,12 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.holyquran.R
-import com.example.holyquran.ui.MainActivity
+import com.example.holyquran.ui.mainPage.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
-
 class FireBaseMessagingService :FirebaseMessagingService() {
-
-
-    private val TAG = "FireBaseMessagingService"
     var NOTIFICATION_CHANNEL_ID = "net.larntech.notification"
     val NOTIFICATION_ID = 100
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 

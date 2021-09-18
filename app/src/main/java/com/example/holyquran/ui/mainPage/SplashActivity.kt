@@ -1,4 +1,4 @@
-package com.example.holyquran.ui
+package com.example.holyquran.ui.mainPage
 
 import android.content.Intent
 import android.os.Bundle
