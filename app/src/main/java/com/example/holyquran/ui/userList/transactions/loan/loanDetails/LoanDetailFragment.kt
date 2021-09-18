@@ -18,6 +18,8 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import android.widget.EditText
 import android.widget.Spinner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class LoanDetailFragment : Fragment() {
     lateinit var mLoanDetailBinding: FragmentLoanDetailBinding
@@ -48,25 +50,33 @@ class LoanDetailFragment : Fragment() {
                 requireArguments()
             )
         id = arg.loanId
-
         mLoanDetailViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
             mLoanDetailViewModel.setLoanDetail(it)
         })
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
+                val yourInputString = it.createDate.toString()
+                yourInputString.split('/', limit = 3).also { (year, month,day) ->
+                    Log.d(
+                        "TAG",
+                        "onCreateView DIVORSE $year/$month/$day"
+                    )
+                }
                 mLoanDetailBinding.loanInfo = it
-
-                val pdate = PersianDate()
-                val pdformater1 = PersianDateFormat("Y/m/d")
-                pdformater1.format(pdate.addDate(10, 0, 1))
-                mLoanDetailBinding.loanExpiredAt.text = pdformater1.format(pdate)
-
-                Log.d("TAG", "amount: ${it.amount}")
             }
         })
-
-
         return mLoanDetailBinding.root
     }
-
 }
+//        val paymentAdapter = PaymentAdapter()
+//        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//        mLoanDetailBinding.rvFeed.adapter = paymentAdapter
+//        mLoanDetailBinding.rvFeed.layoutManager = mLinearLayoutManager
+//        mLoanDetailViewModel.getAllLoans(id).observe(viewLifecycleOwner, {
+//            Log.d("TAG", "userInfo2: ${it}")
+//            mLoanDetailViewModel.loanInfo.value = it
+//        })
+//val pdate = PersianDate()
+//val pdformater1 = PersianDateFormat("Y/m/d")
+//pdformater1.format(pdate.addDate(year.toLong(), month.toLong(), day.toLong()))
+//mLoanDetailBinding.loanExpiredAt.text = pdformater1.format(pdate)

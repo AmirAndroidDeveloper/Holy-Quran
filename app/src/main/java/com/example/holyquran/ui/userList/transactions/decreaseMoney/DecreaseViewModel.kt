@@ -41,12 +41,11 @@ class DecreaseViewModel(
     fun setDecrease(id: Long): LiveData<Transaction>? {
         return mTransactionsDAO.get(id)
     }
-
     fun setDecrease(mTransInfo: Transaction) {
         _decrease.value = mTransInfo
     }
 
-    fun sumUserIncrease(id: Long): Int {
+    private fun sumUserIncrease(id: Long): Int {
         return mTransactionsDAO.sumUserIncrease(id)
     }
 
@@ -59,6 +58,10 @@ class DecreaseViewModel(
     fun decreaseMoney() {
         _decreaseMoney.value = true
     }
+    fun decreaseMoneyDone() {
+        _decreaseMoney.value = false
+    }
+
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun decreaseMoney(
@@ -78,12 +81,8 @@ class DecreaseViewModel(
                     amount,
                     null,
                      sumUserIncrease(userId).minus(sumUserDecrease(userId))
-
                 )
             )
-
         }
     }
-
-
 }

@@ -32,13 +32,6 @@ class MainActivity : AppCompatActivity() {
         navController = this.findNavController(R.id.fragmentContainerView)
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            if (nd.id == nc.graph.startDestination) {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-            } else {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            }
-        }
         NavigationUI.setupWithNavController(binding.navView, navController)
     }
     override fun onSupportNavigateUp(): Boolean {

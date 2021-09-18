@@ -1,6 +1,7 @@
 package com.example.holyquran.ui.addUser
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import saman.zamani.persiandate.PersianDateFormat
 import saman.zamani.persiandate.PersianDate
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.holyquran.ui.userList.UserListFragmentDirections
 
@@ -49,21 +51,15 @@ class AddUserFragment : Fragment() {
         mAddUserListBinding.viewModel = mAddUserViewModel
         this.also { mAddUserListBinding.lifecycleOwner = it }
 
-
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                val userList: MutableList<UserInfo> = mutableListOf()
-                mAddUserViewModel.insertUser(
+                 mAddUserViewModel.insertUser(
                     mAddUserListBinding.edtFullName.text.toString(),
                     mAddUserListBinding.accountId.text.toString(),
                     mAddUserListBinding.edtMobileNumber.text.toString(),
                     mAddUserListBinding.edtPhoneNumber.text.toString(),
                     mAddUserListBinding.createdDate.text.toString(),
                     mAddUserListBinding.edtAddress.text.toString(),
-                    userList
-                )
-                this.findNavController().navigate(
-                    AddUserFragmentDirections.actionAddUserFragmentToUserListFragment()
                 )
 
             }
@@ -77,23 +73,14 @@ class AddUserFragment : Fragment() {
         mAddUserListBinding.createdDate.setOnClickListener {
             val now = PersianCalendar()
             val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-                object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(
-
-                        view: DatePickerDialog?,
-                        year: Int,
-                        monthOfYear: Int,
-                        dayOfMonth: Int
-
-                    ) {
-                        val month = monthOfYear + 1
-                        Toast.makeText(
-                            activity,
-                            "$year/${month}/$dayOfMonth",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
-                    }
+                { view, year, monthOfYear, dayOfMonth ->
+                    val month = monthOfYear + 1
+                    Toast.makeText(
+                        activity,
+                        "$year/${month}/$dayOfMonth",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
                 },
                 now.persianYear,
                 now.persianMonth,
@@ -103,13 +90,6 @@ class AddUserFragment : Fragment() {
             dpd.show(requireActivity().fragmentManager, "FuLLKade")
 
         }
-
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            view?.findNavController()
-                ?.navigate(R.id.action_addUserFragment_to_userListFragment2)
-        }
-
-
         return mAddUserListBinding.root
 
     }

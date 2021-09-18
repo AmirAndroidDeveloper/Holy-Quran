@@ -61,6 +61,7 @@ class UserListFragment : Fragment() {
                 this.findNavController().navigate(
                     UserListFragmentDirections.actionUserListFragmentToAddUserFragment()
                 )
+                mUserListViewModel.goToAddUserDone()
             }
         })
         val mUserAdapter = UserAdapter()
@@ -79,13 +80,6 @@ class UserListFragment : Fragment() {
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
-
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            view?.findNavController()
-                ?.navigate(
-                    UserListFragmentDirections.actionUserListFragmentToMainPageFragment()
-                )
-        }
         return mUserListBinding.root
     }
 

@@ -7,6 +7,7 @@ import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.userList.UserAdapter
+import com.example.holyquran.ui.userList.transactions.loan.loanDetails.PaymentAdapter
 import com.example.holyquran.ui.userList.transactions.loan.loanHistory.LoanAdapter
 import com.example.holyquran.ui.userList.transactions.transactionHistory.increaseHistoryAdapter
 
@@ -35,5 +36,14 @@ fun loanList(
     Log.d("TAG", "loanList: testTest")
     (recyclerView.adapter as LoanAdapter?)?.submitList(list)
     (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
+}
+@BindingAdapter("paymentList")
+fun paymentList(
+    recyclerView: RecyclerView,
+    list: List<Loan>?
+) {
+    Log.d("TAG", "loanList: testTest")
+    (recyclerView.adapter as PaymentAdapter?)?.submitList(list)
+    (recyclerView.adapter as PaymentAdapter?)?.notifyDataSetChanged()
 }
 

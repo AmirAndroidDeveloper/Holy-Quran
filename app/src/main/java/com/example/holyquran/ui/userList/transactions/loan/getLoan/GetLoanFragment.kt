@@ -116,7 +116,8 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             dayOfMonth: Int
 
                         ) {
-                            val month = monthOfYear + 1
+                            val month = monthOfYear + 10
+
                             mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
                         }
                     },

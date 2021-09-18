@@ -67,6 +67,11 @@ class IncreaseMoneyViewModel(
         _gotToDecreaseMoney.value = true
     }
 
+    fun goToIncreaseDone(){
+        _gotToDecreaseMoney.value=false
+    }
+
+
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(

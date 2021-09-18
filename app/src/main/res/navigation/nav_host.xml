@@ -21,30 +21,20 @@
         tools:layout="@layout/fragment_user_list">
 
         <action
-            android:id="@+id/action_userListFragment_to_addUserFragment"
-            app:destination="@id/addUserFragment" />
-        <action
             android:id="@+id/action_userListFragment_to_popupWindowFragment"
             app:destination="@id/popupWindowFragment" />
         <action
             android:id="@+id/action_userListFragment_to_increaseMoneyFragment"
             app:destination="@id/increaseMoneyFragment" />
         <action
-            android:id="@+id/action_userListFragment_to_mainPageFragment"
-            app:destination="@id/mainPageFragment" />
+            android:id="@+id/action_userListFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.holyquran.ui.addUser.AddUserFragment"
         android:label="AddUserFragment"
-        tools:layout="@layout/fragment_add_user">
-        <action
-            android:id="@+id/action_addUserFragment_to_userListFragment"
-            app:destination="@id/userListFragment" />
-        <action
-            android:id="@+id/action_addUserFragment_to_userListFragment2"
-            app:destination="@id/userListFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_user"/>
     <fragment
         android:id="@+id/popupWindowFragment"
         android:name="com.example.holyquran.ui.userList.transactions.popupWindow.PopupWindowFragment"

@@ -29,18 +29,13 @@ class AddUserViewModel(
         phoneNumber: String,
         dateOfCreation: String,
         address: String,
-        id: MutableList<UserInfo>,
     ) {
         uiScope.launch {
             try {
                 Log.d("TAG", "insertTest")
                 val user = UserInfo(0L, fullName, accountId,mobileNumber,phoneNumber,dateOfCreation,address)
                 withContext(Dispatchers.IO) {
-                    val personalId = mUserInfoDAO.insert(user)
-                    id.forEach {
-                    }
-                    mUserInfoDAO.insertList(id)
-                    Log.d("TAG", "insertUser: $fullName")
+                  mUserInfoDAO.insert(user)
                 }
             } catch (e: Exception) {
                 Log.d("TAG", "insertContact: ${e.message}")

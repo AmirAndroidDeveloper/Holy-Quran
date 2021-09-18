@@ -32,6 +32,10 @@ class UserListViewModel(
         _goTOAddUser.value = true
     }
 
+    fun goToAddUserDone(){
+        _goTOAddUser.value=false
+    }
+
     val userInfo = MutableLiveData<List<UserInfo>>()
     fun getUserList(): LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()

@@ -15,9 +15,7 @@ import android.view.*
 import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
-import com.example.holyquran.ui.addUser.AddUserFragmentDirections
 
 
 class IncreaseMoneyFragment : Fragment() {
@@ -94,13 +92,9 @@ class IncreaseMoneyFragment : Fragment() {
                           id
                       )
                   )
+                  mIncreaseMoneyViewModel.goToIncreaseDone()
               }
           })
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            view?.findNavController()
-                ?.navigate(R.id.action_increaseMoneyFragment_to_userListFragment)
-        }
-
         mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyViewModel.setIncrease(it)

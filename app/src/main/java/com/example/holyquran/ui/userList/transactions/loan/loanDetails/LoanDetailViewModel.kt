@@ -40,5 +40,8 @@ class LoanDetailViewModel(
     fun setLoanDetail(mLoanDetail: Loan) {
         _loanDetail.value = mLoanDetail
     }
-
+    val loanInfo = MutableLiveData<List<Loan>>()
+    fun getAllLoans(id: Long): LiveData<List<Loan>> {
+        return mLoan.getAllLoan(id)
+    }
     }

@@ -76,7 +76,6 @@ class LoanHistoryFragment : Fragment() {
         })
         return mLoanHistoryBinding.root
     }
-
     private fun userInfo() {
         mLoanHistoryViewModel.getLoanList(id).observe(viewLifecycleOwner, {
             Log.d("TAG", "userInfo2: ${it}")
