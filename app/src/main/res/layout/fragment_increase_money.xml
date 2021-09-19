@@ -72,10 +72,11 @@
                 android:textSize="35sp" />
 
 
-            <EditText
+            <com.example.holyquran.ui.NumberTextInputEditText
                 android:id="@+id/increaseEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
                 android:layout_marginTop="50dp"
                 android:hint="amount" />
 

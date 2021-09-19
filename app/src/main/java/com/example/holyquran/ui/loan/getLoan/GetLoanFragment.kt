@@ -26,6 +26,7 @@ import saman.zamani.persiandate.PersianDateFormat
 import java.text.NumberFormat
 import java.util.*
 import android.text.Editable
+import android.util.Log
 import java.lang.NumberFormatException
 import java.text.DecimalFormat
 
@@ -88,6 +89,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mGetLoanBinding.sectionPayment.text.toString(),
                     id
                 )
+                Log.d("TAG", "commaTest: $String.format(\"%,.2f\", 50000")
 
 
 
@@ -142,9 +144,11 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         mGetLoanViewModel.calculateLoan.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                if (mGetLoanBinding.loanSections.text.isEmpty()
-                        .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
-                        .or(mGetLoanBinding.loanAmount.text.isEmpty())
+                if (mGetLoanBinding.loanAmount.text?.let { it1 ->
+                        mGetLoanBinding.loanSections.text.isEmpty()
+                            .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
+                            .or(it1.isEmpty())
+                    } == true
                 ) {
                 } else {
                     calculateData()
@@ -162,9 +166,8 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun calculateData() {
-        val loanAmount: String = mGetLoanBinding.loanAmount.getText().toString()
-        val convertLoanAmount = loanAmount.toLong()
-
+        val removeComma =  mGetLoanBinding.loanAmount.text.toString().replace(",", "")
+        val convertLoanAmount = removeComma.toLong()
         val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
         val convertBenefitPercent = benefitPercent.toLong()
         val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()

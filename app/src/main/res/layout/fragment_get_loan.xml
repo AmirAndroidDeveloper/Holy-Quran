@@ -94,7 +94,8 @@
                 android:layoutDirection="ltr"
                 android:orientation="horizontal">
 
-                <EditText
+
+                <com.example.holyquran.ui.NumberTextInputEditText
                     android:id="@+id/loanAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

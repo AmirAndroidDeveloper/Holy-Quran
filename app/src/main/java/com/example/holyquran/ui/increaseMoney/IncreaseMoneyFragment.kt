@@ -16,6 +16,7 @@ import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
+import java.text.NumberFormat
 
 
 class IncreaseMoneyFragment : Fragment() {
@@ -47,7 +48,7 @@ class IncreaseMoneyFragment : Fragment() {
         this.also { mIncreaseMoneyBinding.lifecycleOwner = it }
 
         val arg =
-           IncreaseMoneyFragmentArgs.fromBundle(
+            IncreaseMoneyFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.userIdIncrease
@@ -60,41 +61,48 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.userName = it
             }
         })
-        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
-        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
-        val minus = "-"
-        try {
-            val expression = ExpressionBuilder(increase + minus + decrease).build()
-            val result = expression.evaluate()
-            val longResult = result.toLong()
-            if (result == longResult.toDouble())
-                mIncreaseMoneyBinding.totalMoney.text = longResult.toString()
-            else
-                mIncreaseMoneyBinding.totalMoney.text = result.toString()
-
-        } catch (e: Exception) {
-            Log.d("Exception", " message : " + e.message)
-        }
-
+//        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+//        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
+//        val minus = "-"
+//        try {
+//            val expression = ExpressionBuilder(increase + minus + decrease).build()
+//            val result = expression.evaluate()
+//            val longResult = result.toLong()
+//            if (result == longResult.toDouble())
+//                mIncreaseMoneyBinding.totalMoney.text =
+//                    NumberFormat.getInstance().format(longResult)
+//            else
+//                mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
+//
+//        } catch (e: Exception) {
+//            Log.d("Exception", " message : " + e.message)
+//        }
+        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toLong()
+        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toLong()
+        val result = increase - decrease
+        mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
 
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
+            val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
             if (it == true) {
                 mIncreaseMoneyViewModel.insertMoney(
-                    mIncreaseMoneyBinding.increaseEdt.text.toString(),
+                    removeComma,
                     id
                 )
             }
         })
-          mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
-              if (it == true) {
-                  this.findNavController().navigate(
-                      IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
-                          id
-                      )
-                  )
-                  mIncreaseMoneyViewModel.goToIncreaseDone()
-              }
-          })
+
+        val finalTest = NumberFormat.getInstance().format(result)
+        mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
+                        id
+                    )
+                )
+                mIncreaseMoneyViewModel.goToIncreaseDone()
+            }
+        })
         mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyViewModel.setIncrease(it)
@@ -102,13 +110,10 @@ class IncreaseMoneyFragment : Fragment() {
         })
         mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
             if (it != null) {
-                if (id == mIncreaseMoneyViewModel.increase.value?.userId) {
-                    Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
+                Log.d("TAG", "finalTest number: $finalTest")
+                mIncreaseMoneyBinding.userMoney.text = finalTest
+                if (mIncreaseMoneyBinding.totalMoney.text == "0") {
                     mIncreaseMoneyBinding.userMoney.text = it.increase
-
-                    if (mIncreaseMoneyBinding.totalMoney.text == "0") {
-                        mIncreaseMoneyBinding.userMoney.text = it.increase
-                    }
                 }
                 mIncreaseMoneyBinding.userMoney.text =
                     mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
@@ -129,7 +134,7 @@ class IncreaseMoneyFragment : Fragment() {
         return when (item.itemId) {
             R.id.transactionHistory -> {
                 this.findNavController().navigate(
-                   IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(
                         id
                     )
                 )
@@ -138,7 +143,7 @@ class IncreaseMoneyFragment : Fragment() {
             }
             R.id.getLoan -> {
                 this.findNavController().navigate(
-                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToGetLoanFragment(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToGetLoanFragment(
                         id
                     )
                 )
@@ -146,7 +151,7 @@ class IncreaseMoneyFragment : Fragment() {
             }
             R.id.loanHistory -> {
                 this.findNavController().navigate(
-                 IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToLoanHistoryFragment(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToLoanHistoryFragment(
                         id
                     )
                 )

@@ -55,9 +55,10 @@ class DecreaseMoneyFragment : Fragment() {
             }
         })
         mDecreaseMoneyViewModel.decreaseMoney.observe(viewLifecycleOwner, Observer {
+            val removeComma =  mDecreaseMoneyBinding.decreaseEdt.text.toString().replace(",", "")
             if (it == true) {
                 mDecreaseMoneyViewModel.decreaseMoney(
-                    mDecreaseMoneyBinding.decreaseEdt.text.toString(),
+                    removeComma,
                     id
                 )
             }
@@ -72,7 +73,7 @@ class DecreaseMoneyFragment : Fragment() {
             if (it != null) {
                 if (id == mDecreaseMoneyViewModel.decrease.value?.userId) {
                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
-                    mDecreaseMoneyBinding.userMoney.text = "-" + it.increase
+                    mDecreaseMoneyBinding.userMoney.text =it.increase
                 }
                 mDecreaseMoneyBinding.userMoney.text =
                     mDecreaseMoneyViewModel.sumUserDecrease(id).toString()
