@@ -36,14 +36,27 @@ class GetLoanViewModel(
         userId: Long,
     ) {
         uiScope.launch {
-            mGetLoanDAO.insert(Loan(0L, userId, amount, createdDate, loanSection, null, spinnerSectionSpace,payment))
+            mGetLoanDAO.insert(
+                Loan(
+                    0L,
+                    userId,
+                    amount,
+                    createdDate,
+                    loanSection,
+                    null,
+                    spinnerSectionSpace,
+                    payment
+                )
+            )
         }
     }
+
     var selectedItemPosition = 0
     fun onSelectItem(position: Int) {
         selectedItemPosition = position;
         Log.d("position", "onSelectItem: $selectedItemPosition")
     }
+
     private val _userName = MutableLiveData<UserInfo>()
     val userName: LiveData<UserInfo>
         get() = _userName
@@ -55,21 +68,27 @@ class GetLoanViewModel(
     fun setUserName(mUser: UserInfo) {
         _userName.value = mUser
     }
+
     private val _getLoan = MutableLiveData<Boolean>(false)
     val getLoan: LiveData<Boolean>
         get() = _getLoan
+
     fun getLoan() {
         _getLoan.value = true
     }
+
     private val _calculateLoan = MutableLiveData<Boolean>(false)
     val calculateLoan: LiveData<Boolean>
         get() = _calculateLoan
+
     fun calculateLoan() {
         _calculateLoan.value = true
     }
+
     private val _openCalender = MutableLiveData<Boolean>(false)
     val openCalender: LiveData<Boolean>
         get() = _openCalender
+
     fun openCalender() {
         _openCalender.value = true
     }

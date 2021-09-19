@@ -12,6 +12,10 @@
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
     </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20sp"
             android:layout_marginRight="40dp"
             android:orientation="vertical">
 
@@ -187,7 +191,7 @@
                         android:id="@+id/spinner"
                         android:layout_width="120dp"
                         android:layout_height="50dp"
-                        android:layout_gravity="right"
+                        android:layout_gravity="end"
                         android:layout_marginTop="8dp"
                         android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}" />
                 </LinearLayout>
@@ -196,9 +200,12 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20sp"
                 android:layoutDirection="ltr"
                 android:orientation="horizontal">
+
+
+
 
                 <TextView
                     android:id="@+id/sectionPayment"
@@ -278,4 +285,5 @@
                 android:text="محاسبه" />
         </LinearLayout>
     </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.3625" />
         <entry key="../../sdk/sdk last/sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.346875" />
         <entry key="app/src/main/res/drawable/forground_popup.xml" value="0.3425925925925926" />
         <entry key="app/src/main/res/drawable/ic_add_person.xml" value="0.3638888888888889" />
         <entry key="app/src/main/res/drawable/ic_delete2.xml" value="0.3008438818565401" />
         <entry key="app/src/main/res/drawable/ic_people.xml" value="0.3012658227848101" />
+        <entry key="app/src/main/res/drawable/user_add.xml" value="0.4817708333333333" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2877637130801688" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.346875" />

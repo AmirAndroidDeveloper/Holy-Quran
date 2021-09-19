@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<data>
-    <variable
-        name="viewModel"
-        type="com.example.holyquran.ui.userList.UserListViewModel" />
-</data>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.holyquran.ui.userList.UserListViewModel" />
+    </data>
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/frameLayout"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
@@ -23,16 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
-            app:userList="@{viewModel.userInfo}"/>
+            app:userList="@{viewModel.userInfo}" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-              android:id="@+id/floatingBtn"
-                android:layout_gravity="bottom"
-                android:onClick="@{() -> viewModel.goTOAddUser()}"
-                android:layout_marginBottom="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_person"
-                app:backgroundTint="#1e45d1" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            android:onClick="@{() -> viewModel.goTOAddUser()}"
+            android:src="@drawable/ic_baseline_person_add_alt_1_24"
+            android:backgroundTint="#1e45d1"
+            app:tint="@color/white" />
     </FrameLayout>
 </layout>

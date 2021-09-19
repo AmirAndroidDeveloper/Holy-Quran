@@ -1,7 +1,6 @@
 package com.example.holyquran.ui.loan.getLoan
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +19,16 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+import kotlinx.android.synthetic.main.fragment_add_user.*
+import kotlinx.android.synthetic.main.nav_header.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
+import java.text.NumberFormat
+import java.util.*
+import android.text.Editable
+import java.lang.NumberFormatException
+import java.text.DecimalFormat
+
 
 class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var mGetLoanBinding: FragmentGetLoanBinding
@@ -53,7 +60,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mGetLoanBinding.viewModel = mGetLoanViewModel
         this.also { mGetLoanBinding.lifecycleOwner = it }
         val arg =
-          GetLoanFragmentArgs.fromBundle(
+            GetLoanFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.userId
@@ -62,14 +69,13 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val spinner: Spinner = mGetLoanBinding.spinner
         ArrayAdapter.createFromResource(
             requireActivity(),
-            R.array.planets_array,
+            R.array.payment_time,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-            spinner.onItemSelectedListener = this
+                   spinner.adapter = adapter
+                   spinner.onItemSelectedListener = this
         }
 
         mGetLoanViewModel.getLoan.observe(viewLifecycleOwner, Observer {
@@ -82,6 +88,9 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mGetLoanBinding.sectionPayment.text.toString(),
                     id
                 )
+
+
+
                 mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
                     if (it != null) {
 
@@ -93,7 +102,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         Toast.LENGTH_LONG
                     ).show()
                     this.findNavController().navigate(
-                     GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(
+                        GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(
                             id
                         )
                     )
@@ -105,23 +114,13 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
         mGetLoanBinding.loanDate.text = pdformater1.format(pdate)
-
         mGetLoanViewModel.openCalender.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 val now = PersianCalendar()
                 val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-                    object : DatePickerDialog.OnDateSetListener {
-                        override fun onDateSet(
-                            view: DatePickerDialog?,
-                            year: Int,
-                            monthOfYear: Int,
-                            dayOfMonth: Int
-
-                        ) {
-                            val month = monthOfYear + 10
-
-                            mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
-                        }
+                    { view, year, monthOfYear, dayOfMonth ->
+                        val month = monthOfYear + 1
+                        mGetLoanBinding.loanDate.text = "$year/$month/$dayOfMonth"
                     },
                     now.persianYear,
                     now.persianMonth,
@@ -152,6 +151,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         })
+
         return mGetLoanBinding.root
     }
 
@@ -167,11 +167,9 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
         val convertBenefitPercent = benefitPercent.toLong()
-
         val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
         val convertSectionTime = sectionTime
         val division: Long = 2400
-
         val amount: Long = convertLoanAmount.toLong()
         val benefit: Long = convertBenefitPercent
         val section: Long = convertSectionTime.toLong()
@@ -180,11 +178,10 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val result2: Long = (result + amount) / section
         val result3: Long = amount + result
 
-        mGetLoanBinding.loanBenefit.text = result.toString()
-        mGetLoanBinding.sectionPayment.text = result2.toString()
-        mGetLoanBinding.totalLoan.text = result3.toString()
+        mGetLoanBinding.sectionPayment.text =  NumberFormat.getInstance().format(result2)
+        mGetLoanBinding.loanBenefit.text =  NumberFormat.getInstance().format(result)
+        mGetLoanBinding.totalLoan.text =  NumberFormat.getInstance().format(result3)
     }
-
 }
 
 //        val benefitPresent: String = mGetLoanBinding.spinner.getSelectedItem().toString()

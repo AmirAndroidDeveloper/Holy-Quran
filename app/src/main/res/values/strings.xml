@@ -11,11 +11,11 @@
     <string name="userName">نام کاربری</string>
     <string name="password">رمز عبور</string>
 
-    <string-array name="planets_array">
+    <string-array name="payment_time">
+        <item>۱ ماه</item>
         <item>۱ هفته</item>
         <item>۲ هفته</item>
         <item>۳ هفته</item>
-        <item>۱ ماه</item>
         <item>۲ ماه</item>
         <item>۳ ماه</item>
         <item>۴ ماه</item>

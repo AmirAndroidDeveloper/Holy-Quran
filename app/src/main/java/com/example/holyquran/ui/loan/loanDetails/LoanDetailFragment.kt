@@ -20,6 +20,9 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_add_user.*
+import java.text.NumberFormat
+import java.util.*
 
 class LoanDetailFragment : Fragment() {
     lateinit var mLoanDetailBinding: FragmentLoanDetailBinding
@@ -46,7 +49,7 @@ class LoanDetailFragment : Fragment() {
         mLoanDetailBinding.loanDetailViewModel = mLoanDetailViewModel
         this.also { mLoanDetailBinding.lifecycleOwner = it }
         val arg =
-          LoanDetailFragmentArgs.fromBundle(
+            LoanDetailFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.loanId
@@ -56,11 +59,19 @@ class LoanDetailFragment : Fragment() {
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 val yourInputString = it.createDate.toString()
-                yourInputString.split('/', limit = 3).also { (year, month,day) ->
+                yourInputString.split('/', limit = 3).also { (year, month, day) ->
                     Log.d(
                         "TAG",
-                        "onCreateView DIVORSE $year/$month/$day"
+                        "onCreateView DIVORCE $year/$month/$day"
                     )
+                    val pDate = PersianDate()
+                    val pdformater1 = PersianDateFormat("Y/m/d")
+                    pdformater1.format(pDate)
+                    mLoanDetailBinding.loanExpiredAt.text =
+                        pdformater1.format(
+                            pDate.setShYear(year.toInt()).addMonth(it.loanSections.toLong())
+                                .setShDay(day.toInt())
+                        )
                 }
                 mLoanDetailBinding.loanInfo = it
             }
@@ -68,6 +79,11 @@ class LoanDetailFragment : Fragment() {
         return mLoanDetailBinding.root
     }
 }
+
+
+//mLoanDetailBinding.loanExpiredAt.text = pdformater1.format(pdate.addMonth(it.loanSections.toLong()))
+
+
 //        val paymentAdapter = PaymentAdapter()
 //        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 //        mLoanDetailBinding.rvFeed.adapter = paymentAdapter
