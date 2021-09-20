@@ -18,15 +18,16 @@ class PaymentViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
-    private val _userName = MutableLiveData<UserInfo>()
-    val userName: LiveData<UserInfo>
-        get() = _userName
+    private val _loanDetail = MutableLiveData<Loan>()
+    val loanDetail: LiveData<Loan>
+        get() = _loanDetail
 
-    fun setUserName(id: Long): LiveData<UserInfo>? {
-        return mUserInfoDAO.get(id)
+    fun setLoanDetail(id: Long): LiveData<Loan>? {
+        return mLoan.getLoanId(id)
     }
 
-    fun setUserName(mUser: UserInfo) {
-        _userName.value = mUser
+    fun setLoanDetail(mLoanDetail: Loan) {
+        _loanDetail.value = mLoanDetail
     }
-    }
+
+}

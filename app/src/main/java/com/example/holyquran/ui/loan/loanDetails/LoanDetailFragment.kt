@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
 import kotlinx.android.synthetic.main.fragment_add_user.*
+import kotlinx.android.synthetic.main.fragment_loan_detail.view.*
 import java.text.NumberFormat
 import java.util.*
 
@@ -57,12 +58,6 @@ class LoanDetailFragment : Fragment() {
         id = arg.loanDetailId
         mLoanDetailViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
             mLoanDetailViewModel.setLoanDetail(it)
-
-//            this.findNavController().navigate(
-//                LoanDetailFragmentDirections.actionLoanDetailFragmentToLoanPaymentsFragment(
-//                    id
-//                )
-//            )
         })
         Log.d("TAG", "onCreateView: $id")
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
@@ -87,19 +82,40 @@ class LoanDetailFragment : Fragment() {
         })
         setHasOptionsMenu(true)
 
+
         mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
-                mLoanDetailViewModel.setUserName(it)
+                val yourInputString = it.createDate.toString()
+                yourInputString.split('/', limit = 3).also { (year, month, day) ->
+                    Log.d(
+                        "TAG",
+                        "onCreateView DIVORCE $year/$month/$day"
+                    )
+                    val pDate = PersianDate()
+                    val pdformater1 = PersianDateFormat("Y/m/d")
+                    pdformater1.format(pDate)
+                    mLoanDetailBinding.loanExpiredAt.text =
+                        pdformater1.format(
+                            pDate.setShYear(year.toInt()).addMonth(it.loanSections.toLong())
+                                .setShDay(day.toInt())
+                        )
+                }
+                mLoanDetailBinding.loanInfo = it
             }
         })
-        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
+        mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
-                mLoanDetailBinding.userId.text = it.fullName
+                mLoanDetailBinding.userId.text = it.amount
+
+                mLoanDetailBinding.userId.setOnClickListener {
+                    this.findNavController().navigate(
+                        LoanDetailFragmentDirections.actionLoanDetailFragmentToLoanPaymentsFragment(
+                            id
+                        )
+                    )
+                }
             }
         })
-
-
-
 
 
         return mLoanDetailBinding.root

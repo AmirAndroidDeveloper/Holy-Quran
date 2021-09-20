@@ -11,6 +11,9 @@
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
+        <variable
+            name="loan"
+            type="com.example.holyquran.data.model.Loan" />
     </data>
 
     <LinearLayout
@@ -33,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
-                android:text="@{userName.fullName}"
+                android:text="@{loan.amount}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 tools:text="امیر حسین رجايی زاده‌" />

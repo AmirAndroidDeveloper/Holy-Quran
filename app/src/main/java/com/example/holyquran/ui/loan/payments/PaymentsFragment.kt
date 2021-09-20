@@ -15,7 +15,10 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanPaymentsBinding
+import com.example.holyquran.ui.loan.loanDetails.LoanDetailFragmentDirections
 import com.example.holyquran.ui.loan.loanHistory.*
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 class PaymentsFragment : Fragment() {
     lateinit var mLoanPaymentsBinding: FragmentLoanPaymentsBinding
@@ -47,16 +50,18 @@ class PaymentsFragment : Fragment() {
         val args = PaymentsFragmentArgs.fromBundle(requireArguments())
         id = args.paymentId
 
-        mPaymentsViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-
-
-            mLoanPaymentsBinding.userNameEDT.text = it.fullName
-
+        mPaymentsViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanPaymentsBinding.loan = it
+            }
         })
-        mPaymentsViewModel.userName.observe(viewLifecycleOwner, {
+        mPaymentsViewModel.loanDetail.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPaymentsViewModel.setLoanDetail(it)
 
+            }
         })
-
         return mLoanPaymentsBinding.root
+
     }
 }
