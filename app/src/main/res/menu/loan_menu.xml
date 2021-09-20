@@ -6,9 +6,11 @@
         android:icon="@drawable/loan_money"
         android:title="تاریخچه تراکنش ها" />
 
-    <item android:title="دریافت وام"
-        android:id="@+id/getLoan"/>
-    <item android:title="تاریخچه وام"
-        android:id="@+id/loanHistory"/>
+    <item
+        android:id="@+id/getLoan"
+        android:title="دریافت وام" />
+    <item
+        android:id="@+id/loanHistory"
+        android:title="تاریخچه وام" />
 
 </menu>
