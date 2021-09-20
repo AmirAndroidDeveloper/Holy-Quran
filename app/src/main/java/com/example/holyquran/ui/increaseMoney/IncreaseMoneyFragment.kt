@@ -76,15 +76,21 @@ class IncreaseMoneyFragment : Fragment() {
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
             val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
             if (it == true) {
-            if (id2==true){
-
-            }else {
-                mIncreaseMoneyViewModel.insertMoney(
-                    removeComma,
-                    id
-                )            }
+                if (id2 == true) {
+                    mIncreaseMoneyViewModel.insertMoney(
+                        removeComma,
+                        true,
+                        id
+                    )
+                } else {
+                    mIncreaseMoneyViewModel.insertMoney(
+                        removeComma,
+                        false,
+                        id
+                    )
+                }
             }
-             
+
         })
 
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
@@ -104,6 +110,8 @@ class IncreaseMoneyFragment : Fragment() {
         })
         mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
             if (it != null) {
+
+
                 val formatter: NumberFormat = DecimalFormat("#,###,###,###")
                 mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
                 if (mIncreaseMoneyBinding.totalMoney.text == "0") {
@@ -123,12 +131,11 @@ class IncreaseMoneyFragment : Fragment() {
             } else {
                 id2 = false
             }
-            if (id2 == true) {
-                Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
-            } else if (id2 == false) {
-                Toast.makeText(activity, "No", Toast.LENGTH_SHORT).show()
-
-            }
+//            if (id2 == true) {
+//                Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+//            } else if (id2 == false) {
+//                Toast.makeText(activity, "No", Toast.LENGTH_SHORT).show()
+//            }
         }
         return mIncreaseMoneyBinding.root
     }

@@ -67,8 +67,8 @@ class IncreaseMoneyViewModel(
         _gotToDecreaseMoney.value = true
     }
 
-    fun goToIncreaseDone(){
-        _gotToDecreaseMoney.value=false
+    fun goToIncreaseDone() {
+        _gotToDecreaseMoney.value = false
     }
 
 
@@ -76,6 +76,7 @@ class IncreaseMoneyViewModel(
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
         amount: String,
+        transactionStatus: Boolean,
         userId: Long,
     ) {
         uiScope.launch {
@@ -90,6 +91,7 @@ class IncreaseMoneyViewModel(
                     amount,
                     null,
                     null,
+                    transactionStatus,
                     sumUserIncrease(userId).minus(sumUserDecrease(userId))
                 )
             )
