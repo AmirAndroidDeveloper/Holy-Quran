@@ -3,10 +3,8 @@ package com.example.holyquran.ui.loan.loanDetails
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -18,8 +16,12 @@ import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
 import kotlinx.android.synthetic.main.fragment_add_user.*
 import java.text.NumberFormat
 import java.util.*
@@ -52,10 +54,17 @@ class LoanDetailFragment : Fragment() {
             LoanDetailFragmentArgs.fromBundle(
                 requireArguments()
             )
-        id = arg.loanId
+        id = arg.loanDetailId
         mLoanDetailViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
             mLoanDetailViewModel.setLoanDetail(it)
+
+//            this.findNavController().navigate(
+//                LoanDetailFragmentDirections.actionLoanDetailFragmentToLoanPaymentsFragment(
+//                    id
+//                )
+//            )
         })
+        Log.d("TAG", "onCreateView: $id")
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 val yourInputString = it.createDate.toString()
@@ -76,7 +85,44 @@ class LoanDetailFragment : Fragment() {
                 mLoanDetailBinding.loanInfo = it
             }
         })
+        setHasOptionsMenu(true)
+
+        mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanDetailViewModel.setUserName(it)
+            }
+        })
+        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanDetailBinding.userId.text = it.fullName
+            }
+        })
+
+
+
+
+
         return mLoanDetailBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.payment_list, menu);
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.loanPaymentList -> {
+                this.findNavController().navigate(
+                    LoanDetailFragmentDirections.actionLoanDetailFragmentToLoanPaymentsFragment(
+                        id
+                    )
+                )
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
     }
 }
 

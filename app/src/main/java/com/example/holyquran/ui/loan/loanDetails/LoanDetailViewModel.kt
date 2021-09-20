@@ -1,6 +1,7 @@
 package com.example.holyquran.ui.loan.loanDetails
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +30,7 @@ class LoanDetailViewModel(
     fun setUserName(mUser: UserInfo) {
         _userName.value = mUser
     }
+
     private val _loanDetail = MutableLiveData<Loan>()
     val loanDetail: LiveData<Loan>
         get() = _loanDetail
@@ -40,8 +42,10 @@ class LoanDetailViewModel(
     fun setLoanDetail(mLoanDetail: Loan) {
         _loanDetail.value = mLoanDetail
     }
+
     val loanInfo = MutableLiveData<List<Loan>>()
     fun getAllLoans(id: Long): LiveData<List<Loan>> {
-        return mLoan.getAllLoan(id)
+        Log.d("TAG", "getLoanList: $loanInfo")
+        return mLoan.getAllLoanByUserPayment(id)
     }
-    }
+}

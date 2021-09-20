@@ -111,8 +111,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="342" />
-                            <option name="y" value="-474" />
+                            <option name="x" value="366" />
+                            <option name="y" value="-420" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -139,6 +139,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="loanPaymentsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="600" />
+                            <option name="y" value="-414" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="mainPageFragment">
                     <value>
                       <LayoutPositions>
@@ -147,15 +159,6 @@
                             <option name="x" value="-753" />
                             <option name="y" value="-371" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_mainPageFragment_to_userListFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -97,7 +97,6 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
 
-        val finalTest = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -135,7 +134,6 @@ class IncreaseMoneyFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.loan_menu, menu);
-
         super.onCreateOptionsMenu(menu, inflater)
     }
 

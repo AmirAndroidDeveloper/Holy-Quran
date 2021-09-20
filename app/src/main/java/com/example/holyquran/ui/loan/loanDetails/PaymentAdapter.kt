@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.databinding.ItemPaymentBinding
+import com.example.holyquran.databinding.ItemUserLoanListBinding
 
 
 class PaymentAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
@@ -96,7 +97,7 @@ class AdapterListener6(
     val deleteListener: (category: Loan) -> Unit
 
 ) {
-    fun onclick(category: Loan) = clickListener2(category.userId)
+    fun onclick(loan: Loan) = clickListener2(loan.loanId)
     fun onDeleteClick(userInfo: Loan) = deleteListener(userInfo)
 
 }

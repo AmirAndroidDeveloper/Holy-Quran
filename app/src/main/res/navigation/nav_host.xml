@@ -104,7 +104,19 @@
         android:name="com.example.holyquran.ui.loan.loanDetails.LoanDetailFragment"
         android:label="LoanDetailFragment" >
         <argument
-            android:name="loanId"
+            android:name="loanDetailId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_loanDetailFragment_to_loanPaymentsFragment"
+            app:destination="@id/loanPaymentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loanPaymentsFragment"
+        android:name="com.example.holyquran.ui.loan.payments.PaymentsFragment"
+        android:label="fragment_loan_payments"
+        tools:layout="@layout/fragment_loan_payments" >
+        <argument
+            android:name="paymentId"
             app:argType="long" />
     </fragment>
 
