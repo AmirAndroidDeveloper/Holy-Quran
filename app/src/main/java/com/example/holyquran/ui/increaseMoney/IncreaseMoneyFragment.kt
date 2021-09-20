@@ -17,6 +17,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
+import android.text.method.DigitsKeyListener
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 
 
 class IncreaseMoneyFragment : Fragment() {
@@ -56,6 +59,8 @@ class IncreaseMoneyFragment : Fragment() {
         mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             mIncreaseMoneyViewModel.setUserName(it)
         })
+
+
         mIncreaseMoneyViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyBinding.userName = it
@@ -110,8 +115,11 @@ class IncreaseMoneyFragment : Fragment() {
         })
         mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
             if (it != null) {
-                Log.d("TAG", "finalTest number: $finalTest")
-                mIncreaseMoneyBinding.userMoney.text = finalTest
+                val formatter: NumberFormat = DecimalFormat("#,###,###,###")
+                mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
+
+
+
                 if (mIncreaseMoneyBinding.totalMoney.text == "0") {
                     mIncreaseMoneyBinding.userMoney.text = it.increase
                 }
@@ -121,6 +129,7 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
         setHasOptionsMenu(true)
+
         return mIncreaseMoneyBinding.root
     }
 

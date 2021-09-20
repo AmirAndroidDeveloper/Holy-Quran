@@ -23,7 +23,6 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
         android:layoutDirection="ltr"
-
         android:layout_marginRight="30dp"
         android:orientation="vertical"
         tools:context=".ui.userList.decreaseMoney.IncreaseMoneyFragment">
@@ -32,7 +31,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="ltr"
-
             android:orientation="vertical">
 
             <TextView
@@ -72,7 +70,7 @@
                 android:textSize="35sp" />
 
 
-            <com.example.holyquran.ui.NumberTextInputEditText
+            <EditText
                 android:id="@+id/increaseEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

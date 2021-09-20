@@ -61,7 +61,7 @@
                 android:textSize="35sp" />
 
 
-            <com.example.holyquran.ui.NumberTextInputEditText
+            <com.example.holyquran.ui.thousandSeparator.ThousandNumberEditText
                 android:id="@+id/decreaseEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
