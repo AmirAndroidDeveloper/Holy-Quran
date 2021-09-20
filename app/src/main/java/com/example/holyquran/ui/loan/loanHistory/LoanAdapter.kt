@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.databinding.ItemUserLoanListBinding
-import com.example.holyquran.ui.loan.loanDetails.BillDiffCallback
 
 
 class LoanAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {

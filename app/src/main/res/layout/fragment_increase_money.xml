@@ -8,6 +8,7 @@
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
+
         <variable
             name="transaction"
             type="com.example.holyquran.data.model.Transaction" />
@@ -22,8 +23,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="40dp"
-        android:layoutDirection="ltr"
         android:layout_marginRight="30dp"
+        android:layoutDirection="ltr"
         android:orientation="vertical"
         tools:context=".ui.userList.decreaseMoney.IncreaseMoneyFragment">
 
@@ -50,8 +51,9 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 tools:text="UserName" />
+
             <TextView
-              android:id="@+id/totalMoney"
+                android:id="@+id/totalMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -70,19 +72,34 @@
                 android:textSize="35sp" />
 
 
-            <EditText
-                android:id="@+id/increaseEdt"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:layout_marginTop="50dp"
-                android:hint="amount" />
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/increaseEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="amount"
+                    android:inputType="number" />
+
+
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:text="برداخت قسط"
+                        android:layout_height="50dp" />
+
+            </LinearLayout>
+
 
             <Button
-                android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20sp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
                 android:text="تایید" />
 
 
@@ -98,29 +115,29 @@
             <Button
                 android:id="@+id/decreaseBtn"
                 android:layout_width="match_parent"
-                android:onClick="@{() -> increaseMoneyViewModel.gotToDecreaseMoney()}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
+                android:onClick="@{() -> increaseMoneyViewModel.gotToDecreaseMoney()}"
                 android:text="واریز به حساب" />
 
-          <LinearLayout
-              android:layout_width="match_parent"
-              android:layout_marginTop="35sp"
-              android:layoutDirection="ltr"
-
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/userMoney"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{transaction.increase}"
-                android:textColor="@color/black"
-                android:gravity="center"
-                tools:text="باقی مانده حساب" />
+                android:layout_marginTop="35sp"
 
-          </LinearLayout>
+                android:layoutDirection="ltr"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/userMoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{transaction.increase}"
+                    android:textColor="@color/black"
+                    tools:text="باقی مانده حساب" />
+
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </layout>

@@ -100,23 +100,14 @@ class LoanDetailFragment : Fragment() {
                                 .setShDay(day.toInt())
                         )
                 }
-                mLoanDetailBinding.loanInfo = it
             }
         })
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
-                mLoanDetailBinding.userId.text = it.amount
+                mLoanDetailBinding.loanInfo = it
 
-                mLoanDetailBinding.userId.setOnClickListener {
-                    this.findNavController().navigate(
-                        LoanDetailFragmentDirections.actionLoanDetailFragmentToLoanPaymentsFragment(
-                            id
-                        )
-                    )
-                }
             }
         })
-
 
         return mLoanDetailBinding.root
     }

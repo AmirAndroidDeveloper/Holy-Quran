@@ -1,4 +1,4 @@
-package com.example.holyquran.ui.loan.loanDetails
+package com.example.holyquran.ui.loan.payments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
-import com.example.holyquran.databinding.ItemPaymentBinding
-import com.example.holyquran.databinding.ItemUserLoanListBinding
+import com.example.holyquran.databinding.ItemUserPaymentsListBinding
 
 
-class PaymentAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
+class PaymentsAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -46,24 +45,24 @@ class PaymentAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCall
             ITEM_VIEW_TYPE_EMPTY
     }
 
-    class ViewHolder private constructor(val binding: ItemPaymentBinding) :
+    class ViewHolder private constructor(val binding: ItemUserPaymentsListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Loan, adapterListener2: AdapterListener6) {
+        fun bind(item: Loan, adapterListener6: AdapterListener6) {
             binding.loan = item
-            binding.clickListener2 = adapterListener2
+            binding.clickListener2 = adapterListener6
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemPaymentBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemUserPaymentsListBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
     }
 
-    class EmptyViewHolder private constructor(val binding: ItemPaymentBinding) :
+    class EmptyViewHolder private constructor(val binding: ItemUserPaymentsListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.executePendingBindings()
@@ -72,7 +71,7 @@ class PaymentAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCall
         companion object {
             fun from(parent: ViewGroup): EmptyViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemPaymentBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemUserPaymentsListBinding.inflate(layoutInflater, parent, false)
                 return EmptyViewHolder(binding)
             }
         }
@@ -81,7 +80,7 @@ class PaymentAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCall
 
 class BillDiffCallback : DiffUtil.ItemCallback<Loan>() {
     override fun areItemsTheSame(oldItem: Loan, newItem: Loan): Boolean {
-        return oldItem.loanId == newItem.loanId
+        return oldItem.sectionTime == newItem.sectionTime
     }
 
     override fun areContentsTheSame(

@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
-import com.example.holyquran.ui.userList.UserAdapter
-import com.example.holyquran.ui.loan.loanDetails.PaymentAdapter
 import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
+import com.example.holyquran.ui.loan.payments.PaymentsAdapter
+import com.example.holyquran.ui.userList.UserAdapter
 import com.example.holyquran.ui.transactionHistory.increaseHistoryAdapter
 
 @BindingAdapter("userList")
@@ -43,7 +43,7 @@ fun paymentList(
     list: List<Loan>?
 ) {
     Log.d("TAG", "loanList: testTest")
-    (recyclerView.adapter as PaymentAdapter?)?.submitList(list)
-    (recyclerView.adapter as PaymentAdapter?)?.notifyDataSetChanged()
+    (recyclerView.adapter as PaymentsAdapter?)?.submitList(list)
+    (recyclerView.adapter as PaymentsAdapter?)?.notifyDataSetChanged()
 }
 

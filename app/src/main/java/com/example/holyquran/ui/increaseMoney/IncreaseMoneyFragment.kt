@@ -18,12 +18,14 @@ import androidx.navigation.findNavController
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
 import android.text.method.DigitsKeyListener
+import kotlinx.android.synthetic.main.fragment_increase_money.*
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 
 
 class IncreaseMoneyFragment : Fragment() {
     var id: Long = 0L
+    var id2: Boolean = false
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -66,35 +68,23 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.userName = it
             }
         })
-//        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
-//        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toString()
-//        val minus = "-"
-//        try {
-//            val expression = ExpressionBuilder(increase + minus + decrease).build()
-//            val result = expression.evaluate()
-//            val longResult = result.toLong()
-//            if (result == longResult.toDouble())
-//                mIncreaseMoneyBinding.totalMoney.text =
-//                    NumberFormat.getInstance().format(longResult)
-//            else
-//                mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
-//
-//        } catch (e: Exception) {
-//            Log.d("Exception", " message : " + e.message)
-//        }
+
         val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toLong()
         val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toLong()
         val result = increase - decrease
         mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
-
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
             val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
             if (it == true) {
+            if (id2==true){
+
+            }else {
                 mIncreaseMoneyViewModel.insertMoney(
                     removeComma,
                     id
-                )
+                )            }
             }
+             
         })
 
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
@@ -116,9 +106,6 @@ class IncreaseMoneyFragment : Fragment() {
             if (it != null) {
                 val formatter: NumberFormat = DecimalFormat("#,###,###,###")
                 mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
-
-
-
                 if (mIncreaseMoneyBinding.totalMoney.text == "0") {
                     mIncreaseMoneyBinding.userMoney.text = it.increase
                 }
@@ -129,6 +116,20 @@ class IncreaseMoneyFragment : Fragment() {
         })
         setHasOptionsMenu(true)
 
+        mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                id2 = true
+                Log.d("TAG", "ids: $id2,$id")
+            } else {
+                id2 = false
+            }
+            if (id2 == true) {
+                Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
+            } else if (id2 == false) {
+                Toast.makeText(activity, "No", Toast.LENGTH_SHORT).show()
+
+            }
+        }
         return mIncreaseMoneyBinding.root
     }
 

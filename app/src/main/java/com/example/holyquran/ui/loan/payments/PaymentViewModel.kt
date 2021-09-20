@@ -23,11 +23,28 @@ class PaymentViewModel(
         get() = _loanDetail
 
     fun setLoanDetail(id: Long): LiveData<Loan>? {
-        return mLoan.getLoanId(id)
+        return mLoan.get(id)
     }
 
     fun setLoanDetail(mLoanDetail: Loan) {
         _loanDetail.value = mLoanDetail
     }
+
+
+
+    val loanInfo = MutableLiveData<List<Loan>>()
+    fun getLoanList(id: Long): LiveData<List<Loan>> {
+        Log.d("TAG", "getLoanList: $loanInfo")
+        return mLoan.getAllLoanByUserPayment(id)
+    }
+
+
+//    fun setLoanDetailTest(id: Long): LiveData<Loan>? {
+//        return mLoan.get(id)
+//    }
+//
+//    fun setLoanDetailTest(mLoanDetail: Loan) {
+//        _loanDetail.value = mLoanDetail
+//    }
 
 }

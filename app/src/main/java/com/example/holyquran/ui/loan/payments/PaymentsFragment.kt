@@ -58,10 +58,20 @@ class PaymentsFragment : Fragment() {
         mPaymentsViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 mPaymentsViewModel.setLoanDetail(it)
-
             }
         })
+        val paymentAdapter=PaymentsAdapter()
+        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//        mLoanPaymentsBinding.rvFeed.adapter = paymentAdapter
+        mLoanPaymentsBinding.rvFeed.layoutManager = mLinearLayoutManager
+        paymentsList()
         return mLoanPaymentsBinding.root
+    }
 
+    private fun paymentsList() {
+        mPaymentsViewModel.getLoanList(id).observe(viewLifecycleOwner, {
+            Log.d("TAG", "loanList: ${it.size}")
+            mPaymentsViewModel.loanInfo.value = it
+        })
     }
 }

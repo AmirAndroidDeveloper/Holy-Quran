@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
-                android:text="@{loan.amount}"
+                android:text="@{loan.payment}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 tools:text="امیر حسین رجايی زاده‌" />
@@ -59,8 +59,8 @@
                 android:id="@+id/rvFeed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"/>
-<!--                app:loanList="@{viewModel.loanInfo}"/>-->
+                app:paymentList="@{viewModel.loanInfo}"
+            android:nestedScrollingEnabled="false"/>
         </LinearLayout>
 
 
