@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layoutDirection="ltr"
         android:gravity="center"
+        android:layoutDirection="ltr"
         android:orientation="vertical">
 
 
@@ -49,27 +49,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layoutDirection="ltr"
-
                     android:gravity="center"
+
+                    android:layoutDirection="ltr"
                     android:orientation="horizontal">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="برداشت"
-                    android:layout_marginRight="192dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="192dp"
+                        android:text="برداشت"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="واریز"
-                    android:layout_gravity=""
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity=""
+                        android:text="واریز"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -78,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layoutDirection="ltr"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -97,9 +96,17 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         tools:text="5000" />
-
                 </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:id="@+id/transactionStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="بابت قسط"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_gravity="bottom"/>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 </layout>

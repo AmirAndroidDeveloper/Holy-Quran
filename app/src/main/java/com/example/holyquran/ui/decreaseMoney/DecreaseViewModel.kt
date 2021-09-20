@@ -66,8 +66,10 @@ class DecreaseViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun decreaseMoney(
         amount: String,
+        transactionStatus: Boolean,
         userId: Long,
-    ) {
+
+        ) {
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(
@@ -80,6 +82,7 @@ class DecreaseViewModel(
                     null,
                     amount,
                     null,
+                    false,
                      sumUserIncrease(userId).minus(sumUserDecrease(userId))
                 )
             )

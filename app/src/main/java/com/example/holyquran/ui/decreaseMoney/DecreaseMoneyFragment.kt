@@ -13,6 +13,7 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentDecreaseMoneyBinding
+
 class DecreaseMoneyFragment : Fragment() {
     var id: Long = 0L
     lateinit var mDecreaseMoneyBinding: FragmentDecreaseMoneyBinding
@@ -59,6 +60,7 @@ class DecreaseMoneyFragment : Fragment() {
             if (it == true) {
                 mDecreaseMoneyViewModel.decreaseMoney(
                     removeComma,
+                    null == true,
                     id
                 )
             }

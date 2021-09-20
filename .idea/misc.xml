@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/fragment_decrease_money.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/fragment_get_loan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_increase_history.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_increase_money.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_increase_money.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_loan_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_loan_history.xml" value="0.34205128205128205" />
         <entry key="app/src/main/res/layout/fragment_loan_payments.xml" value="0.25" />
@@ -33,6 +33,7 @@
         <entry key="app/src/main/res/layout/item_trans_history.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/item_user_list.xml" value="0.2914529914529915" />
         <entry key="app/src/main/res/layout/item_user_loan_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_user_payments_list.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/item_user_transaction_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/user_total.xml" value="0.3697916666666667" />
