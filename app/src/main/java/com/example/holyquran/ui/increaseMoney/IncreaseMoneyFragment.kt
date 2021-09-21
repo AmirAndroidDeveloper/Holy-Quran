@@ -90,9 +90,7 @@ class IncreaseMoneyFragment : Fragment() {
                     )
                 }
             }
-
         })
-
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -110,8 +108,6 @@ class IncreaseMoneyFragment : Fragment() {
         })
         mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
             if (it != null) {
-
-
                 val formatter: NumberFormat = DecimalFormat("#,###,###,###")
                 mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
                 if (mIncreaseMoneyBinding.totalMoney.text == "0") {
@@ -124,18 +120,18 @@ class IncreaseMoneyFragment : Fragment() {
         })
         setHasOptionsMenu(true)
 
-        mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                id2 = true
-                Log.d("TAG", "ids: $id2,$id")
+
+        mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+            if (it?.userId != null) {
+                mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+                    id2 = isChecked
+                }
             } else {
-                id2 = false
+                mIncreaseMoneyBinding.checkBox.isEnabled = false
+            mIncreaseMoneyBinding.noLoanForUser.visibility=View.VISIBLE
             }
-//            if (id2 == true) {
-//                Toast.makeText(activity, "Yes", Toast.LENGTH_SHORT).show()
-//            } else if (id2 == false) {
-//                Toast.makeText(activity, "No", Toast.LENGTH_SHORT).show()
-//            }
+        })
+        mIncreaseMoneyBinding.userNameTXT.setOnClickListener {
         }
         return mIncreaseMoneyBinding.root
     }

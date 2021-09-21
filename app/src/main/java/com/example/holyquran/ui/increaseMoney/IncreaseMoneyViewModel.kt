@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
@@ -70,6 +71,19 @@ class IncreaseMoneyViewModel(
     fun goToIncreaseDone() {
         _gotToDecreaseMoney.value = false
     }
+
+    private val _loanDetail = MutableLiveData<Loan>()
+    val loanDetail: LiveData<Loan>
+        get() = _loanDetail
+
+    fun setLoanDetail(id: Long): LiveData<Loan>? {
+        return mLoan.get(id)
+    }
+
+    fun setLoanDetail(mLoanDetail: Loan) {
+        _loanDetail.value = mLoanDetail
+    }
+
 
 
     var viewModelJob = Job()

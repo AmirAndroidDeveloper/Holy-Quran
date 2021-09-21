@@ -105,7 +105,11 @@ class LoanDetailFragment : Fragment() {
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 mLoanDetailBinding.loanInfo = it
-
+//                if (it.loanId==null){
+//                    Toast.makeText(activity, "loan id is empty", Toast.LENGTH_SHORT).show()
+//                }else {
+//                    Toast.makeText(activity, "loan id is not empty", Toast.LENGTH_SHORT).show()
+//                }
             }
         })
 
