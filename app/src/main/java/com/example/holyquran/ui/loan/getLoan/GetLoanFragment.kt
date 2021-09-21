@@ -89,26 +89,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mGetLoanBinding.sectionPayment.text.toString(),
                     id
                 )
-                Log.d("TAG", "commaTest: $String.format(\"%,.2f\", 50000")
-
-
-
-                mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
-                    if (it != null) {
-
-                        mGetLoanBinding.userName = it
-                    }
-                    Toast.makeText(
-                        activity,
-                        "  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    this.findNavController().navigate(
-                        GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(
-                            id
-                        )
-                    )
-                })
             }
         })
 
@@ -186,6 +166,32 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mGetLoanBinding.totalLoan.text =  NumberFormat.getInstance().format(result3)
     }
 }
+
+
+
+//mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
+//    if (it != null) {
+//        mGetLoanBinding.userName = it
+//    }
+//    Toast.makeText(
+//        activity,
+//        "  وام با موفقیت برای کاربر${it.fullName} ثبت شد ",
+//        Toast.LENGTH_LONG
+//    ).show()
+//    this.findNavController().navigate(
+//        GetLoanFragmentDirections.actionGetLoanFragmentToIncreaseMoneyFragment(
+//            id
+//        )
+//    )
+//})
+
+
+
+
+
+
+
+
 
 //        val benefitPresent: String = mGetLoanBinding.spinner.getSelectedItem().toString()
 //            val division = "/"
