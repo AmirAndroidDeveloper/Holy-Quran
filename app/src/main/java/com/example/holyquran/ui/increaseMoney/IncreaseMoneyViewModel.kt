@@ -111,6 +111,30 @@ class IncreaseMoneyViewModel(
             )
 
         }
+    }  fun insertLoanPayments(
+        amount: String,
+        transactionStatus: Boolean,
+        loanPayments: String,
+        userId: Long,
+    ) {
+        uiScope.launch {
+            mTransactionsDAO.insert(
+                Transaction(
+                    0L,
+                    userId,
+                    null,
+                    null,
+                    null,
+                    null,
+                    amount,
+                    null,
+                    loanPayments,
+                    transactionStatus,
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId))
+                )
+            )
+
+        }
     }
 
     fun deleteTrans(

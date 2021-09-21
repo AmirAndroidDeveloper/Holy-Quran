@@ -60,18 +60,36 @@ class PaymentsFragment : Fragment() {
                 mPaymentsViewModel.setLoanDetail(it)
             }
         })
-        val paymentAdapter=PaymentsAdapter()
-        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-//        mLoanPaymentsBinding.rvFeed.adapter = paymentAdapter
-        mLoanPaymentsBinding.rvFeed.layoutManager = mLinearLayoutManager
-        paymentsList()
+        val test = mPaymentsViewModel.sumLoanPayments(id).toLong()
+        mLoanPaymentsBinding.paymentsLeft.text = test.toString()
+
+        mPaymentsViewModel.setLoanPayments(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanPaymentsBinding.transaction = it
+//                mLoanPaymentsBinding.paymentsLeft.text = it.loanPayments
+            }
+        })
+        mPaymentsViewModel.loanPayments.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPaymentsViewModel.setLoanPayments(it)
+            }
+        })
+
+
         return mLoanPaymentsBinding.root
     }
 
-    private fun paymentsList() {
-        mPaymentsViewModel.getLoanList(id).observe(viewLifecycleOwner, {
-            Log.d("TAG", "loanList: ${it.size}")
-            mPaymentsViewModel.loanInfo.value = it
-        })
-    }
+    //        val paymentAdapter=PaymentsAdapter()
+//        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//        mLoanPaymentsBinding.rvFeed.adapter = paymentAdapter
+//        mLoanPaymentsBinding.rvFeed.layoutManager = mLinearLayoutManager
+//        paymentsList()
+
+
+//    private fun paymentsList() {
+//        mPaymentsViewModel.getLoanList(id).observe(viewLifecycleOwner, {
+//            Log.d("TAG", "loanList: ${it.size}")
+//            mPaymentsViewModel.loanInfo.value = it
+//        })
+//    }
 }

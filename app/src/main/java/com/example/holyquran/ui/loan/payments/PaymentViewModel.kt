@@ -9,6 +9,7 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 
 class PaymentViewModel(
@@ -28,6 +29,24 @@ class PaymentViewModel(
 
     fun setLoanDetail(mLoanDetail: Loan) {
         _loanDetail.value = mLoanDetail
+    }
+
+    private val _loanPayments = MutableLiveData<Transaction>()
+    val loanPayments: LiveData<Transaction>
+        get() = _loanPayments
+
+
+    fun sumLoanPayments(id: Long): Int {
+        return mTransactionsDAO.sumLoanPayments(id)
+    }
+
+
+    fun setLoanPayments(id: Long): LiveData<Transaction>? {
+        return mTransactionsDAO.get(id)
+    }
+
+    fun setLoanPayments(mLoanDetail: Transaction) {
+        _loanPayments.value = mLoanDetail
     }
 
 

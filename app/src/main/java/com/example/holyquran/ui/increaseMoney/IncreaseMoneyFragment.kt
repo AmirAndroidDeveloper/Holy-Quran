@@ -26,6 +26,7 @@ import java.text.DecimalFormatSymbols
 class IncreaseMoneyFragment : Fragment() {
     var id: Long = 0L
     var id2: Boolean = false
+    var numbers = 1
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -77,9 +78,10 @@ class IncreaseMoneyFragment : Fragment() {
             val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
             if (it == true) {
                 if (id2 == true) {
-                    mIncreaseMoneyViewModel.insertMoney(
+                    mIncreaseMoneyViewModel.insertLoanPayments(
                         removeComma,
                         true,
+                        numbers.toString(),
                         id
                     )
                 } else {
@@ -130,6 +132,11 @@ class IncreaseMoneyFragment : Fragment() {
                 mIncreaseMoneyBinding.checkBox.isEnabled = false
                 mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
             }
+
+
+      if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment){
+          Toast.makeText(activity, "test", Toast.LENGTH_SHORT).show()
+      }
         })
         mIncreaseMoneyBinding.userNameTXT.setOnClickListener {
         }

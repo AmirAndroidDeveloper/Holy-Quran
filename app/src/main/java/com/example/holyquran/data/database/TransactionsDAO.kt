@@ -18,6 +18,9 @@ interface TransactionsDAO {
     @Query("SELECT * from trans WHERE trans_id = :key")
     fun get(key: Long): LiveData<Transaction>?
 
+    @Query("SELECT SUM(loan_payments) FROM trans WHERE user_id=:key")
+    fun sumLoanPayments(key: Long): Int
+
     @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY increase ,decrease DESC")
     fun getAllTransactionByUserId(key: Long): LiveData<List<Transaction>>
 
