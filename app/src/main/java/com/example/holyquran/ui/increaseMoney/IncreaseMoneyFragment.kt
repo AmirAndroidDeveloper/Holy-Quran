@@ -128,7 +128,7 @@ class IncreaseMoneyFragment : Fragment() {
                 }
             } else {
                 mIncreaseMoneyBinding.checkBox.isEnabled = false
-            mIncreaseMoneyBinding.noLoanForUser.visibility=View.VISIBLE
+                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
             }
         })
         mIncreaseMoneyBinding.userNameTXT.setOnClickListener {
