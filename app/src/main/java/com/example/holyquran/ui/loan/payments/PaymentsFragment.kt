@@ -57,15 +57,31 @@ class PaymentsFragment : Fragment() {
                 mPaymentsViewModel.setLoanPayments(it)
             }
         })
-          val wholeIncreaseMoney=  mPaymentsViewModel.sumWholePayments(id).toString()
-            mLoanPaymentsBinding.payedAmount.text = NumberFormat.getInstance().format(wholeIncreaseMoney.toLong())
+        val wholeIncreaseMoney = mPaymentsViewModel.sumWholePayments(id).toString()
+        mLoanPaymentsBinding.payedAmount.text =
+            NumberFormat.getInstance().format(wholeIncreaseMoney.toLong())
 
 //        calculateData()
 
 
         mPaymentsViewModel.setWholeLoan(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
+                val wholeAmount: String = it.amount
+                val removeCommaOfWholeLoan = wholeAmount.replace(",", "")
+                val convertWholeAmount = removeCommaOfWholeLoan.toLong()
+                val payedAmount: String = mLoanPaymentsBinding.payedAmount.text.toString()
+                val removeCommaOfWholeIncrease = payedAmount.replace(",", "")
+                val convertPayedAmount = removeCommaOfWholeIncrease.toLong()
+                val amountLeft: Long = convertWholeAmount - convertPayedAmount
+                mLoanPaymentsBinding.amountLeft.text = NumberFormat.getInstance().format(amountLeft)
                 mLoanPaymentsBinding.loan = it
+
+                var wholePayments = it.loanSections
+                val convertWholePayments = wholePayments.toLong()
+                val payedPayments = mLoanPaymentsBinding.payedPayments.text.toString()
+                val convertPayedPayments = payedPayments.toLong()
+                val sectionsLeft= convertWholePayments-convertPayedPayments
+                mLoanPaymentsBinding.paymentsLeft.text=sectionsLeft.toString()
             }
         })
         mPaymentsViewModel.wholeLoan.observe(viewLifecycleOwner, {
@@ -75,20 +91,6 @@ class PaymentsFragment : Fragment() {
         })
 
 
-
-
         return mLoanPaymentsBinding.root
-    }
-
-    private fun calculateData() {
-       val wholeAmount :String= mLoanPaymentsBinding.wholeLoanAmount.text.toString()
-        val convertWholeAmount = wholeAmount.toLong()
-        val payedAmount: String = mLoanPaymentsBinding.payedAmount.text.toString()
-        val convertPayedAmount = payedAmount.toLong()
-        val result: Long = convertWholeAmount-convertPayedAmount
-
-        mLoanPaymentsBinding.amountLeft.text = NumberFormat.getInstance().format(result)
-//        mGetLoanBinding.loanBenefit.text = NumberFormat.getInstance().format(result)
-//        mGetLoanBinding.totalLoan.text = NumberFormat.getInstance().format(result3)
     }
 }
