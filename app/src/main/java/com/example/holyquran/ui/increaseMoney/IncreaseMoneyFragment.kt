@@ -37,8 +37,6 @@ class IncreaseMoneyFragment : Fragment() {
                 container,
                 false
             )
-
-
         val application = requireNotNull(this.activity).application
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
@@ -61,14 +59,11 @@ class IncreaseMoneyFragment : Fragment() {
         mIncreaseMoneyViewModel.setUserName(userId)?.observe(viewLifecycleOwner, {
             mIncreaseMoneyViewModel.setUserName(it)
         })
-
-
         mIncreaseMoneyViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyBinding.userName = it
             }
         })
-
         val increase = mIncreaseMoneyViewModel.sumUserIncrease(userId).toLong()
         val decrease = mIncreaseMoneyViewModel.sumUserDecrease(userId).toLong()
         val result = increase - decrease
@@ -77,15 +72,13 @@ class IncreaseMoneyFragment : Fragment() {
             val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
             if (it == true) {
                 if (id2 == true) {
-                    mIncreaseMoneyViewModel.insertLoanPayments(
-                        removeComma,
-                        true,
-                        numbers.toString(),
-                        userId
-                    )
                     mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
                         if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-
+                            Toast.makeText(
+                                activity,
+                                "${mIncreaseMoneyBinding.increaseEdt.text}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             val builder: AlertDialog.Builder =
                                 AlertDialog.Builder(requireActivity())
                             builder.setIcon(R.drawable.warning)
@@ -106,13 +99,22 @@ class IncreaseMoneyFragment : Fragment() {
                                         ).show()
                                     })
                                 .setNegativeButton("نه,ممنون",
-                                    DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+                                )
                             val alert: AlertDialog = builder.create()
                             alert.setCanceledOnTouchOutside(true)
+                            mIncreaseMoneyBinding.increaseEdt.text = null
                             alert.show()
+                        } else {
+                            mIncreaseMoneyViewModel.insertMoney(
+                                removeComma,
+                                false,
+                                userId
+                            )
                         }
                     })
                 } else {
+
                     mIncreaseMoneyViewModel.insertMoney(
                         removeComma,
                         false,
@@ -121,7 +123,6 @@ class IncreaseMoneyFragment : Fragment() {
                 }
             }
         })
-
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -153,12 +154,6 @@ class IncreaseMoneyFragment : Fragment() {
         mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
             if (it?.userId != null) {
                 mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
-                    if (!isChecked) {
-                        Log.d("TAG", "checkBox: test")
-                    } else {
-                        Log.d("TAG", "checkBox: no")
-
-                    }
                     id2 = isChecked
                     if (id2 == isChecked) {
                         mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
