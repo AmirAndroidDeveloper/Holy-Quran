@@ -84,6 +84,15 @@ class IncreaseMoneyFragment : Fragment() {
                         numbers.toString(),
                         id
                     )
+                    mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+                        if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
+                            Toast.makeText(
+                                activity,
+                                "مبلغ مورد نظر با مبلغ وام تطابق ندارد.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
                 } else {
                     mIncreaseMoneyViewModel.insertMoney(
                         removeComma,
@@ -121,25 +130,36 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
         setHasOptionsMenu(true)
-
-
         mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
             if (it?.userId != null) {
                 mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+                    if (!isChecked) {
+                        Log.d("TAG", "checkBox: test")
+                    } else {
+                        Log.d("TAG", "checkBox: no")
+
+                    }
                     id2 = isChecked
+                    if (id2 == isChecked) {
+                        mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+                            if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
+                                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
+                                val textLoanPayments=it.payment.toInt()
+                                mIncreaseMoneyBinding.textPlus.visibility=View.VISIBLE
+                                    mIncreaseMoneyBinding.noLoanForUser.text =
+                                    NumberFormat.getInstance()
+                                        .format(textLoanPayments)
+                            }
+                        })
+                    }
                 }
             } else {
                 mIncreaseMoneyBinding.checkBox.isEnabled = false
                 mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
+
             }
-
-
-      if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment){
-          Toast.makeText(activity, "test", Toast.LENGTH_SHORT).show()
-      }
         })
-        mIncreaseMoneyBinding.userNameTXT.setOnClickListener {
-        }
+
         return mIncreaseMoneyBinding.root
     }
 

@@ -65,8 +65,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 requireArguments()
             )
         id = arg.userId
-
-
         val spinner: Spinner = mGetLoanBinding.spinner
         ArrayAdapter.createFromResource(
             requireActivity(),
@@ -75,18 +73,19 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                   spinner.adapter = adapter
-                   spinner.onItemSelectedListener = this
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = this
         }
 
         mGetLoanViewModel.getLoan.observe(viewLifecycleOwner, Observer {
+            val removeComma = mGetLoanBinding.sectionPayment.text.toString().replace(",", "")
             if (it == true) {
                 mGetLoanViewModel.insertLoanTimeSpinner(
                     mGetLoanBinding.loanAmount.text.toString(),
                     mGetLoanBinding.loanDate.text.toString(),
                     mGetLoanBinding.loanSections.text.toString(),
                     mGetLoanBinding.spinner.selectedItem.toString(),
-                    mGetLoanBinding.sectionPayment.text.toString(),
+                    removeComma,
                     id
                 )
             }
@@ -146,7 +145,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun calculateData() {
-        val removeComma =  mGetLoanBinding.loanAmount.text.toString().replace(",", "")
+        val removeComma = mGetLoanBinding.loanAmount.text.toString().replace(",", "")
         val convertLoanAmount = removeComma.toLong()
         val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
         val convertBenefitPercent = benefitPercent.toLong()
@@ -161,12 +160,11 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val result2: Long = (result + amount) / section
         val result3: Long = amount + result
 
-        mGetLoanBinding.sectionPayment.text =  NumberFormat.getInstance().format(result2)
-        mGetLoanBinding.loanBenefit.text =  NumberFormat.getInstance().format(result)
-        mGetLoanBinding.totalLoan.text =  NumberFormat.getInstance().format(result3)
+        mGetLoanBinding.sectionPayment.text = NumberFormat.getInstance().format(result2)
+        mGetLoanBinding.loanBenefit.text = NumberFormat.getInstance().format(result)
+        mGetLoanBinding.totalLoan.text = NumberFormat.getInstance().format(result3)
     }
 }
-
 
 
 //mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
@@ -184,13 +182,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 //        )
 //    )
 //})
-
-
-
-
-
-
-
 
 
 //        val benefitPresent: String = mGetLoanBinding.spinner.getSelectedItem().toString()

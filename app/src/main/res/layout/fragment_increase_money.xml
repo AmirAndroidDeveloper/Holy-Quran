@@ -96,16 +96,29 @@
                     android:layout_height="50dp"
                     android:text="برداخت قسط" />
 
-                <TextView
-                    android:id="@+id/noLoanForUser"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/noLoanForUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="left"
-                    android:text="کاربر تا الان هیچ وامی دریافت نکرده است."
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:visibility="gone" />
-
+                <TextView
+                    android:id="@+id/textPlus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="مبلغ هر قسط برابر اسب با "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+                </LinearLayout>
             </LinearLayout>
 
 
@@ -138,7 +151,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35sp"
-
                 android:layoutDirection="ltr"
                 android:orientation="vertical">
 
