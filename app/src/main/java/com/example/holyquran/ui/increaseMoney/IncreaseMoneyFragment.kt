@@ -1,8 +1,8 @@
 package com.example.holyquran.ui.increaseMoney
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import net.objecthunter.exp4j.ExpressionBuilder
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -12,15 +12,11 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
-import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
-import android.text.method.DigitsKeyListener
-import kotlinx.android.synthetic.main.fragment_increase_money.*
 import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 
 
 class IncreaseMoneyFragment : Fragment() {
@@ -86,11 +82,20 @@ class IncreaseMoneyFragment : Fragment() {
                     )
                     mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
                         if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-                            Toast.makeText(
-                                activity,
-                                "مبلغ مورد نظر با مبلغ وام تطابق ندارد.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+
+                            val builder: AlertDialog.Builder =
+                                AlertDialog.Builder(requireActivity())
+                            builder.setIcon(R.drawable.warning)
+                            builder.setTitle("خروج از برنامه ")
+                            builder.setMessage("از برنامه خارج میشوید؟")
+                                .setCancelable(false)
+                                .setPositiveButton("بله",
+                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() })
+                                .setNegativeButton("خیر",
+                                    DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+                            val alert: AlertDialog = builder.create()
+                            alert.setCanceledOnTouchOutside(false)
+                            alert.show()
                         }
                     })
                 } else {
@@ -144,9 +149,9 @@ class IncreaseMoneyFragment : Fragment() {
                         mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
                             if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
                                 mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
-                                val textLoanPayments=it.payment.toInt()
-                                mIncreaseMoneyBinding.textPlus.visibility=View.VISIBLE
-                                    mIncreaseMoneyBinding.noLoanForUser.text =
+                                val textLoanPayments = it.payment.toInt()
+                                mIncreaseMoneyBinding.textPlus.visibility = View.VISIBLE
+                                mIncreaseMoneyBinding.noLoanForUser.text =
                                     NumberFormat.getInstance()
                                         .format(textLoanPayments)
                             }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.holyquran.R
 import android.content.DialogInterface
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -39,30 +40,27 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
-    override fun onBackPressed() {
-        if (navController.currentDestination?.label?.equals("fragment_main") == true) {
-            if (lastBackPressTime < System.currentTimeMillis() - 4000) {
-                lastBackPressTime = System.currentTimeMillis()
-                val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-                builder.setIcon(R.drawable.warning)
-                builder.setTitle("خروج از برنامه ")
-                builder.setMessage("از برنامه خارج میشوید؟")
-                    .setCancelable(false)
-                    .setPositiveButton("بله",
-                        DialogInterface.OnClickListener { dialog, id -> finish() })
-                    .setNegativeButton("خیر",
-                        DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
-                val alert: AlertDialog = builder.create()
-                alert.show()
-
-            } else {
-                toast?.cancel()
-                super.onBackPressed()
-            }
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    override fun onBackPressed() {
+//            Log.d("TAG", "onBackPressed: alertDilog")
+//            if (lastBackPressTime < System.currentTimeMillis() - 4000) {
+//                lastBackPressTime = System.currentTimeMillis()
+//                val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+//                builder.setIcon(R.drawable.warning)
+//                builder.setTitle("خروج از برنامه ")
+//                builder.setMessage("از برنامه خارج میشوید؟")
+//                    .setCancelable(false)
+//                    .setPositiveButton("بله",
+//                        DialogInterface.OnClickListener { dialog, id -> finish() })
+//                    .setNegativeButton("خیر",
+//                        DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+//                val alert: AlertDialog = builder.create()
+//                alert.show()
+//
+//            } else {
+//                toast?.cancel()
+//                super.onBackPressed()
+//            }
+//    }
 
 
 }
