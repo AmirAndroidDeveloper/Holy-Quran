@@ -13,6 +13,7 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
@@ -20,7 +21,7 @@ import java.text.DecimalFormat
 
 
 class IncreaseMoneyFragment : Fragment() {
-    var id: Long = 0L
+    var userId: Long = 0L
     var id2: Boolean = false
     var numbers = 1
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
@@ -36,6 +37,8 @@ class IncreaseMoneyFragment : Fragment() {
                 container,
                 false
             )
+
+
         val application = requireNotNull(this.activity).application
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
@@ -53,9 +56,9 @@ class IncreaseMoneyFragment : Fragment() {
             IncreaseMoneyFragmentArgs.fromBundle(
                 requireArguments()
             )
-        id = arg.userIdIncrease
-        Log.d("TAG", "onCreateView: $id")
-        mIncreaseMoneyViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+        userId = arg.userIdIncrease
+        Log.d("TAG", "onCreateView: $userId")
+        mIncreaseMoneyViewModel.setUserName(userId)?.observe(viewLifecycleOwner, {
             mIncreaseMoneyViewModel.setUserName(it)
         })
 
@@ -66,8 +69,8 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
 
-        val increase = mIncreaseMoneyViewModel.sumUserIncrease(id).toLong()
-        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(id).toLong()
+        val increase = mIncreaseMoneyViewModel.sumUserIncrease(userId).toLong()
+        val decrease = mIncreaseMoneyViewModel.sumUserDecrease(userId).toLong()
         val result = increase - decrease
         mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
@@ -78,23 +81,34 @@ class IncreaseMoneyFragment : Fragment() {
                         removeComma,
                         true,
                         numbers.toString(),
-                        id
+                        userId
                     )
-                    mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+                    mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
                         if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
 
                             val builder: AlertDialog.Builder =
                                 AlertDialog.Builder(requireActivity())
                             builder.setIcon(R.drawable.warning)
-                            builder.setTitle("خروج از برنامه ")
-                            builder.setMessage("از برنامه خارج میشوید؟")
+                            builder.setTitle(" مبلغ مورد نظر با مبلغ قسط وام تطابق ندارد. ادامه میدهید؟")
                                 .setCancelable(false)
-                                .setPositiveButton("بله",
-                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() })
-                                .setNegativeButton("خیر",
+                                .setPositiveButton("اره به هر حال واریز کن",
+                                    DialogInterface.OnClickListener { dialog, id ->
+                                        mIncreaseMoneyViewModel.insertLoanPayments(
+                                            removeComma,
+                                            true,
+                                            numbers.toString(),
+                                            userId
+                                        )
+                                        Toast.makeText(
+                                            activity,
+                                            "قسط با موفقیت برداخت شد.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    })
+                                .setNegativeButton("نه,ممنون",
                                     DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
                             val alert: AlertDialog = builder.create()
-                            alert.setCanceledOnTouchOutside(false)
+                            alert.setCanceledOnTouchOutside(true)
                             alert.show()
                         }
                     })
@@ -102,22 +116,23 @@ class IncreaseMoneyFragment : Fragment() {
                     mIncreaseMoneyViewModel.insertMoney(
                         removeComma,
                         false,
-                        id
+                        userId
                     )
                 }
             }
         })
+
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToDecreaseMoneyFragment(
-                        id
+                        userId
                     )
                 )
                 mIncreaseMoneyViewModel.goToIncreaseDone()
             }
         })
-        mIncreaseMoneyViewModel.setIncrease(id)?.observe(viewLifecycleOwner, {
+        mIncreaseMoneyViewModel.setIncrease(userId)?.observe(viewLifecycleOwner, {
             if (it != null) {
                 mIncreaseMoneyViewModel.setIncrease(it)
             }
@@ -130,12 +145,12 @@ class IncreaseMoneyFragment : Fragment() {
                     mIncreaseMoneyBinding.userMoney.text = it.increase
                 }
                 mIncreaseMoneyBinding.userMoney.text =
-                    mIncreaseMoneyViewModel.sumUserIncrease(id).toString()
+                    mIncreaseMoneyViewModel.sumUserIncrease(userId).toString()
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
         setHasOptionsMenu(true)
-        mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
             if (it?.userId != null) {
                 mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
                     if (!isChecked) {
@@ -146,7 +161,7 @@ class IncreaseMoneyFragment : Fragment() {
                     }
                     id2 = isChecked
                     if (id2 == isChecked) {
-                        mIncreaseMoneyViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+                        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
                             if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
                                 mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
                                 val textLoanPayments = it.payment.toInt()
@@ -164,7 +179,6 @@ class IncreaseMoneyFragment : Fragment() {
 
             }
         })
-
         return mIncreaseMoneyBinding.root
     }
 
@@ -178,7 +192,7 @@ class IncreaseMoneyFragment : Fragment() {
             R.id.transactionHistory -> {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToIncreaseHistoryFragment(
-                        id
+                        userId
                     )
                 )
                 Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
@@ -187,7 +201,7 @@ class IncreaseMoneyFragment : Fragment() {
             R.id.getLoan -> {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToGetLoanFragment(
-                        id
+                        userId
                     )
                 )
                 true
@@ -195,7 +209,7 @@ class IncreaseMoneyFragment : Fragment() {
             R.id.loanHistory -> {
                 this.findNavController().navigate(
                     IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToLoanHistoryFragment(
-                        id
+                        userId
                     )
                 )
                 true
