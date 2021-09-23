@@ -46,10 +46,8 @@ class TransactionHistoryViewModel(
     val transaction: LiveData<List<Transaction>>
         get() = _transaction
 
-    val transactionTest = MutableLiveData<List<Transaction>>()
-    fun transactionListTest(id: Long): LiveData<List<Transaction>> {
-        return mTransactionDAO.getAllTransactionStatus(id)
-    }
+
+
 
 
     val transactionInfo = MutableLiveData<List<Transaction>>()

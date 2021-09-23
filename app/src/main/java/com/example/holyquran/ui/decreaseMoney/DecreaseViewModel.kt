@@ -79,11 +79,12 @@ class DecreaseViewModel(
                     null,
                     null,
                     null,
-                    null,
                     amount,
                     null,
                     false,
-                     sumUserIncrease(userId).minus(sumUserDecrease(userId))
+                   null,
+                     sumUserIncrease(userId).minus(sumUserDecrease(userId)),
+
                 )
             )
         }

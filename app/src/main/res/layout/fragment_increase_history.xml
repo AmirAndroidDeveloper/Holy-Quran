@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-
             android:layoutDirection="ltr"
             android:orientation="horizontal">
 
@@ -54,10 +53,21 @@
                 android:textSize="18sp" />
         </LinearLayout>
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hi"
+            android:textSize="20sp"
+            android:id="@+id/hi"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginTop="20sp"/>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="15sp"
             android:layoutDirection="ltr">
 

@@ -67,50 +67,22 @@ class TransactionHistoryFragment : Fragment() {
             }
         })
 
-
-
-        mTransactionHistoryViewModel.transactionListTest(id).observe(viewLifecycleOwner, {
-          it.forEach{
-              it.transactionStatus=false
-              Toast.makeText(activity, "$it,$it", Toast.LENGTH_SHORT).show()
-          }
-
-
-                mTransactionHistoryViewModel.transactionTest.value = it
-
-
-            mTransactionHistoryViewModel.setTransaction(id)?.observe(viewLifecycleOwner, {
-                mTransactionHistoryViewModel.setTransaction(it)
-            })
-            mTransactionHistoryViewModel.singleTransaction.observe(viewLifecycleOwner, {
-                if (it != null) {
-                    mIncreaseHistoryBinding.transaction = it
-
-                    if (!it.transactionStatus) {
-
-
-                    }
-                }
-            })
-
-
-            val mLinearLayoutManager =
-                LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
-            mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
-            userInfo()
-            mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-                mTransactionHistoryViewModel.setUserName(it)
-            })
-            mTransactionHistoryViewModel.userName.observe(viewLifecycleOwner, {
-                if (it != null) {
-                    mIncreaseHistoryBinding.userName = it
-                }
-            })
+        val mLinearLayoutManager =
+            LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+        mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
+        mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
+        userInfo()
+        mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            mTransactionHistoryViewModel.setUserName(it)
+        })
+        mTransactionHistoryViewModel.userName.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mIncreaseHistoryBinding.userName = it
+            }
         })
 
-
         return mIncreaseHistoryBinding.root
+
     }
 
     private fun userInfo() {

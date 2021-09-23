@@ -103,12 +103,12 @@ class IncreaseMoneyViewModel(
                     null,
                     null,
                     null,
-                    null,
                     amount,
                     null,
                     null,
                     transactionStatus,
-                    sumUserIncrease(userId).minus(sumUserDecrease(userId))
+                    null,
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId)),
                 )
             )
 
@@ -128,11 +128,11 @@ class IncreaseMoneyViewModel(
                     null,
                     null,
                     null,
-                    amount,
                     null,
                     loanPayments,
                     transactionStatus,
-                    sumUserIncrease(userId).minus(sumUserDecrease(userId))
+                    amount,
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId)),
                 )
             )
 

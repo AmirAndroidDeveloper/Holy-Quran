@@ -10,8 +10,6 @@ data class Transaction(
     var transId: Long = 0L,
     @ColumnInfo(name = "user_id")
     var userId:Long,
-    @ColumnInfo(name = "amount")
-    var amount: Long?,
     @ColumnInfo(name = "create_date")
     var createDate: String?,
     @ColumnInfo(name = "bank_id")
@@ -26,6 +24,8 @@ data class Transaction(
     var loanPayments: String?,
     @ColumnInfo(name = "transaction_status")
     var transactionStatus: Boolean,
+    @ColumnInfo(name = "pay_payment")
+    var payPayPayment: String?,
     @ColumnInfo(name = "total")
-    var total: Int
+    var total: Int,
     )

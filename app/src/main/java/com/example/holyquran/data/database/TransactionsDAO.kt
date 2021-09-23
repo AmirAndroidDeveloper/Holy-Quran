@@ -9,7 +9,6 @@ import com.example.holyquran.data.model.UserInfo
 interface TransactionsDAO {
     @Insert
     suspend fun insert(ta: Transaction): Long
-
     @Update
     suspend fun update(ta: Transaction)
 
@@ -22,14 +21,11 @@ interface TransactionsDAO {
     @Query("SELECT SUM(loan_payments) FROM trans WHERE user_id=:key")
     fun sumLoanPayments(key: Long): Int
 
-    @Query("SELECT SUM(increase) FROM trans WHERE user_id=:key")
+    @Query("SELECT SUM(pay_payment) FROM trans WHERE user_id=:key")
     fun sumWholeIncrease(key: Long): Int
 
     @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY increase ,decrease DESC")
     fun getAllTransactionByUserId(key: Long): LiveData<List<Transaction>>
-
-    @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY transaction_status DESC")
-    fun getAllTransactionStatus(key: Long): LiveData<List<Transaction>>
 
     @Query("SELECT * FROM trans ORDER BY increase ASC")
     fun getAllTransaction(): LiveData<List<Transaction>>
