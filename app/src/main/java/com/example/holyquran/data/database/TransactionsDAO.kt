@@ -9,6 +9,7 @@ import com.example.holyquran.data.model.UserInfo
 interface TransactionsDAO {
     @Insert
     suspend fun insert(ta: Transaction): Long
+
     @Update
     suspend fun update(ta: Transaction)
 

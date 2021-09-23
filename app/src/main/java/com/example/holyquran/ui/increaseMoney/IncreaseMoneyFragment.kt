@@ -109,9 +109,10 @@ class IncreaseMoneyFragment : Fragment() {
                             mIncreaseMoneyViewModel.goToIncreaseDone()
 
                         } else {
-                            mIncreaseMoneyViewModel.insertMoney(
+                            mIncreaseMoneyViewModel.insertLoanPayments(
                                 removeComma,
-                                false,
+                                true,
+                                numbers.toString(),
                                 userId
                             )
                             mIncreaseMoneyViewModel.goToIncreaseDone()
