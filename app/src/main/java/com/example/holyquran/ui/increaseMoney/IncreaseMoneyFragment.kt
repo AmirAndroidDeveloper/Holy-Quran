@@ -13,7 +13,6 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
@@ -83,11 +82,9 @@ class IncreaseMoneyFragment : Fragment() {
                             val currentPayment = it.payment
 
                             if (increaseEditText.toInt() > currentPayment.toInt()) {
-                                Toast.makeText(activity, "more", Toast.LENGTH_SHORT).show()
                                 val more = "بیشتر"
                                 decide = more
                             } else {
-                                Toast.makeText(activity, "less", Toast.LENGTH_SHORT).show()
                                 val less = "کمتر"
                                 decide = less
                             }
