@@ -81,7 +81,8 @@ class IncreaseMoneyFragment : Fragment() {
                             builder.setIcon(R.drawable.warning)
                             val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
                             val currentPayment = it.payment
-                            if (increaseEditText >= currentPayment) {
+
+                            if (increaseEditText.toInt() > currentPayment.toInt()) {
                                 Toast.makeText(activity, "more", Toast.LENGTH_SHORT).show()
                                 val more = "بیشتر"
                                 decide = more
