@@ -24,6 +24,7 @@ class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
     var id2: Boolean = false
     var numbers = 1
+    var decide = ""
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -75,15 +76,21 @@ class IncreaseMoneyFragment : Fragment() {
                 if (id2 == true) {
                     mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
                         if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-                            Toast.makeText(
-                                activity,
-                                "${mIncreaseMoneyBinding.increaseEdt.text}",
-                                Toast.LENGTH_SHORT
-                            ).show()
                             val builder: AlertDialog.Builder =
                                 AlertDialog.Builder(requireActivity())
                             builder.setIcon(R.drawable.warning)
-                            builder.setTitle(" مبلغ مورد نظر با مبلغ قسط وام تطابق ندارد. ادامه میدهید؟")
+                            val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
+                            val currentPayment = it.payment
+                            if (increaseEditText >= currentPayment) {
+                                Toast.makeText(activity, "more", Toast.LENGTH_SHORT).show()
+                                val more = "بیشتر"
+                                decide = more
+                            } else {
+                                Toast.makeText(activity, "less", Toast.LENGTH_SHORT).show()
+                                val less = "کمتر"
+                                decide = less
+                            }
+                            builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
                                 .setCancelable(false)
                                 .setPositiveButton("اره به هر حال واریز کن",
                                     DialogInterface.OnClickListener { dialog, id ->
@@ -115,7 +122,6 @@ class IncreaseMoneyFragment : Fragment() {
                                 userId
                             )
                             mIncreaseMoneyViewModel.goToIncreaseDone()
-
                         }
                         mIncreaseMoneyViewModel.goToIncreaseDone()
 
@@ -127,11 +133,11 @@ class IncreaseMoneyFragment : Fragment() {
                         userId
                     )
                 }
-           mIncreaseMoneyViewModel.increaseMoneyDone()
+                mIncreaseMoneyViewModel.increaseMoneyDone()
             }
             mIncreaseMoneyViewModel.goToIncreaseDone()
 
-       mIncreaseMoneyViewModel.goToIncreaseDone()
+            mIncreaseMoneyViewModel.goToIncreaseDone()
         })
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
