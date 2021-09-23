@@ -6,19 +6,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanPaymentsBinding
-import com.example.holyquran.ui.loan.loanDetails.LoanDetailFragmentDirections
-import com.example.holyquran.ui.loan.loanHistory.*
-import saman.zamani.persiandate.PersianDate
-import saman.zamani.persiandate.PersianDateFormat
+import java.text.NumberFormat
+
 
 class PaymentsFragment : Fragment() {
     lateinit var mLoanPaymentsBinding: FragmentLoanPaymentsBinding
@@ -49,24 +45,11 @@ class PaymentsFragment : Fragment() {
         this.also { mLoanPaymentsBinding.lifecycleOwner = it }
         val args = PaymentsFragmentArgs.fromBundle(requireArguments())
         id = args.paymentId
-
-        mPaymentsViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mLoanPaymentsBinding.loan = it
-            }
-        })
-        mPaymentsViewModel.loanDetail.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mPaymentsViewModel.setLoanDetail(it)
-            }
-        })
-        val test = mPaymentsViewModel.sumLoanPayments(id).toLong()
-        mLoanPaymentsBinding.paymentsLeft.text = test.toString()
-
+        val payedPayments = mPaymentsViewModel.sumLoanPayments(id).toLong()
+        mLoanPaymentsBinding.payedPayments.text = payedPayments.toString()
         mPaymentsViewModel.setLoanPayments(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
                 mLoanPaymentsBinding.transaction = it
-//                mLoanPaymentsBinding.paymentsLeft.text = it.loanPayments
             }
         })
         mPaymentsViewModel.loanPayments.observe(viewLifecycleOwner, {
@@ -74,22 +57,40 @@ class PaymentsFragment : Fragment() {
                 mPaymentsViewModel.setLoanPayments(it)
             }
         })
+        val wholeIncreaseMoney = mPaymentsViewModel.sumWholePayments(id).toString()
+        mLoanPaymentsBinding.payedAmount.text =
+            NumberFormat.getInstance().format(wholeIncreaseMoney.toLong())
+
+//        calculateData()
+
+
+        mPaymentsViewModel.setWholeLoan(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                val wholeAmount: String = it.amount
+                val removeCommaOfWholeLoan = wholeAmount.replace(",", "")
+                val convertWholeAmount = removeCommaOfWholeLoan.toLong()
+                val payedAmount: String = mLoanPaymentsBinding.payedAmount.text.toString()
+                val removeCommaOfWholeIncrease = payedAmount.replace(",", "")
+                val convertPayedAmount = removeCommaOfWholeIncrease.toLong()
+                val amountLeft: Long = convertWholeAmount - convertPayedAmount
+                mLoanPaymentsBinding.amountLeft.text = NumberFormat.getInstance().format(amountLeft)
+                mLoanPaymentsBinding.loan = it
+
+                var wholePayments = it.loanSections
+                val convertWholePayments = wholePayments.toLong()
+                val payedPayments = mLoanPaymentsBinding.payedPayments.text.toString()
+                val convertPayedPayments = payedPayments.toLong()
+                val sectionsLeft= convertWholePayments-convertPayedPayments
+                mLoanPaymentsBinding.paymentsLeft.text=sectionsLeft.toString()
+            }
+        })
+        mPaymentsViewModel.wholeLoan.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPaymentsViewModel.setWholeLoan(it)
+            }
+        })
 
 
         return mLoanPaymentsBinding.root
     }
-
-    //        val paymentAdapter=PaymentsAdapter()
-//        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-//        mLoanPaymentsBinding.rvFeed.adapter = paymentAdapter
-//        mLoanPaymentsBinding.rvFeed.layoutManager = mLinearLayoutManager
-//        paymentsList()
-
-
-//    private fun paymentsList() {
-//        mPaymentsViewModel.getLoanList(id).observe(viewLifecycleOwner, {
-//            Log.d("TAG", "loanList: ${it.size}")
-//            mPaymentsViewModel.loanInfo.value = it
-//        })
-//    }
 }

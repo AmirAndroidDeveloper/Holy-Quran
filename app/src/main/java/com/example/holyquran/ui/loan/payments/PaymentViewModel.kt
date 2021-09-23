@@ -19,18 +19,6 @@ class PaymentViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
-    private val _loanDetail = MutableLiveData<Loan>()
-    val loanDetail: LiveData<Loan>
-        get() = _loanDetail
-
-    fun setLoanDetail(id: Long): LiveData<Loan>? {
-        return mLoan.get(id)
-    }
-
-    fun setLoanDetail(mLoanDetail: Loan) {
-        _loanDetail.value = mLoanDetail
-    }
-
     private val _loanPayments = MutableLiveData<Transaction>()
     val loanPayments: LiveData<Transaction>
         get() = _loanPayments
@@ -38,6 +26,10 @@ class PaymentViewModel(
 
     fun sumLoanPayments(id: Long): Int {
         return mTransactionsDAO.sumLoanPayments(id)
+    }
+
+    fun sumWholePayments(id: Long): Int {
+        return mTransactionsDAO.sumWholeIncrease(id)
     }
 
 
@@ -49,7 +41,17 @@ class PaymentViewModel(
         _loanPayments.value = mLoanDetail
     }
 
+    private val _wholeLoan = MutableLiveData<Loan>()
+    val wholeLoan: LiveData<Loan>
+        get() = _wholeLoan
 
+    fun setWholeLoan(id: Long): LiveData<Loan>? {
+        return mLoan.get(id)
+    }
+
+    fun setWholeLoan(mWholeLoan: Loan) {
+        _wholeLoan.value = mWholeLoan
+    }
 
     val loanInfo = MutableLiveData<List<Loan>>()
     fun getLoanList(id: Long): LiveData<List<Loan>> {
