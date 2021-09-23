@@ -104,7 +104,6 @@ class IncreaseMoneyFragment : Fragment() {
                                 )
                             val alert: AlertDialog = builder.create()
                             alert.setCanceledOnTouchOutside(true)
-//                            mIncreaseMoneyBinding.increaseEdt.text = null
                             alert.show()
                             mIncreaseMoneyViewModel.goToIncreaseDone()
 
