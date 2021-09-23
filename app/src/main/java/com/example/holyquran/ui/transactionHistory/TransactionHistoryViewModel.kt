@@ -29,6 +29,28 @@ class TransactionHistoryViewModel(
         _userName.value = mUserInfo
     }
 
+    private val _singleTransaction = MutableLiveData<Transaction>()
+    val singleTransaction: LiveData<Transaction>
+        get() = _singleTransaction
+
+    fun setTransaction(id: Long): LiveData<Transaction>? {
+        return mTransactionDAO.get(id)
+    }
+
+    fun setTransaction(mTransaction: Transaction) {
+        _singleTransaction.value = mTransaction
+    }
+
+
+    private val _transaction = MutableLiveData<List<Transaction>>()
+    val transaction: LiveData<List<Transaction>>
+        get() = _transaction
+
+    val transactionTest = MutableLiveData<List<Transaction>>()
+    fun transactionListTest(id: Long): LiveData<List<Transaction>> {
+        return mTransactionDAO.getAllTransactionStatus(id)
+    }
+
 
     val transactionInfo = MutableLiveData<List<Transaction>>()
     fun getTransactionList(id: Long): LiveData<List<Transaction>> {

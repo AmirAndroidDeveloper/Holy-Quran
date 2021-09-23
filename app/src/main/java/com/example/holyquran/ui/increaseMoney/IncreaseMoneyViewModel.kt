@@ -58,6 +58,8 @@ class IncreaseMoneyViewModel(
 
     fun increaseMoney() {
         _increaseMoney.value = true
+    }   fun increaseMoneyDone() {
+        _increaseMoney.value = false
     }
 
     private val _gotToDecreaseMoney = MutableLiveData<Boolean>(false)

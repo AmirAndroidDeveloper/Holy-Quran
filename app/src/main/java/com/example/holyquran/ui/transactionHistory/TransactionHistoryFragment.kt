@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,12 +31,12 @@ class TransactionHistoryFragment : Fragment() {
                 container,
                 false
             )
-
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, application)
         mTransactionHistoryViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -56,11 +57,6 @@ class TransactionHistoryFragment : Fragment() {
 //            deleteDialog(it)
         }
         ))
-        val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
-        mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
-        userInfo()
-
 
         mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             mTransactionHistoryViewModel.setUserName(it)
@@ -70,6 +66,50 @@ class TransactionHistoryFragment : Fragment() {
                 mIncreaseHistoryBinding.userName = it
             }
         })
+
+
+
+        mTransactionHistoryViewModel.transactionListTest(id).observe(viewLifecycleOwner, {
+          it.forEach{
+              it.transactionStatus=false
+              Toast.makeText(activity, "$it,$it", Toast.LENGTH_SHORT).show()
+          }
+
+
+                mTransactionHistoryViewModel.transactionTest.value = it
+
+
+            mTransactionHistoryViewModel.setTransaction(id)?.observe(viewLifecycleOwner, {
+                mTransactionHistoryViewModel.setTransaction(it)
+            })
+            mTransactionHistoryViewModel.singleTransaction.observe(viewLifecycleOwner, {
+                if (it != null) {
+                    mIncreaseHistoryBinding.transaction = it
+
+                    if (!it.transactionStatus) {
+
+
+                    }
+                }
+            })
+
+
+            val mLinearLayoutManager =
+                LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
+            mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
+            userInfo()
+            mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+                mTransactionHistoryViewModel.setUserName(it)
+            })
+            mTransactionHistoryViewModel.userName.observe(viewLifecycleOwner, {
+                if (it != null) {
+                    mIncreaseHistoryBinding.userName = it
+                }
+            })
+        })
+
+
         return mIncreaseHistoryBinding.root
     }
 

@@ -9,6 +9,7 @@ import com.example.holyquran.data.model.UserInfo
 interface TransactionsDAO {
     @Insert
     suspend fun insert(ta: Transaction): Long
+
     @Update
     suspend fun update(ta: Transaction)
 
@@ -26,6 +27,9 @@ interface TransactionsDAO {
 
     @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY increase ,decrease DESC")
     fun getAllTransactionByUserId(key: Long): LiveData<List<Transaction>>
+
+    @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY transaction_status DESC")
+    fun getAllTransactionStatus(key: Long): LiveData<List<Transaction>>
 
     @Query("SELECT * FROM trans ORDER BY increase ASC")
     fun getAllTransaction(): LiveData<List<Transaction>>

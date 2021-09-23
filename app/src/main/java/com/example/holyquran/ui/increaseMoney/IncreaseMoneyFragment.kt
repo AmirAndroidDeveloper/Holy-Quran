@@ -49,6 +49,7 @@ class IncreaseMoneyFragment : Fragment() {
             ).get(IncreaseMoneyViewModel::class.java)
         mIncreaseMoneyBinding.increaseMoneyViewModel = mIncreaseMoneyViewModel
         this.also { mIncreaseMoneyBinding.lifecycleOwner = it }
+        mIncreaseMoneyViewModel.increaseMoneyDone()
 
         val arg =
             IncreaseMoneyFragmentArgs.fromBundle(
@@ -103,25 +104,34 @@ class IncreaseMoneyFragment : Fragment() {
                                 )
                             val alert: AlertDialog = builder.create()
                             alert.setCanceledOnTouchOutside(true)
-                            mIncreaseMoneyBinding.increaseEdt.text = null
+//                            mIncreaseMoneyBinding.increaseEdt.text = null
                             alert.show()
+                            mIncreaseMoneyViewModel.goToIncreaseDone()
+
                         } else {
                             mIncreaseMoneyViewModel.insertMoney(
                                 removeComma,
                                 false,
                                 userId
                             )
+                            mIncreaseMoneyViewModel.goToIncreaseDone()
+
                         }
+                        mIncreaseMoneyViewModel.goToIncreaseDone()
+
                     })
                 } else {
-
                     mIncreaseMoneyViewModel.insertMoney(
                         removeComma,
                         false,
                         userId
                     )
                 }
+           mIncreaseMoneyViewModel.increaseMoneyDone()
             }
+            mIncreaseMoneyViewModel.goToIncreaseDone()
+
+       mIncreaseMoneyViewModel.goToIncreaseDone()
         })
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -190,7 +200,9 @@ class IncreaseMoneyFragment : Fragment() {
                         userId
                     )
                 )
-                Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
+//                Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
+                mIncreaseMoneyViewModel.goToIncreaseDone()
+
                 true
             }
             R.id.getLoan -> {
@@ -199,6 +211,7 @@ class IncreaseMoneyFragment : Fragment() {
                         userId
                     )
                 )
+                mIncreaseMoneyViewModel.goToIncreaseDone()
                 true
             }
             R.id.loanHistory -> {
@@ -207,6 +220,7 @@ class IncreaseMoneyFragment : Fragment() {
                         userId
                     )
                 )
+                mIncreaseMoneyViewModel.goToIncreaseDone()
                 true
             }
             else -> super.onOptionsItemSelected(item)

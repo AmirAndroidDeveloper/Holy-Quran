@@ -101,7 +101,7 @@ class AdapterListener2(
     val deleteListener: (category: Transaction) -> Unit
 
 ) {
-    fun onclick(category: Transaction) = clickListener(category.userId)
+    fun onclick(transaction: Transaction) = clickListener(transaction.userId)
     fun onDeleteClick(userInfo: Transaction) = deleteListener(userInfo)
 
 }
