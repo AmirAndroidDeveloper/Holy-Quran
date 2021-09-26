@@ -39,29 +39,5 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragmentContainerView)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
-
-//    override fun onBackPressed() {
-//            Log.d("TAG", "onBackPressed: alertDilog")
-//            if (lastBackPressTime < System.currentTimeMillis() - 4000) {
-//                lastBackPressTime = System.currentTimeMillis()
-//                val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-//                builder.setIcon(R.drawable.warning)
-//                builder.setTitle("خروج از برنامه ")
-//                builder.setMessage("از برنامه خارج میشوید؟")
-//                    .setCancelable(false)
-//                    .setPositiveButton("بله",
-//                        DialogInterface.OnClickListener { dialog, id -> finish() })
-//                    .setNegativeButton("خیر",
-//                        DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
-//                val alert: AlertDialog = builder.create()
-//                alert.show()
-//
-//            } else {
-//                toast?.cancel()
-//                super.onBackPressed()
-//            }
-//    }
-
-
 }
 

@@ -1,22 +1,26 @@
 package com.example.holyquran.ui.mainPage
 
+import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.transition.Slide
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
-import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionManager
 
 
 class MainPageFragment : Fragment() {
@@ -46,6 +50,8 @@ class MainPageFragment : Fragment() {
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             AlertDialog()
         }
+
+
         return mMainPageBinding.root
     }
 
