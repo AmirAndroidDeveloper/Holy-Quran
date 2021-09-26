@@ -37,7 +37,6 @@ class UserListFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-
         val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,loanDAO, application)
         mUserListViewModel =
             ViewModelProviders.of(

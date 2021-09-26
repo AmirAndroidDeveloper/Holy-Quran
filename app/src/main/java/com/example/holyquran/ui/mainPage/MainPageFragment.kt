@@ -21,6 +21,7 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
 import androidx.transition.TransitionManager
+import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentArgs
 
 
 class MainPageFragment : Fragment() {
@@ -37,9 +38,9 @@ class MainPageFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-
         val viewModelFactory =
             ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, application)
+
         mMainViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -47,11 +48,7 @@ class MainPageFragment : Fragment() {
         mMainPageBinding.viewModel = mMainViewModel
         this.also { mMainPageBinding.lifecycleOwner = it }
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            alertDialog()
-        }
-
-
+       requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { alertDialog() }
         return mMainPageBinding.root
     }
 

@@ -191,10 +191,6 @@ class IncreaseMoneyFragment : Fragment() {
 
             }
         })
-
-
-
-
         return mIncreaseMoneyBinding.root
     }
 

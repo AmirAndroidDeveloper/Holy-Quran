@@ -11,6 +11,9 @@
         android:label="صفحه اصلی"
         tools:layout="@layout/fragment_main_page">
 
+        <argument
+            android:name="loanId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/userListFragment"
@@ -118,6 +121,20 @@
         <argument
             android:name="paymentId"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBankFragment"
+        android:name="com.example.holyquran.ui.banks.addBank.AddBankFragment"
+        android:label="fragment_add_bank"
+        tools:layout="@layout/fragment_add_bank" />
+    <fragment
+        android:id="@+id/bankListFragment"
+        android:name="com.example.holyquran.ui.banks.bankList.BankListFragment"
+        android:label="fragment_bank_list"
+        tools:layout="@layout/fragment_bank_list" >
+        <action
+            android:id="@+id/action_bankListFragment_to_addBankFragment"
+            app:destination="@id/addBankFragment" />
     </fragment>
 
 </navigation>
