@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.loan.getLoan
 
+import NumberTextWatcherForThousand
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,27 +9,18 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentGetLoanBinding
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
-import kotlinx.android.synthetic.main.fragment_add_user.*
-import kotlinx.android.synthetic.main.nav_header.*
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import java.text.NumberFormat
-import java.util.*
-import android.text.Editable
-import android.util.Log
-import java.lang.NumberFormatException
-import java.text.DecimalFormat
 
 
 class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -78,14 +70,24 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
 
         mGetLoanViewModel.getLoan.observe(viewLifecycleOwner, Observer {
-            val removeComma = mGetLoanBinding.sectionPayment.text.toString().replace(",", "")
+            val removeSectionComma = mGetLoanBinding.sectionPayment.text.toString().replace(",", "")
+            mGetLoanBinding.loanAmount.addTextChangedListener(
+                NumberTextWatcherForThousand(
+                    mGetLoanBinding.loanAmount
+                )
+            )
+            val removeComma =
+                NumberTextWatcherForThousand.trimCommaOfString(mGetLoanBinding.loanAmount.text.toString())
+                    .replace(",", "")
+
+
             if (it == true) {
                 mGetLoanViewModel.insertLoanTimeSpinner(
-                    mGetLoanBinding.loanAmount.text.toString(),
+                    removeComma,
                     mGetLoanBinding.loanDate.text.toString(),
                     mGetLoanBinding.loanSections.text.toString(),
                     mGetLoanBinding.spinner.selectedItem.toString(),
-                    removeComma,
+                    removeSectionComma,
                     id
                 )
             }

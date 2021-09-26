@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="اعضا"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
         android:id="@+id/userListFragment"
-        android:icon="@drawable/ic_people"/>
+        android:icon="@drawable/ic_people"
+        android:title="اعضا" />
+    <item
+        android:id="@+id/loans"
+        android:icon="@drawable/ic_baseline_attach_money_24"
+        android:title="وام ها" />
+    <item
+        android:id="@+id/loanHistoryFragment"
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
+        android:title="بانک ها" />
+
+
 </menu>

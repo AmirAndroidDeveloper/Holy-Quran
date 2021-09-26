@@ -48,7 +48,7 @@ class MainPageFragment : Fragment() {
         this.also { mMainPageBinding.lifecycleOwner = it }
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            AlertDialog()
+            alertDialog()
         }
 
 
@@ -56,7 +56,7 @@ class MainPageFragment : Fragment() {
     }
 
 
-    fun AlertDialog() {
+    fun alertDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
         builder.setIcon(R.drawable.warning)
         builder.setTitle("خروج از برنامه ")

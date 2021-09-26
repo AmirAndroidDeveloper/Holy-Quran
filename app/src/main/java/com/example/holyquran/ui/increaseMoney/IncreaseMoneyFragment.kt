@@ -1,9 +1,8 @@
 package com.example.holyquran.ui.increaseMoney
 
+import NumberTextWatcherForThousand
 import android.content.DialogInterface
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -15,14 +14,10 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
-import com.example.holyquran.utils.toCurrencyFormat
-import java.lang.Exception
 import java.text.NumberFormat
 import java.text.DecimalFormat
-
 
 class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
@@ -75,7 +70,10 @@ class IncreaseMoneyFragment : Fragment() {
         val result = increase - decrease
         mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
-            val removeComma = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
+            val removeComma =NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
+                .replace(",", "")
+             mIncreaseMoneyBinding.increaseEdt.addTextChangedListener( NumberTextWatcherForThousand(mIncreaseMoneyBinding.increaseEdt));
+
             if (it == true) {
                 if (id2 == true) {
                     mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
@@ -193,35 +191,10 @@ class IncreaseMoneyFragment : Fragment() {
 
             }
         })
-        mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                try {
-                    mIncreaseMoneyBinding.increaseEdt.removeTextChangedListener(this)
-                    val value: String = mIncreaseMoneyBinding.increaseEdt.getText().toString()
-                    if (value != "") {
-                        if (value.startsWith(".")) {
-                            mIncreaseMoneyBinding.increaseEdt.setText("0.")
-                        }
-                        if (value.startsWith("0") && !value.startsWith("0.")) {
-                            mIncreaseMoneyBinding.increaseEdt.setText("")
-                        }
-                        val str: String = mIncreaseMoneyBinding.increaseEdt.text.toString().replace(",", "")
-                        if (value != "") mIncreaseMoneyBinding.increaseEdt.setText(toCurrencyFormat(str))
-                        mIncreaseMoneyBinding.increaseEdt.setSelection(mIncreaseMoneyBinding.increaseEdt.text.toString().length)
-                    }
-                    mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(this)
-                } catch (ex: Exception) {
-                    ex.printStackTrace()
-                    mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(this)
-                }
-            }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
+
+
         return mIncreaseMoneyBinding.root
     }
 

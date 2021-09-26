@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.decreaseMoney
 
+import NumberTextWatcherForThousand
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -56,11 +57,12 @@ class DecreaseMoneyFragment : Fragment() {
             }
         })
         mDecreaseMoneyViewModel.decreaseMoney.observe(viewLifecycleOwner, Observer {
-            val removeComma =  mDecreaseMoneyBinding.decreaseEdt.text.toString().replace(",", "")
+            val removeComma=NumberTextWatcherForThousand.trimCommaOfString(mDecreaseMoneyBinding.decreaseEdt.text.toString()).replace(",", "")
+            mDecreaseMoneyBinding.decreaseEdt.addTextChangedListener(NumberTextWatcherForThousand(mDecreaseMoneyBinding.decreaseEdt))
             if (it == true) {
                 mDecreaseMoneyViewModel.decreaseMoney(
                     removeComma,
-                    null == true,
+                    false,
                     id
                 )
             }
