@@ -44,7 +44,11 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/increaseMoney/IncreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/increaseMoney/IncreaseMoneyFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/loan/getLoan/GetLoanFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/loan/getLoan/GetLoanFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/mainPage/MainPageFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/mainPage/MainPageFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/thousandSeparator/NumberTextInputEditText.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/thousandSeparator/NumberTextInputEditTextCrash.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/utils/Utils.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_decrease_money.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_get_loan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/navdrawer_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/navdrawer_menu.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
