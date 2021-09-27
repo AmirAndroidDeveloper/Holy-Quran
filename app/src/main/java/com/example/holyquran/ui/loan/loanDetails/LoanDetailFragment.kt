@@ -42,8 +42,9 @@ class LoanDetailFragment : Fragment() {
         val userDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+        val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, application)
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO,application)
 
         mLoanDetailViewModel =
             ViewModelProviders.of(

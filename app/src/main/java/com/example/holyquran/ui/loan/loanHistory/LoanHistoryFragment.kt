@@ -36,7 +36,8 @@ class LoanHistoryFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO,application)
+        val bankDAO = UserDatabase.getInstance(application).mBankDAO
+        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,loanDAO,bankDAO, application)
         mLoanHistoryViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory

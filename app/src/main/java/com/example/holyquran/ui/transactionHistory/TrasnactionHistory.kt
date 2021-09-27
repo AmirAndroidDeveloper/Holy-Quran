@@ -51,11 +51,11 @@ class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolde
             binding.transaction = item
             binding.clickListener = adapterListener2
             binding.executePendingBindings()
-      if (item.transactionStatus){
-          binding.transactionStatus.text="برداخت قسط"
-      }else{
-          binding.transactionStatus.text="به حساب"
-      }
+//      if (item.transactionStatus){
+//          binding.transactionStatus.text="برداخت قسط"
+//      }else{
+//          binding.transactionStatus.text="به حساب"
+//      }
         }
 
         companion object {

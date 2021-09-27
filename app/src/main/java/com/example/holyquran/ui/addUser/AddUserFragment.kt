@@ -29,7 +29,7 @@ import com.example.holyquran.ui.userList.UserListFragmentDirections
 
 class AddUserFragment : Fragment() {
 
-    lateinit var mAddUserListBinding: FragmentAddUserBinding
+    private lateinit var mAddUserListBinding: FragmentAddUserBinding
     lateinit var mAddUserViewModel: AddUserViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,8 +42,9 @@ class AddUserFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+        val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, application)
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO,application)
         mAddUserViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory

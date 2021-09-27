@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 
 @Database(
-    entities = [UserInfo::class, Transaction::class, Loan::class],
+    entities = [UserInfo::class, Transaction::class, Loan::class,Bank::class],
     version = 1,
     exportSchema = false
 )
@@ -17,6 +18,7 @@ abstract class UserDatabase : RoomDatabase() {
     abstract val mUserDAO: UserDAO
     abstract val mTransactionsDAO: TransactionsDAO
     abstract val mLoanDAO: LoanDAO
+    abstract val mBankDAO: BankDAO
 
     companion object {
         @Volatile

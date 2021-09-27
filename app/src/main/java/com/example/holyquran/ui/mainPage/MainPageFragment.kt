@@ -38,8 +38,9 @@ class MainPageFragment : Fragment() {
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+        val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, application)
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO,bankDAO, application)
 
         mMainViewModel =
             ViewModelProviders.of(

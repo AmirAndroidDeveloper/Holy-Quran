@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
@@ -11,12 +12,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 
-class BankListViewModel(  val mUserInfoDAO: UserDAO,
-val mTransactionsDAO: TransactionsDAO,
-val mLoan: LoanDAO,
-application: Application
+class BankListViewModel(
+    val mUserInfoDAO: UserDAO,
+    val mTransactionsDAO: TransactionsDAO,
+    val mLoan: LoanDAO,
+    val mBankDAO: BankDAO,
+    application: Application
 ) :
-AndroidViewModel(application) {
+    AndroidViewModel(application) {
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -28,7 +31,7 @@ AndroidViewModel(application) {
         _goTOAddBank.value = true
     }
 
-    fun goTOAddBankDone(){
-        _goTOAddBank.value=false
+    fun goTOAddBankDone() {
+        _goTOAddBank.value = false
     }
 }

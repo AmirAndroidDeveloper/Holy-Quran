@@ -16,27 +16,27 @@ interface TransactionsDAO {
     @Delete
     suspend fun deleteTrans(ta: Transaction)
 
-    @Query("SELECT * from trans WHERE trans_id = :key")
+    @Query("SELECT * from `transaction` WHERE trans_id = :key")
     fun get(key: Long): LiveData<Transaction>?
 
-    @Query("SELECT SUM(loan_payments) FROM trans WHERE user_id=:key")
+    @Query("SELECT SUM(loan_number) FROM `transaction` WHERE user_id=:key")
     fun sumLoanPayments(key: Long): Int
 
-    @Query("SELECT SUM(pay_payment) FROM trans WHERE user_id=:key")
+    @Query("SELECT SUM(loan_number) FROM `transaction` WHERE user_id=:key")
     fun sumWholeIncrease(key: Long): Int
 
-    @Query("SELECT * FROM trans WHERE user_id=:key ORDER BY increase ,decrease DESC")
+    @Query("SELECT * FROM `transaction` WHERE user_id=:key ORDER BY increase ,decrease DESC")
     fun getAllTransactionByUserId(key: Long): LiveData<List<Transaction>>
 
-    @Query("SELECT * FROM trans ORDER BY increase ASC")
+    @Query("SELECT * FROM `transaction` ORDER BY increase ASC")
     fun getAllTransaction(): LiveData<List<Transaction>>
 
-    @Query("SELECT SUM(increase)FROM trans")
+    @Query("SELECT SUM(increase)FROM `transaction`")
     fun getTotalIncrease(): Int
 
-    @Query("SELECT SUM(increase) FROM trans WHERE user_id=:key")
+    @Query("SELECT SUM(increase) FROM `transaction` WHERE user_id=:key")
     fun sumUserIncrease(key: Long): Int
 
-    @Query("SELECT SUM(decrease) FROM trans WHERE user_id=:key")
+    @Query("SELECT SUM(decrease) FROM `transaction` WHERE user_id=:key")
     fun sumUserDecrease(key: Long): Int
 }

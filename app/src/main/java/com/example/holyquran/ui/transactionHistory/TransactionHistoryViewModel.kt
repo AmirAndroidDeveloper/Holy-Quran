@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
@@ -12,8 +13,9 @@ import com.example.holyquran.data.model.UserInfo
 
 class TransactionHistoryViewModel(
     val mUserInfoDAO: UserDAO,
-    val mTransactionDAO: TransactionsDAO,
+    private val mTransactionDAO: TransactionsDAO,
     val mLoan: LoanDAO,
+    val mBankDAO: BankDAO,
     application: Application
 ) :
     AndroidViewModel(application) {

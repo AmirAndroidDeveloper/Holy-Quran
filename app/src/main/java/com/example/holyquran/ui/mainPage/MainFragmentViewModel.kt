@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
@@ -16,7 +17,7 @@ class MainFragmentViewModel(
     val mUserInfoDAO: UserDAO,
     val mTransactionsDAO: TransactionsDAO,
     val mLoan: LoanDAO,
-
+    val mBankDAO: BankDAO,
     application: Application
 ) : AndroidViewModel(application) {
 
