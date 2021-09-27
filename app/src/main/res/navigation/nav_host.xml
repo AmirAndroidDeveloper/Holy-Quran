@@ -136,5 +136,10 @@
             android:id="@+id/action_bankListFragment_to_addBankFragment"
             app:destination="@id/addBankFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loanListFragment"
+        tools:layout="@layout/fragment_loan_list"
+        android:name="com.example.holyquran.ui.loan.loanList.LoanListFragment"
+        android:label="LoanListFragment" />
 
 </navigation>

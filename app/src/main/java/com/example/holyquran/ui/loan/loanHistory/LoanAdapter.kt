@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.databinding.ItemUserLoanListBinding
+import com.example.holyquran.ui.loan.loanList.BillDiffCallback
 
 
 class LoanAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
@@ -93,10 +94,10 @@ class BillDiffCallback : DiffUtil.ItemCallback<Loan>() {
 
 class AdapterListener3(
     val clickListener2: (id: Long) -> Unit,
-    val deleteListener: (category: Loan) -> Unit
+    val deleteListener: (loan: Loan) -> Unit
 
 ) {
     fun onclick(loan: Loan) = clickListener2(loan.loanId)
-    fun onDeleteClick(userInfo: Loan) = deleteListener(userInfo)
+    fun onDeleteClick(loan: Loan) = deleteListener(loan)
 
 }

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<data>
-    <variable
-        name="viewModel"
-        type="com.example.holyquran.ui.banks.bankList.BankListViewModel" />
-</data>
-    
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.holyquran.ui.banks.bankList.BankListViewModel" />
+    </data>
+
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
@@ -22,18 +24,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
-            app:bankList="@{viewModel.bankInfo}"
-            />
-<!--        app:userList="@{viewModel.userInfo}"-->
+            app:bankList="@{viewModel.bankInfo}" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="30dp"
+            android:backgroundTint="#1e45d1"
             android:onClick="@{() -> viewModel.goTOAddBank()}"
             android:src="@drawable/ic_baseline_account_balance_wallet_24"
-            android:backgroundTint="#1e45d1"
             app:tint="@color/white" />
     </FrameLayout>
 </layout>

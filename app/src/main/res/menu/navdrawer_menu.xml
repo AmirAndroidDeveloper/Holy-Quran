@@ -6,7 +6,7 @@
         android:icon="@drawable/ic_people"
         android:title="اعضا" />
     <item
-        android:id="@+id/loans"
+        android:id="@+id/loanListFragment"
         android:icon="@drawable/ic_baseline_attach_money_24"
         android:title="وام ها" />
     <item

@@ -8,6 +8,7 @@ import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.banks.bankList.BankAdapter
 import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
+import com.example.holyquran.ui.loan.loanList.LoanListAdapter
 import com.example.holyquran.ui.transactionHistory.increaseHistoryAdapter
 import com.example.holyquran.ui.userList.UserAdapter
 
@@ -28,13 +29,16 @@ fun increaseList(
     (recyclerView.adapter as increaseHistoryAdapter?)?.submitList(list)
     (recyclerView.adapter as increaseHistoryAdapter?)?.notifyDataSetChanged()
 }
+
 @BindingAdapter("loanList")
 fun loanList(
     recyclerView: RecyclerView,
     list: List<Loan>?
-) { (recyclerView.adapter as LoanAdapter?)?.submitList(list)
+) {
+    (recyclerView.adapter as LoanAdapter?)?.submitList(list)
     (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
 }
+
 @BindingAdapter("bankList")
 fun bankList(
     recyclerView: RecyclerView,
@@ -43,4 +47,11 @@ fun bankList(
     (recyclerView.adapter as BankAdapter?)?.submitList(list)
     (recyclerView.adapter as BankAdapter?)?.notifyDataSetChanged()
 }
-
+@BindingAdapter("loanListAll")
+fun loanListAll(
+    recyclerView: RecyclerView,
+    list: List<Loan>?
+) {
+    (recyclerView.adapter as LoanListAdapter?)?.submitList(list)
+    (recyclerView.adapter as LoanListAdapter?)?.notifyDataSetChanged()
+}

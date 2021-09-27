@@ -23,7 +23,10 @@ interface LoanDAO {
     fun getLoanId(key: Long): LiveData<Loan>?
 
     @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY amount DESC")
-    fun getAllLoan(key: Long): LiveData<List<Loan>>
+    fun getAllLoanWithUserId(key: Long): LiveData<List<Loan>>
+
+    @Query("SELECT * FROM loan ORDER BY amount DESC")
+    fun getAllLoans(): LiveData<List<Loan>>
 
     @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY payment DESC")
     fun getAllLoanByUserPayment(key: Long): LiveData<List<Loan>>

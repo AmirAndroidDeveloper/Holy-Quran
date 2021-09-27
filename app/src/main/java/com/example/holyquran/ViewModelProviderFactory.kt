@@ -17,6 +17,7 @@ import com.example.holyquran.ui.loan.getLoan.GetLoanViewModel
 import com.example.holyquran.ui.increaseMoney.IncreaseMoneyViewModel
 import com.example.holyquran.ui.loan.loanDetails.LoanDetailViewModel
 import com.example.holyquran.ui.loan.loanHistory.LoanHistoryViewModel
+import com.example.holyquran.ui.loan.loanList.LoanListViewModel
 import com.example.holyquran.ui.loan.payments.PaymentViewModel
 import com.example.holyquran.ui.transactionHistory.TransactionHistoryViewModel
 
@@ -54,6 +55,8 @@ class ViewModelProviderFactory (
             return BankListViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
         }else if (modelClass.isAssignableFrom(AddBankViewModel::class.java)){
             return AddBankViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
+        }else if (modelClass.isAssignableFrom(LoanListViewModel::class.java)){
+            return LoanListViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
