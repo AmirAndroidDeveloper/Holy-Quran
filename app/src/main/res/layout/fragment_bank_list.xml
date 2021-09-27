@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="false"
-           />
+            app:bankList="@{viewModel.bankInfo}"
+            />
 <!--        app:userList="@{viewModel.userInfo}"-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingBtn"

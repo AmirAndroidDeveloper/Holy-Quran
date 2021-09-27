@@ -8,6 +8,7 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.ui.addUser.AddUserViewModel
+import com.example.holyquran.ui.banks.addBank.AddBankViewModel
 import com.example.holyquran.ui.banks.bankList.BankListViewModel
 import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import com.example.holyquran.ui.userList.UserListViewModel
@@ -51,6 +52,8 @@ class ViewModelProviderFactory (
             return PaymentViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
         }else if (modelClass.isAssignableFrom(BankListViewModel::class.java)){
             return BankListViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
+        }else if (modelClass.isAssignableFrom(AddBankViewModel::class.java)){
+            return AddBankViewModel(dataSourceUser,dataSourceTransactions,dataSourceLoan, dataSourceBank ,application)as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

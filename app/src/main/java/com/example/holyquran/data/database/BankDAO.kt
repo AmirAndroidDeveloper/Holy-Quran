@@ -22,5 +22,6 @@ interface BankDAO {
     @Query("SELECT * from bank WHERE bank_id = :key")
     fun get(key: Long): LiveData<Bank>?
 
-
+    @Query("SELECT * FROM bank ORDER BY bank_name DESC")
+    fun getAllBanks(): LiveData<List<Bank>>
 }

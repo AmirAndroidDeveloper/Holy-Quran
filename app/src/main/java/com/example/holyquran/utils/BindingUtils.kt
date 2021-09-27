@@ -1,15 +1,15 @@
 package com.example.holyquran.utils
 
-import android.util.Log
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.ui.banks.bankList.BankAdapter
 import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
-import com.example.holyquran.ui.loan.payments.PaymentsAdapter
-import com.example.holyquran.ui.userList.UserAdapter
 import com.example.holyquran.ui.transactionHistory.increaseHistoryAdapter
+import com.example.holyquran.ui.userList.UserAdapter
 
 @BindingAdapter("userList")
 fun userList(
@@ -32,18 +32,15 @@ fun increaseList(
 fun loanList(
     recyclerView: RecyclerView,
     list: List<Loan>?
-) {
-    Log.d("TAG", "loanList: testTest")
-    (recyclerView.adapter as LoanAdapter?)?.submitList(list)
+) { (recyclerView.adapter as LoanAdapter?)?.submitList(list)
     (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
 }
-@BindingAdapter("paymentList")
-fun paymentList(
+@BindingAdapter("bankList")
+fun bankList(
     recyclerView: RecyclerView,
-    list: List<Loan>?
+    list: List<Bank>?
 ) {
-    Log.d("TAG", "loanList: testTest")
-    (recyclerView.adapter as PaymentsAdapter?)?.submitList(list)
-    (recyclerView.adapter as PaymentsAdapter?)?.notifyDataSetChanged()
+    (recyclerView.adapter as BankAdapter?)?.submitList(list)
+    (recyclerView.adapter as BankAdapter?)?.notifyDataSetChanged()
 }
 

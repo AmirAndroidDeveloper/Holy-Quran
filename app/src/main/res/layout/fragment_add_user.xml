@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
-
         <variable
             name="viewModel"
             type="com.example.holyquran.ui.addUser.AddUserViewModel" />
@@ -18,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="ltr"
-
         android:orientation="vertical"
         tools:context=".ui.addUser.AddUserFragment">
 
@@ -26,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="ltr"
-
             android:layout_marginTop="20sp"
             android:orientation="horizontal">
 
@@ -34,7 +30,6 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layoutDirection="ltr"
-
                 android:layout_marginStart="20sp">
 
                 <com.google.android.material.textfield.TextInputLayout

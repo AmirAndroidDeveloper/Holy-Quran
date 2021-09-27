@@ -10,11 +10,13 @@ data class Bank(
     @ColumnInfo(name = "bank_id")
     var bankId: Long = 0L,
     @ColumnInfo(name = "account_number")
-    var accountNumber: String,
+    var accountNumber: String?,
     @ColumnInfo(name = "card_number")
-    var cardNumber: String,
+    var cardNumber: String?,
     @ColumnInfo(name = "address")
-    var address: String,
-    @ColumnInfo(name = "name")
-    var name: String
+    var address: String?,
+    @ColumnInfo(name = "bank_name")
+    var bankName: String,
+    @ColumnInfo(name = "create_date")
+    var createDate: String,
 )
