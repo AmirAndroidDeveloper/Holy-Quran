@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
@@ -40,7 +41,7 @@ class MainPageFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO,bankDAO, application)
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
 
         mMainViewModel =
             ViewModelProviders.of(
@@ -48,13 +49,13 @@ class MainPageFragment : Fragment() {
             ).get(MainFragmentViewModel::class.java)
         mMainPageBinding.viewModel = mMainViewModel
         this.also { mMainPageBinding.lifecycleOwner = it }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { alertDialog() }
 
-       requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { alertDialog() }
         return mMainPageBinding.root
     }
 
 
-    fun alertDialog() {
+    private fun alertDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
         builder.setIcon(R.drawable.warning)
         builder.setTitle("خروج از برنامه ")

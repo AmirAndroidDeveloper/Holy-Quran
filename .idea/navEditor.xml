@@ -217,6 +217,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="popupWindowFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-291" />
+                            <option name="y" value="-1018" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="userListFragment">
                     <value>
                       <LayoutPositions>

@@ -33,7 +33,7 @@ class IntroActivity : AppCompatActivity() {
 //        })
 
 
-            window.setFlags(
+        window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
@@ -90,21 +90,16 @@ class IntroActivity : AppCompatActivity() {
                         indicator_3.setTextColor(Color.BLACK)
                     }
                 }
-
-
             }
 
         })
-
-
     }
-
     private fun skip() {
         view_pager.currentItem = 2
     }
 
 
-    fun GoToWelcomeScree() {
+    fun goToWelcomeScreen() {
         startActivity(Intent(this@IntroActivity, MainActivity::class.java))
         finish()
         val editor = preference.edit()

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
@@ -24,149 +25,158 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="30dp"
-        android:layoutDirection="ltr"
-        android:orientation="vertical"
-        tools:context=".ui.userList.decreaseMoney.IncreaseMoneyFragment">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="ltr"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/userNameTXT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{userName.fullName}"
-                android:textColor="@color/black"
-                android:textSize="35sp"
-                tools:text="UserName" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@{userName.mobileNumber}"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                tools:text="UserName" />
-
-            <TextView
-                android:id="@+id/totalMoney"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Total Money"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/increaseMoney"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:gravity="center"
-                android:text="ثبت واریز"
-                android:textColor="@color/black"
-                android:textSize="35sp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/increaseEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="amount"
-                    android:inputType="number" />
-
-                <CheckBox
-                    android:id="@+id/checkBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="برداخت قسط" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/noLoanForUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
-                <TextView
-                    android:id="@+id/textPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:text="مبلغ هر قسط برابر اسب با "
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:visibility="gone" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
-                android:text="تایید" />
-
-
-        </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
             android:layoutDirection="ltr"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/decreaseBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:onClick="@{() -> increaseMoneyViewModel.gotToDecreaseMoney()}"
-                android:text="واریز به حساب" />
+            android:orientation="vertical"
+            tools:context=".ui.userList.decreaseMoney.IncreaseMoneyFragment">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35sp"
                 android:layoutDirection="ltr"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/userMoney"
+                    android:id="@+id/userNameTXT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{transaction.increase}"
+                    android:text="@{userName.fullName}"
                     android:textColor="@color/black"
-                    tools:text="باقی مانده حساب" />
+                    android:textSize="35sp"
+                    tools:text="UserName" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{userName.mobileNumber}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:text="UserName" />
+
+                <TextView
+                    android:id="@+id/totalMoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Total Money"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/increaseMoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
+                    android:text="ثبت واریز"
+                    android:textColor="@color/black"
+                    android:textSize="35sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/increaseEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="amount"
+                        android:inputType="number" />
+
+                    <CheckBox
+                        android:id="@+id/checkBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="برداخت قسط" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/noLoanForUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/textPlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:text="مبلغ هر قسط برابر اسب با "
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
+                    android:text="تایید" />
+
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layoutDirection="ltr"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/decreaseBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:onClick="@{() -> increaseMoneyViewModel.gotToDecreaseMoney()}"
+                    android:text="واریز به حساب" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userMoney"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{transaction.increase}"
+                        android:textColor="@color/black"
+                        tools:text="باقی مانده حساب" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/popUpWindow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:text="popup window" />
+
         </LinearLayout>
-    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

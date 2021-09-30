@@ -192,6 +192,13 @@ class IncreaseMoneyFragment : Fragment() {
 
             }
         })
+
+        mIncreaseMoneyBinding.popUpWindow.setOnClickListener {
+            this.findNavController().navigate(
+                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToPopupWindowFragment()
+            )
+
+        }
         return mIncreaseMoneyBinding.root
     }
 
