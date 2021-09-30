@@ -22,8 +22,8 @@ import java.text.DecimalFormat
 class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
     var id2: Boolean = false
-    var numbers = 1
     var decide = ""
+    private val increasePage = "increase"
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -43,7 +43,7 @@ class IncreaseMoneyFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO,application)
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO, application)
         mIncreaseMoneyViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -71,74 +71,75 @@ class IncreaseMoneyFragment : Fragment() {
         val result = increase - decrease
         mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
-            val removeComma =NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
-                .replace(",", "")
-             mIncreaseMoneyBinding.increaseEdt.addTextChangedListener( NumberTextWatcherForThousand(mIncreaseMoneyBinding.increaseEdt));
+            val removeComma =
+                NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
+                    .replace(",", "")
+            mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(
+                NumberTextWatcherForThousand(
+                    mIncreaseMoneyBinding.increaseEdt
+                )
+            );
 
             if (it == true) {
-                if (id2 == true) {
-                    mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-                        if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-                            val builder: AlertDialog.Builder =
-                                AlertDialog.Builder(requireActivity())
-                            builder.setIcon(R.drawable.warning)
-                            val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
-                            val currentPayment = it.payment
-
-                            if (increaseEditText.toInt() > currentPayment.toInt()) {
-                                val more = "بیشتر"
-                                decide = more
-                            } else {
-                                val less = "کمتر"
-                                decide = less
-                            }
-                            builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
-                                .setCancelable(false)
-                                .setPositiveButton("اره به هر حال واریز کن",
-                                    DialogInterface.OnClickListener { dialog, id ->
-                                        mIncreaseMoneyViewModel.insertLoanPayments(
-                                            removeComma,
-                                            true,
-                                            numbers.toString(),
-                                            userId
-                                        )
-                                        Toast.makeText(
-                                            activity,
-                                            "قسط با موفقیت برداخت شد.",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    })
-                                .setNegativeButton("نه,ممنون",
-                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
-                                )
-                            val alert: AlertDialog = builder.create()
-                            alert.setCanceledOnTouchOutside(true)
-                            alert.show()
-                            mIncreaseMoneyViewModel.goToIncreaseDone()
-
-                        } else {
-                            mIncreaseMoneyViewModel.insertLoanPayments(
-                                removeComma,
-                                true,
-                                numbers.toString(),
-                                userId
-                            )
-                            mIncreaseMoneyViewModel.goToIncreaseDone()
-                        }
-                        mIncreaseMoneyViewModel.goToIncreaseDone()
-
-                    })
-                } else {
-                    mIncreaseMoneyViewModel.insertMoney(
-                        removeComma,
-                        false,
-                        userId
-                    )
-                }
+//                if (id2 == true) {
+//                    mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
+//                        if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
+//                            val builder: AlertDialog.Builder =
+//                                AlertDialog.Builder(requireActivity())
+//                            builder.setIcon(R.drawable.warning)
+//                            val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
+//                            val currentPayment = it.payment
+//                            if (increaseEditText.toInt() > currentPayment.toInt()) {
+//                                val more = "بیشتر"
+//                                decide = more
+//                            } else {
+//                                val less = "کمتر"
+//                                decide = less
+//                            }
+//                            builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
+//                                .setCancelable(false)
+//                                .setPositiveButton("اره به هر حال واریز کن",
+//                                    DialogInterface.OnClickListener { dialog, id ->
+//                                        mIncreaseMoneyViewModel.insertLoanPayments(
+//                                            removeComma,
+//                                            true,
+//                                            userId,
+//                                            increasePage
+//                                        )
+//                                        Toast.makeText(
+//                                            activity,
+//                                            "قسط با موفقیت برداخت شد.",
+//                                            Toast.LENGTH_SHORT
+//                                        ).show()
+//                                    })
+//                                .setNegativeButton("نه,ممنون",
+//                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+//                                )
+//                            val alert: AlertDialog = builder.create()
+//                            alert.setCanceledOnTouchOutside(true)
+//                            alert.show()
+//                            mIncreaseMoneyViewModel.goToIncreaseDone()
+//
+//                        } else {
+//                            mIncreaseMoneyViewModel.insertLoanPayments(
+//                                removeComma,
+//                                true,
+//                                userId,
+//                                increasePage
+//                            )
+//                            mIncreaseMoneyViewModel.goToIncreaseDone()
+//                        }
+//                        mIncreaseMoneyViewModel.goToIncreaseDone()
+//
+//                    })
+//            }else {
+//                    mIncreaseMoneyViewModel.insertMoney(
+//                        removeComma,
+//                        userId,
+//                    increasePage)
+//                }
                 mIncreaseMoneyViewModel.increaseMoneyDone()
             }
-            mIncreaseMoneyViewModel.goToIncreaseDone()
-
             mIncreaseMoneyViewModel.goToIncreaseDone()
         })
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {

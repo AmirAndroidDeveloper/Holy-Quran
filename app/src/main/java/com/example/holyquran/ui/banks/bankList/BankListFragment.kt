@@ -21,21 +21,22 @@ import com.example.holyquran.ui.userList.UserListFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 
 class BankListFragment : Fragment() {
-lateinit var mBankListBinding:FragmentBankListBinding
-lateinit var mBankListViewModel: BankListViewModel
+    lateinit var mBankListBinding: FragmentBankListBinding
+    lateinit var mBankListViewModel: BankListViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-mBankListBinding=
-    DataBindingUtil.inflate(layoutInflater,R.layout.fragment_bank_list, container, false)
+        mBankListBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.fragment_bank_list, container, false)
 
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,loanDAO, bankDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
         mBankListViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -54,9 +55,9 @@ mBankListBinding=
         val mBankAdapter = BankAdapter()
         mBankAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
-//                this.findNavController().navigate(
-//                    UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)
-//                )
+                this.findNavController().navigate(
+                    BankListFragmentDirections.actionBankListFragmentToBankDetailFragment(it)
+                )
             Log.d("TAG", "navTeat $it ")
 
         }, {
@@ -71,7 +72,11 @@ mBankListBinding=
     }
 
     private fun deleteDialog(bankInfo: Bank) {
-        Snackbar.make(mBankListBinding.root, "آیا تمایل به حذف این بانک دارید؟ ", Snackbar.LENGTH_LONG)
+        Snackbar.make(
+            mBankListBinding.root,
+            "آیا تمایل به حذف این بانک دارید؟ ",
+            Snackbar.LENGTH_LONG
+        )
             .setAction("حذف") {
                 mBankListViewModel.deleteCategory(bankInfo)
             }
@@ -79,6 +84,7 @@ mBankListBinding=
             .show()
 
     }
+
     private fun bankInfo() {
         mBankListViewModel.getBankList().observe(viewLifecycleOwner, {
             mBankListViewModel.bankInfo.value = it

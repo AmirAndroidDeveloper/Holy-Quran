@@ -42,6 +42,7 @@ class DecreaseViewModel(
     fun setDecrease(id: Long): LiveData<Transaction>? {
         return mTransactionsDAO.get(id)
     }
+
     fun setDecrease(mTransInfo: Transaction) {
         _decrease.value = mTransInfo
     }
@@ -53,12 +54,15 @@ class DecreaseViewModel(
     fun sumUserDecrease(id: Long): Int {
         return mTransactionsDAO.sumUserDecrease(id)
     }
+
     private val _decreaseMoney = MutableLiveData<Boolean>(false)
     val decreaseMoney: LiveData<Boolean>
         get() = _decreaseMoney
+
     fun decreaseMoney() {
         _decreaseMoney.value = true
     }
+
     fun decreaseMoneyDone() {
         _decreaseMoney.value = false
     }
@@ -69,8 +73,8 @@ class DecreaseViewModel(
         amount: String,
         transactionStatus: Boolean,
         userId: Long,
-
-        ) {
+        decreasePage: String
+    ) {
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(
@@ -82,8 +86,8 @@ class DecreaseViewModel(
                     null,
                     amount,
                     null,
-                     sumUserIncrease(userId).minus(sumUserDecrease(userId)),
-
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId)),
+                    decreasePage
                 )
             )
         }

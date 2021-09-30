@@ -138,6 +138,9 @@
         <action
             android:id="@+id/action_bankListFragment_to_addBankFragment"
             app:destination="@id/addBankFragment" />
+        <action
+            android:id="@+id/action_bankListFragment_to_bankDetailFragment"
+            app:destination="@id/bankDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/loanListFragment"
@@ -149,5 +152,14 @@
         tools:layout="@layout/fragment_popup_window"
         android:name="com.example.holyquran.ui.popupWindow.PopupWindowFragment"
         android:label="PopupWindowFragment" />
+    <fragment
+        android:id="@+id/bankDetailFragment"
+        tools:layout="@layout/fragment_bank_detail"
+        android:name="com.example.holyquran.ui.banks.bankDetail.BankDetailFragment"
+        android:label="BankDetailFragment" >
+        <argument
+            android:name="bankId"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

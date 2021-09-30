@@ -25,4 +25,6 @@ data class Transaction(
     var loanNumber: String?,
     @ColumnInfo(name = "total")
     var total: Int,
+    @ColumnInfo(name = "type")
+    var type: String
 )

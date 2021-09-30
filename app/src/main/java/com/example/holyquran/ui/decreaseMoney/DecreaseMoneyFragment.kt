@@ -19,6 +19,7 @@ class DecreaseMoneyFragment : Fragment() {
     var id: Long = 0L
     lateinit var mDecreaseMoneyBinding: FragmentDecreaseMoneyBinding
     lateinit var mDecreaseMoneyViewModel: DecreaseViewModel
+    val decreasePage = "decrease"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,16 +37,15 @@ class DecreaseMoneyFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO,bankDAO, application)
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO, application)
         mDecreaseMoneyViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
             ).get(DecreaseViewModel::class.java)
         mDecreaseMoneyBinding.decreaseMoneyViewModel = mDecreaseMoneyViewModel
         this.also { mDecreaseMoneyBinding.lifecycleOwner = it }
-
         val arg =
-        DecreaseMoneyFragmentArgs.fromBundle(
+            DecreaseMoneyFragmentArgs.fromBundle(
                 requireArguments()
             )
         id = arg.userIdDecrease
@@ -58,13 +58,20 @@ class DecreaseMoneyFragment : Fragment() {
             }
         })
         mDecreaseMoneyViewModel.decreaseMoney.observe(viewLifecycleOwner, Observer {
-            val removeComma=NumberTextWatcherForThousand.trimCommaOfString(mDecreaseMoneyBinding.decreaseEdt.text.toString()).replace(",", "")
-            mDecreaseMoneyBinding.decreaseEdt.addTextChangedListener(NumberTextWatcherForThousand(mDecreaseMoneyBinding.decreaseEdt))
+            val removeComma =
+                NumberTextWatcherForThousand.trimCommaOfString(mDecreaseMoneyBinding.decreaseEdt.text.toString())
+                    .replace(",", "")
+            mDecreaseMoneyBinding.decreaseEdt.addTextChangedListener(
+                NumberTextWatcherForThousand(
+                    mDecreaseMoneyBinding.decreaseEdt
+                )
+            )
             if (it == true) {
                 mDecreaseMoneyViewModel.decreaseMoney(
                     removeComma,
                     false,
-                    id
+                    id,
+                    decreasePage
                 )
             }
         })
@@ -72,13 +79,13 @@ class DecreaseMoneyFragment : Fragment() {
             if (it != null) {
                 mDecreaseMoneyViewModel.setDecrease(it)
             }
-        mDecreaseMoneyViewModel.decreaseMoneyDone()
+            mDecreaseMoneyViewModel.decreaseMoneyDone()
         })
         mDecreaseMoneyViewModel.decrease.observe(viewLifecycleOwner, {
             if (it != null) {
                 if (id == mDecreaseMoneyViewModel.decrease.value?.userId) {
                     Toast.makeText(activity, "Match", Toast.LENGTH_SHORT).show()
-                    mDecreaseMoneyBinding.userMoney.text =it.increase
+                    mDecreaseMoneyBinding.userMoney.text = it.increase
                 }
                 mDecreaseMoneyBinding.userMoney.text =
                     mDecreaseMoneyViewModel.sumUserDecrease(id).toString()

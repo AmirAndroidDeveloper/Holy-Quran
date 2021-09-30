@@ -60,7 +60,9 @@ class IncreaseMoneyViewModel(
 
     fun increaseMoney() {
         _increaseMoney.value = true
-    }   fun increaseMoneyDone() {
+    }
+
+    fun increaseMoneyDone() {
         _increaseMoney.value = false
     }
 
@@ -89,13 +91,12 @@ class IncreaseMoneyViewModel(
     }
 
 
-
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
         amount: String,
-        transactionStatus: Boolean,
         userId: Long,
+        increasePage: String
     ) {
         uiScope.launch {
             mTransactionsDAO.insert(
@@ -109,33 +110,14 @@ class IncreaseMoneyViewModel(
                     null,
                     null,
                     sumUserIncrease(userId).minus(sumUserDecrease(userId)),
-                )
-            )
-
-        }
-    }  fun insertLoanPayments(
-        amount: String,
-        transactionStatus: Boolean,
-        loanPayments: String,
-        userId: Long,
-    ) {
-        uiScope.launch {
-            mTransactionsDAO.insert(
-                Transaction(
-                    0L,
-                    userId,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    loanPayments,
-                    sumUserIncrease(userId).minus(sumUserDecrease(userId)),
+                    increasePage
                 )
             )
 
         }
     }
+
+
 
     fun deleteTrans(
         transInfo: UserInfo
