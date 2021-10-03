@@ -26,7 +26,4 @@ interface BankDAO {
     fun getAllBanks(): LiveData<List<Bank>>
 
 
-    @Query("SELECT SUM(increase) FROM `transaction` WHERE bank_id=:key")
-    fun sumBankIncrease(key: Long): Int
-
 }

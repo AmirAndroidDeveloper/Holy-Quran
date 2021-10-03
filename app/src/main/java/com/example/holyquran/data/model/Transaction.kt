@@ -24,7 +24,7 @@ data class Transaction(
     @ColumnInfo(name = "loan_number")
     var loanNumber: String?,
     @ColumnInfo(name = "total")
-    var total: Int?,
+    var total: Long?,
     @ColumnInfo(name = "type")
     var type: String?
 )

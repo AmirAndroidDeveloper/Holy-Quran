@@ -31,13 +31,15 @@ interface TransactionsDAO {
     @Query("SELECT * FROM `transaction` ORDER BY increase ASC")
     fun getAllTransaction(): LiveData<List<Transaction>>
 
-    @Query("SELECT SUM(increase)FROM `transaction`")
-    fun getTotalIncrease(): Int
-
     @Query("SELECT SUM(increase) FROM `transaction` WHERE user_id=:key")
-    fun sumUserIncrease(key: Long): Int
+    fun sumUserIncrease(key: Long): Long
 
     @Query("SELECT SUM(decrease) FROM `transaction` WHERE user_id=:key")
-    fun sumUserDecrease(key: Long): Int
+    fun sumUserDecrease(key: Long): Long
 
+    @Query("SELECT SUM(increase) FROM `transaction` WHERE bank_id=:key")
+    fun sumBankIncrease(key: Long): Long
+
+    @Query("SELECT SUM(decrease) FROM `transaction` WHERE bank_id=:key")
+    fun sumBankDecrease(key: Long): Long
 }

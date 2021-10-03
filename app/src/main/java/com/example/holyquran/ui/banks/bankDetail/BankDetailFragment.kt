@@ -13,6 +13,8 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentBankDetailBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.ArrayList
 
 class BankDetailFragment : Fragment() {
@@ -134,25 +136,25 @@ class BankDetailFragment : Fragment() {
             }
 
 
+        val increase = mBankDetailViewModel.sumBankMoneyIncrease(bankId).toLong()
+        val decrease = mBankDetailViewModel.sumBankMoneyDecrease(bankId).toLong()
+        val result = increase - decrease
+//        Toast.makeText(activity, "$increase|||$decrease|||$result", Toast.LENGTH_SHORT).show()
+
+        mBankDetailBinding.amountLeft.text =result.toString()
+        val formatter: NumberFormat = DecimalFormat("#,###,###,###")
+        mBankDetailBinding.amountLeft.setText("" + formatter.format(result))
 
 
         mBankDetailBinding.finish.setOnClickListener {
-            if (type == "increase") {
-                mBankDetailBinding.finish.text =
-                    mBankDetailViewModel.sumBankMoney(bankId).toLong().toString()
-            }
+            if (type == "increase") {}
             val amount = mBankDetailBinding.transferAmount.text.toString()
-            mBankDetailViewModel.transferMoney(
+            mBankDetailViewModel.transferMoneyDecrease(
                 amount,
                 bankId,
                 type,
             )
-
         }
-
-        mBankDetailBinding.amountLeft.text = mBankDetailViewModel.sumBankMoney(bankId).toString()
-
-
         setHasOptionsMenu(true)
         return mBankDetailBinding.root
     }

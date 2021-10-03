@@ -42,10 +42,13 @@ class BankDetailViewModel(
         return mBankDAO.getAllBanks()
     }
 
-    fun sumBankMoney(id: Long): Int {
-        return mBankDAO.sumBankIncrease(id)
+    fun sumBankMoneyIncrease(id: Long): Long {
+        return mTransactionsDAO.sumBankIncrease(id)
     }
 
+    fun sumBankMoneyDecrease(id: Long): Long {
+        return mTransactionsDAO.sumBankDecrease(id)
+    }
 
 
 //    var selectedItemPosition = 0
@@ -66,7 +69,7 @@ class BankDetailViewModel(
 
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    fun transferMoney(
+    fun transferMoneyIncrease(
         amount: String,
         bankId: Long,
         transferPage: String,
@@ -82,6 +85,31 @@ class BankDetailViewModel(
                     null,
                     amount,
                     null,
+                    null,
+                    null,
+                    transferPage,
+                )
+            )
+
+        }
+    }
+
+    fun transferMoneyDecrease(
+        amount: String,
+        bankId: Long,
+        transferPage: String,
+//        fromBankSpinner: String, toBankSpinner: String
+    ) {
+        uiScope.launch {
+            mTransactionsDAO.insert(
+                Transaction(
+                    0L,
+                    null,
+                    null,
+                    bankId,
+                    null,
+                    null,
+                    amount,
                     null,
                     null,
                     transferPage,

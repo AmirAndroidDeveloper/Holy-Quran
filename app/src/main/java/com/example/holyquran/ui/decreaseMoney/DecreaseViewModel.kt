@@ -47,11 +47,11 @@ class DecreaseViewModel(
         _decrease.value = mTransInfo
     }
 
-    private fun sumUserIncrease(id: Long): Int {
+    private fun sumUserIncrease(id: Long): Long {
         return mTransactionsDAO.sumUserIncrease(id)
     }
 
-    fun sumUserDecrease(id: Long): Int {
+    fun sumUserDecrease(id: Long): Long {
         return mTransactionsDAO.sumUserDecrease(id)
     }
 

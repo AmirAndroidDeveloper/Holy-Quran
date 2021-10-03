@@ -46,11 +46,11 @@ class IncreaseMoneyViewModel(
         _increase.value = mTransInfo
     }
 
-    fun sumUserIncrease(id: Long): Int {
+    fun sumUserIncrease(id: Long): Long {
         return mTransactionsDAO.sumUserIncrease(id)
     }
 
-    fun sumUserDecrease(id: Long): Int {
+    fun sumUserDecrease(id: Long): Long {
         return mTransactionsDAO.sumUserDecrease(id)
     }
 
