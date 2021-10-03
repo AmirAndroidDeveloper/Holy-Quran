@@ -180,6 +180,7 @@
                     android:textSize="20sp" />
 
                 <Spinner
+                    android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}"
                     android:id="@+id/toBank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

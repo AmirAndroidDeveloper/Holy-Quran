@@ -1,6 +1,7 @@
 package com.example.holyquran.ui.banks.bankDetail
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -51,13 +52,12 @@ class BankDetailViewModel(
     }
 
 
-//    var selectedItemPosition = 0
-//    fun onSelectItem(postion: Int) {
-//        selectedItemPosition = postion;
-//        Log.d("position", "onSelectItem: $postion")
-//        type1 = "decrease"
-//
-//    }
+    var selectedItemPosition = 0
+    fun onSelectItem(postion: Int) {
+        selectedItemPosition = postion;
+        Log.d("position", "onSelectItem: $postion")
+        type1 = "decrease"
+    }
 
 //    var selectedItemPosition2 = 0
 //    fun onSelectItem2(postion2: Int) {
@@ -66,15 +66,15 @@ class BankDetailViewModel(
 //        type2 = "increase"
 //    }
 
-
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun transferMoneyIncrease(
         amount: String,
-        bankId: Long,
+        bankIdNo: Long?,
         transferPage: String,
 //        fromBankSpinner: String, toBankSpinner: String
     ) {
+        var bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(
