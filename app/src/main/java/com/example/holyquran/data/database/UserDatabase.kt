@@ -11,7 +11,7 @@ import com.example.holyquran.data.model.UserInfo
 
 @Database(
     entities = [UserInfo::class, Transaction::class, Loan::class,Bank::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {

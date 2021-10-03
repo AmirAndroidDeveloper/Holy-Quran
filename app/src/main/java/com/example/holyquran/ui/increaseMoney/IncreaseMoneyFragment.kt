@@ -1,11 +1,9 @@
 package com.example.holyquran.ui.increaseMoney
 
 import NumberTextWatcherForThousand
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -13,15 +11,15 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
-import androidx.appcompat.app.AlertDialog
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import java.text.NumberFormat
 import java.text.DecimalFormat
+import java.util.ArrayList
 
 class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
-    var id2: Boolean = false
     var decide = ""
     private val increasePage = "increase"
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
@@ -79,69 +77,22 @@ class IncreaseMoneyFragment : Fragment() {
                     mIncreaseMoneyBinding.increaseEdt
                 )
             );
-
             if (it == true) {
-//                if (id2 == true) {
-//                    mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-//                        if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-//                            val builder: AlertDialog.Builder =
-//                                AlertDialog.Builder(requireActivity())
-//                            builder.setIcon(R.drawable.warning)
-//                            val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
-//                            val currentPayment = it.payment
-//                            if (increaseEditText.toInt() > currentPayment.toInt()) {
-//                                val more = "بیشتر"
-//                                decide = more
-//                            } else {
-//                                val less = "کمتر"
-//                                decide = less
-//                            }
-//                            builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
-//                                .setCancelable(false)
-//                                .setPositiveButton("اره به هر حال واریز کن",
-//                                    DialogInterface.OnClickListener { dialog, id ->
-//                                        mIncreaseMoneyViewModel.insertLoanPayments(
-//                                            removeComma,
-//                                            true,
-//                                            userId,
-//                                            increasePage
-//                                        )
-//                                        Toast.makeText(
-//                                            activity,
-//                                            "قسط با موفقیت برداخت شد.",
-//                                            Toast.LENGTH_SHORT
-//                                        ).show()
-//                                    })
-//                                .setNegativeButton("نه,ممنون",
-//                                    DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
-//                                )
-//                            val alert: AlertDialog = builder.create()
-//                            alert.setCanceledOnTouchOutside(true)
-//                            alert.show()
-//                            mIncreaseMoneyViewModel.goToIncreaseDone()
-//
-//                        } else {
-//                            mIncreaseMoneyViewModel.insertLoanPayments(
-//                                removeComma,
-//                                true,
-//                                userId,
-//                                increasePage
-//                            )
-//                            mIncreaseMoneyViewModel.goToIncreaseDone()
-//                        }
-//                        mIncreaseMoneyViewModel.goToIncreaseDone()
-//
-//                    })
-//            }else {
-//                    mIncreaseMoneyViewModel.insertMoney(
-//                        removeComma,
-//                        userId,
-//                    increasePage)
-//                }
-                mIncreaseMoneyViewModel.increaseMoneyDone()
+                mIncreaseMoneyViewModel.insertMoney(
+                    removeComma,
+                    userId,
+                    null,
+
+                    )
+                mIncreaseMoneyViewModel.goToIncreaseDone()
             }
             mIncreaseMoneyViewModel.goToIncreaseDone()
+
+
         })
+        mIncreaseMoneyViewModel.increaseMoneyDone()
+        mIncreaseMoneyViewModel.goToIncreaseDone()
+
         mIncreaseMoneyViewModel.gotToDecreaseMoney.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -170,29 +121,51 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
         setHasOptionsMenu(true)
-        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-            if (it?.userId != null) {
-                mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
-                    id2 = isChecked
-                    if (id2 == isChecked) {
-                        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-                            if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-                                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
-                                val textLoanPayments = it.payment.toInt()
-                                mIncreaseMoneyBinding.textPlus.visibility = View.VISIBLE
-                                mIncreaseMoneyBinding.noLoanForUser.text =
-                                    NumberFormat.getInstance()
-                                        .format(textLoanPayments)
-                            }
-                        })
-                    }
-                }
-            } else {
-                mIncreaseMoneyBinding.checkBox.isEnabled = false
-                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
+//        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
+//            if (it?.userId != null) {
+//                mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
+//                    id2 = isChecked
+//                    if (id2 == isChecked) {
+//                        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
+//                            if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
+//                                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
+//                                val textLoanPayments = it.payment.toInt()
+//                                mIncreaseMoneyBinding.textPlus.visibility = View.VISIBLE
+//                                mIncreaseMoneyBinding.noLoanForUser.text =
+//                                    NumberFormat.getInstance()
+//                                        .format(textLoanPayments)
+//                            }
+//                        })
+//                    }
+//                }
+//            } else {
+//                mIncreaseMoneyBinding.checkBox.isEnabled = false
+//                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
+//
+//            }
+//        })
 
+
+        mIncreaseMoneyViewModel.getBankList().observe(viewLifecycleOwner, {
+            mIncreaseMoneyViewModel.bankInfo.value = it
+            Log.d("TAG", "viewHolder: $it")
+
+            val bankList: MutableList<String> = ArrayList() //this is list<string>
+            it.forEach { item ->
+                // here item is item of list category
+                bankList.add(item.bankName)
             }
+
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, bankList
+            )
+            Log.d("TAG", "toBank: $bankList")
+            mIncreaseMoneyBinding.chooseBank.adapter = adapter
         })
+
+
+
 
         mIncreaseMoneyBinding.popUpWindow.setOnClickListener {
             this.findNavController().navigate(
@@ -243,3 +216,39 @@ class IncreaseMoneyFragment : Fragment() {
         }
     }
 }
+
+//val builder: AlertDialog.Builder =
+//    AlertDialog.Builder(requireActivity())
+//builder.setIcon(R.drawable.warning)
+//val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
+//val currentPayment = it.payment
+//if (increaseEditText.toInt() > currentPayment.toInt()) {
+//    val more = "بیشتر"
+//    decide = more
+//} else {
+//    val less = "کمتر"
+//    decide = less
+//}
+//builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
+//.setCancelable(false)
+//.setPositiveButton("اره به هر حال واریز کن",
+//DialogInterface.OnClickListener { dialog, id ->
+//    mIncreaseMoneyViewModel.insertLoanPayments(
+//        removeComma,
+//        true,
+//        userId,
+//        increasePage
+//    )
+//    Toast.makeText(
+//        activity,
+//        "قسط با موفقیت برداخت شد.",
+//        Toast.LENGTH_SHORT
+//    ).show()
+//})
+//.setNegativeButton("نه,ممنون",
+//DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+//)
+//val alert: AlertDialog = builder.create()
+//alert.setCanceledOnTouchOutside(true)
+//alert.show()
+//mIncreaseMoneyViewModel.goToIncreaseDone()

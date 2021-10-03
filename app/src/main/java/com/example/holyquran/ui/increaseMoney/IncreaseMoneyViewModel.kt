@@ -9,7 +9,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
@@ -78,33 +78,35 @@ class IncreaseMoneyViewModel(
         _gotToDecreaseMoney.value = false
     }
 
-    private val _loanDetail = MutableLiveData<Loan>()
-    val loanDetail: LiveData<Loan>
-        get() = _loanDetail
+    var selectedItemPosition = 0
+    fun onSelectItem(postion: Int) {
+        selectedItemPosition = postion;
+        Log.d("position", "onSelectItem: $postion")
 
-    fun setLoanDetail(id: Long): LiveData<Loan>? {
-        return mLoan.get(id)
     }
 
-    fun setLoanDetail(mLoanDetail: Loan) {
-        _loanDetail.value = mLoanDetail
-    }
 
+
+    val bankInfo = MutableLiveData<List<Bank>>()
+    fun getBankList(): LiveData<List<Bank>> {
+        return mBankDAO.getAllBanks()
+    }
 
     var viewModelJob = Job()
-    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun insertMoney(
         amount: String,
         userId: Long,
-        increasePage: String
+        increasePage: String?
     ) {
+        var bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(
                     0L,
                     userId,
                     null,
-                    null,
+                    bankId,
                     null,
                     amount,
                     null,

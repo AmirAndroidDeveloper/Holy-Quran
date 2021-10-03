@@ -3,23 +3,23 @@ package com.example.holyquran.ui.banks.bankDetail
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentBankDetailBinding
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentArgs
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyViewModel
+import java.util.ArrayList
 
 class BankDetailFragment : Fragment() {
     lateinit var mBankDetailBinding: FragmentBankDetailBinding
     lateinit var mBankDetailViewModel: BankDetailViewModel
     var bankId: Long = 0L
+    var type = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,15 +46,113 @@ class BankDetailFragment : Fragment() {
                 requireArguments()
             )
         bankId = arg.bankId
+
         Log.d("TAG", "onCreateView: $bankId")
         mBankDetailViewModel.setBankName(bankId)?.observe(viewLifecycleOwner, {
             mBankDetailViewModel.setBankName(it)
+
+            val bankList: MutableList<String> = ArrayList() //this is list<string>
+
+            bankList.add(it.bankName)
+
+
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, bankList
+            )
+            Log.d("TAG", "fromBank: $adapter")
+
+            mBankDetailBinding.fromBank.adapter = adapter
+
         })
         mBankDetailViewModel.bankName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mBankDetailBinding.bank = it
             }
         })
+
+
+        mBankDetailViewModel.getBankList().observe(viewLifecycleOwner, {
+            mBankDetailViewModel.bankInfo.value = it
+            Log.d("TAG", "viewHolder: $it")
+
+            val bankList: MutableList<String> = ArrayList() //this is list<string>
+            it.forEach { item ->
+                // here item is item of list category
+                bankList.add(item.bankName)
+            }
+
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, bankList
+            )
+            Log.d("TAG", "toBank: $bankList")
+            mBankDetailBinding.toBank.adapter = adapter
+        })
+
+        mBankDetailBinding.fromBank?.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val decrease = "decrease"
+                    type = decrease
+                    if (type == "increase") {
+                        Toast.makeText(activity, "increase", Toast.LENGTH_SHORT).show()
+                    } else if (type == "decrease") {
+                        Toast.makeText(activity, "decrease", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        mBankDetailBinding.toBank?.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val increase = "increase"
+                    type = increase
+
+                    if (type == "increase") {
+                        Toast.makeText(activity, "increase", Toast.LENGTH_SHORT).show()
+                    } else if (type == "decrease") {
+                        Toast.makeText(activity, "decrease", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.d("TAG", "toBank $type")
+                }
+            }
+
+
+
+
+        mBankDetailBinding.finish.setOnClickListener {
+            if (type == "increase") {
+                mBankDetailBinding.finish.text =
+                    mBankDetailViewModel.sumBankMoney(bankId).toLong().toString()
+            }
+            val amount = mBankDetailBinding.transferAmount.text.toString()
+            mBankDetailViewModel.transferMoney(
+                amount,
+                bankId,
+                type,
+            )
+
+        }
+
+
+
+
         setHasOptionsMenu(true)
         return mBankDetailBinding.root
     }
@@ -69,8 +167,6 @@ class BankDetailFragment : Fragment() {
             R.id.transferMoney -> {
                 mBankDetailBinding.transferMoneyLayout.visibility = View.VISIBLE
                 Toast.makeText(activity, "جا به جایی بول", Toast.LENGTH_LONG).show()
-//                mIncreaseMoneyViewModel.goToIncreaseDone()
-
                 true
             }
 

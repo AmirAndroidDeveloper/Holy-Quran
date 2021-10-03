@@ -97,7 +97,7 @@ class BillDiffCallback : DiffUtil.ItemCallback<Transaction>() {
 }
 
 class AdapterListener2(
-    val clickListener: (id: Long) -> Unit,
+    val clickListener: (id: Long?) -> Unit,
     val deleteListener: (category: Transaction) -> Unit
 
 ) {

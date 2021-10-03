@@ -9,7 +9,11 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Bank
-import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.data.model.Transaction
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class BankDetailViewModel(
     private val mUserInfoDAO: UserDAO,
@@ -19,6 +23,8 @@ class BankDetailViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
+    var type1: String = ""
+    var type2: String = ""
     private val _bankName = MutableLiveData<Bank>()
     val bankName: LiveData<Bank>
         get() = _bankName
@@ -29,5 +35,57 @@ class BankDetailViewModel(
 
     fun setBankName(mBankInfo: Bank) {
         _bankName.value = mBankInfo
+    }
+
+    val bankInfo = MutableLiveData<List<Bank>>()
+    fun getBankList(): LiveData<List<Bank>> {
+        return mBankDAO.getAllBanks()
+    }
+
+
+//    var selectedItemPosition = 0
+//    fun onSelectItem(postion: Int) {
+//        selectedItemPosition = postion;
+//        Log.d("position", "onSelectItem: $postion")
+//        type1 = "decrease"
+//
+//    }
+
+//    var selectedItemPosition2 = 0
+//    fun onSelectItem2(postion2: Int) {
+//        selectedItemPosition2 = postion2;
+//        Log.d("position", "onSelectItem2: $postion2")
+//        type2 = "increase"
+//    }
+
+    fun sumBankMoney(id: Long): Int {
+        return mBankDAO.sumBankIncrease(id)
+    }
+
+    var viewModelJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    fun transferMoney(
+        amount: String,
+        bankId: Long,
+        transferPage: String,
+//        fromBankSpinner: String, toBankSpinner: String
+    ) {
+        uiScope.launch {
+            mTransactionsDAO.insert(
+                Transaction(
+                    0L,
+                    null,
+                    null,
+                    bankId,
+                    null,
+                    amount,
+                    null,
+                    null,
+                    null,
+                    transferPage,
+                )
+            )
+
+        }
     }
 }

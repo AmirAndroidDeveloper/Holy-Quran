@@ -135,6 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:visibility="invisible"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
@@ -144,6 +145,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="90dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -154,6 +156,7 @@
                     android:textSize="20sp" />
 
                 <Spinner
+                    android:id="@+id/fromBank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -176,6 +179,7 @@
                     android:textSize="20sp" />
 
                 <Spinner
+                 android:id="@+id/toBank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -185,8 +189,37 @@
             </LinearLayout>
 
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="مبلغ">
+                    <!--this is the actual edit text which takes the input-->
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/transferAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content">
+                <Button
+                   android:id="@+id/finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="تایید"/>
+            </LinearLayout>
+
         </LinearLayout>
-
-
     </FrameLayout>
 </layout>
