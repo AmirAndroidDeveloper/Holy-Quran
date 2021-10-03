@@ -150,7 +150,7 @@ class BankDetailFragment : Fragment() {
 
         }
 
-
+        mBankDetailBinding.amountLeft.text = mBankDetailViewModel.sumBankMoney(bankId).toString()
 
 
         setHasOptionsMenu(true)

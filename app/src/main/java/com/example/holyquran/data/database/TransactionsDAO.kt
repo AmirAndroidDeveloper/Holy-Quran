@@ -39,4 +39,5 @@ interface TransactionsDAO {
 
     @Query("SELECT SUM(decrease) FROM `transaction` WHERE user_id=:key")
     fun sumUserDecrease(key: Long): Int
+
 }

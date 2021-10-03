@@ -42,6 +42,11 @@ class BankDetailViewModel(
         return mBankDAO.getAllBanks()
     }
 
+    fun sumBankMoney(id: Long): Int {
+        return mBankDAO.sumBankIncrease(id)
+    }
+
+
 
 //    var selectedItemPosition = 0
 //    fun onSelectItem(postion: Int) {
@@ -58,9 +63,6 @@ class BankDetailViewModel(
 //        type2 = "increase"
 //    }
 
-    fun sumBankMoney(id: Long): Int {
-        return mBankDAO.sumBankIncrease(id)
-    }
 
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)

@@ -119,6 +119,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/amountLeft"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="left|center"
@@ -131,15 +132,15 @@
 
 
         <LinearLayout
-           android:id="@+id/transferMoneyLayout"
+            android:id="@+id/transferMoneyLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:visibility="invisible"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="30dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
 
             <LinearLayout
@@ -179,7 +180,7 @@
                     android:textSize="20sp" />
 
                 <Spinner
-                 android:id="@+id/toBank"
+                    android:id="@+id/toBank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="left|center"
@@ -189,12 +190,10 @@
             </LinearLayout>
 
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -211,13 +210,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
                 <Button
-                   android:id="@+id/finish"
+                    android:id="@+id/finish"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="تایید"/>
+                    android:text="تایید" />
             </LinearLayout>
 
         </LinearLayout>
