@@ -47,3 +47,12 @@ fun bankList(
     (recyclerView.adapter as BankAdapter?)?.submitList(list)
     (recyclerView.adapter as BankAdapter?)?.notifyDataSetChanged()
 }
+
+@BindingAdapter("loanHistory")
+fun loanHistory(
+    recyclerView: RecyclerView,
+    list: List<Loan>?
+) {
+    (recyclerView.adapter as LoanAdapter?)?.submitList(list)
+    (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
+}

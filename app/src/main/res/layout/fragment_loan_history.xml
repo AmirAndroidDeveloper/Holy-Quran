@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
-                app:loanList="@{increaseHistoryViewModel.loanInfo}"/>
+                app:loanHistory="@{increaseHistoryViewModel.loanInfo}"/>
         </LinearLayout>
 
 
