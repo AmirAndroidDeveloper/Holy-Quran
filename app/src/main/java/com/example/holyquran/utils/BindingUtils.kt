@@ -35,8 +35,8 @@ fun loanList(
     recyclerView: RecyclerView,
     list: List<Loan>?
 ) {
-    (recyclerView.adapter as LoanAdapter?)?.submitList(list)
-    (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
+    (recyclerView.adapter as LoanListAdapter?)?.submitList(list)
+    (recyclerView.adapter as LoanListAdapter?)?.notifyDataSetChanged()
 }
 
 @BindingAdapter("bankList")
@@ -46,12 +46,4 @@ fun bankList(
 ) {
     (recyclerView.adapter as BankAdapter?)?.submitList(list)
     (recyclerView.adapter as BankAdapter?)?.notifyDataSetChanged()
-}
-@BindingAdapter("loanListAll")
-fun loanListAll(
-    recyclerView: RecyclerView,
-    list: List<Loan>?
-) {
-    (recyclerView.adapter as LoanListAdapter?)?.submitList(list)
-    (recyclerView.adapter as LoanListAdapter?)?.notifyDataSetChanged()
 }

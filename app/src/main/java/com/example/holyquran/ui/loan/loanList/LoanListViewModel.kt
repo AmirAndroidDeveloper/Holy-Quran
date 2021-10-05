@@ -10,6 +10,7 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.UserInfo
 
 class LoanListViewModel(
     private val mUserInfoDAO: UserDAO,
