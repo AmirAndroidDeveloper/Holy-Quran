@@ -39,5 +39,4 @@ class LoanHistoryViewModel(
         Log.d("TAG", "getLoanList: $loanInfo")
         return mLoan.getAllLoan(id)
     }
-
 }
