@@ -147,6 +147,11 @@
         tools:layout="@layout/fragment_loan_list"
         android:name="com.example.holyquran.ui.loan.loanList.LoanListFragment"
         android:label="LoanListFragment" >
+
+        <argument
+            android:name="userId"
+            app:argType="long" />
+
         <action
             android:id="@+id/action_loanListFragment_to_loanDetailFragment"
             app:destination="@id/loanDetailFragment" />

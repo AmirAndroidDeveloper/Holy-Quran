@@ -45,9 +45,9 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/userLoan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{userInfo.fullName}"
                         android:textColor="@color/gray600"
                         android:textSize="20sp"
                         tools:text="امیر حسین" />

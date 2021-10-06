@@ -14,6 +14,7 @@ import java.text.NumberFormat
 class LoanListAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
+    var id = 0L
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
@@ -54,7 +55,7 @@ class LoanListAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCal
             binding.clickListenerLoan = adapterListenerLoan
             binding.executePendingBindings()
 
-            if (binding.amount.text.isNotEmpty()){
+            if (binding.amount.text.isNotEmpty()) {
                 val formatter: NumberFormat = DecimalFormat("#,###,###,###")
                 binding.amount.setText("" + formatter.format(item.amount.toLong()))
             }
