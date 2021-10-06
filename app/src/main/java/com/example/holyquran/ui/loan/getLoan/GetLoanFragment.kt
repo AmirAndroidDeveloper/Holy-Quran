@@ -2,6 +2,8 @@ package com.example.holyquran.ui.loan.getLoan
 
 import NumberTextWatcherForThousand
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
@@ -45,7 +48,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO,application)
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO, application)
 
         mGetLoanViewModel =
             ViewModelProviders.of(
@@ -83,14 +86,25 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
             if (it == true) {
-                mGetLoanViewModel.insertLoanTimeSpinner(
-                    removeComma,
-                    mGetLoanBinding.loanDate.text.toString(),
-                    mGetLoanBinding.loanSections.text.toString(),
-                    mGetLoanBinding.spinner.selectedItem.toString(),
-                    removeSectionComma,
-                    id
-                )
+                if (mGetLoanBinding.loanAmount.text?.let { it1 ->
+                        mGetLoanBinding.loanSections.text.isEmpty()
+                            .or(mGetLoanBinding.benefitPrecent.text.isEmpty())
+                            .or(it1.isEmpty())
+                    } == true
+                ) {
+                } else {
+                    mGetLoanViewModel.insertLoanTimeSpinner(
+                        removeComma,
+                        mGetLoanBinding.loanDate.text.toString(),
+                        mGetLoanBinding.loanSections.text.toString(),
+                        mGetLoanBinding.spinner.selectedItem.toString(),
+                        removeSectionComma,
+                        id
+                    )
+
+                    requireView().findNavController().popBackStack()
+                }
+
             }
         })
 
@@ -138,6 +152,22 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
         })
 
+
+        mGetLoanBinding.loanSections.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int) {}
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                if (mGetLoanBinding.loanSections.text.toString() != "0".orEmpty()) {
+                    calculateData()
+                }
+            }
+        })
+
         return mGetLoanBinding.root
     }
 
@@ -152,20 +182,21 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val convertLoanAmount = removeComma.toLong()
         val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
         val convertBenefitPercent = benefitPercent.toLong()
-        val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
-        val convertSectionTime = sectionTime
-        val division: Long = 2400
-        val amount: Long = convertLoanAmount.toLong()
-        val benefit: Long = convertBenefitPercent
-        val section: Long = convertSectionTime.toLong()
-        val division2: Long = division
-        val result: Long = section.plus(1) * benefit * amount / division2
-        val result2: Long = (result + amount) / section
-        val result3: Long = amount + result
-
-        mGetLoanBinding.sectionPayment.text = NumberFormat.getInstance().format(result2)
-        mGetLoanBinding.loanBenefit.text = NumberFormat.getInstance().format(result)
-        mGetLoanBinding.totalLoan.text = NumberFormat.getInstance().format(result3)
+        if (mGetLoanBinding.loanSections.text.isNotEmpty()){
+            val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
+            val convertSectionTime = sectionTime
+            val division: Long = 2400
+            val amount: Long = convertLoanAmount.toLong()
+            val benefit: Long = convertBenefitPercent
+            val section: Long = convertSectionTime.toLong()
+            val division2: Long = division
+            val result: Long = section.plus(1) * benefit * amount / division2
+            val result2: Long = (result + amount) / section
+            val result3: Long = amount + result
+            mGetLoanBinding.sectionPayment.text = NumberFormat.getInstance().format(result2)
+            mGetLoanBinding.loanBenefit.text = NumberFormat.getInstance().format(result)
+            mGetLoanBinding.totalLoan.text = NumberFormat.getInstance().format(result3)
+        }
     }
 }
 

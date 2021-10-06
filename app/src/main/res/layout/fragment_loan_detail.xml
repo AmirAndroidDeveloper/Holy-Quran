@@ -13,6 +13,9 @@
         <variable
             name="loanInfo"
             type="com.example.holyquran.data.model.Loan" />
+        <variable
+            name="userInfo"
+            type="com.example.holyquran.data.model.UserInfo" />
     </data>
 
 
@@ -34,6 +37,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{userInfo.fullName}"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp"
+                        tools:text="امیر حسین" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="وام گیرنده:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
