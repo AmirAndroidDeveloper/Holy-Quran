@@ -121,30 +121,7 @@ class IncreaseMoneyFragment : Fragment() {
             }
         })
         setHasOptionsMenu(true)
-//        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-//            if (it?.userId != null) {
-//                mIncreaseMoneyBinding.checkBox?.setOnCheckedChangeListener { buttonView, isChecked ->
-//                    id2 = isChecked
-//                    if (id2 == isChecked) {
-//                        mIncreaseMoneyViewModel.setLoanDetail(userId)?.observe(viewLifecycleOwner, {
-//                            if (mIncreaseMoneyBinding.increaseEdt.text.toString() != it.payment) {
-//                                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
-//                                val textLoanPayments = it.payment.toInt()
-//                                mIncreaseMoneyBinding.textPlus.visibility = View.VISIBLE
-//                                mIncreaseMoneyBinding.noLoanForUser.text =
-//                                    NumberFormat.getInstance()
-//                                        .format(textLoanPayments)
-//                            }
-//                        })
-//                    }
-//                }
-//            } else {
-//                mIncreaseMoneyBinding.checkBox.isEnabled = false
-//                mIncreaseMoneyBinding.noLoanForUser.visibility = View.VISIBLE
-//
-//            }
-//        })
-
+//        mIn
 
         mIncreaseMoneyViewModel.getBankList().observe(viewLifecycleOwner, {
             mIncreaseMoneyViewModel.bankInfo.value = it

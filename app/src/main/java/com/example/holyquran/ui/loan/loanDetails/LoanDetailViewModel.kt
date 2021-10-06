@@ -25,8 +25,8 @@ class LoanDetailViewModel(
     val userName: LiveData<UserInfo>
         get() = _userName
 
-    fun setUserName(id: Long): LiveData<Loan>? {
-        return mLoan.get(id)
+    fun setUserName(id: Long): LiveData<UserInfo>? {
+        return mUserInfoDAO.get(id)
     }
 
     fun setUserName(mUser: UserInfo) {

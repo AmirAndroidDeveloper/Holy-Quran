@@ -44,7 +44,7 @@ class LoanDetailFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO,application)
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO, application)
 
         mLoanDetailViewModel =
             ViewModelProviders.of(
@@ -85,32 +85,13 @@ class LoanDetailFragment : Fragment() {
 
 
         mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-            if (it != null) {
-                val yourInputString = it.createDate.toString()
-                yourInputString.split('/', limit = 3).also { (year, month, day) ->
-                    Log.d(
-                        "TAG",
-                        "onCreateView DIVORCE $year/$month/$day"
-                    )
-                    val pDate = PersianDate()
-                    val pdformater1 = PersianDateFormat("Y/m/d")
-                    pdformater1.format(pDate)
-                    mLoanDetailBinding.loanExpiredAt.text =
-                        pdformater1.format(
-                            pDate.setShYear(year.toInt()).addMonth(it.loanSections.toLong())
-                                .setShDay(day.toInt())
-                        )
-                }
-            }
+            mLoanDetailViewModel.setUserName(it)
+            Log.d("TAG", "fssfsf: ${it.userId}")
         })
-        mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
+
+        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
-                mLoanDetailBinding.loanInfo = it
-//                if (it.loanId==null){
-//                    Toast.makeText(activity, "loan id is empty", Toast.LENGTH_SHORT).show()
-//                }else {
-//                    Toast.makeText(activity, "loan id is not empty", Toast.LENGTH_SHORT).show()
-//                }
+                mLoanDetailBinding.userInfo = it
             }
         })
 
