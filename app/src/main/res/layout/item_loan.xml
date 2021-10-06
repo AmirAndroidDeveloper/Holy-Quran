@@ -71,12 +71,23 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/userName"
+                            android:id="@+id/amount"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:text="@{loan.amount}"
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/createdDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="@{loan.createDate}"
                             android:textColor="#000"
                             android:textSize="20sp"
                             android:textStyle="bold" />

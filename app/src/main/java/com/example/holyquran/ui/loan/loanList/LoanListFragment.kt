@@ -47,7 +47,7 @@ class LoanListFragment : Fragment() {
         mLoanListAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
                 this.findNavController().navigate(
-                    UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)
+                    LoanListFragmentDirections.actionLoanListFragmentToLoanDetailFragment(it)
                 )
             Log.d("TAG", "navTeat $it ")
 

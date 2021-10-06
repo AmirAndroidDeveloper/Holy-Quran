@@ -146,7 +146,11 @@
         android:id="@+id/loanListFragment"
         tools:layout="@layout/fragment_loan_list"
         android:name="com.example.holyquran.ui.loan.loanList.LoanListFragment"
-        android:label="LoanListFragment" />
+        android:label="LoanListFragment" >
+        <action
+            android:id="@+id/action_loanListFragment_to_loanDetailFragment"
+            app:destination="@id/loanDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/popupWindowFragment"
         tools:layout="@layout/fragment_popup_window"

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.databinding.ItemLoanBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 
 class LoanListAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCallback()) {
@@ -51,6 +53,12 @@ class LoanListAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCal
             binding.loan = item
             binding.clickListenerLoan = adapterListenerLoan
             binding.executePendingBindings()
+
+            if (binding.amount.text.isNotEmpty()){
+                val formatter: NumberFormat = DecimalFormat("#,###,###,###")
+                binding.amount.setText("" + formatter.format(item.amount.toLong()))
+            }
+
         }
 
         companion object {
@@ -96,7 +104,7 @@ class AdapterListener(
     val deleteListener: (loan: Loan) -> Unit
 
 ) {
-    fun onclick(loan: Loan) = clickListener(loan.loanId)
+    fun onclick(loan: Loan) = clickListener(loan.userId)
     fun onDeleteClick(loan: Loan) = deleteListener(loan)
 
 }
