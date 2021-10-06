@@ -74,7 +74,7 @@ class BankDetailViewModel(
         transferPage: String,
 //        fromBankSpinner: String, toBankSpinner: String
     ) {
-        var bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
+        var bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(
