@@ -15,19 +15,22 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanListBinding
-import com.example.holyquran.ui.userList.UserListFragmentDirections
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.example.holyquran.Communicator
+
 
 class LoanListFragment : Fragment() {
     lateinit var mLoanListBinding: FragmentLoanListBinding
     lateinit var mLoanListViewModel: LoanListViewModel
+    var id = 0L
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         mLoanListBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_loan_list, container, false)
-
-
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
@@ -41,18 +44,15 @@ class LoanListFragment : Fragment() {
             ).get(LoanListViewModel::class.java)
         mLoanListBinding.viewModel = mLoanListViewModel
         this.also { mLoanListBinding.lifecycleOwner = it }
-
-
         val mLoanListAdapter = LoanListAdapter()
         mLoanListAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
                 this.findNavController().navigate(
-                    LoanListFragmentDirections.actionLoanListFragmentToLoanDetailFragment(it)
+                    LoanListFragmentDirections.actionLoanListFragmentToLoanDetailFragment(id)
                 )
-            Log.d("TAG", "navTeat $it ")
+            Log.d("TAG", "navTeat $id ")
 
         }, {
-
         }
         ))
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -61,7 +61,20 @@ class LoanListFragment : Fragment() {
         loanInfo()
         return mLoanListBinding.root
     }
-
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//        val model = ViewModelProviders.of(requireActivity()).get(Communicator::class.java)
+//
+//        model.message.observe(requireActivity(), object : Observer<Any> {
+//            override fun onChanged(o: Any?) {
+//                id = o.toString().toLong()
+//                Toast.makeText(activity, "id is $id", Toast.LENGTH_SHORT).show().toString()
+//
+//            }
+//        })
+//    }
     private fun loanInfo() {
         mLoanListViewModel.getAllLoanList().observe(viewLifecycleOwner, {
             mLoanListViewModel.loanInfo.value = it

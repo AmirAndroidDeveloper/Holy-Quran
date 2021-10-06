@@ -81,20 +81,26 @@ class LoanDetailFragment : Fragment() {
                 mLoanDetailBinding.loanInfo = it
             }
         })
-        setHasOptionsMenu(true)
 
 
-        mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-            mLoanDetailViewModel.setUserName(it)
-            Log.d("TAG", "fssfsf: ${it.userId}")
-        })
-
-        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
+        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
             if (it != null) {
-                mLoanDetailBinding.userInfo = it
+                mLoanDetailViewModel.setUserInfo(it)
             }
         })
 
+        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanDetailBinding.userInfo = it
+                Log.d("TAG", "onCreateView: ${it.userId}")
+                mLoanDetailBinding.userLoan.text = it.fullName
+            }
+        })
+
+
+
+
+        setHasOptionsMenu(true)
         return mLoanDetailBinding.root
     }
 

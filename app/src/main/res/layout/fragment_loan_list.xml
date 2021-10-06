@@ -17,6 +17,7 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/llip"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -25,17 +26,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             app:loanList="@{viewModel.loanInfo}" />
 
         <TextView
-            android:id="@+id/tv"
             android:layout_width="match_parent"
-            android:textSize="40dp"
-            android:layout_marginTop="120dp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/tv"/>
     </LinearLayout>
 </layout>
