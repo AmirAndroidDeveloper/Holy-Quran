@@ -14,7 +14,7 @@ import kotlinx.coroutines.*
 
 class AddBankViewModel(
     val mUserInfoDAO: UserDAO,
-    val  mTransactionDAO: TransactionsDAO,
+    val mTransactionDAO: TransactionsDAO,
     val mLoan: LoanDAO,
     val mBankDAO: BankDAO,
     application: Application
@@ -32,7 +32,7 @@ class AddBankViewModel(
     ) {
         uiScope.launch {
             try {
-                val bank = Bank(0L,accountNumber,cardNumber,address,bankName,createData)
+                val bank = Bank(0L, accountNumber, cardNumber, address, bankName, createData)
                 withContext(Dispatchers.IO) {
                     mBankDAO.insert(bank)
                 }
@@ -42,14 +42,21 @@ class AddBankViewModel(
         }
     }
 
+    private val _addCard = MutableLiveData<Boolean>(false)
+    val addCard: LiveData<Boolean>
+        get() = _addCard
 
-    private val _addUser = MutableLiveData<Boolean>(false)
-    val addUser: LiveData<Boolean>
-        get() = _addUser
-    fun addUser() {
-        _addUser.value = true
+    fun addCard() {
+        _addCard.value = true
+    }
+
+    private val _openCalender = MutableLiveData<Boolean>(false)
+    val openCalender: LiveData<Boolean>
+        get() = _openCalender
+
+    fun openCalender() {
+        _openCalender.value = true
     }
 
 
-
-    }
+}

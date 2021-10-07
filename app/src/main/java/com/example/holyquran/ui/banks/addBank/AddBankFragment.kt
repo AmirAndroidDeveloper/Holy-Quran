@@ -15,6 +15,11 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentAddBankBinding
 import com.example.holyquran.ui.addUser.AddUserViewModel
+import com.example.holyquran.ui.userList.UserListFragmentDirections
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
+import saman.zamani.persiandate.PersianDate
+import saman.zamani.persiandate.PersianDateFormat
 
 class AddBankFragment : Fragment() {
     lateinit var mAddBankBinding: FragmentAddBankBinding
@@ -39,18 +44,43 @@ class AddBankFragment : Fragment() {
         mAddBankBinding.viewModel = mAddBankViewModel
         this.also { mAddBankBinding.lifecycleOwner = it }
 
-        mAddBankBinding.addBank.setOnClickListener {
-            checkValidation()
-            if (mAddBankBinding.bankName.text!!.isNotEmpty().and(
-                    mAddBankBinding.cardNumber.text!!.isNotEmpty().and(
-                        mAddBankBinding.accountNumber.text!!.isNotEmpty()
-                            .and(mAddBankBinding.edtAddress.text!!.isNotEmpty())
-                    )
+
+        val pdate = PersianDate()
+        val pdformater1 = PersianDateFormat("Y/m/d")
+        pdformater1.format(pdate) //1396/05/20
+        mAddBankBinding.createdDate.text = pdformater1.format(pdate)
+
+        mAddBankViewModel.openCalender.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                val now = PersianCalendar()
+                val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+                    { view, year, monthOfYear, dayOfMonth ->
+                        val month = monthOfYear + 1
+                        mAddBankBinding.createdDate.text = "$year/$month/$dayOfMonth"
+                    },
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
                 )
-            ) {
-                valid()
+                dpd.setThemeDark(false)
+                dpd.show(requireActivity().fragmentManager, "FuLLKade")
             }
-        }
+        })
+
+        mAddBankViewModel.addCard.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                checkValidation()
+                if (mAddBankBinding.bankName.text!!.isNotEmpty().and(
+                        mAddBankBinding.cardNumber.text!!.isNotEmpty().and(
+                            mAddBankBinding.accountNumber.text!!.isNotEmpty()
+                                .and(mAddBankBinding.edtAddress.text!!.isNotEmpty())
+                        ))) { valid()
+                }
+            }
+        })
+
+
+       
         return mAddBankBinding.root
     }
 

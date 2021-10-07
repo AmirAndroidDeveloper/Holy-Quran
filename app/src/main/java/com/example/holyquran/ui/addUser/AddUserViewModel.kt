@@ -44,6 +44,20 @@ class AddUserViewModel(
         }
     }
 
+
+    private val _openCalender = MutableLiveData<Boolean>(false)
+    val openCalender: LiveData<Boolean>
+        get() = _openCalender
+
+    fun openCalender() {
+        _openCalender.value = true
+    }
+
+    fun openCalenderDone(){
+        _openCalender.value=false
+    }
+
+
     private val _addUser = MutableLiveData<Boolean>(false)
     val addUser: LiveData<Boolean>
         get() = _addUser

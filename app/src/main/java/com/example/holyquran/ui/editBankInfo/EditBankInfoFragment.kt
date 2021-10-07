@@ -54,7 +54,6 @@ class EditBankInfoFragment : Fragment() {
 
         return mEditBankInfoBinding.root
     }
-
     var bankInfo = Bank(0L, "", "", "", "", null);
     private fun setBankInfo() {
         mEditBankInfoViewModel.setBankName(id)?.observe(viewLifecycleOwner, {
@@ -68,7 +67,6 @@ class EditBankInfoFragment : Fragment() {
         })
         editBank()
     }
-
     private fun editBank() {
         mEditBankInfoViewModel.validInfo.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -80,8 +78,6 @@ class EditBankInfoFragment : Fragment() {
                     mEditBankInfoViewModel.updateBank(
                         bankInfo
                     )
-                    Toast.makeText(activity, "update user", Toast.LENGTH_LONG).show();
-
                 }
                 mEditBankInfoViewModel.validDone()
             }

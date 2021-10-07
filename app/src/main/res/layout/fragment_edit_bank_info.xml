@@ -162,24 +162,23 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="40dp">-->
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
-                    android:text="ویرایش" />
-            </LinearLayout>
+<!--                <Button-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="ویرایش" />-->
+<!--            </LinearLayout>-->
 
 
         </LinearLayout>
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingBtn"
+            android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
