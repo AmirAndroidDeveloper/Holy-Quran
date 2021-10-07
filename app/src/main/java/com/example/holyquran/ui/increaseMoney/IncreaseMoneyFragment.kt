@@ -201,6 +201,13 @@ class IncreaseMoneyFragment : Fragment() {
                 true
             }
 
+            R.id.editUserInfo -> {
+               this.findNavController().navigate(
+                   IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToEditFragment(userId)
+               )
+                return true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

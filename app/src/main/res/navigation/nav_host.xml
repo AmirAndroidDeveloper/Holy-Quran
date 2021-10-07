@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/increaseMoneyFragment"
         android:name="com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragment"
-        android:label="UserOptionsFragment"
+        android:label="اطلاعات کاربر"
         tools:layout="@layout/fragment_increase_money">
 
         <argument
@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_increaseMoneyFragment_to_popupWindowFragment"
             app:destination="@id/popupWindowFragment" />
+        <action
+            android:id="@+id/action_increaseMoneyFragment_to_editFragment"
+            app:destination="@id/editFragment" />
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
@@ -168,6 +171,15 @@
         android:label="BankDetailFragment" >
         <argument
             android:name="bankId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/editFragment"
+        tools:layout="@layout/fragment_edit"
+        android:name="com.example.holyquran.ui.editUserInfo.EditUserInfoFragment"
+        android:label="EditFragment" >
+        <argument
+            android:name="userId"
             app:argType="long" />
     </fragment>
 
