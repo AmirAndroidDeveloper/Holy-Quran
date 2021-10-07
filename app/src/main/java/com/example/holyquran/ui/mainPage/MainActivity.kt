@@ -39,5 +39,8 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragmentContainerView)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
+
+
+
 }
 
