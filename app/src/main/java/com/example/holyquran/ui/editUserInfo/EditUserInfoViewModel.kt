@@ -35,18 +35,6 @@ class EditUserInfoViewModel(
         _userName.value = mUserInfo
     }
 
-    fun getPersonalInfo(id: Long): LiveData<UserInfo>? {
-        return mUserInfoDAO.get(id)
-    }
-
-    private val _personalInfo = MutableLiveData<UserInfo>()
-    val personalInfo: LiveData<UserInfo>
-        get() = _personalInfo
-
-    fun setPersonalInfo(mPersonalInfo: UserInfo) {
-        _personalInfo.value = mPersonalInfo
-    }
-
     private val _validInfo = MutableLiveData<Boolean>(false)
     val validInfo: LiveData<Boolean>
         get() = _validInfo

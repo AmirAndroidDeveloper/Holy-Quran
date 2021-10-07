@@ -21,5 +21,5 @@ data class UserInfo(
     @ColumnInfo(name = "date_of_creation")
     var dateOfCreation:String?,
     @ColumnInfo(name = "address")
-    var Address:String?)
+    var address:String?)
 

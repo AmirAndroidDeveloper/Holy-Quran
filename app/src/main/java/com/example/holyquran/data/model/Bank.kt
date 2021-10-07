@@ -18,5 +18,5 @@ data class Bank(
     @ColumnInfo(name = "bank_name")
     var bankName: String,
     @ColumnInfo(name = "create_date")
-    var createDate: String,
+    var createDate: String?,
 )

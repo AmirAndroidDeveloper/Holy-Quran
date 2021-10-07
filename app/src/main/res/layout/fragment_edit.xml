@@ -57,7 +57,7 @@
                         android:orientation="horizontal">
 
                         <EditText
-                            android:id="@+id/userEDT"
+                            android:id="@+id/userName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -83,6 +83,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/mobileNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -108,11 +109,11 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/phoneNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:text="@{userInfo.phoneNumber}"
-
                         android:textColor="@color/gray800"
                         android:textSize="20sp"
                         tools:text="۴۶۴۰۵۰۲۳" />
@@ -157,11 +158,11 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:text="@{userInfo.address}"
-
                         android:textColor="@color/gray800"
                         android:textSize="20sp"
                         tools:text="ایران, اصفهان" />
@@ -181,9 +182,9 @@
                 android:layout_marginTop="40dp">
 
                 <Button
-                    android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
                     android:text="لیست اقساط" />
             </LinearLayout>
 

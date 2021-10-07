@@ -8,10 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentBankDetailBinding
+import com.example.holyquran.ui.banks.bankList.BankListFragmentDirections
+import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.ArrayList
@@ -19,7 +23,7 @@ import java.util.ArrayList
 class BankDetailFragment : Fragment() {
     lateinit var mBankDetailBinding: FragmentBankDetailBinding
     lateinit var mBankDetailViewModel: BankDetailViewModel
-    var bankId: Long = 0L
+    var bankId = 0L
     var type = ""
     var test = ""
     override fun onCreateView(
@@ -117,21 +121,22 @@ class BankDetailFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.transferMoney -> {
-                mBankDetailBinding.transferMoneyLayout.visibility = View.VISIBLE
                 Toast.makeText(
                     activity,
                     "${mBankDetailViewModel.selectedItemPosition}",
                     Toast.LENGTH_SHORT
                 ).show()
-
                 true
+            }
+
+            R.id.editBankInfo -> {
+                this.findNavController().navigate(
+                    BankDetailFragmentDirections.actionBankDetailFragmentToEditBankInfoFragment(bankId)
+                )
+                return true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun test() {
-
     }
 }

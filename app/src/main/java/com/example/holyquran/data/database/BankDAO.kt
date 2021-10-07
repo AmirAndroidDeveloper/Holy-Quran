@@ -1,12 +1,10 @@
 package com.example.holyquran.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.UserInfo
 
 @Dao
 interface BankDAO {
@@ -15,6 +13,9 @@ interface BankDAO {
 
     @Insert
     suspend fun insertList(bank: MutableList<Bank>)
+
+    @Update
+    suspend fun update(bank: Bank)
 
     @Delete
     suspend fun deleteBank(bank: Bank)

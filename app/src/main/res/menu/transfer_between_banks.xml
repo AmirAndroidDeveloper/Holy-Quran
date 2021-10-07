@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="جا به جای بول بین بانک "
-        android:id="@+id/transferMoney"/>
+    <item
+        android:id="@+id/editBankInfo"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="ویرایش اطلاعات بانک" />
+    <item
+        android:id="@+id/transferMoney"
+        android:title="جا به جای بول بین بانک " />
 </menu>
