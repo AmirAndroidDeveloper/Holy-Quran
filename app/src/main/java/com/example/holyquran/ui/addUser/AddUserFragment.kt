@@ -37,7 +37,6 @@ class AddUserFragment : Fragment() {
     ): View? {
         mAddUserListBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_add_user, container, false)
-
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
@@ -51,7 +50,6 @@ class AddUserFragment : Fragment() {
             ).get(AddUserViewModel::class.java)
         mAddUserListBinding.viewModel = mAddUserViewModel
         this.also { mAddUserListBinding.lifecycleOwner = it }
-
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                  mAddUserViewModel.insertUser(
@@ -69,28 +67,30 @@ class AddUserFragment : Fragment() {
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
         mAddUserListBinding.createdDate.text = pdformater1.format(pdate)
-        mAddUserListBinding.createdDate.setOnClickListener {
-            val now = PersianCalendar()
-            val dpd: DatePickerDialog = DatePickerDialog.newInstance(
-                { view, year, monthOfYear, dayOfMonth ->
-                    val month = monthOfYear + 1
-                    Toast.makeText(
-                        activity,
-                        "$year/${month}/$dayOfMonth",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
-                },
-                now.persianYear,
-                now.persianMonth,
-                now.persianDay
-            )
-            dpd.setThemeDark(false)
-            dpd.show(requireActivity().fragmentManager, "FuLLKade")
 
-        }
+        mAddUserViewModel.openCalender.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                val now = PersianCalendar()
+                val dpd: DatePickerDialog = DatePickerDialog.newInstance(
+                    { view, year, monthOfYear, dayOfMonth ->
+                        val month = monthOfYear + 1
+                        Toast.makeText(
+                            activity,
+                            "$year/${month}/$dayOfMonth",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        mAddUserListBinding.createdDate.text = "$year/$month/$dayOfMonth"
+                    },
+                    now.persianYear,
+                    now.persianMonth,
+                    now.persianDay
+                )
+                dpd.isThemeDark = false
+                dpd.show(requireActivity().fragmentManager, "")
+            }
+        })
+        mAddUserViewModel.openCalenderDone()
         return mAddUserListBinding.root
-
     }
 
 }

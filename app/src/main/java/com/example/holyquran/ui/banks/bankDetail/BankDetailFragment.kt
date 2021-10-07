@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -91,23 +92,27 @@ class BankDetailFragment : Fragment() {
         mBankDetailBinding.amountLeft.setText("" + formatter.format(result))
 
 
-        mBankDetailBinding.finish.setOnClickListener {
-            val decreasePage = "decrease"
-            type = decreasePage
-            val amount = mBankDetailBinding.transferAmount.text.toString()
-            mBankDetailViewModel.transferMoneyDecrease(
-                amount,
-                bankId,
-                type,
-            )
-            val increasePage = "increase"
-            type = increasePage
-            mBankDetailViewModel.transferMoneyIncrease(
-                mBankDetailBinding.transferAmount.text.toString(),
-                null,
-                type,
-            )
-        }
+        mBankDetailViewModel.transferMoney.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                val decreasePage = "decrease"
+                type = decreasePage
+                val amount = mBankDetailBinding.transferAmount.text.toString()
+                mBankDetailViewModel.transferMoneyDecrease(
+                    amount,
+                    bankId,
+                    type,
+                )
+                val increasePage = "increase"
+                type = increasePage
+                mBankDetailViewModel.transferMoneyIncrease(
+                    mBankDetailBinding.transferAmount.text.toString(),
+                    null,
+                    type,
+                )
+            }
+        })
+
+
 
         setHasOptionsMenu(true)
         return mBankDetailBinding.root
@@ -126,6 +131,7 @@ class BankDetailFragment : Fragment() {
                     "${mBankDetailViewModel.selectedItemPosition}",
                     Toast.LENGTH_SHORT
                 ).show()
+              mBankDetailBinding.transferMoneyLayout.visibility=View.VISIBLE
                 true
             }
 
@@ -135,7 +141,6 @@ class BankDetailFragment : Fragment() {
                 )
                 return true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }

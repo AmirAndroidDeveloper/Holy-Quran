@@ -42,12 +42,6 @@ class UserListViewModel(
     fun getUserList(): LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
     }
-
-    val userTotalMoney = MutableLiveData<List<Transaction>>()
-    fun getUserTotalMoney(): LiveData<List<Transaction>> {
-        return mTransactionsDAO.getAllTransaction()
-    }
-
     fun deleteCategory(
         userInfo: UserInfo
     ) {

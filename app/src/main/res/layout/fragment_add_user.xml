@@ -137,6 +137,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:text="99/5/2"
+                    android:onClick="@{() -> viewModel.openCalender()}"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 

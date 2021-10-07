@@ -51,6 +51,12 @@ class BankDetailViewModel(
         return mTransactionsDAO.sumBankDecrease(id)
     }
 
+    private val _transferMoney = MutableLiveData<Boolean>(false)
+    val transferMoney: LiveData<Boolean>
+        get() = _transferMoney
+    fun transferMoney() {
+        _transferMoney.value = true
+    }
 
     var selectedItemPosition = 0
     fun onSelectItem(postion: Int) {
@@ -58,21 +64,12 @@ class BankDetailViewModel(
         Log.d("position", "onSelectItem: $postion")
         type1 = "decrease"
     }
-
-//    var selectedItemPosition2 = 0
-//    fun onSelectItem2(postion2: Int) {
-//        selectedItemPosition2 = postion2;
-//        Log.d("position", "onSelectItem2: $postion2")
-//        type2 = "increase"
-//    }
-
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun transferMoneyIncrease(
         amount: String,
         bankIdNo: Long?,
         transferPage: String,
-//        fromBankSpinner: String, toBankSpinner: String
     ) {
         var bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
@@ -98,7 +95,6 @@ class BankDetailViewModel(
         amount: String,
         bankId: Long,
         transferPage: String,
-//        fromBankSpinner: String, toBankSpinner: String
     ) {
         uiScope.launch {
             mTransactionsDAO.insert(

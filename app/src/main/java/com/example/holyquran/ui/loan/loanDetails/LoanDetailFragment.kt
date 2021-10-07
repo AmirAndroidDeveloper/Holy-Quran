@@ -60,7 +60,6 @@ class LoanDetailFragment : Fragment() {
         mLoanDetailViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
             mLoanDetailViewModel.setLoanDetail(it)
         })
-        Log.d("TAG", "onCreateView: $id")
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 val yourInputString = it.createDate.toString()
