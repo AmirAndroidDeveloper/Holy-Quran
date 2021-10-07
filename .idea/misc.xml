@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_bank_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_date_picker.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_decrease_money.xml" value="0.3692708333333333" />
+        <entry key="app/src/main/res/layout/fragment_edit.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_get_loan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_increase_history.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_increase_money.xml" value="0.25" />
@@ -47,7 +48,7 @@
         <entry key="app/src/main/res/layout/popup_window.xml" value="0.2388888888888889" />
         <entry key="app/src/main/res/layout/user_total.xml" value="0.3697916666666667" />
         <entry key="app/src/main/res/layout/user_total_money.xml" value="0.17708333333333334" />
-        <entry key="app/src/main/res/menu/loan_menu.xml" value="0.465625" />
+        <entry key="app/src/main/res/menu/loan_menu.xml" value="0.33" />
         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.2918803418803419" />
         <entry key="app/src/main/res/menu/payment_list.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/menu/transfer_between_banks.xml" value="0.34739583333333335" />

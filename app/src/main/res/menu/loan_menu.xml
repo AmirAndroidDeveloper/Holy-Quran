@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/call"
         android:icon="@drawable/ic_baseline_call_24"
         android:title="تماس با کاربر"
-        app:showAsAction="always"/>
-
+        app:showAsAction="always" />
     <item
         android:id="@+id/message"
         android:icon="@drawable/ic_baseline_message_24"
         android:title="بیام به کاربر"
-        app:showAsAction="always"/>
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/editUserInfo"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="ویرایش اطلاعات کاربر"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/transactionHistory"
         android:icon="@drawable/loan_money"

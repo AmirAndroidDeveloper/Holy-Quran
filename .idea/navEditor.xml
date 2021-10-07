@@ -94,6 +94,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="editFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-466" />
+                            <option name="y" value="-1003" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="getLoanFragment">
                     <value>
                       <LayoutPositions>
@@ -127,6 +139,11 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_increaseMoneyFragment_to_decreaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_increaseMoneyFragment_to_editFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -211,6 +228,15 @@
                             <option name="x" value="-122" />
                             <option name="y" value="-2169" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_loanListFragment_to_loanDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

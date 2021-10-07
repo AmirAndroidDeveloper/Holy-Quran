@@ -151,8 +151,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         })
-
-
         mGetLoanBinding.loanSections.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(
@@ -199,8 +197,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 }
-
-
 //mGetLoanViewModel.userName.observe(viewLifecycleOwner, {
 //    if (it != null) {
 //        mGetLoanBinding.userName = it

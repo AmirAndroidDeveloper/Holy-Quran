@@ -10,6 +10,9 @@ interface UserDAO {
     @Insert
     suspend fun insert(ui: UserInfo): Long
 
+    @Update
+    suspend fun update(ui: UserInfo)
+
     @Insert
     suspend fun insertList(ui: MutableList<UserInfo>)
 
