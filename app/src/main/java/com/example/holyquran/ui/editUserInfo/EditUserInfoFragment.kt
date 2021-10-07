@@ -51,14 +51,13 @@ class EditUserInfoFragment : Fragment() {
         return mEditFragmentBiding.root
     }
 
-    var name: String? = null
-    var personalInfo = UserInfo(0L, "", null, null, null, null, null);
+    var userInfo = UserInfo(0L, "", null, "", "", null, "");
     private fun subscription() {
-        mEditUserInfoViewModel.getPersonalInfo(id)?.observe(viewLifecycleOwner, {
-            mEditUserInfoViewModel.setPersonalInfo(it)
-            personalInfo = it
+        mEditUserInfoViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            mEditUserInfoViewModel.setUserName(it)
+            userInfo = it
         })
-        mEditUserInfoViewModel.personalInfo.observe(viewLifecycleOwner, {
+        mEditUserInfoViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mEditFragmentBiding.userInfo = it
             }
@@ -66,9 +65,12 @@ class EditUserInfoFragment : Fragment() {
         mEditUserInfoViewModel.validInfo.observe(viewLifecycleOwner, Observer {
             if (it) {
                 if (validInfo()) {
-                    personalInfo.fullName = mEditFragmentBiding.userEDT.text.toString()
+                    userInfo.fullName = mEditFragmentBiding.userName.text.toString()
+                    userInfo.mobileNumber = mEditFragmentBiding.mobileNumber.text.toString()
+                    userInfo.phoneNumber = mEditFragmentBiding.phoneNumber.text.toString()
+                    userInfo.address = mEditFragmentBiding.address.text.toString()
                     mEditUserInfoViewModel.updateUser(
-                        personalInfo
+                        userInfo
                     )
                     Toast.makeText(activity, "update user", Toast.LENGTH_LONG).show();
 
@@ -83,9 +85,8 @@ class EditUserInfoFragment : Fragment() {
             }
         })
     }
-
-    fun validInfo(): Boolean {
-        if (mEditFragmentBiding.userEDT.text.isEmpty()) {
+    private fun validInfo(): Boolean {
+        if (mEditFragmentBiding.userName.text.isEmpty()) {
             Toast.makeText(
                 activity, "Empty", Toast.LENGTH_SHORT
             ).show()

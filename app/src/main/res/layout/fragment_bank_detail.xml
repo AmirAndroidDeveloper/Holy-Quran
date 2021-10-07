@@ -51,6 +51,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="30dp">
 
                 <FrameLayout
@@ -69,6 +70,28 @@
                         android:layout_height="match_parent"
                         android:gravity="left|center"
                         android:text="@{bank.cardNumber}"
+                        android:textColor="@color/gray500"
+                        android:textSize="20sp"
+                        tools:text="۶۰۳۷۹۹۱۸۵۰۳۲۵۹۸۰" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="شماره حساب"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:text="@{bank.accountNumber}"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
                         tools:text="۶۰۳۷۹۹۱۸۵۰۳۲۵۹۸۰" />

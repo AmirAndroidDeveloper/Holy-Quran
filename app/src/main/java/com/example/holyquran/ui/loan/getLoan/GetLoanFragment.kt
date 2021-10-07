@@ -155,7 +155,10 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(
                 s: CharSequence, start: Int,
-                count: Int, after: Int) {}
+                count: Int, after: Int
+            ) {
+            }
+
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int
@@ -180,7 +183,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val convertLoanAmount = removeComma.toLong()
         val benefitPercent: String = mGetLoanBinding.benefitPrecent.getText().toString()
         val convertBenefitPercent = benefitPercent.toLong()
-        if (mGetLoanBinding.loanSections.text.isNotEmpty()){
+        if (mGetLoanBinding.loanSections.text.isNotEmpty()) {
             val sectionTime: String = mGetLoanBinding.loanSections.getText().toString()
             val convertSectionTime = sectionTime
             val division: Long = 2400

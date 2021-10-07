@@ -172,6 +172,9 @@
         <argument
             android:name="bankId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_bankDetailFragment_to_editBankInfoFragment"
+            app:destination="@id/editBankInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/editFragment"
@@ -180,6 +183,15 @@
         android:label="EditFragment" >
         <argument
             android:name="userId"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/editBankInfoFragment"
+        tools:layout="@layout/fragment_edit_bank_info"
+        android:name="com.example.holyquran.ui.editBankInfo.EditBankInfoFragment"
+        android:label="EditBankInfoFragment" >
+        <argument
+            android:name="bankId"
             app:argType="long" />
     </fragment>
 
