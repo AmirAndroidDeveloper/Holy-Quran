@@ -92,10 +92,11 @@ class BillDiffCallback : DiffUtil.ItemCallback<UserInfo>() {
 
 class AdapterListener(
     val clickListener: (id: Long) -> Unit,
-    val deleteListener: (category: UserInfo) -> Unit
+    val deleteListener: (userInfo: UserInfo) -> Unit,
+    private val longClickListener: (id: Long) -> Unit
 
 ) {
-    fun onclick(category: UserInfo) = clickListener(category.userId)
+    fun onclick(userInfo: UserInfo) = clickListener(userInfo.userId)
     fun onDeleteClick(userInfo: UserInfo) = deleteListener(userInfo)
-
+    fun onLongClick(userInfo: UserInfo) = longClickListener(userInfo.userId)
 }

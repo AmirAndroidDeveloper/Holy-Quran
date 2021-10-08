@@ -1,5 +1,6 @@
 package com.example.holyquran.utils
 
+import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Bank
@@ -55,4 +56,11 @@ fun loanHistory(
 ) {
     (recyclerView.adapter as LoanAdapter?)?.submitList(list)
     (recyclerView.adapter as LoanAdapter?)?.notifyDataSetChanged()
+}
+@BindingAdapter("android:onLongClick")
+fun setOnLongClickListener(view: View, block : () -> Unit) {
+    view.setOnLongClickListener {
+        block()
+        return@setOnLongClickListener true
+    }
 }
