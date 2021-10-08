@@ -44,7 +44,8 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layoutDirection="ltr"
-                android:onClick="@{()->clickListener.onclick(userInfo)}"
+                android:onClick="@{() -> clickListener.onclick(userInfo)}"
+                android:onLongClick="@{() -> clickListener.onLongClick(userInfo)}"
                 android:orientation="vertical">
 
                 <LinearLayout

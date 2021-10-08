@@ -1,6 +1,10 @@
 package com.example.holyquran.ui.userList
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,7 +43,8 @@ class UserListFragment : Fragment() {
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
-        val viewModelFactory = ViewModelProviderFactory(personalDAO, transactionDAO,loanDAO, bankDAO,application)
+        val viewModelFactory =
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
         mUserListViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -67,17 +72,21 @@ class UserListFragment : Fragment() {
                     UserListFragmentDirections.actionUserListFragmentToIncreaseMoneyFragment(it)
                 )
             Log.d("TAG", "navTeat $it ")
-
         }, {
             deleteDialog(it)
         }
-        ))
+        ) {
+            Toast.makeText(activity, "Long", Toast.LENGTH_SHORT).show()
+            vibratePhone()
+
+        })
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
         return mUserListBinding.root
     }
+
     private fun userInfo() {
         mUserListViewModel.getUserList().observe(viewLifecycleOwner, {
             mUserListViewModel.userInfo.value = it
@@ -92,5 +101,13 @@ class UserListFragment : Fragment() {
             }
             .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
             .show()
+    }
+    private fun Fragment.vibratePhone() {
+        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+        } else {
+            vibrator.vibrate(50)
+        }
     }
 }
