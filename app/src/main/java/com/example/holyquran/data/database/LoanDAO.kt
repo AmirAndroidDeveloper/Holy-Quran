@@ -16,7 +16,7 @@ interface LoanDAO {
     @Delete
     suspend fun deleteLoan(loan: Loan)
 
-    @Query("SELECT * from loan WHERE user_id = :key")
+    @Query("SELECT * from loan WHERE loan_id = :key")
     fun get(key: Long): LiveData<Loan>?
 
     @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY amount DESC")
