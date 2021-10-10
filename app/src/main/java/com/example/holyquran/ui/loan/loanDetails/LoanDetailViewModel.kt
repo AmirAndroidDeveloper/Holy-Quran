@@ -40,7 +40,7 @@ class LoanDetailViewModel(
         get() = _loanDetail
 
     fun setLoanDetail(id: Long): LiveData<Loan>? {
-        return mLoan.getLoanId(id)
+        return mLoan.get(id)
     }
 
     fun setLoanDetail(mLoanDetail: Loan) {

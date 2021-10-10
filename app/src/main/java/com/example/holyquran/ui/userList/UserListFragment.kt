@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.userList
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -76,7 +78,10 @@ class UserListFragment : Fragment() {
             deleteDialog(it)
         }
         ) {
-            Toast.makeText(activity, "Long", Toast.LENGTH_SHORT).show()
+            if (it != 0L)
+                this.findNavController().navigate(
+                    UserListFragmentDirections.actionUserListFragmentToNavigationDialogFragment(it)
+                )
             vibratePhone()
 
         })
@@ -84,6 +89,8 @@ class UserListFragment : Fragment() {
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
+
+
         return mUserListBinding.root
     }
 

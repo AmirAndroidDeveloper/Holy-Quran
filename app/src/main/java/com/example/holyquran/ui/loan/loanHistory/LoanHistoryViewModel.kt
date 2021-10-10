@@ -37,6 +37,6 @@ class LoanHistoryViewModel(
     val loanInfo = MutableLiveData<List<Loan>>()
     fun getLoanList(id: Long): LiveData<List<Loan>> {
         Log.d("TAG", "getLoanList: $loanInfo")
-        return mLoan.getAllLoan(id)
+        return mLoan.getAllLoanWithUserID(id)
     }
 }

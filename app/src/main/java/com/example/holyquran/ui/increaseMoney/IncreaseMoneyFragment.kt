@@ -141,12 +141,7 @@ class IncreaseMoneyFragment : Fragment() {
             mIncreaseMoneyBinding.chooseBank.adapter = adapter
         })
 
-        mIncreaseMoneyBinding.popUpWindow.setOnClickListener {
-            this.findNavController().navigate(
-                IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToPopupWindowFragment()
-            )
 
-        }
         return mIncreaseMoneyBinding.root
     }
 

@@ -1,11 +1,9 @@
 package com.example.holyquran.ui.loan.loanDetails
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.holyquran.R
@@ -14,17 +12,9 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanDetailBinding
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
 import kotlinx.android.synthetic.main.fragment_add_user.*
 import kotlinx.android.synthetic.main.fragment_loan_detail.view.*
-import java.text.NumberFormat
 import java.util.*
 
 class LoanDetailFragment : Fragment() {
@@ -62,6 +52,50 @@ class LoanDetailFragment : Fragment() {
         })
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
+                textDivorce()
+
+                Log.d("TAG", "ID TESTER: $id")
+                mLoanDetailBinding.loanExpiredAt.text = it.amount
+                mLoanDetailBinding.loanInfo = it
+            }
+        })
+
+
+//        mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+//            mLoanDetailViewModel.setUserName(it)
+//        })
+//        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
+//            if (it != null) {
+//               mLoanDetailBinding.loanExpiredAt.text=it.fullName
+//                mLoanDetailBinding.userInfo = it
+//            }
+//        })
+
+
+        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanDetailViewModel.setUserInfo(it)
+            }
+        })
+
+        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mLoanDetailBinding.userInfo = it
+                Log.d("TAG", "onCreateView: ${it.userId}")
+//                mLoanDetailBinding.userLoan.text = it.fullName
+            }
+        })
+        setHasOptionsMenu(true)
+        return mLoanDetailBinding.root
+    }
+
+    private fun textDivorce() {
+        mLoanDetailViewModel.setLoanDetail(id)?.observe(viewLifecycleOwner, {
+            mLoanDetailViewModel.setLoanDetail(it)
+        })
+        mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
+            if (it != null) {
+
                 val yourInputString = it.createDate.toString()
                 yourInputString.split('/', limit = 3).also { (year, month, day) ->
                     Log.d(
@@ -77,30 +111,9 @@ class LoanDetailFragment : Fragment() {
                                 .setShDay(day.toInt())
                         )
                 }
-                mLoanDetailBinding.loanInfo = it
             }
-        })
-
-
-        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mLoanDetailViewModel.setUserInfo(it)
-            }
-        })
-
-        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mLoanDetailBinding.userInfo = it
-                Log.d("TAG", "onCreateView: ${it.userId}")
-                mLoanDetailBinding.userLoan.text = it.fullName
-            }
-        })
-
-
-
-
-        setHasOptionsMenu(true)
-        return mLoanDetailBinding.root
+        }
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

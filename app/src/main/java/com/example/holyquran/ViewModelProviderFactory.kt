@@ -22,6 +22,7 @@ import com.example.holyquran.ui.loan.loanDetails.LoanDetailViewModel
 import com.example.holyquran.ui.loan.loanHistory.LoanHistoryViewModel
 import com.example.holyquran.ui.loan.loanList.LoanListViewModel
 import com.example.holyquran.ui.loan.payments.PaymentViewModel
+import com.example.holyquran.ui.popupWindow.PopupViewModel
 import com.example.holyquran.ui.transactionHistory.TransactionHistoryViewModel
 
 class ViewModelProviderFactory(
@@ -156,6 +157,14 @@ class ViewModelProviderFactory(
         ) as T
         } else if (modelClass.isAssignableFrom(EditBankInfoViewModel::class.java)) {
         return EditBankInfoViewModel(
+            dataSourceUser,
+            dataSourceTransactions,
+            dataSourceLoan,
+            dataSourceBank,
+            application
+        ) as T
+        } else if (modelClass.isAssignableFrom(PopupViewModel::class.java)) {
+        return PopupViewModel(
             dataSourceUser,
             dataSourceTransactions,
             dataSourceLoan,
