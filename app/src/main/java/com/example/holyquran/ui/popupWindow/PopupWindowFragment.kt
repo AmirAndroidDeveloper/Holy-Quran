@@ -14,10 +14,24 @@ import android.view.Gravity
 
 import android.R.layout
 import android.util.DisplayMetrics
+import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.DialogFragment.STYLE_NO_FRAME
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import com.example.holyquran.ViewModelProviderFactory
+import com.example.holyquran.data.database.UserDatabase
+import com.example.holyquran.ui.decreaseMoney.DecreaseMoneyFragmentArgs
+import com.example.holyquran.ui.decreaseMoney.DecreaseViewModel
+import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
 
 
-class PopupWindowFragment : Fragment() {
+class PopupWindowFragment : DialogFragment() {
     lateinit var mPopupWindowBinding: FragmentPopupWindowBinding
+    lateinit var mPopupViewModel: PopupViewModel
+    var id: Long = 0L
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,26 +43,84 @@ class PopupWindowFragment : Fragment() {
                 container,
                 false
             )
-        requireActivity().window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-        val dm = DisplayMetrics()
-        activity?.windowManager!!.defaultDisplay.getMetrics(dm)
 
-        var width = dm.widthPixels
-        var height = dm.heightPixels
-        requireActivity().window.setLayout(width.times(.8).toInt(), (height.times(.6)).toInt())
+        val application = requireNotNull(this.activity).application
+        val userDAO = UserDatabase.getInstance(application).mUserDAO
+        val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
+        val loanDAO = UserDatabase.getInstance(application).mLoanDAO
+        val bankDAO = UserDatabase.getInstance(application).mBankDAO
+        val viewModelFactory =
+            ViewModelProviderFactory(userDAO, transactionDAO, loanDAO, bankDAO, application)
+        mPopupViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory
+            ).get(PopupViewModel::class.java)
+        mPopupWindowBinding.viewModel = mPopupViewModel
+        this.also { mPopupWindowBinding.lifecycleOwner = it }
+        val arg =
+            PopupWindowFragmentArgs.fromBundle(
+                requireArguments()
+            )
+        id = arg.userId
+
+
+        mPopupViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+            mPopupViewModel.setUserName(it)
+        })
+        mPopupViewModel.userName.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPopupWindowBinding.userName = it
+            }
+        })
+
+        mPopupViewModel.goToIncreaseSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToIncreaseMoneyFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToIncreaseDone()
+            }
+        })
+        mPopupViewModel.goToDecreaseSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToDecreaseMoneyFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToDecreaseDone()
+            }
+        })
+        mPopupViewModel.goToLoanSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToGetLoanFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToLoanDone()
+            }
+        })
+
+        mPopupViewModel.goToLoanListSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToLoanHistoryFragment(
+                        id
+                    )
+                )
+                Log.d("TAG", "onCreateView: $id")
+                mPopupViewModel.goToLoanDone()
+            }
+        })
 
 
 
-//        val popupView: View = LayoutInflater.from(activity).inflate(R.layout.fragment_popup_window, null)
-//        val popupWindow = PopupWindow(
-//            popupView,
-//            WindowManager.LayoutParams.WRAP_CONTENT,
-//            WindowManager.LayoutParams.WRAP_CONTENT
-//        )
-//        popupWindow.showAsDropDown(popupView, 0, 0)
+
+
+
 
 
 

@@ -108,8 +108,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-535" />
-                            <option name="y" value="-365" />
+                            <option name="x" value="-550" />
+                            <option name="y" value="-444" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -184,11 +184,6 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_increaseMoneyFragment_to_popupWindowFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_increaseMoneyFragment_to_userListFragment">
                               <value>
                                 <LayoutPositions />
@@ -225,8 +220,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-389" />
-                            <option name="y" value="608" />
+                            <option name="x" value="-339" />
+                            <option name="y" value="-90" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -286,14 +281,43 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="popupWindowFragment">
+                  <entry key="navigation_dialog_fragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-561" />
-                            <option name="y" value="328" />
+                            <option name="x" value="63" />
+                            <option name="y" value="-1110" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_navigation_dialog_fragment_to_TransactionHistoryFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_decreaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_getLoanFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_loanListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -315,6 +339,11 @@
                               </value>
                             </entry>
                             <entry key="action_userListFragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_userListFragment_to_navigation_dialog_fragment">
                               <value>
                                 <LayoutPositions />
                               </value>

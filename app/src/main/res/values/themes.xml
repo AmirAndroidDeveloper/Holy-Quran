@@ -15,9 +15,12 @@
         <item name="fontFamily">@font/b_nazanin</item>
     </style>
 
-    <style name="Theme.CustomTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <item name="android:windowIsTranslucent"> true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
+    <style name="AppDialogTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">#40000000</item><!--dialog background-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
