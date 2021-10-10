@@ -70,7 +70,7 @@ class LoanHistoryFragment : Fragment() {
         mLoanAdapter.setOnclickListener(AdapterListener3({
             if (it != 0L)
                 this.findNavController().navigate(
-                LoanHistoryFragmentDirections.actionLoanHistoryFragmentToLoanDetailFragment(id) )
+                LoanHistoryFragmentDirections.actionLoanHistoryFragmentToLoanDetailFragment(it) )
             Log.d("TAG", "navTeat $it ")
         }, {
 //            deleteDialog(it)
