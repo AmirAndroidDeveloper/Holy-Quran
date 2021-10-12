@@ -17,7 +17,7 @@ interface UserDAO {
     suspend fun insertList(ui: MutableList<UserInfo>)
 
     @Delete
-    suspend fun deleteCategory(ui: UserInfo )
+    suspend fun deleteUser(ui: UserInfo )
 
     @Query("SELECT * from user_info WHERE user_id = :key")
     fun get(key: Long): LiveData<UserInfo>?

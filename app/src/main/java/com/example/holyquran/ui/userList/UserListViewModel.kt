@@ -47,7 +47,7 @@ class UserListViewModel(
     ) {
         uiScope.launch {
             try {
-                mUserInfoDAO.deleteCategory(userInfo)
+                mUserInfoDAO.deleteUser(userInfo)
             } catch (e: Exception) {
                 Log.d("TAG", "deleteContact: ${e.message}")
             }

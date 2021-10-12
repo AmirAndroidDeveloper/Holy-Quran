@@ -63,7 +63,7 @@
             app:destination="@id/loanHistoryFragment" />
         <action
             android:id="@+id/action_increaseMoneyFragment_to_editFragment"
-            app:destination="@id/editFragment" />
+            app:destination="@id/editUserInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/decreaseMoneyFragment"
@@ -172,7 +172,7 @@
             app:destination="@id/editBankInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/editFragment"
+        android:id="@+id/editUserInfoFragment"
         tools:layout="@layout/fragment_edit"
         android:name="com.example.holyquran.ui.editUserInfo.EditUserInfoFragment"
         android:label="ویرایش اطلاعات کاربر" >
@@ -212,7 +212,10 @@
             android:id="@+id/action_navigation_dialog_fragment_to_loanHistoryFragment"
             app:destination="@id/loanHistoryFragment" />
         <action
-            android:id="@+id/action_navigation_dialog_fragment_to_loanListFragment"
-            app:destination="@id/loanListFragment" />
+            android:id="@+id/action_navigation_dialog_fragment_to_editFragment"
+            app:destination="@id/editUserInfoFragment" />
+        <action
+            android:id="@+id/action_navigation_dialog_fragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </dialog>
 </navigation>

@@ -126,7 +126,7 @@ class IncreaseMoneyViewModel(
     ) {
         uiScope.launch {
             try {
-                mUserInfoDAO.deleteCategory(transInfo)
+                mUserInfoDAO.deleteUser(transInfo)
             } catch (e: Exception) {
                 Log.d("TAG", "deleteContact: ${e.message}")
             }
