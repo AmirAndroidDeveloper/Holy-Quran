@@ -20,12 +20,15 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.DialogFragment.STYLE_NO_FRAME
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
+import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.decreaseMoney.DecreaseMoneyFragmentArgs
 import com.example.holyquran.ui.decreaseMoney.DecreaseViewModel
 import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
+import com.google.android.material.snackbar.Snackbar
 
 
 class PopupWindowFragment : DialogFragment() {
@@ -63,14 +66,21 @@ class PopupWindowFragment : DialogFragment() {
             )
         id = arg.userId
 
-
         mPopupViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
             mPopupViewModel.setUserName(it)
+
         })
         mPopupViewModel.userName.observe(viewLifecycleOwner, {
             if (it != null) {
                 mPopupWindowBinding.userName = it
+                val hi = it
+                mPopupViewModel.deleteUser.observe(viewLifecycleOwner, Observer {
+                    if (it == true) {
+                        deleteUserDialog(hi)
+                    }
+                })
             }
+
         })
 
         mPopupViewModel.goToIncreaseSubmit.observe(viewLifecycleOwner, Observer {
@@ -111,20 +121,36 @@ class PopupWindowFragment : DialogFragment() {
                         id
                     )
                 )
-                Log.d("TAG", "onCreateView: $id")
                 mPopupViewModel.goToLoanDone()
             }
         })
 
-
-
-
-
-
-
-
-
+        mPopupViewModel.goToEditUserInfoSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToEditFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToLoanDone()
+            }
+        })
         return mPopupWindowBinding.root
+    }
+
+
+    private fun deleteUserDialog(userInfo: UserInfo) {
+        Snackbar.make(
+            mPopupWindowBinding.root,
+            "آیا تمایل به حذف عضو دارید؟ ",
+            Snackbar.LENGTH_LONG
+        )
+            .setAction("حذف") {
+                mPopupViewModel.deleteUser(userInfo)
+                dialog?.dismiss()
+            }
+            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+            .show()
     }
 
 }

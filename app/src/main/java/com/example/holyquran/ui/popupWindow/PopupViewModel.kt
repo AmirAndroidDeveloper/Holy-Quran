@@ -9,6 +9,10 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.UserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class PopupViewModel(
     private val mUserInfoDAO: UserDAO,
@@ -18,9 +22,13 @@ class PopupViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
+    var viewModelJob = Job()
+    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _userName = MutableLiveData<UserInfo>()
     val userName: LiveData<UserInfo>
         get() = _userName
+
+
 
     fun setUserName(id: Long): LiveData<UserInfo>? {
         return mUserInfoDAO.get(id)
@@ -76,5 +84,39 @@ class PopupViewModel(
     fun goToLoanListDone() {
         _goToLoanListSubmit.value = false
     }
+ private val _goToEditUserInfoSubmit = MutableLiveData<Boolean>(false)
+    val goToEditUserInfoSubmit: LiveData<Boolean>
+        get() = _goToEditUserInfoSubmit
 
-}
+    fun goToEditUserInfo() {
+        _goToEditUserInfoSubmit.value = true
+    }
+
+    fun goToEditUserInfoDone() {
+        _goToEditUserInfoSubmit.value = false
+    }
+    fun deleteUser(
+        userInfo: UserInfo
+    ) {
+        uiScope.launch {
+            try {
+                mUserInfoDAO.deleteUser(userInfo)
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    private val _deleteUser = MutableLiveData<Boolean>(false)
+    val deleteUser: LiveData<Boolean>
+        get() = _deleteUser
+
+    fun deleteUser() {
+        _deleteUser.value = true
+    }
+
+    fun deleteUserDone() {
+        _deleteUser.value = false
+    }
+
+
+    }

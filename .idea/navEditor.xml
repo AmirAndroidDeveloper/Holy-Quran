@@ -115,13 +115,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="editFragment">
+                  <entry key="editUserInfoFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-514" />
-                            <option name="y" value="-827" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -286,8 +286,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="63" />
-                            <option name="y" value="-1110" />
+                            <option name="x" value="-172" />
+                            <option name="y" value="-1383" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -302,12 +302,22 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_navigation_dialog_fragment_to_editFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_navigation_dialog_fragment_to_getLoanFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                             <entry key="action_navigation_dialog_fragment_to_increaseMoneyFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_loanHistoryFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

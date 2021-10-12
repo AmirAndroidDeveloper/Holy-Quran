@@ -184,7 +184,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:gravity="right"
+            android:gravity="end"
             android:onClick="@{() -> viewModel.goToLoanList()}"
             android:orientation="horizontal">
 
@@ -212,6 +212,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
+            android:onClick="@{() -> viewModel.goToEditUserInfo()}"
             android:gravity="right"
             android:orientation="horizontal">
 
@@ -221,6 +222,7 @@
                 android:layout_marginEnd="8dp"
                 android:text="ویرایش اطلاعات کاربر"
                 android:textColor="@color/black"
+                android:layout_gravity="center"
                 android:textSize="20sp" />
 
             <ImageView
@@ -230,9 +232,12 @@
         </LinearLayout>
 
         <LinearLayout
+          android:id="@+id/deleteUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
+            android:onClick="@{() -> viewModel.deleteUser()}"
+
             android:gravity="right"
             android:orientation="horizontal">
 
@@ -240,6 +245,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_gravity="center"
                 android:text="حذف کاربر"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
