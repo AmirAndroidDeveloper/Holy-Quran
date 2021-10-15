@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Gravity
 
 import android.R.layout
+import android.graphics.Color
 import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.Toast
@@ -135,6 +136,31 @@ class PopupWindowFragment : DialogFragment() {
                 mPopupViewModel.goToLoanDone()
             }
         })
+        mPopupViewModel.goToPayPaymentsSubmit.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToPayPaymentsFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToLoanDone()
+            }
+        })
+
+        mPopupViewModel.setLoan(id)?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPopupViewModel.setLoan(it)
+            } else {
+                notShowLoanInfo()
+            }
+        })
+        mPopupViewModel.loan.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mPopupWindowBinding.loan = it
+            }
+        })
+
+
         return mPopupWindowBinding.root
     }
 
@@ -153,4 +179,11 @@ class PopupWindowFragment : DialogFragment() {
             .show()
     }
 
+    private fun notShowLoanInfo() {
+        Toast.makeText(activity, "noLoanHasBEENSAVED", Toast.LENGTH_SHORT).show()
+        mPopupWindowBinding.payPayment.setTextColor(resources.getColor(R.color.gray500))
+        mPopupWindowBinding.img.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_add_circle))
+      mPopupWindowBinding.noLoanForUser.visibility=View.VISIBLE
+        mPopupWindowBinding.payPaymentLL.isClickable = false
+    }
 }

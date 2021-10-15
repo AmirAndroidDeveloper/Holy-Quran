@@ -286,8 +286,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-172" />
-                            <option name="y" value="-1383" />
+                            <option name="x" value="-504" />
+                            <option name="y" value="-817" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -322,12 +322,29 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_navigation_dialog_fragment_to_loanListFragment">
+                            <entry key="action_navigation_dialog_fragment_to_payPaymentsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_dialog_fragment_to_userListFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="payPaymentsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-288" />
+                            <option name="y" value="-1177" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -22,6 +22,7 @@ import com.example.holyquran.ui.loan.loanDetails.LoanDetailViewModel
 import com.example.holyquran.ui.loan.loanHistory.LoanHistoryViewModel
 import com.example.holyquran.ui.loan.loanList.LoanListViewModel
 import com.example.holyquran.ui.loan.payments.PaymentViewModel
+import com.example.holyquran.ui.payPayments.PayPaymentsViewModel
 import com.example.holyquran.ui.popupWindow.PopupViewModel
 import com.example.holyquran.ui.transactionHistory.TransactionHistoryViewModel
 
@@ -148,30 +149,38 @@ class ViewModelProviderFactory(
                 application
             ) as T
         } else if (modelClass.isAssignableFrom(EditUserInfoViewModel::class.java)) {
-        return EditUserInfoViewModel(
-            dataSourceUser,
-            dataSourceTransactions,
-            dataSourceLoan,
-            dataSourceBank,
-            application
-        ) as T
+            return EditUserInfoViewModel(
+                dataSourceUser,
+                dataSourceTransactions,
+                dataSourceLoan,
+                dataSourceBank,
+                application
+            ) as T
         } else if (modelClass.isAssignableFrom(EditBankInfoViewModel::class.java)) {
-        return EditBankInfoViewModel(
-            dataSourceUser,
-            dataSourceTransactions,
-            dataSourceLoan,
-            dataSourceBank,
-            application
-        ) as T
+            return EditBankInfoViewModel(
+                dataSourceUser,
+                dataSourceTransactions,
+                dataSourceLoan,
+                dataSourceBank,
+                application
+            ) as T
         } else if (modelClass.isAssignableFrom(PopupViewModel::class.java)) {
-        return PopupViewModel(
-            dataSourceUser,
-            dataSourceTransactions,
-            dataSourceLoan,
-            dataSourceBank,
-            application
-        ) as T
-    }
+            return PopupViewModel(
+                dataSourceUser,
+                dataSourceTransactions,
+                dataSourceLoan,
+                dataSourceBank,
+                application
+            ) as T
+    } else if (modelClass.isAssignableFrom(PayPaymentsViewModel::class.java)) {
+            return PayPaymentsViewModel(
+                dataSourceUser,
+                dataSourceTransactions,
+                dataSourceLoan,
+                dataSourceBank,
+                application
+            ) as T
+        }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 

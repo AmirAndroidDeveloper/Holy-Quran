@@ -8,6 +8,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,17 @@ class PopupViewModel(
     val userName: LiveData<UserInfo>
         get() = _userName
 
+    private val _loan = MutableLiveData<Loan>()
+    val loan: LiveData<Loan>
+        get() = _loan
 
+    fun setLoan(id: Long): LiveData<Loan>? {
+        return mLoan.get(id)
+    }
+
+    fun setLoan(mLoan: Loan) {
+        _loan.value = mLoan
+    }
 
     fun setUserName(id: Long): LiveData<UserInfo>? {
         return mUserInfoDAO.get(id)
@@ -43,6 +54,16 @@ class PopupViewModel(
 
     fun goToIncrease() {
         _goToIncreaseSubmit.value = true
+    }
+    private val _goToPayPaymentsSubmit = MutableLiveData<Boolean>(false)
+    val goToPayPaymentsSubmit: LiveData<Boolean>
+        get() = _goToPayPaymentsSubmit
+
+    fun goToPayPayments() {
+        _goToPayPaymentsSubmit.value = true
+    }
+    fun goToPayPaymentsDone() {
+        _goToPayPaymentsSubmit.value = false
     }
 
     fun goToIncreaseDone() {

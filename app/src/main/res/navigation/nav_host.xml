@@ -217,5 +217,17 @@
         <action
             android:id="@+id/action_navigation_dialog_fragment_to_userListFragment"
             app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_navigation_dialog_fragment_to_payPaymentsFragment"
+            app:destination="@id/payPaymentsFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/payPaymentsFragment"
+        tools:layout="@layout/fragment_pay_payments"
+        android:name="com.example.holyquran.ui.payPayments.PayPaymentsFragment"
+        android:label="PayPaymentsFragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
 </navigation>

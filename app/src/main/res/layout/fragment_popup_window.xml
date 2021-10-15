@@ -2,13 +2,22 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
-            type="com.example.holyquran.ui.popupWindow.PopupViewModel" />    <variable
+            type="com.example.holyquran.ui.popupWindow.PopupViewModel" />
+
+        <variable
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
+
+        <variable
+            name="loan"
+            type="com.example.holyquran.data.model.Loan" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,22 +28,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@{userName.fullName}"
                 android:textColor="@color/black"
-                android:textSize="25sp"
-                android:gravity="center" />
+                android:textSize="25sp" />
         </LinearLayout>
 
 
         <LinearLayout
-            android:onClick="@{() -> viewModel.goToIncrease()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_marginTop="30dp"
+            android:gravity="right"
+            android:onClick="@{() -> viewModel.goToIncrease()}"
             android:orientation="horizontal">
 
             <TextView
@@ -42,7 +52,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
-                android:text="                                                  "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -75,10 +84,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:text="ثبت برداشت"
                 android:textColor="@color/black"
-                android:layout_gravity="center"
                 android:textSize="20sp" />
 
             <ImageView
@@ -98,9 +107,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:text="ثبت وام"
-                android:layout_gravity="center"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -111,22 +120,36 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/payPaymentLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:onClick="@{() -> viewModel.goToPayPayments()}"
             android:orientation="horizontal">
+            <TextView
+               android:id="@+id/noLoanForUser"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:textColor="@color/gray600"
+                android:textSize="14sp"
+                android:text=" (تاکنون وامی برای کاربر ثبت نشده است)" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/payPayment"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
                 android:text="برداخت قسط"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
+
             <ImageView
+                android:id="@+id/img"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_baseline_add_circle_24" />
@@ -137,48 +160,6 @@
             android:layout_height="1.5dp"
             android:layout_marginTop="10dp"
             android:background="@color/gray500" />
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20sp"-->
-<!--            android:gravity="right"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:text="لیست واریز"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:src="@drawable/ic_baseline_format_list_bulleted_24" />-->
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20sp"-->
-<!--            android:gravity="right"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:text="لیست برداشت"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:src="@drawable/ic_baseline_format_list_bulleted_24" />-->
-<!--        </LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,6 +172,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:text="لیست وام ها"
                 android:textColor="@color/black"
@@ -212,17 +194,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:onClick="@{() -> viewModel.goToEditUserInfo()}"
             android:gravity="right"
+            android:onClick="@{() -> viewModel.goToEditUserInfo()}"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
                 android:text="ویرایش اطلاعات کاربر"
                 android:textColor="@color/black"
-                android:layout_gravity="center"
                 android:textSize="20sp" />
 
             <ImageView
@@ -232,20 +214,19 @@
         </LinearLayout>
 
         <LinearLayout
-          android:id="@+id/deleteUser"
+            android:id="@+id/deleteUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:onClick="@{() -> viewModel.deleteUser()}"
-
             android:gravity="right"
+            android:onClick="@{() -> viewModel.deleteUser()}"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
                 android:text="حذف کاربر"
                 android:textColor="@color/black"
                 android:textSize="20sp" />

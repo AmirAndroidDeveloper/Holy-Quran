@@ -12,30 +12,16 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.holyquran.Communicator
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentLoanHistoryBinding
-import com.example.holyquran.ui.loan.loanList.LoanListFragment
 import kotlinx.android.synthetic.main.fragment_loan_history.*
 
 class LoanHistoryFragment : Fragment() {
     lateinit var mLoanHistoryBinding: FragmentLoanHistoryBinding
     lateinit var mLoanHistoryViewModel: LoanHistoryViewModel
     var id: Long = 0L
-
-
-    companion object {
-        lateinit var mctx: Context
-    }
-    private var model: Communicator?=null
-
-
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

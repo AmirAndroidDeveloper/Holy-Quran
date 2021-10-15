@@ -83,8 +83,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
             val removeComma =
                 NumberTextWatcherForThousand.trimCommaOfString(mGetLoanBinding.loanAmount.text.toString())
                     .replace(",", "")
-
-
             if (it == true) {
                 if (mGetLoanBinding.loanAmount.text?.let { it1 ->
                         mGetLoanBinding.loanSections.text.isEmpty()
