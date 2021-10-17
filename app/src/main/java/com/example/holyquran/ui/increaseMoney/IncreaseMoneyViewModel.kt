@@ -81,8 +81,6 @@ class IncreaseMoneyViewModel(
     var selectedItemPosition = 0
     fun onSelectItem(postion: Int) {
         selectedItemPosition = postion;
-        Log.d("position", "onSelectItem: $postion")
-
     }
 
 
@@ -99,7 +97,7 @@ class IncreaseMoneyViewModel(
         userId: Long,
         increasePage: String?
     ) {
-        var bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
+        val bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
                 Transaction(

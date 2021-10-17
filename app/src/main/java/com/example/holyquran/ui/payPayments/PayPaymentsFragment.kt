@@ -4,10 +4,12 @@ import NumberTextWatcherForThousand
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -15,10 +17,13 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentPayPaymentsBinding
+import java.text.DecimalFormat
+import java.text.NumberFormat
+import java.util.ArrayList
 
 class PayPaymentsFragment : Fragment() {
-    var id = 0L
-   var descide =""
+    var userId = 0L
+    var descide = ""
     lateinit var mPayPaymentsBinding: FragmentPayPaymentsBinding
     lateinit var mPaymentsViewModel: PayPaymentsViewModel
     override fun onCreateView(
@@ -51,9 +56,9 @@ class PayPaymentsFragment : Fragment() {
             PayPaymentsFragmentArgs.fromBundle(
                 requireArguments()
             )
-        id = arg.id
+        userId = arg.id
 
-        mPaymentsViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
+        mPaymentsViewModel.setUserName(userId)?.observe(viewLifecycleOwner, {
             mPaymentsViewModel.setUserName(it)
         })
         mPaymentsViewModel.userName.observe(viewLifecycleOwner, {
@@ -62,15 +67,18 @@ class PayPaymentsFragment : Fragment() {
             }
         })
 
-        mPaymentsViewModel.setLoan(id)?.observe(viewLifecycleOwner, {
-            if (it !=null) {
+        mPaymentsViewModel.setLoan(userId)?.observe(viewLifecycleOwner, {
+            if (it != null) {
                 mPaymentsViewModel.setLoan(it)
-            }else{
-              notShowLoanInfo()
+            } else {
+                notShowLoanInfo()
             }
-            })
+        })
         mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
             if (it != null) {
+                val formatter: NumberFormat = DecimalFormat("#,###,###,###")
+                mPayPaymentsBinding.paymentPrice.setText("" + formatter.format(it.payment.toLong()))
+                mPayPaymentsBinding.loanAmount.setText("" + formatter.format(it.amount.toLong()))
                 mPayPaymentsBinding.loan = it
             }
         })
@@ -79,65 +87,88 @@ class PayPaymentsFragment : Fragment() {
                 mPayPaymentsBinding.paymentsMoneyEditText
             )
         )
+        mPayPaymentsBinding.submit.setOnClickListener {
 
-       mPayPaymentsBinding.submit.setOnClickListener {
-           val builder: AlertDialog.Builder =
-               AlertDialog.Builder(requireActivity())
-           builder.setIcon(R.drawable.warning)
-           mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
-               val removeComma =
-                   NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
-                       .replace(",", "")
-               if (it != null) {
-                   mPayPaymentsBinding.loan = it
-                   val currentPayment = it.payment
+            mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
+                if (it != null) {
+                    val removeComma =
+                        NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
+                    val currentPayment = it.payment
+                    if (removeComma==currentPayment){
+                        val payPayment = "payPayment"
+                                mPaymentsViewModel.insertMoney(
+                                    removeComma,
+                                    userId,
+                                    payPayment
+                                )
+                    }else{
+                        val builder: AlertDialog.Builder =
+                            AlertDialog.Builder(requireActivity())
+                        builder.setIcon(R.drawable.warning)
+                        mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
+                            val removeComma =
+                                NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
+                                    .replace(",", "")
+                            if (it != null) {
+                                mPayPaymentsBinding.loan = it
+                                val currentPayment = it.payment
+                                if (removeComma.toLong() > currentPayment.toLong()) {
+                                    val more = "بیشتر"
+                                    descide = more
+                                } else if (removeComma.toLong() < currentPayment.toLong()) {
+                                    val less = "کمتر"
+                                    descide = less
+                                }
+                                builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $descide است. ادامه میدهید؟")
+                                    .setCancelable(false)
+                                    .setPositiveButton("اره به هر حال واریز کن",
+                                        DialogInterface.OnClickListener { dialog, id ->
+                                            val payPayment = "payPayment"
+                                            mPaymentsViewModel.insertMoney(
+                                                removeComma,
+                                                userId,
+                                                payPayment
+                                            )
+                                            Toast.makeText(
+                                                activity,
+                                                "قسط با موفقیت برداخت شد.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        })
+                                    .setNegativeButton("نه,ممنون",
+                                        DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+                                    )
+                                val alert: AlertDialog = builder.create()
+                                alert.setCanceledOnTouchOutside(true)
+                                alert.show()
+                            }
+                        })
+                    }
+                    mPayPaymentsBinding.loan = it
+                }
+            })
+        }
+        mPaymentsViewModel.getBankList().observe(viewLifecycleOwner, {
+            mPaymentsViewModel.bankInfo.value = it
+            Log.d("TAG", "viewHolder: $it")
 
-                   if (removeComma.toInt() > currentPayment.toInt()) {
-                       val more = "بیشتر"
-                       descide = more
-                   } else {
-                       val less = "کمتر"
-                       descide = less
-                   }
-                 if (removeComma.toInt()==currentPayment.toInt()){
-//                    mPaymentsViewModel.insertLoanPayments(
-//                        removeComma,
-//                        true,
-//                        userId,
-//                        increasePage
-//                    )
-                 }
-                   builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $descide است. ادامه میدهید؟")
-                       .setCancelable(false)
-                       .setPositiveButton("اره به هر حال واریز کن",
-                           DialogInterface.OnClickListener { dialog, id ->
-//                    mIncreaseMoneyViewModel.insertLoanPayments(
-//                        removeComma,
-//                        true,
-//                        userId,
-//                        increasePage
-//                    )
-                               Toast.makeText(
-                                   activity,
-                                   "قسط با موفقیت برداخت شد.",
-                                   Toast.LENGTH_SHORT
-                               ).show()
-                           })
-                       .setNegativeButton("نه,ممنون",
-                           DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
-                       )
-                   val alert: AlertDialog = builder.create()
-                   alert.setCanceledOnTouchOutside(true)
-                   alert.show()
-//        mIncreaseMoneyViewModel.goToIncreaseDone()
-               }
-           })
-       }
+            val bankList: MutableList<String> = ArrayList() //this is list<string>
+            it.forEach { item ->
+                // here item is item of list category
+                bankList.add(item.bankName)
+            }
 
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, bankList
+            )
+            Log.d("TAG", "toBank: $bankList")
+            mPayPaymentsBinding.chooseBank.adapter = adapter
 
-
+        })
         return mPayPaymentsBinding.root
     }
+
     private fun notShowLoanInfo() {
         Toast.makeText(activity, "noLoanHasBEENSAVED", Toast.LENGTH_SHORT).show()
     }

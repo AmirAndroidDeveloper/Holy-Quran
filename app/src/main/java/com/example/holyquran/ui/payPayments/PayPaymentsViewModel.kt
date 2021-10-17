@@ -8,11 +8,14 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class PayPaymentsViewModel(
     private val mUserInfoDAO: UserDAO,
@@ -49,5 +52,44 @@ class PayPaymentsViewModel(
         _loan.value = mLoan
     }
 
+    var selectedItemPosition = 0
+    fun onSelectItem(postion: Int) {
+        selectedItemPosition = postion;
+    }
+    val bankInfo = MutableLiveData<List<Bank>>()
+    fun getBankList(): LiveData<List<Bank>> {
+        return mBankDAO.getAllBanks()
+    }
+    private fun sumUserIncrease(id: Long): Long {
+        return mTransactionsDAO.sumUserIncrease(id)
+    }
 
+    private fun sumUserDecrease(id: Long): Long {
+        return mTransactionsDAO.sumUserDecrease(id)
+    }
+
+    fun insertMoney(
+        amount: String,
+        userId: Long,
+        increasePage: String?
+    ) {
+        var bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
+        uiScope.launch {
+            mTransactionsDAO.insert(
+                Transaction(
+                    0L,
+                    userId,
+                    null,
+                    bankId,
+                    null,
+                    amount,
+                    null,
+                    null,
+                    sumUserIncrease(userId).minus(sumUserDecrease(userId)),
+                    increasePage
+                )
+            )
+
+        }
+    }
 }
