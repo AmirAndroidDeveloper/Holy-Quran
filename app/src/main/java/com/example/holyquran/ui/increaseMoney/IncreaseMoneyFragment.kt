@@ -80,11 +80,11 @@ class IncreaseMoneyFragment : Fragment() {
                 )
             );
             if (it == true) {
+                val transactionStatus = "increase"
                 mIncreaseMoneyViewModel.insertMoney(
                     removeComma,
                     userId,
-                    null,
-
+                    transactionStatus,
                     )
                 mIncreaseMoneyViewModel.goToIncreaseDone()
             }

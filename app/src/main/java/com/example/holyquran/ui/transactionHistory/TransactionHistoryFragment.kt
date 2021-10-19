@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
+import com.example.holyquran.data.model.Bank
+import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.databinding.FragmentIncreaseHistoryBinding
 
 class TransactionHistoryFragment : Fragment() {
@@ -37,7 +39,7 @@ class TransactionHistoryFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO,bankDAO, application)
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
         mTransactionHistoryViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -50,8 +52,8 @@ class TransactionHistoryFragment : Fragment() {
                 requireArguments()
             )
         id = arg.userId
-        val mIncreaseHistoryAdapter = increaseHistoryAdapter()
-        mIncreaseHistoryAdapter.setOnclickListener(AdapterListener2({
+        val mTransactionHistoryAdapter = TransactionHistory()
+        mTransactionHistoryAdapter.setOnclickListener(AdapterListener2({
             if (it != 0L)
                 null
         }, {
@@ -70,7 +72,7 @@ class TransactionHistoryFragment : Fragment() {
 
         val mLinearLayoutManager =
             LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        mIncreaseHistoryBinding.rvFeed.adapter = mIncreaseHistoryAdapter
+        mIncreaseHistoryBinding.rvFeed.adapter = mTransactionHistoryAdapter
         mIncreaseHistoryBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
         mTransactionHistoryViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
@@ -83,7 +85,6 @@ class TransactionHistoryFragment : Fragment() {
         })
 
         return mIncreaseHistoryBinding.root
-
     }
 
     private fun userInfo() {

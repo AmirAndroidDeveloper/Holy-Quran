@@ -48,6 +48,7 @@ class PopupViewModel(
     fun setUserName(mUserInfo: UserInfo) {
         _userName.value = mUserInfo
     }
+
     private val _goToIncreaseSubmit = MutableLiveData<Boolean>(false)
     val goToIncreaseSubmit: LiveData<Boolean>
         get() = _goToIncreaseSubmit
@@ -55,6 +56,7 @@ class PopupViewModel(
     fun goToIncrease() {
         _goToIncreaseSubmit.value = true
     }
+
     private val _goToPayPaymentsSubmit = MutableLiveData<Boolean>(false)
     val goToPayPaymentsSubmit: LiveData<Boolean>
         get() = _goToPayPaymentsSubmit
@@ -62,6 +64,7 @@ class PopupViewModel(
     fun goToPayPayments() {
         _goToPayPaymentsSubmit.value = true
     }
+
     fun goToPayPaymentsDone() {
         _goToPayPaymentsSubmit.value = false
     }
@@ -105,7 +108,17 @@ class PopupViewModel(
     fun goToLoanListDone() {
         _goToLoanListSubmit.value = false
     }
- private val _goToEditUserInfoSubmit = MutableLiveData<Boolean>(false)
+
+
+    private val _goToUserTransactionHistory = MutableLiveData<Boolean>(false)
+    val goToUserTransactionHistory: LiveData<Boolean>
+        get() = _goToUserTransactionHistory
+
+    fun goToUserTransactionHistory() {
+        _goToUserTransactionHistory.value = true
+    }
+
+    private val _goToEditUserInfoSubmit = MutableLiveData<Boolean>(false)
     val goToEditUserInfoSubmit: LiveData<Boolean>
         get() = _goToEditUserInfoSubmit
 
@@ -116,6 +129,7 @@ class PopupViewModel(
     fun goToEditUserInfoDone() {
         _goToEditUserInfoSubmit.value = false
     }
+
     fun deleteUser(
         userInfo: UserInfo
     ) {
@@ -140,4 +154,4 @@ class PopupViewModel(
     }
 
 
-    }
+}

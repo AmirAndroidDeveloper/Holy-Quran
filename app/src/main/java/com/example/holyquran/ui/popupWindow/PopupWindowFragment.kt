@@ -146,6 +146,16 @@ class PopupWindowFragment : DialogFragment() {
                 mPopupViewModel.goToLoanDone()
             }
         })
+        mPopupViewModel.goToUserTransactionHistory.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    PopupWindowFragmentDirections.actionNavigationDialogFragmentToTransactionHistoryFragment(
+                        id
+                    )
+                )
+                mPopupViewModel.goToLoanDone()
+            }
+        })
 
         mPopupViewModel.setLoan(id)?.observe(viewLifecycleOwner, {
             if (it != null) {

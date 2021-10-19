@@ -10,7 +10,7 @@ import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.ui.banks.bankList.BankAdapter
 import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
 import com.example.holyquran.ui.loan.loanList.LoanListAdapter
-import com.example.holyquran.ui.transactionHistory.increaseHistoryAdapter
+import com.example.holyquran.ui.transactionHistory.TransactionHistory
 import com.example.holyquran.ui.userList.UserAdapter
 
 @BindingAdapter("userList")
@@ -27,8 +27,8 @@ fun increaseList(
     recyclerView: RecyclerView,
     list: List<Transaction>?
 ) {
-    (recyclerView.adapter as increaseHistoryAdapter?)?.submitList(list)
-    (recyclerView.adapter as increaseHistoryAdapter?)?.notifyDataSetChanged()
+    (recyclerView.adapter as TransactionHistory?)?.submitList(list)
+    (recyclerView.adapter as TransactionHistory?)?.notifyDataSetChanged()
 }
 
 @BindingAdapter("loanList")

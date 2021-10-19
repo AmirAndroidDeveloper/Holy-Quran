@@ -50,7 +50,7 @@
         <entry key="app/src/main/res/layout/item_user_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_user_loan_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_user_payments_list.xml" value="0.346875" />
-        <entry key="app/src/main/res/layout/item_user_transaction_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_user_transaction_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/no.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/popup_window.xml" value="0.2388888888888889" />

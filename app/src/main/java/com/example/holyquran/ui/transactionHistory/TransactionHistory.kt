@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
-
-
-class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
+class TransactionHistory() :
+    ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,6 +25,7 @@ class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolde
             is ViewHolder -> {
                 val item = getItem(position)
                 holder.bind(item, clickListener)
+//                holder.bind2(Bank, clickListener)
             }
             is EmptyViewHolder -> {
                 holder.bind()
@@ -45,17 +46,32 @@ class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolde
             ITEM_VIEW_TYPE_EMPTY
     }
 
-    class ViewHolder private constructor(val binding: ItemUserTransactionListBinding) :
+    class ViewHolder
+    private constructor(val binding: ItemUserTransactionListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Transaction, adapterListener2: AdapterListener2) {
             binding.transaction = item
             binding.clickListener = adapterListener2
             binding.executePendingBindings()
-//      if (item.transactionStatus){
-//          binding.transactionStatus.text="برداخت قسط"
-//      }else{
-//          binding.transactionStatus.text="به حساب"
-//      }
+            if (item.type == "payPayment") {
+                binding.transactionStatus.text = "برداخت قسط"
+            } else if (item.type == "decrease") {
+                binding.transactionStatus.text = "برداشت"
+            } else if (item.type == "increase") {
+                binding.transactionStatus.text = "واریز"
+            }
+
+            if (item.decrease == null) {
+                binding.amount.text = item.increase
+            } else {
+                binding.amount.text = item.decrease
+            }
+        }
+
+        fun bind2(item2: Bank, adapterListener2: AdapterListener2) {
+            binding.bankInfo = item2
+            binding.clickListener = adapterListener2
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -66,22 +82,23 @@ class increaseHistoryAdapter() : ListAdapter<Transaction, RecyclerView.ViewHolde
             }
         }
     }
+}
 
-    class EmptyViewHolder private constructor(val binding: ItemUserTransactionListBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-            binding.executePendingBindings()
-        }
+class EmptyViewHolder private constructor(val binding: ItemUserTransactionListBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+    fun bind() {
+        binding.executePendingBindings()
+    }
 
-        companion object {
-            fun from(parent: ViewGroup): EmptyViewHolder {
-                val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemUserTransactionListBinding.inflate(layoutInflater, parent, false)
-                return EmptyViewHolder(binding)
-            }
+    companion object {
+        fun from(parent: ViewGroup): EmptyViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ItemUserTransactionListBinding.inflate(layoutInflater, parent, false)
+            return EmptyViewHolder(binding)
         }
     }
 }
+
 
 class BillDiffCallback : DiffUtil.ItemCallback<Transaction>() {
     override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
