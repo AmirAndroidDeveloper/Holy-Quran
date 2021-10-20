@@ -8,23 +8,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 class TransactionHistory() :
-    ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
+    ListAdapter<DataItem, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM_TRANSACTION = 1
     private val ITEM_VIEW_TYPE_ITEM_BANK = 2
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
+    /**
+     * DO NOT USE .submit(), use the method bellow
+     */
+
     fun addTransactionsAndBanks(transactionList: List<Transaction>?, bankList: List<Bank>?) {
         adapterScope.launch {
-            val transactionItems: List<DataItem> = when{
-                transactionList == null || transactionList.isEmpty()  -> listOf(DataItem.Empty)
-                else -> list.map { DataItem.TransactionItem(it) }
+            val transactionItems: List<DataItem> = when {
+                transactionList == null || transactionList.isEmpty() -> listOf(DataItem.Empty)
+                else -> transactionList.map { DataItem.TransactionItem(it) }
             }
             val bankItems: List<DataItem> = when {
-                bankList == null || bankList.isEmpty()  -> listOf(DataItem.Empty)
-                else -> list.map { DataItem.BankItem(it) }
+                bankList == null || bankList.isEmpty() -> listOf(DataItem.Empty)
+                else -> bankList.map { DataItem.BankItem(it) }
             }
 
             val items = transactionItems + bankItems
@@ -44,11 +53,11 @@ class TransactionHistory() :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       when (holder) {
+        when (holder) {
             is ViewHolder -> {
-                when(val item = getItem(position)) {
-                    DataItem.TransactionItem -> holder.bind(item, clickListener)
-                    DataItem.BankItem -> holder.bind2(Bank, clickListener)
+                when (val item = getItem(position)) {
+                    is DataItem.TransactionItem -> holder.bind(item.transaction, clickListener)
+                    is DataItem.BankItem -> holder.bind2(item.bank, clickListener)
                 }
             }
             is EmptyViewHolder -> holder.bind()
@@ -146,15 +155,15 @@ class AdapterListener2(
 sealed class DataItem {
     abstract val id: Long
 
-    data class TransactionItem(val transaction: Transaction): DataItem() {
+    data class TransactionItem(val transaction: Transaction) : DataItem() {
         override val id = transaction.transId
     }
 
-    data class BankItem(val transaction: Bank): DataItem() {
+    data class BankItem(val bank: Bank) : DataItem() {
         override val id = bank.bankId
     }
 
-    object Empty: DataItem() {
+    object Empty : DataItem() {
         override val id = Long.MIN_VALUE
     }
 }
