@@ -166,6 +166,13 @@ class PayPaymentsFragment : Fragment() {
             mPayPaymentsBinding.chooseBank.adapter = adapter
 
         })
+        mPaymentsViewModel.copyNumber.observe(viewLifecycleOwner, {
+            if (it == true) {
+                val getPaymentPrice = mPayPaymentsBinding.paymentPrice.text.toString()
+                mPayPaymentsBinding.paymentsLayout.getEditText()?.setText(getPaymentPrice);
+            }
+        })
+
         return mPayPaymentsBinding.root
     }
 
