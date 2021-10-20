@@ -11,25 +11,47 @@ import com.example.holyquran.databinding.ItemUserTransactionListBinding
 class TransactionHistory() :
     ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
-    private val ITEM_VIEW_TYPE_ITEM = 1
+    private val ITEM_VIEW_TYPE_ITEM_TRANSACTION = 1
+    private val ITEM_VIEW_TYPE_ITEM_BANK = 2
+
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
+
+    fun addTransactionsAndBanks(transactionList: List<Transaction>?, bankList: List<Bank>?) {
+        adapterScope.launch {
+            val transactionItems: List<DataItem> = when{
+                transactionList == null || transactionList.isEmpty()  -> listOf(DataItem.Empty)
+                else -> list.map { DataItem.TransactionItem(it) }
+            }
+            val bankItems: List<DataItem> = when {
+                bankList == null || bankList.isEmpty()  -> listOf(DataItem.Empty)
+                else -> list.map { DataItem.BankItem(it) }
+            }
+
+            val items = transactionItems + bankItems
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM_TRANSACTION -> ViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM_BANK -> ViewHolder.from(parent)
             ITEM_VIEW_TYPE_EMPTY -> EmptyViewHolder.from(parent)
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
+       when (holder) {
             is ViewHolder -> {
-                val item = getItem(position)
-                holder.bind(item, clickListener)
-//                holder.bind2(Bank, clickListener)
+                when(val item = getItem(position)) {
+                    DataItem.TransactionItem -> holder.bind(item, clickListener)
+                    DataItem.BankItem -> holder.bind2(Bank, clickListener)
+                }
             }
-            is EmptyViewHolder -> {
-                holder.bind()
-            }
+            is EmptyViewHolder -> holder.bind()
         }
     }
 
@@ -40,10 +62,11 @@ class TransactionHistory() :
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (itemCount > 0)
-            ITEM_VIEW_TYPE_ITEM
-        else
-            ITEM_VIEW_TYPE_EMPTY
+        return when (getItem(position)) {
+            is DataItem.Empty -> ITEM_VIEW_TYPE_EMPTY
+            is DataItem.TransactionItem -> ITEM_VIEW_TYPE_ITEM_TRANSACTION
+            is DataItem.BankItem -> ITEM_VIEW_TYPE_ITEM_BANK
+        }
     }
 
     class ViewHolder
@@ -100,15 +123,12 @@ class EmptyViewHolder private constructor(val binding: ItemUserTransactionListBi
 }
 
 
-class BillDiffCallback : DiffUtil.ItemCallback<Transaction>() {
-    override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
-        return oldItem.transId == newItem.transId
+class BillDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(
-        oldItem: Transaction,
-        newItem: Transaction
-    ): Boolean {
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem == newItem
     }
 }
@@ -121,4 +141,20 @@ class AdapterListener2(
     fun onclick(transaction: Transaction) = clickListener(transaction.userId)
     fun onDeleteClick(userInfo: Transaction) = deleteListener(userInfo)
 
+}
+
+sealed class DataItem {
+    abstract val id: Long
+
+    data class TransactionItem(val transaction: Transaction): DataItem() {
+        override val id = transaction.transId
+    }
+
+    data class BankItem(val transaction: Bank): DataItem() {
+        override val id = bank.bankId
+    }
+
+    object Empty: DataItem() {
+        override val id = Long.MIN_VALUE
+    }
 }
