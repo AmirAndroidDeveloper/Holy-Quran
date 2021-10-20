@@ -14,18 +14,15 @@ interface LoanDAO {
     suspend fun insertList(loan: MutableList<Loan>)
 
     @Delete
-    suspend fun deleteLoan(loan: Loan)
+     fun deleteLoan(loan: Loan)
 
     @Query("SELECT * from loan WHERE loan_id = :key")
     fun get(key: Long): LiveData<Loan>?
 
-    @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY amount DESC")
-    fun getAllLoanWithUserId(key: Long): LiveData<List<Loan>>
-
     @Query("SELECT * FROM loan ORDER BY amount DESC")
     fun getAllLoans(): LiveData<List<Loan>>
 
-    @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY amount DESC")
+    @Query("SELECT * FROM loan WHERE user_id=:key ORDER BY loan_id DESC")
     fun getAllLoanWithUserID(key: Long): LiveData<List<Loan>>
 
     @Query("SELECT * from loan WHERE loan_id = :key")

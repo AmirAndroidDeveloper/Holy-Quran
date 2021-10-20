@@ -53,8 +53,6 @@ class LoanDetailFragment : Fragment() {
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
                 textDivorce()
-
-                Log.d("TAG", "ID TESTER: $id")
                 mLoanDetailBinding.loanExpiredAt.text = it.amount
                 mLoanDetailBinding.loanInfo = it
             }
@@ -95,13 +93,8 @@ class LoanDetailFragment : Fragment() {
         })
         mLoanDetailViewModel.loanDetail.observe(viewLifecycleOwner, {
             if (it != null) {
-
                 val yourInputString = it.createDate.toString()
                 yourInputString.split('/', limit = 3).also { (year, month, day) ->
-                    Log.d(
-                        "TAG",
-                        "onCreateView DIVORCE $year/$month/$day"
-                    )
                     val pDate = PersianDate()
                     val pdformater1 = PersianDateFormat("Y/m/d")
                     pdformater1.format(pDate)

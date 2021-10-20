@@ -11,6 +11,10 @@ import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.UserInfo
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class LoanListViewModel(
     private val mUserInfoDAO: UserDAO,
@@ -20,8 +24,8 @@ class LoanListViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
-
-
+    var viewModelJob = Job()
+    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val _userName = MutableLiveData<Loan>()
     val userName: LiveData<Loan>
         get() = _userName
@@ -39,4 +43,15 @@ class LoanListViewModel(
         Log.d("TAG", "getLoanList: $loanInfo")
         return mLoan.getAllLoans()
     }
-}
+    fun deleteLoan(
+        loan: Loan
+    ) {
+        uiScope.launch {
+            try {
+                mLoan.deleteLoan(loan)
+            } catch (e: Exception) {
+                Log.d("TAG", "deleteContact: ${e.message}")
+            }
+        }
+    }
+    }

@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
+import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentLoanListBinding
+import com.google.android.material.snackbar.Snackbar
 
 
 class LoanListFragment : Fragment() {
@@ -44,11 +47,12 @@ class LoanListFragment : Fragment() {
         mLoanListAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
                 this.findNavController().navigate(
-                    LoanListFragmentDirections.actionLoanListFragmentToLoanDetailFragment(id)
+                    LoanListFragmentDirections.actionLoanListFragmentToLoanDetailFragment(it)
                 )
-            Log.d("TAG", "navTeat $id ")
+            Log.d("TAG", "navTeat $it ")
 
         }, {
+      deleteDialog(it)
         }
         ))
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -57,24 +61,18 @@ class LoanListFragment : Fragment() {
         loanInfo()
         return mLoanListBinding.root
     }
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//
-//        val model = ViewModelProviders.of(requireActivity()).get(Communicator::class.java)
-//
-//        model.message.observe(requireActivity(), object : Observer<Any> {
-//            override fun onChanged(o: Any?) {
-//                id = o.toString().toLong()
-//                Toast.makeText(activity, "id is $id", Toast.LENGTH_SHORT).show().toString()
-//
-//            }
-//        })
-//    }
     private fun loanInfo() {
         mLoanListViewModel.getAllLoanList().observe(viewLifecycleOwner, {
             mLoanListViewModel.loanInfo.value = it
             Log.d("TAG", "viewHolder: $it")
         })
+    }
+    private fun deleteDialog(loan: Loan) {
+        Snackbar.make(mLoanListBinding.root, "آیا تمایل به حذف وام دارید؟ ", Snackbar.LENGTH_LONG)
+            .setAction("حذف") {
+                mLoanListViewModel.deleteLoan(loan)
+            }
+            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+            .show()
     }
 }
