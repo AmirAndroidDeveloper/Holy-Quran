@@ -14,8 +14,10 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
+import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
 import java.text.DecimalFormat
 import java.util.ArrayList
@@ -71,26 +73,15 @@ class IncreaseMoneyFragment : Fragment() {
         val result = increase - decrease
         mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
-            val removeComma =
-                NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
-                    .replace(",", "")
             mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(
                 NumberTextWatcherForThousand(
                     mIncreaseMoneyBinding.increaseEdt
                 )
             );
             if (it == true) {
-                val transactionStatus = "increase"
-                mIncreaseMoneyViewModel.insertMoney(
-                    removeComma,
-                    userId,
-                    transactionStatus,
-                    )
-                mIncreaseMoneyViewModel.goToIncreaseDone()
+                saveData()
             }
             mIncreaseMoneyViewModel.goToIncreaseDone()
-
-
         })
         mIncreaseMoneyViewModel.increaseMoneyDone()
         mIncreaseMoneyViewModel.goToIncreaseDone()
@@ -132,15 +123,28 @@ class IncreaseMoneyFragment : Fragment() {
                 // here item is item of list category
                 bankList.add(item.bankName)
             }
+            mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
+
+
+            })
+            if (it.isEmpty()) {
+                mIncreaseMoneyBinding.submit.isClickable = false
+                Snackbar.make(
+                    mIncreaseMoneyBinding.root,
+                    "تا کنون بانکی ثبت نشده است, ابتدا بانکی ثبت کنید.",
+                    Snackbar.LENGTH_LONG
+                )
+                    .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+                    .show()
+            }
+            mIncreaseMoneyBinding.submit.isClickable = it.isNotEmpty()
 
             val adapter = ArrayAdapter(
                 requireContext(),
                 android.R.layout.simple_spinner_item, bankList
             )
-            Log.d("TAG", "toBank: $bankList")
             mIncreaseMoneyBinding.chooseBank.adapter = adapter
         })
-
 
         return mIncreaseMoneyBinding.root
     }
@@ -158,7 +162,6 @@ class IncreaseMoneyFragment : Fragment() {
                         userId
                     )
                 )
-//                Toast.makeText(activity, "تاریخچه تراکنش ها", Toast.LENGTH_LONG).show()
                 mIncreaseMoneyViewModel.goToIncreaseDone()
 
                 true
@@ -191,62 +194,43 @@ class IncreaseMoneyFragment : Fragment() {
             R.id.message -> {
                 mIncreaseMoneyViewModel.setUserName(userId)?.observe(viewLifecycleOwner, {
                     mIncreaseMoneyViewModel.setUserName(it)
-                sendPhoneNumberToSms(it.mobileNumber.toString())
+                    sendPhoneNumberToSms(it.mobileNumber.toString())
                 })
                 true
             }
 
             R.id.editUserInfo -> {
-               this.findNavController().navigate(
-                   IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToEditFragment(userId)
-               )
+                this.findNavController().navigate(
+                    IncreaseMoneyFragmentDirections.actionIncreaseMoneyFragmentToEditFragment(userId)
+                )
                 return true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun sendPhoneNumberToSms(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", phoneNumber, null))
         startActivity(intent)
     }
+
     private fun sendPhoneNumberForCall(phoneNumber: String) {
         val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))
         startActivity(intent)
-    }}
+    }
 
-//val builder: AlertDialog.Builder =
-//    AlertDialog.Builder(requireActivity())
-//builder.setIcon(R.drawable.warning)
-//val increaseEditText = mIncreaseMoneyBinding.increaseEdt.text.toString()
-//val currentPayment = it.payment
-//if (increaseEditText.toInt() > currentPayment.toInt()) {
-//    val more = "بیشتر"
-//    decide = more
-//} else {
-//    val less = "کمتر"
-//    decide = less
-//}
-//builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $decide است. ادامه میدهید؟")
-//.setCancelable(false)
-//.setPositiveButton("اره به هر حال واریز کن",
-//DialogInterface.OnClickListener { dialog, id ->
-//    mIncreaseMoneyViewModel.insertLoanPayments(
-//        removeComma,
-//        true,
-//        userId,
-//        increasePage
-//    )
-//    Toast.makeText(
-//        activity,
-//        "قسط با موفقیت برداخت شد.",
-//        Toast.LENGTH_SHORT
-//    ).show()
-//})
-//.setNegativeButton("نه,ممنون",
-//DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
-//)
-//val alert: AlertDialog = builder.create()
-//alert.setCanceledOnTouchOutside(true)
-//alert.show()
-//mIncreaseMoneyViewModel.goToIncreaseDone()
+    fun saveData() {
+        val removeComma =
+            NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
+                .replace(",", "")
+        val transactionStatus = "increase"
+        mIncreaseMoneyViewModel.insertMoney(
+            removeComma,
+            userId,
+            transactionStatus,
+        )
+        mIncreaseMoneyViewModel.goToIncreaseDone()
+    }
+
+}

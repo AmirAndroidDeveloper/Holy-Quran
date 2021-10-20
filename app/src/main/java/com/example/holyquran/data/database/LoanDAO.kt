@@ -35,3 +35,4 @@ interface LoanDAO {
     fun getAllLoanByUserPayment(key: Long): LiveData<List<Loan>>
 
 }
+
