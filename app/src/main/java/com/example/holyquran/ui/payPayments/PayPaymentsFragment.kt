@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
@@ -87,67 +89,74 @@ class PayPaymentsFragment : Fragment() {
                 mPayPaymentsBinding.paymentsMoneyEditText
             )
         )
-        mPayPaymentsBinding.submit.setOnClickListener {
-
-            mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
-                if (it != null) {
-                    val removeComma =
-                        NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
-                    val currentPayment = it.payment
-                    if (removeComma==currentPayment){
-                        val payPayment = "payPayment"
-                                mPaymentsViewModel.insertMoney(
-                                    removeComma,
-                                    userId,
-                                    payPayment
-                                )
-                    }else{
-                        val builder: AlertDialog.Builder =
-                            AlertDialog.Builder(requireActivity())
-                        builder.setIcon(R.drawable.warning)
-                        mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
-                            val removeComma =
-                                NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
-                                    .replace(",", "")
-                            if (it != null) {
-                                mPayPaymentsBinding.loan = it
-                                val currentPayment = it.payment
-                                if (removeComma.toLong() > currentPayment.toLong()) {
-                                    val more = "بیشتر"
-                                    descide = more
-                                } else if (removeComma.toLong() < currentPayment.toLong()) {
-                                    val less = "کمتر"
-                                    descide = less
-                                }
-                                builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $descide است. ادامه میدهید؟")
-                                    .setCancelable(false)
-                                    .setPositiveButton("اره به هر حال واریز کن",
-                                        DialogInterface.OnClickListener { dialog, id ->
-                                            val payPayment = "payPayment"
-                                            mPaymentsViewModel.insertMoney(
-                                                removeComma,
-                                                userId,
-                                                payPayment
-                                            )
-                                            Toast.makeText(
-                                                activity,
-                                                "قسط با موفقیت برداخت شد.",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                        })
-                                    .setNegativeButton("نه,ممنون",
-                                        DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+        mPaymentsViewModel.submit.observe(viewLifecycleOwner, {
+            if (it == true) {
+                mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
+                    if (it != null) {
+                        val removeComma =
+                            NumberTextWatcherForThousand.trimCommaOfString(mPayPaymentsBinding.paymentsMoneyEditText.text.toString())
+                        val currentPayment = it.payment
+                        if (removeComma == currentPayment) {
+                            val payPayment = "payPayment"
+                            mPaymentsViewModel.insertMoney(
+                                removeComma,
+                                userId,
+                                payPayment
+                            )
+                        } else {
+                            val builder: AlertDialog.Builder =
+                                AlertDialog.Builder(requireActivity())
+                            builder.setIcon(R.drawable.warning)
+                            mPaymentsViewModel.loan.observe(viewLifecycleOwner, {
+                                val removeComma =
+                                    NumberTextWatcherForThousand.trimCommaOfString(
+                                        mPayPaymentsBinding.paymentsMoneyEditText.text.toString()
                                     )
-                                val alert: AlertDialog = builder.create()
-                                alert.setCanceledOnTouchOutside(true)
-                                alert.show()
-                            }
-                        })
+                                        .replace(",", "")
+                                if (it != null) {
+                                    mPayPaymentsBinding.loan = it
+                                    val currentPayment = it.payment
+                                    if (removeComma.toLong() > currentPayment.toLong()) {
+                                        val more = "بیشتر"
+                                        descide = more
+                                    } else if (removeComma.toLong() < currentPayment.toLong()) {
+                                        val less = "کمتر"
+                                        descide = less
+                                    }
+                                    builder.setTitle(" مبلغ مورد نظر از مبلغ قسط وام $descide است. ادامه میدهید؟")
+                                        .setCancelable(false)
+                                        .setPositiveButton("اره به هر حال واریز کن",
+                                            DialogInterface.OnClickListener { dialog, id ->
+                                                val payPayment = "payPayment"
+                                                mPaymentsViewModel.insertMoney(
+                                                    removeComma,
+                                                    userId,
+                                                    payPayment
+                                                )
+                                                Toast.makeText(
+                                                    activity,
+                                                    "قسط با موفقیت برداخت شد.",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            })
+                                        .setNegativeButton("نه,ممنون",
+                                            DialogInterface.OnClickListener { dialog, id -> dialog.dismiss() }
+                                        )
+                                    val alert: AlertDialog = builder.create()
+                                    alert.setCanceledOnTouchOutside(true)
+                                    alert.show()
+                                }
+                            })
+                        }
+                        mPayPaymentsBinding.loan = it
                     }
-                    mPayPaymentsBinding.loan = it
-                }
-            })
-        }
+                })
+
+                mPaymentsViewModel.submitDone()
+            }
+
+        })
+
         mPaymentsViewModel.getBankList().observe(viewLifecycleOwner, {
             mPaymentsViewModel.bankInfo.value = it
             Log.d("TAG", "viewHolder: $it")
@@ -166,12 +175,13 @@ class PayPaymentsFragment : Fragment() {
             mPayPaymentsBinding.chooseBank.adapter = adapter
 
         })
-        mPaymentsViewModel.copyNumber.observe(viewLifecycleOwner, {
-            if (it == true) {
-                val getPaymentPrice = mPayPaymentsBinding.paymentPrice.text.toString()
-                mPayPaymentsBinding.paymentsLayout.getEditText()?.setText(getPaymentPrice);
-            }
-        })
+        mPaymentsViewModel.copyNumber.observe(viewLifecycleOwner,
+            {
+                if (it == true) {
+                    val getPaymentPrice = mPayPaymentsBinding.paymentPrice.text.toString()
+                    mPayPaymentsBinding.paymentsLayout.getEditText()?.setText(getPaymentPrice);
+                }
+            })
 
         return mPayPaymentsBinding.root
     }

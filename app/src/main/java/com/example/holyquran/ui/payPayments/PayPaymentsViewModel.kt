@@ -32,6 +32,24 @@ class PayPaymentsViewModel(
     val userName: LiveData<UserInfo>
         get() = _userName
 
+    private val _copyNumber = MutableLiveData<Boolean>(false)
+    val copyNumber: LiveData<Boolean>
+        get() = _copyNumber
+
+    fun copyNumber() {
+        _copyNumber.value = true
+    }
+    private val _submit = MutableLiveData<Boolean>(false)
+    val submit: LiveData<Boolean>
+        get() = _submit
+
+    fun submit() {
+        _submit.value = true
+    }
+    fun submitDone() {
+        _submit.value = false
+    }
+
     fun setUserName(id: Long): LiveData<UserInfo>? {
         return mUserInfoDAO.get(id)
     }

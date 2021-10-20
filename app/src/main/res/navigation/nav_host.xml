@@ -232,5 +232,8 @@
         <argument
             android:name="id"
             app:argType="long" />
+        <action
+            android:id="@+id/action_payPaymentsFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
     </fragment>
 </navigation>
