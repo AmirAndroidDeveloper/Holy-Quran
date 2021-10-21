@@ -16,6 +16,7 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentEditBinding
+import com.google.android.material.snackbar.Snackbar
 
 class EditUserInfoFragment : Fragment() {
     lateinit var mEditFragmentBiding: FragmentEditBinding
@@ -73,7 +74,6 @@ class EditUserInfoFragment : Fragment() {
                         userInfo
                     )
                     Toast.makeText(activity, "update user", Toast.LENGTH_LONG).show();
-
                 }
                 mEditUserInfoViewModel.validDone()
             }
@@ -85,13 +85,30 @@ class EditUserInfoFragment : Fragment() {
             }
         })
     }
+
     private fun validInfo(): Boolean {
         if (mEditFragmentBiding.userName.text.isEmpty()) {
-            Toast.makeText(
-                activity, "Empty", Toast.LENGTH_SHORT
-            ).show()
+
+
+            Snackbar.make(
+                mEditFragmentBiding.root,
+                resources.getText(R.string.empty_user_field_error),
+                Snackbar.LENGTH_LONG
+            )
+                .setAction(resources.getText(R.string.submit)) {
+                }
+                .setActionTextColor(resources.getColor(android.R.color.white))
+                .show()
             return false
+        } else if (mEditFragmentBiding.mobileNumber.text.isEmpty()) {
+            return true
+        } else if (mEditFragmentBiding.phoneNumber.text.isEmpty()) {
+            return true
+
+        } else if (mEditFragmentBiding.address.text.isEmpty()) {
+            return true
+
         }
-        return true
+        return false
     }
 }

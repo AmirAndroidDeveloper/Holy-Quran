@@ -38,41 +38,28 @@
                 android:text="@{userName.fullName}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                tools:text="امیر حسین رجايی زاده‌" />
+                tools:text="@string/user_profile" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="لیست وام های آقای/خانم "
+                android:text="@string/loan_list_user"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="15sp"
             android:layoutDirection="ltr">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFeed"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 app:loanHistory="@{increaseHistoryViewModel.loanInfo}" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <LinearLayout
-            android:id="@+id/ll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
         </LinearLayout>
     </LinearLayout>
 

@@ -17,7 +17,6 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -42,7 +41,6 @@ dataBinding{
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
 
     implementation 'net.objecthunter:exp4j:0.4.8'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'

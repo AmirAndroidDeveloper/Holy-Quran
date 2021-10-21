@@ -42,7 +42,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="شماره حساب">
+                        android:hint="@string/account_number">
                         <!--this is the actual edit text which takes the input-->
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/accountNumber"
@@ -64,7 +64,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="نام بانک">
+                        android:hint="@string/bank_name">
                         <!--this is the actual edit text which takes the input-->
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/bankName"
@@ -87,17 +87,34 @@
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layoutDirection="ltr">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="شماره تلفن همراه">
-                        <!--this is the actual edit text which takes the input-->
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/background_line"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/createdDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:onClick="@{() -> viewModel.openCalender()}"
+                            android:text="99/5/2"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
+
+                    </LinearLayout>
+<!--                    <com.google.android.material.textfield.TextInputLayout-->
+<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="شماره تلفن همراه">-->
+<!--                        &lt;!&ndash;this is the actual edit text which takes the input&ndash;&gt;-->
+<!--                        <com.google.android.material.textfield.TextInputEditText-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content" />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,10 +129,10 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="شماره کارت">
+                        android:hint="@string/address">
                         <!--this is the actual edit text which takes the input-->
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/cardNumber"
+                            android:id="@+id/edtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number" />
@@ -131,25 +148,6 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/background_line"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/createdDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:gravity="center"
-                        android:onClick="@{() -> viewModel.openCalender()}"
-                        android:text="99/5/2"
-                        android:textColor="@color/black"
-                        android:textSize="22sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -160,10 +158,10 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="آدرس">
+                        android:hint="@string/card_number">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtAddress"
+                            android:id="@+id/cardNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="text" />
@@ -177,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:onClick="@{() -> viewModel.addCard()}"
-                android:text="add Card" />
+                android:text="@string/add_card" />
         </LinearLayout>
     </LinearLayout>
 </layout>

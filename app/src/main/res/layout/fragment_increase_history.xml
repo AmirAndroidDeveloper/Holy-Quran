@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="increaseHistoryViewModel"
             type="com.example.holyquran.ui.transactionHistory.TransactionHistoryViewModel" />
@@ -17,7 +16,6 @@
         <variable
             name="transaction"
             type="com.example.holyquran.data.model.Transaction" />
-
     </data>
 
     <LinearLayout
@@ -43,12 +41,12 @@
                 android:text="@{userName.fullName}"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                tools:text="امیر حسین رجايی زاده‌" />
+                tools:text="@string/user_profile" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="لیست تراکنش های آقای/خانم "
+                android:text="@string/transactions_list_of_user"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>

@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="نام بانک"
+                    android:text="@string/bank_name"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -45,14 +45,14 @@
                     android:text="@{bank.bankName}"
                     android:textColor="@color/gray500"
                     android:textSize="20sp"
-                    tools:text="ملت" />
+                    tools:text="@string/melly" />
             </FrameLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -61,18 +61,18 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="شماره کارت"
+                        android:text="@string/card_number"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="left|center"
                         android:text="@{bank.cardNumber}"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
-                        tools:text="۶۰۳۷۹۹۱۸۵۰۳۲۵۹۸۰" />
+                        tools:text="@string/card_number_sample" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -83,7 +83,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="شماره حساب"
+                        android:text="@string/account_number"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -94,7 +94,7 @@
                         android:text="@{bank.accountNumber}"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
-                        tools:text="۶۰۳۷۹۹۱۸۵۰۳۲۵۹۸۰" />
+                        tools:text="@string/account_number_sample" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -110,7 +110,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="تاریخ ایجاد"
+                        android:text="@string/create_date_bank"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -121,7 +121,7 @@
                         android:text="@{bank.createDate}"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
-                        tools:text="1400/8/9" />
+                        tools:text="@string/current_date" />
                 </FrameLayout>
             </LinearLayout>
 
@@ -137,7 +137,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="موجودی"
+                        android:text="@string/amount_left_in_account"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
@@ -148,7 +148,7 @@
                         android:gravity="left|center"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
-                        tools:text="۲۰۰۰۰" />
+                        tools:text="@string/amount_left_account_number_sample" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
@@ -160,8 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginLeft="30dp"
-            android:layout_marginBottom="50dp"
             android:layout_marginRight="30dp"
+            android:layout_marginBottom="50dp"
             android:orientation="vertical"
             android:visibility="invisible">
 
@@ -202,11 +202,11 @@
                     android:textSize="20sp" />
 
                 <Spinner
-                    android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}"
                     android:id="@+id/toBank"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="start|center"
+                    android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}"
                     android:text="20000"
                     android:textColor="@color/gray500"
                     android:textSize="20sp" />
@@ -237,9 +237,9 @@
                 android:layout_marginTop="30dp">
 
                 <Button
-                    android:onClick="@{() -> viewModel.transferMoney()}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:onClick="@{() -> viewModel.transferMoney()}"
                     android:text="تایید" />
             </LinearLayout>
 

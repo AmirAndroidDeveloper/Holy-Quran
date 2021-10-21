@@ -12,277 +12,276 @@
             name="userName"
             type="com.example.holyquran.data.model.UserInfo" />
     </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.loan.getLoan.GetLoanFragment">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20sp"
-            android:layout_marginRight="40dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="دریافت وام"
-                android:textColor="@color/black"
-                android:textSize="30dp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".ui.loan.getLoan.GetLoanFragment">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
                 android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{userName.fullName}"
-                    android:textColor="@color/gray600"
-                    android:textSize="20sp"
-                    tools:text="امیر حسین رجایی" />
+                android:layout_marginRight="40dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=" وام گیرنده:"
+                    android:gravity="center"
+                    android:text="@string/get_loan"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:textSize="30sp" />
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-                <TextView
-                   android:id="@+id/loanDate"
-                    android:layout_width="wrap_content"
-                    android:onClick="@{() -> viewModel.openCalender()}"
-                    android:layout_height="wrap_content"
-                    android:text="99/5/4"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="تاریخ اعطای وام:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-
-                <EditText
-                    android:id="@+id/loanAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textColor="@color/gray600"
-                    android:textSize="20sp"
-                    tools:text="50000000" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=" مبلغ وام:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-
-                android:layoutDirection="ltr">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
                     android:orientation="horizontal">
 
-
-                    <EditText
-                        android:id="@+id/benefitPrecent"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginStart="50dp"
-                        android:inputType="number"
+                        android:text="@{userName.fullName}"
                         android:textColor="@color/gray600"
                         android:textSize="20sp"
-                        tools:text="20" />
+                        tools:text="@string/user_profile" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|center"
-                        android:text="درصد"
+                        android:text="@string/loan_getter"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|center"
-                        android:text="سود بانکی:"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-
-                </FrameLayout>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/loanSections"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="تعداد اقساط"
-                    android:inputType="number" />
+                </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
                     android:layoutDirection="ltr"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/loanDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{() -> viewModel.openCalender()}"
+                        android:text="@string/current_date"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/loan_date"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/loanAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp"
+                        tools:text="@string/amount_left" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/loan_price"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+
+                    android:layoutDirection="ltr">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <EditText
+                            android:id="@+id/benefitPrecent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginStart="50dp"
+                            android:inputType="number"
+                            android:textColor="@color/gray600"
+                            android:textSize="20sp"
+                            tools:text="20" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:text="@string/percent"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center"
+                            android:text="@string/benefit_percent"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+
+                    </FrameLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/loanSections"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/loan_section"
+                        android:inputType="number" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layoutDirection="ltr"
-                        android:text="فاصله اقساط"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layoutDirection="ltr"
+                            android:text="@string/section_time"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="8dp"
+                            android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/sectionPayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/section_price"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
 
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="end"
-                        android:layout_marginTop="8dp"
-                        android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}" />
-                </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/loanBenefit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/loan_benefit"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/totalLoan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/whole_loan_price"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                </FrameLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:onClick="@{() -> viewModel.getLoan()}"
+                    android:text="@string/submit" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.calculateLoan()}"
+                    android:text="@string/calculate" />
             </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-
-
-
-                <TextView
-                    android:id="@+id/sectionPayment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray600"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:text="مبلغ هر قسط:"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/loanBenefit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray600"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="سود وام"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:layoutDirection="ltr"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/totalLoan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/gray600"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="مبلغ کل وام"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-            </FrameLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:onClick="@{() -> viewModel.getLoan()}"
-                android:text="تایید" />
-
-            <Button
-                android:onClick="@{() -> viewModel.calculateLoan()}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="محاسبه" />
         </LinearLayout>
-    </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

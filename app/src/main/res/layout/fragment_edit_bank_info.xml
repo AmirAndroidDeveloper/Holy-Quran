@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="ویرایش اطلاعات باتک"
+                android:text="@string/edit_bank_info"
                 android:textColor="@color/gray800"
                 android:textSize="30dp" />
 
@@ -64,12 +64,12 @@
                             android:text="@{bankInfo.bankName}"
                             android:textColor="@color/gray800"
                             android:textSize="20sp"
-                            tools:text="ملت" />
+                            tools:text="@string/melly" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="نام بانک:"
+                            android:text="@string/bank_name"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -90,12 +90,12 @@
                             android:text="@{bankInfo.cardNumber}"
                             android:textColor="@color/gray800"
                             android:textSize="20sp"
-                            tools:text="6104338925659515" />
+                            tools:text="@string/card_number_sample" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text=" شماره کارت:"
+                            android:text="@string/card_number"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
                     </LinearLayout>
@@ -116,12 +116,12 @@
                         android:text="@{bankInfo.accountNumber}"
                         android:textColor="@color/gray800"
                         android:textSize="20sp"
-                        tools:text="5658452565" />
+                        tools:text="@string/account_number_sample" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="شماره حساب:"
+                        android:text="@string/account_number"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -134,19 +134,19 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                      android:id="@+id/address"
                         android:background="@null"
                         android:text="@{bankInfo.address}"
                         android:textColor="@color/gray800"
                         android:textSize="20sp"
-                        tools:text="https://mellat.com" />
+                        tools:text="https://MellyBank.com" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="آدرس:"
+                        android:text="@string/address"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -158,33 +158,34 @@
                     android:layoutDirection="ltr"
                     android:orientation="horizontal">
 
-                  
+
                 </LinearLayout>
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="40dp">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp">
 
-<!--                <Button-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="ویرایش" />-->
-<!--            </LinearLayout>-->
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
+                    android:text="@string/edit" />
+            </LinearLayout>
 
 
         </LinearLayout>
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:onClick="@{()-> viewModel.onSubmitBtnClick()}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp"
-            android:backgroundTint="#1e45d1"
-            android:src="@drawable/ic_baseline_edit_24"
-            app:tint="@color/white" />
+        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--            android:onClick="@{()-> viewModel.onSubmitBtnClick()}"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="bottom"-->
+        <!--            android:layout_marginBottom="30dp"-->
+        <!--            android:backgroundTint="#1e45d1"-->
+        <!--            android:src="@drawable/ic_baseline_edit_24"-->
+        <!--            app:tint="@color/white" />-->
     </FrameLayout>
-</layout><!--    android:onClick="@{() -> viewModel.goTOAddUser()}"-->
+</layout>

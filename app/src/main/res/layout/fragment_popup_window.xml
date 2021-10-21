@@ -20,7 +20,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20sp"
         tools:context=".ui.popupWindow.PopupWindowFragment">
@@ -60,7 +60,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
-                android:text="ثبت واریز"
+                android:text="@string/submit_increase"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -68,6 +68,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_gravity="left"
                 android:src="@drawable/ic_baseline_add_circle_24" />
 
 
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="ثبت برداشت"
+                android:text="@string/submit_decrease"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -109,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="ثبت وام"
+                android:text="@string/submit_loan"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -133,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text=" (تاکنون وامی برای کاربر ثبت نشده است)"
+                android:text="@string/no_loan_user"
                 android:textColor="@color/gray600"
                 android:textSize="14sp"
                 android:visibility="invisible" />
@@ -144,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="برداخت قسط"
+                android:text="@string/pay_payment"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -175,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="لیست وام ها"
+                android:text="@string/payments_list"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -198,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="تاریخچه تراکنش ها"
+                android:text="@string/transaction_history"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -227,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="ویرایش اطلاعات کاربر"
+                android:text="@string/edit_user_info"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -251,7 +252,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="حذف کاربر"
+                android:text="@string/delete_user"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 

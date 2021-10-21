@@ -193,7 +193,7 @@ class PopupWindowFragment : DialogFragment() {
         Toast.makeText(activity, "noLoanHasBEENSAVED", Toast.LENGTH_SHORT).show()
         mPopupWindowBinding.payPayment.setTextColor(resources.getColor(R.color.gray500))
         mPopupWindowBinding.img.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_add_circle))
-      mPopupWindowBinding.noLoanForUser.visibility=View.VISIBLE
+        mPopupWindowBinding.noLoanForUser.visibility = View.VISIBLE
         mPopupWindowBinding.payPaymentLL.isClickable = false
     }
 }

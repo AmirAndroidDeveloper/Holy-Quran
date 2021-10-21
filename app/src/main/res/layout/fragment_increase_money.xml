@@ -49,7 +49,7 @@
                     android:text="@{userName.fullName}"
                     android:textColor="@color/black"
                     android:textSize="35sp"
-                    tools:text="UserName" />
+                    tools:text="@string/userName" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -58,14 +58,14 @@
                     android:text="@{userName.mobileNumber}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    tools:text="UserName" />
+                    tools:text="@string/mobile_number" />
 
                 <TextView
                     android:id="@+id/totalMoney"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Total Money"
+                    android:text="@string/final_money_user"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:gravity="center"
-                    android:text="ثبت واریز"
+                    android:text="@string/submit_increase"
                     android:textColor="@color/black"
                     android:textSize="35sp" />
 
@@ -90,23 +90,22 @@
                         android:id="@+id/increaseEdt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="amount"
+                        android:hint="@string/amount"
                         android:inputType="number" />
 
-<!--                    <CheckBox-->
-<!--                        android:id="@+id/checkBox"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:text="برداخت قسط" />-->
-
+                    <!--                    <CheckBox-->
+                    <!--                        android:id="@+id/checkBox"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="50dp"-->
+                    <!--                        android:text="برداخت قسط" />-->
 
 
                     <Spinner
-                        android:onItemSelected="@{(parent,view,pos,id)-> increaseMoneyViewModel.onSelectItem(pos)}"
                         android:id="@+id/chooseBank"
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="20sp"
-                        android:layout_height="wrap_content"/>
+                        android:onItemSelected="@{(parent,view,pos,id)-> increaseMoneyViewModel.onSelectItem(pos)}" />
 
 
                     <LinearLayout
@@ -142,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
                     android:onClick="@{() -> increaseMoneyViewModel.increaseMoney()}"
-                    android:text="تایید" />
+                    android:text="@string/submit" />
 
 
             </LinearLayout>
@@ -176,18 +175,10 @@
                         android:gravity="center"
                         android:text="@{transaction.increase}"
                         android:textColor="@color/black"
-                        tools:text="باقی مانده حساب" />
+                        tools:text="@string/total_increase" />
 
                 </LinearLayout>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/popUpWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:text="popup window" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

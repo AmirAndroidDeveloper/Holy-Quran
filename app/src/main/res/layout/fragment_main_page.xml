@@ -25,7 +25,7 @@
             android:id="@+id/txtTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="صندوق"
+            android:text="@string/sandogh"
             android:textColor="@color/black"
             android:textSize="45sp"
             android:layout_gravity="center"

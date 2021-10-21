@@ -74,13 +74,16 @@ class AddBankFragment : Fragment() {
                         mAddBankBinding.cardNumber.text!!.isNotEmpty().and(
                             mAddBankBinding.accountNumber.text!!.isNotEmpty()
                                 .and(mAddBankBinding.edtAddress.text!!.isNotEmpty())
-                        ))) { valid()
+                        )
+                    )
+                ) {
+                    valid()
                 }
             }
         })
 
 
-       
+
         return mAddBankBinding.root
     }
 
