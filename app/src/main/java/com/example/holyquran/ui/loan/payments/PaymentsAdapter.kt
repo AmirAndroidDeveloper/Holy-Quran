@@ -80,7 +80,7 @@ class PaymentsAdapter() : ListAdapter<Loan, RecyclerView.ViewHolder>(BillDiffCal
 
 class BillDiffCallback : DiffUtil.ItemCallback<Loan>() {
     override fun areItemsTheSame(oldItem: Loan, newItem: Loan): Boolean {
-        return oldItem.sectionTime == newItem.sectionTime
+        return oldItem.loanId == newItem.loanId
     }
 
     override fun areContentsTheSame(

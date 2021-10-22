@@ -16,10 +16,10 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
         tools:context=".ui.editUserInfo.EditUserInfoFragment">
 
@@ -36,7 +36,7 @@
                 android:gravity="center"
                 android:text="@string/edit_user_info"
                 android:textColor="@color/gray800"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
 
             <LinearLayout
@@ -69,34 +69,12 @@
                                 android:textColor="@color/gray800"
                                 android:textSize="20sp"
                                 tools:text="@string/user_profile" />
-<!--                            <LinearLayout-->
-<!--                                android:id="@+id/error"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:orientation="horizontal"-->
-<!--                                android:visibility="invisible">-->
-
-<!--                                <TextView-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:gravity="center"-->
-<!--                                    android:text="@string/empty_user_field_error"-->
-<!--                                    android:textColor="@color/gray800" />-->
-
-<!--                                <ImageView-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="match_parent"-->
-<!--                                    android:src="@drawable/ic_baseline_error_outline_24" />-->
-<!--                            </LinearLayout>-->
                         </LinearLayout>
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
                             android:gravity="right|center"
                             android:text="@string/userName"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            style="@style/customTheme" />
                     </LinearLayout>
 
 

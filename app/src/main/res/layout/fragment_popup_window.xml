@@ -2,9 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
-
         <variable
             name="viewModel"
             type="com.example.holyquran.ui.popupWindow.PopupViewModel" />
@@ -20,7 +18,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="20sp"
         tools:context=".ui.popupWindow.PopupWindowFragment">
@@ -37,13 +35,12 @@
                 android:textColor="@color/black"
                 android:textSize="25sp" />
         </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToIncrease()}"
             android:orientation="horizontal">
 
@@ -64,14 +61,11 @@
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="left"
                 android:src="@drawable/ic_baseline_add_circle_24" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -79,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToDecrease()}"
             android:orientation="horizontal">
 
@@ -102,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToLoan()}"
             android:orientation="horizontal">
 
@@ -126,6 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToPayPayments()}"
             android:orientation="horizontal">
 
@@ -167,7 +164,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:gravity="end"
+            android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToLoanList()}"
             android:orientation="horizontal">
 
@@ -190,7 +188,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
-            android:gravity="end"
+            android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToUserTransactionHistory()}"
             android:orientation="horizontal">
 
@@ -220,6 +219,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.goToEditUserInfo()}"
             android:orientation="horizontal">
 
@@ -244,6 +244,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:gravity="right"
+            android:layoutDirection="ltr"
             android:onClick="@{() -> viewModel.deleteUser()}"
             android:orientation="horizontal">
 

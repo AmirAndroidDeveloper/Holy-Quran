@@ -32,7 +32,7 @@ class GetLoanViewModel(
         amount: String,
         createdDate: String,
         loanSection: String,
-        spinnerSectionSpace: String,
+//        spinnerSectionSpace: String,
         payment: String,
         userId: Long,
     ) {
@@ -45,7 +45,7 @@ class GetLoanViewModel(
                     createdDate,
                     loanSection,
                     null,
-                    spinnerSectionSpace,
+//                    spinnerSectionSpace,
                     payment
                 )
             )

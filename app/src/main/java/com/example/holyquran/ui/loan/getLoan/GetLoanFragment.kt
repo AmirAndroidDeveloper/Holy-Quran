@@ -61,7 +61,7 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 requireArguments()
             )
         id = arg.userId
-        val spinner: Spinner = mGetLoanBinding.spinner
+//        val spinner: Spinner = mGetLoanBinding.spinner
         ArrayAdapter.createFromResource(
             requireActivity(),
             R.array.payment_time,
@@ -69,8 +69,8 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
-            spinner.onItemSelectedListener = this
+//            spinner.adapter = adapter
+//            spinner.onItemSelectedListener = this
         }
 
         mGetLoanViewModel.getLoan.observe(viewLifecycleOwner, Observer {
@@ -95,14 +95,12 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                         removeComma,
                         mGetLoanBinding.loanDate.text.toString(),
                         mGetLoanBinding.loanSections.text.toString(),
-                        mGetLoanBinding.spinner.selectedItem.toString(),
+//                        mGetLoanBinding.spinner.selectedItem.toString(),
                         removeSectionComma,
                         id
                     )
-
                     requireView().findNavController().popBackStack()
                 }
-
             }
         })
 
@@ -156,7 +154,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 count: Int, after: Int
             ) {
             }
-
             override fun onTextChanged(
                 s: CharSequence, start: Int,
                 before: Int, count: Int

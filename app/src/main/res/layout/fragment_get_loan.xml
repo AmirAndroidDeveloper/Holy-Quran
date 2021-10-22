@@ -170,13 +170,12 @@
                         android:id="@+id/loanSections"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="@string/loan_section"
                         android:inputType="number" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layoutDirection="ltr"
                         android:orientation="vertical">
 
@@ -184,17 +183,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layoutDirection="ltr"
-                            android:text="@string/section_time"
+                            android:gravity="right|center"
+                            android:text="@string/loan_section"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
-                        <Spinner
-                            android:id="@+id/spinner"
-                            android:layout_width="120dp"
-                            android:layout_height="50dp"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="8dp"
-                            android:onItemSelected="@{(parent,view,pos,id)-> viewModel.onSelectItem(pos)}" />
                     </LinearLayout>
                 </LinearLayout>
 

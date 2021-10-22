@@ -169,12 +169,11 @@ class PopupWindowFragment : DialogFragment() {
                 mPopupWindowBinding.loan = it
             }
         })
-
-
+        val width = resources.getDimensionPixelSize(R.dimen.popup_width)
+        val height = resources.getDimensionPixelSize(R.dimen.popup_height)
+        dialog!!.window!!.setLayout(width, height)
         return mPopupWindowBinding.root
     }
-
-
     private fun deleteUserDialog(userInfo: UserInfo) {
         Snackbar.make(
             mPopupWindowBinding.root,
