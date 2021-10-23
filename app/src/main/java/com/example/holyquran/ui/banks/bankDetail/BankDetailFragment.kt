@@ -112,8 +112,6 @@ class BankDetailFragment : Fragment() {
             }
         })
 
-
-
         setHasOptionsMenu(true)
         return mBankDetailBinding.root
     }

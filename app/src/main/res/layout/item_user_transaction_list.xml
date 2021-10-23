@@ -14,7 +14,7 @@
 
         <variable
             name="transaction"
-            type="com.example.holyquran.data.model.Transaction" />
+            type="com.example.holyquran.data.model.TransactionAndBank" />
     </data>
 
     <LinearLayout

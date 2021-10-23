@@ -9,11 +9,12 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.data.model.UserInfo
 
 class TransactionHistoryViewModel(
     val mUserInfoDAO: UserDAO,
-    private val mTransactionDAO: TransactionsDAO,
+     val mTransactionDAO: TransactionsDAO,
     val mLoan: LoanDAO,
     val mBankDAO: BankDAO,
     application: Application
@@ -49,12 +50,25 @@ class TransactionHistoryViewModel(
         get() = _transaction
 
 
+    private val _joinName = MutableLiveData<TransactionAndBank>()
+    val joinName: LiveData<TransactionAndBank>
+        get() = _joinName
+
+    fun joinTables(id: Long): LiveData<TransactionAndBank>? {
+        return mTransactionDAO.joinTables(id)
+    }
+
+    fun joinTables(mJoinInfo: TransactionAndBank) {
+        _joinName.value = mJoinInfo
+    }
 
 
 
-    val transactionInfo = MutableLiveData<List<Transaction>>()
-    fun getTransactionList(id: Long): LiveData<List<Transaction>> {
-        return mTransactionDAO.getAllTransactionByUserId(id)
+
+
+    val transactionInfo = MutableLiveData<List<TransactionAndBank>>()
+    fun getTransactionList(id: Long): LiveData<List<TransactionAndBank>> {
+        return mTransactionDAO.joinAllTables(id)
     }
 
 }

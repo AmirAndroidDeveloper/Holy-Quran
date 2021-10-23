@@ -59,30 +59,26 @@ class LoanDetailFragment : Fragment() {
         })
 
 
-//        mLoanDetailViewModel.setUserName(id)?.observe(viewLifecycleOwner, {
-//            mLoanDetailViewModel.setUserName(it)
+//        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
+//            mLoanDetailViewModel.setUserInfo(it)
 //        })
-//        mLoanDetailViewModel.userName.observe(viewLifecycleOwner, {
+//        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
 //            if (it != null) {
 //               mLoanDetailBinding.loanExpiredAt.text=it.fullName
 //                mLoanDetailBinding.userInfo = it
 //            }
 //        })
 
+//        mLoanDetailViewModel.joinTables(id)?.observe(viewLifecycleOwner, {
+//            mLoanDetailViewModel.joinTables(it)
+//            Log.d("TAG", "onCreateView: ${it.fullName},${it.amount}")
+//        })
+//        mLoanDetailViewModel.joinName.observe(viewLifecycleOwner, {
+//            if (it != null) {
+//                mLoanDetailBinding.join = it
+//            }
+//        })
 
-        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mLoanDetailViewModel.setUserInfo(it)
-            }
-        })
-
-        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
-            if (it != null) {
-                mLoanDetailBinding.userInfo = it
-                Log.d("TAG", "onCreateView: ${it.userId}")
-//                mLoanDetailBinding.userLoan.text = it.fullName
-            }
-        })
         setHasOptionsMenu(true)
         return mLoanDetailBinding.root
     }

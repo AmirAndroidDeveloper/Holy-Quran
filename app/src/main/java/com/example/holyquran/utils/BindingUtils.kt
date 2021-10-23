@@ -3,10 +3,7 @@ package com.example.holyquran.utils
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.holyquran.data.model.Bank
-import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.Transaction
-import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.data.model.*
 import com.example.holyquran.ui.banks.bankList.BankAdapter
 import com.example.holyquran.ui.loan.loanHistory.LoanAdapter
 import com.example.holyquran.ui.loan.loanList.LoanListAdapter
@@ -25,7 +22,7 @@ fun userList(
 @BindingAdapter("increaseList")
 fun increaseList(
     recyclerView: RecyclerView,
-    list: List<Transaction>?
+    list: List<TransactionAndBank>?
 ) {
     (recyclerView.adapter as TransactionHistory?)?.submitList(list)
     (recyclerView.adapter as TransactionHistory?)?.notifyDataSetChanged()

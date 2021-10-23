@@ -2,7 +2,9 @@ package com.example.holyquran.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.data.model.UserInfo
 
 @Dao
@@ -42,4 +44,15 @@ interface TransactionsDAO {
 
     @Query("SELECT SUM(decrease) FROM `transaction` WHERE bank_id=:key")
     fun sumBankDecrease(key: Long): Long
+
+
+    @Query("SELECT `transaction`.increase, `transaction`.decrease, bank.bank_name From `transaction` JOIN bank WHERE `transaction`.bank_id=:key ")
+    fun joinTables(key: Long): LiveData<TransactionAndBank>?
+
+    @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank WHERE `transaction`.bank_id=:key ")
+    fun joinAllTables(key: Long): LiveData<List<TransactionAndBank>>
+
+
+//    @Query("SELECT `transaction`.trans_id FROM `transaction`  JOIN bank ")
+//    fun joinTables():LiveData<TransactionAndBank>?
 }

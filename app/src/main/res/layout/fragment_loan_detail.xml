@@ -17,6 +17,10 @@
         <variable
             name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
+
+        <variable
+            name="join"
+            type="com.example.holyquran.data.model.LoanAndUserInfo" />
     </data>
 
 
@@ -38,29 +42,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <!--                <LinearLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="20sp"-->
-                <!--                    android:layoutDirection="ltr"-->
-                <!--                    android:orientation="horizontal">-->
 
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/userLoan"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:textColor="@color/gray600"-->
-                <!--                        android:textSize="20sp"-->
-                <!--                        tools:text="امیر حسین" />-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    android:layoutDirection="ltr"
+                    android:orientation="horizontal">
 
-                <!--                    <TextView-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:text="وام گیرنده:"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="20sp" />-->
-                <!--                </LinearLayout>-->
+                    <TextView
+                        android:id="@+id/loanGetter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/gray600"
+                        android:textSize="20sp"
+                        tools:text="امیر حسین" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="وام گیرنده:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -178,29 +182,29 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20sp"-->
-<!--                android:layoutDirection="ltr"-->
-<!--                android:orientation="horizontal">-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="20sp"-->
+            <!--                android:layoutDirection="ltr"-->
+            <!--                android:orientation="horizontal">-->
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@{loanInfo.sectionTime}"-->
-<!--                    android:textColor="@color/gray600"-->
-<!--                    android:textSize="20sp"-->
-<!--                    tools:text="1 ماه" />-->
+            <!--                <TextView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="@{loanInfo.sectionTime}"-->
+            <!--                    android:textColor="@color/gray600"-->
+            <!--                    android:textSize="20sp"-->
+            <!--                    tools:text="1 ماه" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/sectionSpace"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="@string/section_time"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="20sp" />-->
-<!--            </LinearLayout>-->
+            <!--                <TextView-->
+            <!--                    android:id="@+id/sectionSpace"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:text="@string/section_time"-->
+            <!--                    android:textColor="@color/black"-->
+            <!--                    android:textSize="20sp" />-->
+            <!--            </LinearLayout>-->
         </LinearLayout>
 
         <LinearLayout

@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
+
 class TransactionHistory() :
-    ListAdapter<Transaction, RecyclerView.ViewHolder>(BillDiffCallback()) {
+    ListAdapter<TransactionAndBank, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -49,7 +51,7 @@ class TransactionHistory() :
     class ViewHolder
     private constructor(val binding: ItemUserTransactionListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Transaction, adapterListener2: AdapterListener2) {
+        fun bind(item: TransactionAndBank, adapterListener2: AdapterListener2) {
             binding.transaction = item
             binding.clickListener = adapterListener2
             binding.executePendingBindings()
@@ -66,12 +68,7 @@ class TransactionHistory() :
             } else {
                 binding.amount.text = item.decrease
             }
-        }
-
-        fun bind2(item2: Bank, adapterListener2: AdapterListener2) {
-            binding.bankInfo = item2
-            binding.clickListener = adapterListener2
-            binding.executePendingBindings()
+            binding.bank.text = item.bankName
         }
 
         companion object {
@@ -100,14 +97,17 @@ class EmptyViewHolder private constructor(val binding: ItemUserTransactionListBi
 }
 
 
-class BillDiffCallback : DiffUtil.ItemCallback<Transaction>() {
-    override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
-        return oldItem.transId == newItem.transId
+class BillDiffCallback : DiffUtil.ItemCallback<TransactionAndBank>() {
+    override fun areItemsTheSame(
+        oldItem: TransactionAndBank,
+        newItem: TransactionAndBank
+    ): Boolean {
+        return oldItem.bankName == newItem.bankName
     }
 
     override fun areContentsTheSame(
-        oldItem: Transaction,
-        newItem: Transaction
+        oldItem: TransactionAndBank,
+        newItem: TransactionAndBank
     ): Boolean {
         return oldItem == newItem
     }

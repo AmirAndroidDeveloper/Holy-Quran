@@ -9,6 +9,9 @@
         <variable
             name="bank"
             type="com.example.holyquran.data.model.Bank" />
+  <variable
+            name="join"
+            type="com.example.holyquran.data.model.TransactionAndBank" />
 
         <variable
             name="viewModel"
@@ -52,10 +55,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:layoutDirection="ltr"
                 android:orientation="vertical">
 
                 <FrameLayout
                     android:layout_width="match_parent"
+                    android:layoutDirection="ltr"
                     android:layout_height="wrap_content">
 
                     <TextView
@@ -148,7 +153,7 @@
                         android:gravity="left|center"
                         android:textColor="@color/gray500"
                         android:textSize="20sp"
-                        tools:text="@string/amount_left_account_number_sample" />
+                        tools:text="@string/amount_left_in_account" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>

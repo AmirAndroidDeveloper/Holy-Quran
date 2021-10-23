@@ -84,6 +84,19 @@ class TransactionHistoryFragment : Fragment() {
             }
         })
 
+
+        mTransactionHistoryViewModel.joinTables(id)?.observe(viewLifecycleOwner, {
+            mTransactionHistoryViewModel.joinTables(it)
+            Log.d("TAG", "onCreateView: ${it.bankName},${it.increase},${it.decrease}")
+        })
+        mTransactionHistoryViewModel.joinName.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mIncreaseHistoryBinding.join = it
+            }
+        })
+
+
+
         return mIncreaseHistoryBinding.root
     }
 

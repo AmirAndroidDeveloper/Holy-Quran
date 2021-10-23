@@ -109,6 +109,7 @@ class UserListFragment : Fragment() {
             .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
             .show()
     }
+
     private fun Fragment.vibratePhone() {
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {

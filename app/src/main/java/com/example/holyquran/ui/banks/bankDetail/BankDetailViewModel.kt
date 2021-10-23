@@ -11,6 +11,7 @@ import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.TransactionAndBank
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -25,7 +26,6 @@ class BankDetailViewModel(
 ) :
     AndroidViewModel(application) {
     var type1: String = ""
-    var type2: String = ""
     private val _bankName = MutableLiveData<Bank>()
     val bankName: LiveData<Bank>
         get() = _bankName
@@ -54,6 +54,7 @@ class BankDetailViewModel(
     private val _transferMoney = MutableLiveData<Boolean>(false)
     val transferMoney: LiveData<Boolean>
         get() = _transferMoney
+
     fun transferMoney() {
         _transferMoney.value = true
     }
@@ -64,6 +65,7 @@ class BankDetailViewModel(
         Log.d("position", "onSelectItem: $postion")
         type1 = "decrease"
     }
+
     var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     fun transferMoneyIncrease(
