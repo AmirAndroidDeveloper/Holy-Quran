@@ -9,10 +9,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.LoanAndUserInfo
-import com.example.holyquran.data.model.TransactionAndBank
-import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.data.model.*
 
 class LoanDetailViewModel(
     val mUserInfoDAO: UserDAO,
@@ -47,15 +44,4 @@ class LoanDetailViewModel(
         _loanDetail.value = mLoanDetail
     }
 
-    private val _joinName = MutableLiveData<LoanAndUserInfo>()
-    val joinName: LiveData<LoanAndUserInfo>
-        get() = _joinName
-
-    fun joinTables(id: Long): LiveData<LoanAndUserInfo>? {
-        return mLoan.joinTables(id)
-    }
-
-    fun joinTables(mJoinInfo: LoanAndUserInfo) {
-        _joinName.value = mJoinInfo
-    }
 }

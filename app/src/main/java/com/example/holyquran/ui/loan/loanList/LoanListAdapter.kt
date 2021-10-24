@@ -105,7 +105,7 @@ class AdapterListener(
     val deleteListener: (loan: Loan) -> Unit
 
 ) {
-    fun onclick(loan: Loan) = clickListener(loan.loanId)
+    fun onclick(loan: Loan) = clickListener(loan.userId)
     fun onDeleteClick(loan: Loan) = deleteListener(loan)
 
 }

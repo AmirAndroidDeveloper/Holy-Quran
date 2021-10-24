@@ -2,6 +2,7 @@ package com.example.holyquran.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.UserInfo
 
 @Dao

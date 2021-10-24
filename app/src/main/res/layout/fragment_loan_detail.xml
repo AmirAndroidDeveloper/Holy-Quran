@@ -17,12 +17,7 @@
         <variable
             name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
-
-        <variable
-            name="join"
-            type="com.example.holyquran.data.model.LoanAndUserInfo" />
     </data>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,6 +49,7 @@
                         android:id="@+id/loanGetter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@{userInfo.fullName}"
                         android:textColor="@color/gray600"
                         android:textSize="20sp"
                         tools:text="امیر حسین" />
