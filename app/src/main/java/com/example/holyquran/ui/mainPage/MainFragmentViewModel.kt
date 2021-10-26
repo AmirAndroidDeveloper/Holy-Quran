@@ -8,6 +8,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Loan
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,39 +19,20 @@ class MainFragmentViewModel(
     val mTransactionsDAO: TransactionsDAO,
     val mLoan: LoanDAO,
     val mBankDAO: BankDAO,
-    application: Application
-) : AndroidViewModel(application) {
+    application: Application)
+    : AndroidViewModel(application) {
 
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
-
     val userInfo = MutableLiveData<List<UserInfo>>()
-    fun getUserList():LiveData<List<UserInfo>> {
+    fun getUserList(): LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
     }
 
-    private val _userName = MutableLiveData<UserInfo>()
-    val userName: LiveData<UserInfo>
-        get() = _userName
-
-
-    fun getUserInfo(id: Long): LiveData<UserInfo>? {
-        return mUserInfoDAO.get(id)
-    }
-    fun setUserInfo(mUserInfo: UserInfo) {
-        _userName.value = mUserInfo
-    }
-
-
-    private val _noNameTillKnow = MutableLiveData<Boolean>(false)
-    val noNameTillKnow: LiveData<Boolean>
-        get() = _noNameTillKnow
-
-
-    fun noNameTillKnow() {
-        _noNameTillKnow.value = true
+    val loan = MutableLiveData<List<Loan>>()
+    fun getLoanList(): LiveData<List<Loan>> {
+        return mLoan.getAllLoans()
     }
 
 

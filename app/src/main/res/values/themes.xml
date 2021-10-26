@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">#00786b</item>
         <item name="fontFamily">@font/b_nazanin</item>
     </style>
 
@@ -27,9 +28,8 @@
         <item name="fontFamily">@font/b_nazanin</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
-<!--        <item name="android:layout_width">match_parent</item>-->
-<!--        <item name="android:layout_height">match_parent</item>-->
-
+        <!--        <item name="android:layout_width">match_parent</item>-->
+        <!--        <item name="android:layout_height">match_parent</item>-->
 
 
     </style>

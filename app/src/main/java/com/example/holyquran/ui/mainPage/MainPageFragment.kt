@@ -1,28 +1,19 @@
 package com.example.holyquran.ui.mainPage
 
-import android.content.Context
 import android.content.DialogInterface
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.util.Log
+import android.view.*
+import android.widget.Toolbar
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
-import androidx.transition.TransitionManager
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentArgs
 
 
 class MainPageFragment : Fragment() {
@@ -42,7 +33,6 @@ class MainPageFragment : Fragment() {
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
             ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
-
         mMainViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
@@ -51,9 +41,17 @@ class MainPageFragment : Fragment() {
         this.also { mMainPageBinding.lifecycleOwner = it }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { alertDialog() }
 
+        mMainViewModel.getUserList().observe(viewLifecycleOwner, {
+            mMainViewModel.userInfo.value = it
+            mMainPageBinding.currentUsers.text = it.size.toString()
+        })
+        mMainViewModel.getLoanList().observe(viewLifecycleOwner, {
+            mMainViewModel.loan.value = it
+            mMainPageBinding.loans.text = it.size.toString()
+        })
+
         return mMainPageBinding.root
     }
-
 
     private fun alertDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
@@ -69,4 +67,5 @@ class MainPageFragment : Fragment() {
         alert.show()
 
     }
+
 }
