@@ -63,9 +63,6 @@ class TransactionHistoryViewModel(
     }
 
 
-
-
-
     val transactionInfo = MutableLiveData<List<TransactionAndBank>>()
     fun getTransactionList(id: Long): LiveData<List<TransactionAndBank>> {
         return mTransactionDAO.joinAllTables(id)

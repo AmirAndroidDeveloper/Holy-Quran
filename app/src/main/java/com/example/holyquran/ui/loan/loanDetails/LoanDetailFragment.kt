@@ -13,11 +13,6 @@ import com.example.holyquran.databinding.FragmentLoanDetailBinding
 import saman.zamani.persiandate.PersianDate
 import saman.zamani.persiandate.PersianDateFormat
 import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_add_user.*
-import kotlinx.android.synthetic.main.fragment_loan_detail.view.*
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
 
 class LoanDetailFragment : Fragment() {
     lateinit var mLoanDetailBinding: FragmentLoanDetailBinding
@@ -60,12 +55,24 @@ class LoanDetailFragment : Fragment() {
             }
         })
 
+//        mLoanDetailViewModel.joinTables(id)?.observe(viewLifecycleOwner, {
+//            mLoanDetailViewModel.joinTables(it)
+//            Log.d("TAG", "onCreateView: ${it.amount},${it.fullName}")
+//        })
+//        mLoanDetailViewModel.joinName.observe(viewLifecycleOwner, {
+//            if (it != null) {
+//                mLoanDetailBinding.join = it
+//            }
+//        })
+
 
         mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
             mLoanDetailViewModel.setUserInfo(it)
         })
         mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
             if (it != null) {
+            val test=id
+                Log.d("TAG", "testtesttest: ${it.fullName}")
                 mLoanDetailBinding.userInfo = it
             }
         })

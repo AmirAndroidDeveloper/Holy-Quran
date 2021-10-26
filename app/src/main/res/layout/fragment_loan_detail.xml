@@ -17,6 +17,10 @@
         <variable
             name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
+
+        <variable
+            name="join"
+            type="com.example.holyquran.data.model.LoanAndUserInfo" />
     </data>
 
     <LinearLayout

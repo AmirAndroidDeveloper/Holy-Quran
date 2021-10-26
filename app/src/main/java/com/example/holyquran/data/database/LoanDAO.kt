@@ -27,11 +27,5 @@ interface LoanDAO {
 
     @Query("SELECT * FROM loan WHERE user_id=:key")
     fun getLoan(key: Long): LiveData<Loan>
-
-    @Query("SELECT `loan`.amount, user_info.full_name From `user_info` JOIN loan WHERE `loan`.user_id=:key ")
-    fun joinTables(key: Long): LiveData<LoanAndUserInfo>?
-
-    @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank WHERE `transaction`.bank_id=:key ")
-    fun joinAllTables(key: Long): LiveData<List<TransactionAndBank>>
 }
 

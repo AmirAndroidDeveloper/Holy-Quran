@@ -15,6 +15,9 @@
             name="loan"
             type="com.example.holyquran.data.model.Loan" />
     </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/dialog_root"
@@ -264,4 +267,6 @@
                 android:src="@drawable/ic_delete2" />
         </LinearLayout>
     </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

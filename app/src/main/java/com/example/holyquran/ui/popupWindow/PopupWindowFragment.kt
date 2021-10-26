@@ -1,34 +1,24 @@
 package com.example.holyquran.ui.popupWindow
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
-import com.example.holyquran.R
-import com.example.holyquran.databinding.FragmentPopupWindowBinding
 import android.view.*
-import android.widget.PopupWindow
-import android.view.WindowManager
-import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Gravity
-
-import android.R.layout
-import android.graphics.Color
-import android.util.DisplayMetrics
-import android.util.Log
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.DialogFragment.STYLE_NO_FRAME
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
-import com.example.holyquran.ui.decreaseMoney.DecreaseMoneyFragmentArgs
-import com.example.holyquran.ui.decreaseMoney.DecreaseViewModel
-import com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragmentDirections
+import android.content.Context
+import android.content.res.Configuration
+import android.graphics.Insets
+import android.os.Build
+import android.util.DisplayMetrics
+import com.example.holyquran.databinding.FragmentPopupWindowBinding
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -39,7 +29,7 @@ class PopupWindowFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mPopupWindowBinding =
             DataBindingUtil.inflate(
                 layoutInflater,
@@ -169,7 +159,6 @@ class PopupWindowFragment : DialogFragment() {
                 mPopupWindowBinding.loan = it
             }
         })
-
         return mPopupWindowBinding.root
     }
     private fun deleteUserDialog(userInfo: UserInfo) {
@@ -192,5 +181,59 @@ class PopupWindowFragment : DialogFragment() {
         mPopupWindowBinding.img.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_add_circle))
         mPopupWindowBinding.noLoanForUser.visibility = View.VISIBLE
         mPopupWindowBinding.payPaymentLL.isClickable = false
+    }
+
+    private fun resize() {
+        val screenWidth: Int = requireActivity().getScreenWidth()
+        val screenHeight: Int = requireActivity().getScreenHeight()
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // landscape
+            if (dialog != null) dialog!!.window!!.setLayout(
+                screenWidth - 300.toPx(requireContext()),
+                screenHeight - 100.toPx(requireContext())
+            )
+        } else {
+            // Portrait
+            if (dialog != null) dialog!!.window!!.setLayout(
+                screenWidth - 16.toPx(requireContext()),
+                screenHeight - 200.toPx(requireContext())
+            )
+        }
+    }
+
+    private fun Int.toPx(context: Context): Int =
+        (this * context.resources.displayMetrics.density).toInt()
+
+
+    private fun Activity.getScreenWidth(): Int {
+        return if (Build.VERSION.SDK_INT < 30) {
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        } else {
+            val metrics = windowManager.currentWindowMetrics
+            val insets = metrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            metrics.bounds.width() - insets.left - insets.right
+        }
+    }
+
+    private fun Activity.getScreenHeight(): Int {
+        return if (Build.VERSION.SDK_INT < 30) {
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.heightPixels
+        } else {
+            val metrics = windowManager.currentWindowMetrics
+            val insets = metrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            metrics.bounds.height() - insets.top - insets.bottom
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        resize()
     }
 }

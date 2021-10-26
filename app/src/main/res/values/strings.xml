@@ -77,6 +77,8 @@
     <string name="delete_user">حذف کاربر</string>
     <string name="transaction_history">تاریخچه تراکنش ها</string>
     <string name="no_loan_user">(تاکنون وامی برای کاربر ثبت نشده است)</string>
+    <string name="not_payed_loan">تسویه نشده اقساطی</string>
+    <string name="loans">وام های اقساطی</string>
 <!--    <string name="edit">ویرایش</string>-->
 
 

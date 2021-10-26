@@ -57,7 +57,7 @@ class LoanHistoryFragment : Fragment() {
             if (it != 0L)
                 this.findNavController().navigate(
                 LoanHistoryFragmentDirections.actionLoanHistoryFragmentToLoanDetailFragment(it) )
-            Log.d("TAG", "navTeat $it ")
+            Log.d("TAG", "navTeat $id ")
         }, {
 //            deleteDialog(it)
         }
