@@ -32,7 +32,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var mGetLoanBinding: FragmentGetLoanBinding
     lateinit var mGetLoanViewModel: GetLoanViewModel
     var id: Long = 0L
-    var checkComma = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,16 +81,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     mGetLoanBinding.loanAmount
                 )
             )
-            val string: String = mGetLoanBinding.sectionPayment.text.toString()
-            val english: Boolean = "," in string
-            val persian: Boolean = "٬" in string
-            Log.d("TAG", "onCreateView: $english,$persian")
-
-            if (english) {
-                checkComma = false
-            } else if (persian) {
-                checkComma = true
-            }
 
             if (it == true) {
                 if (mGetLoanBinding.loanAmount.text?.let { it1 ->
@@ -101,16 +90,12 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     } == true
                 ) {
                 } else {
-
-                    if (checkComma) {
-                        insertDataPersianComma()
-                    } else {
-                        insertDataEnglishComma()
-                    }
+                    saveLoan()
                     requireView().findNavController().popBackStack()
                 }
             }
         })
+
         val pdate = PersianDate()
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
@@ -171,7 +156,6 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
             }
         })
-
         return mGetLoanBinding.root
     }
 
@@ -203,39 +187,47 @@ class GetLoanFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    fun insertDataEnglishComma() {
+    private fun saveLoan() {
+        val text = mGetLoanBinding.sectionPayment.text.toString()
+        val convertor = persianToEnglish(text)
+
         val removeComma =
             NumberTextWatcherForThousand.trimCommaOfString(mGetLoanBinding.loanAmount.text.toString())
                 .replace(",", "")
 
-        val removeCommaSectionEnglish =
-            mGetLoanBinding.sectionPayment.text.toString().replace(",", "")
-
-        mGetLoanViewModel.insertLoanTimeSpinner(
-            removeComma,
-            mGetLoanBinding.loanDate.text.toString(),
-            mGetLoanBinding.loanSections.text.toString(),
-            removeCommaSectionEnglish,
-            id
-        )
-    }
-
-    fun insertDataPersianComma() {
-        val removeComma =
-            NumberTextWatcherForThousand.trimCommaOfString(mGetLoanBinding.loanAmount.text.toString())
+        val removeCommaSection =
+            NumberTextWatcherForThousand.trimCommaOfString(convertor)
                 .replace(",", "")
 
-        val removeCommaSectionFarsi =
-            mGetLoanBinding.sectionPayment.text.toString().replace("٬", "")
-
+        Log.d("TAG", "insertDataEnglishComma: $convertor,$removeComma")
         mGetLoanViewModel.insertLoanTimeSpinner(
             removeComma,
             mGetLoanBinding.loanDate.text.toString(),
             mGetLoanBinding.loanSections.text.toString(),
-            removeCommaSectionFarsi,
+            removeCommaSection,
             id
         )
     }
 
-
+    private fun persianToEnglish(persianStr: String): String {
+        var result = ""
+        var en = '0'
+        for (ch in persianStr) {
+            en = ch
+            when (ch) {
+                '۰' -> en = '0'
+                '۱' -> en = '1'
+                '۲' -> en = '2'
+                '۳' -> en = '3'
+                '۴' -> en = '4'
+                '۵' -> en = '5'
+                '۶' -> en = '6'
+                '۷' -> en = '7'
+                '۸' -> en = '8'
+                '۹' -> en = '9'
+            }
+            result = "${result}$en"
+        }
+        return result
+    }
 }

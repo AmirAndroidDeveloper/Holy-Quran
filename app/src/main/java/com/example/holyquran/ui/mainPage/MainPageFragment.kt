@@ -4,7 +4,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toolbar
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
@@ -14,10 +14,14 @@ import com.example.holyquran.R
 import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
+import java.text.NumberFormat
 
 
 class MainPageFragment : Fragment() {
     var id: Long = 0L
+    val type: String = "payPayment"
+    var paidMoney: String = ""
+    val number:Long = 1
     lateinit var mMainPageBinding: FragmentMainPageBinding
     lateinit var mMainViewModel: MainFragmentViewModel
     override fun onCreateView(
@@ -44,12 +48,47 @@ class MainPageFragment : Fragment() {
         mMainViewModel.getUserList().observe(viewLifecycleOwner, {
             mMainViewModel.userInfo.value = it
             mMainPageBinding.currentUsers.text = it.size.toString()
+
+            val resultDeletedUsers = it.size.toString().toLong()
+                .minus(mMainPageBinding.deletedUsers.text.toString().toLong())
+            mMainPageBinding.resultUsers.text = resultDeletedUsers.toString()
+            Log.d("TAG", "onCreateView: $resultDeletedUsers")
         })
         mMainViewModel.getLoanList().observe(viewLifecycleOwner, {
             mMainViewModel.loan.value = it
             mMainPageBinding.loans.text = it.size.toString()
         })
 
+        val sumAll = mMainViewModel.sumAllIncrease() - mMainViewModel.sumAllDecrease()
+        mMainPageBinding.wholeMoney.text = NumberFormat.getInstance().format(sumAll)
+        mMainPageBinding.wholeMoney.append(" ریال")
+
+        val sumAllLoans = mMainViewModel.sumAllLoansAmount()
+        mMainPageBinding.allLoans.text = NumberFormat.getInstance().format(sumAllLoans)
+        mMainPageBinding.allLoans.append(" ریال")
+
+
+        val sumPayments = mMainViewModel.sumUserPayments(type)
+        Log.d("TAG", "test:SumWithKStringKey$sumPayments")
+        mMainPageBinding.paidMoneyLoan.text = sumPayments.toString()
+        paidMoney = sumPayments.toString()
+        mMainPageBinding.paidMoneyLoan.append(" ریال")
+
+        mMainViewModel.setIncrease()?.observe(viewLifecycleOwner, {
+            if (it != null) {
+                mMainViewModel.setIncrease(it)
+                val amountLeft = mMainViewModel.sumAllLoansAmount().minus(sumPayments)
+                mMainPageBinding.amountLoanLeft.text = amountLeft.toString()
+
+
+                val before = mMainPageBinding.paidLoans.text.toString().toLong()
+                var sumAllLoans= mMainViewModel.sumAllLoansAmount().toString()
+                if (paidMoney == sumAllLoans) {
+                    Toast.makeText(activity, "fix", Toast.LENGTH_SHORT).show()
+                   mMainPageBinding.paidLoans.text= (before + number).toString()
+                }
+            }
+        })
         return mMainPageBinding.root
     }
 
@@ -67,5 +106,4 @@ class MainPageFragment : Fragment() {
         alert.show()
 
     }
-
 }

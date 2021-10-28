@@ -178,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="8dp"
-                android:text="@string/payments_list"
+                android:text="تاریخچه وام ها"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 

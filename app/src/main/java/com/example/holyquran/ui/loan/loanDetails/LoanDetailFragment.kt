@@ -66,16 +66,17 @@ class LoanDetailFragment : Fragment() {
 //        })
 
 
-        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
-            mLoanDetailViewModel.setUserInfo(it)
-        })
-        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
-            if (it != null) {
-            val test=id
-                Log.d("TAG", "testtesttest: ${it.fullName}")
-                mLoanDetailBinding.userInfo = it
-            }
-        })
+
+//        mLoanDetailViewModel.setUserInfo(id)?.observe(viewLifecycleOwner, {
+//            mLoanDetailViewModel.setUserInfo(it)
+//        })
+//        mLoanDetailViewModel.userInfo.observe(viewLifecycleOwner, {
+//            if (it != null) {
+//            val test=id
+//                Log.d("TAG", "testtesttest: ${it.fullName}")
+//                mLoanDetailBinding.userInfo = it
+//            }
+//        })
 
 
         setHasOptionsMenu(true)

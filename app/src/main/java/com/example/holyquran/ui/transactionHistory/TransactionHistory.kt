@@ -27,7 +27,6 @@ class TransactionHistory() :
             is ViewHolder -> {
                 val item = getItem(position)
                 holder.bind(item, clickListener)
-//                holder.bind2(Bank, clickListener)
             }
             is EmptyViewHolder -> {
                 holder.bind()

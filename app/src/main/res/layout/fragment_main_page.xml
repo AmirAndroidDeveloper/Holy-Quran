@@ -15,6 +15,10 @@
             type="com.example.holyquran.data.model.Loan" />
 
         <variable
+            name="payments"
+            type="com.example.holyquran.data.model.Transaction" />
+
+        <variable
             name="viewModel"
             type="com.example.holyquran.ui.mainPage.MainFragmentViewModel" />
     </data>
@@ -76,10 +80,10 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/info_text"
+                                    android:id="@+id/wholeMoney"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="20sp"
+                                    android:layout_marginStart="20sp"
                                     android:layoutDirection="ltr"
                                     android:text="0 ریال"
                                     android:textColor="@color/black"
@@ -282,10 +286,10 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/info_text3"
+                                    android:id="@+id/allLoans"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="20sp"
+                                    android:layout_marginStart="20sp"
                                     android:layoutDirection="ltr"
                                     android:text="0 ریال"
                                     android:textColor="@color/black"
@@ -314,31 +318,11 @@
                                     android:orientation="horizontal">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginLeft="20sp"
-                                        android:layoutDirection="ltr"
-                                        android:text="0 ریال"
-                                        android:textSize="16dp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="50dp"
-                                        android:layoutDirection="ltr"
-                                        android:text="وام های اقساطی:"
-                                        android:textSize="18sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
+                                        android:id="@+id/paidMoneyLoan"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_marginStart="20sp"
+                                        android:layout_marginTop="10dp"
                                         android:layoutDirection="ltr"
                                         android:text="0 ریال"
                                         android:textSize="16sp" />
@@ -347,9 +331,18 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="50dp"
+                                        android:layout_marginTop="10dp"
                                         android:layoutDirection="ltr"
-                                        android:text=" برداشت:"
+                                        android:text="مبلغ برداخت شده:"
                                         android:textSize="18sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
@@ -395,10 +388,10 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/info_text5"
+                                    android:id="@+id/amountLoanLeft"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="20sp"
+                                    android:layout_marginStart="20sp"
                                     android:layoutDirection="ltr"
                                     android:text="0 ریال"
                                     android:textColor="@color/black"
@@ -430,6 +423,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_marginStart="20sp"
+                                        android:layout_marginTop="10dp"
                                         android:layoutDirection="ltr"
                                         android:text="0 ریال"
                                         android:textSize="16sp" />
@@ -438,30 +432,9 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginEnd="50dp"
+                                        android:layout_marginTop="10dp"
                                         android:layoutDirection="ltr"
                                         android:text="مانده وام های اقساطی:"
-                                        android:textSize="18sp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginStart="20sp"
-                                        android:layoutDirection="ltr"
-                                        android:text="0 ریال"
-                                        android:textSize="16sp" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="50dp"
-                                        android:layoutDirection="ltr"
-                                        android:text=" برداشت:"
                                         android:textSize="18sp" />
                                 </LinearLayout>
                             </LinearLayout>
@@ -475,109 +448,90 @@
                     android:layout_gravity="end"
                     android:src="@drawable/coin" />
             </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layoutDirection="ltr">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_view6"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30sp"
-                android:layout_marginTop="20sp"
-                android:layout_marginRight="30sp"
-                android:layout_marginBottom="20sp"
-                card_view:cardCornerRadius="4dp">
-
+                android:layout_marginTop="16dp"
+                android:layoutDirection="ltr">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_view6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/info_text6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="20sp"
-                            android:layoutDirection="ltr"
-                            android:text="0 ریال"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="50dp"
-                            android:layoutDirection="ltr"
-                            android:text="معوقه وام ها"
-                            android:textColor="@color/black"
-                            android:textSize="21sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30sp"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginRight="30sp"
+                        android:layout_marginBottom="20sp"
+                        card_view:cardCornerRadius="4dp">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="20sp"
-                                android:layoutDirection="ltr"
-                                android:text="0 ریال"
-                                android:textSize="16sp" />
-
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="50dp"
-                                android:layoutDirection="ltr"
-                                android:text="معوقه وام های اقساطی:"
-                                android:textSize="18sp" />
-                        </LinearLayout>
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                                <TextView
+                                    android:id="@+id/info_text6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="20sp"
+                                    android:layoutDirection="ltr"
+                                    android:text="0 ریال"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="20sp"
-                                android:layoutDirection="ltr"
-                                android:text="0 ریال"
-                                android:textSize="16sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="50dp"
+                                    android:layoutDirection="ltr"
+                                    android:text="معوقه وام ها"
+                                    android:textColor="@color/black"
+                                    android:textSize="21sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="50dp"
-                                android:layoutDirection="ltr"
-                                android:text=" برداشت:"
-                                android:textSize="18sp" />
-                      </LinearLayout>
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="20sp"
+                                        android:layout_marginTop="10dp"
+                                        android:layoutDirection="ltr"
+                                        android:text="0 ریال"
+                                        android:textSize="16sp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="50dp"
+                                        android:layoutDirection="ltr"
+                                        android:layout_marginTop="10dp"
+                                        android:text="معوقه وام های اقساطی:"
+                                        android:textSize="18sp" />
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -586,8 +540,8 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="90dp"
-                    android:layout_marginTop="20sp"
                     android:layout_gravity="end"
+                    android:layout_marginTop="20sp"
                     android:src="@drawable/coin" />
             </FrameLayout>
 
@@ -607,13 +561,13 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView"
+                            android:id="@+id/paidLoans"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="60dp"
                             android:text="0"
                             android:textColor="@color/white"
-                            app:layout_constraintEnd_toStartOf="@+id/textView11"
+                            app:layout_constraintEnd_toStartOf="@+id/deletedUsers"
                             app:layout_constraintStart_toEndOf="@+id/textView2"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -670,7 +624,7 @@
                             android:layout_marginTop="15dp"
                             android:text="وام های اقساطی"
                             android:textColor="@color/white"
-                            app:layout_constraintBottom_toTopOf="@+id/textView"
+                            app:layout_constraintBottom_toTopOf="@+id/paidLoans"
                             app:layout_constraintEnd_toEndOf="@+id/loans"
                             app:layout_constraintStart_toStartOf="@+id/loans"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -702,14 +656,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="0"
                             android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="@+id/textView8"
                             app:layout_constraintStart_toStartOf="@+id/textView8"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="0" />
 
                         <TextView
-                            android:id="@+id/textView11"
+                            android:id="@+id/deletedUsers"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="60dp"
@@ -726,9 +680,9 @@
                             android:text="وام های برداخت شده"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/textView"
+                            app:layout_constraintEnd_toEndOf="@+id/paidLoans"
                             app:layout_constraintHorizontal_bias="0.519"
-                            app:layout_constraintStart_toStartOf="@+id/textView" />
+                            app:layout_constraintStart_toStartOf="@+id/paidLoans" />
 
                         <TextView
                             android:id="@+id/textView13"
@@ -748,14 +702,14 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="9dp"
                             android:background="@color/gray400"
-                            app:layout_constraintBottom_toTopOf="@+id/textView14"
+                            app:layout_constraintBottom_toTopOf="@+id/resultUsers"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
                         <TextView
-                            android:id="@+id/textView14"
+                            android:id="@+id/resultUsers"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="45dp"
@@ -764,7 +718,7 @@
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/textView11" />
+                            app:layout_constraintStart_toStartOf="@+id/deletedUsers" />
 
                         <TextView
                             android:id="@+id/textView15"
@@ -774,7 +728,7 @@
                             android:text="0"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/textView14"
+                            app:layout_constraintEnd_toStartOf="@+id/resultUsers"
                             app:layout_constraintStart_toEndOf="@+id/textView16" />
 
                         <TextView

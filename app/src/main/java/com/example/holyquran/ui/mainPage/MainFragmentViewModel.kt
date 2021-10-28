@@ -9,6 +9,8 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +19,10 @@ import kotlinx.coroutines.Job
 class MainFragmentViewModel(
     val mUserInfoDAO: UserDAO,
     val mTransactionsDAO: TransactionsDAO,
-    val mLoan: LoanDAO,
+    val mLoanDAO: LoanDAO,
     val mBankDAO: BankDAO,
-    application: Application)
-    : AndroidViewModel(application) {
+    application: Application
+) : AndroidViewModel(application) {
 
     var viewModelJob = Job()
     val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -32,8 +34,36 @@ class MainFragmentViewModel(
 
     val loan = MutableLiveData<List<Loan>>()
     fun getLoanList(): LiveData<List<Loan>> {
-        return mLoan.getAllLoans()
+        return mLoanDAO.getAllLoans()
     }
+
+    fun sumAllIncrease(): Long {
+        return mTransactionsDAO.sumAllIncrease()
+    }
+
+    fun sumAllDecrease(): Long {
+        return mTransactionsDAO.sumAllDecrease()
+    }
+    fun sumAllLoansAmount():Long{
+        return mLoanDAO.sumAllLoans()
+    }
+
+    fun sumUserPayments(type: String): Long {
+        return mTransactionsDAO.sumAllUserPayments(type)
+    }
+
+    private val _increase = MutableLiveData<Loan>()
+    val increase: LiveData<Loan>
+        get() = _increase
+
+    fun setIncrease(): LiveData<Loan>? {
+        return mLoanDAO.getAll()
+    }
+
+    fun setIncrease(mLoan: Loan) {
+        _increase.value = mLoan
+    }
+
 
 
 }

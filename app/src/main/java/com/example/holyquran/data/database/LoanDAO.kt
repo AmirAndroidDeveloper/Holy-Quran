@@ -14,10 +14,13 @@ interface LoanDAO {
     suspend fun insert(loan: Loan): Long
 
     @Delete
-     fun deleteLoan(loan: Loan)
+    fun deleteLoan(loan: Loan)
 
-    @Query("SELECT * from loan WHERE loan_id = :key")
+    @Query("SELECT * from loan WHERE user_id = :key")
     fun get(key: Long): LiveData<Loan>?
+
+    @Query("SELECT * from loan")
+    fun getAll(): LiveData<Loan>?
 
     @Query("SELECT * FROM loan ORDER BY amount DESC")
     fun getAllLoans(): LiveData<List<Loan>>
@@ -27,5 +30,9 @@ interface LoanDAO {
 
     @Query("SELECT * FROM loan WHERE user_id=:key")
     fun getLoan(key: Long): LiveData<Loan>
+
+    @Query("SELECT SUM(amount) FROM `loan`")
+    fun sumAllLoans(): Long
+
 }
 

@@ -16,6 +16,7 @@ import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import com.google.android.material.snackbar.Snackbar
 import java.text.NumberFormat
@@ -220,7 +221,7 @@ class IncreaseMoneyFragment : Fragment() {
         startActivity(intent)
     }
 
-    fun saveData() {
+    private fun saveData() {
         val removeComma =
             NumberTextWatcherForThousand.trimCommaOfString(mIncreaseMoneyBinding.increaseEdt.text.toString())
                 .replace(",", "")
@@ -231,6 +232,7 @@ class IncreaseMoneyFragment : Fragment() {
             transactionStatus,
         )
         mIncreaseMoneyViewModel.goToIncreaseDone()
+        view!!.findNavController().popBackStack()
     }
 
 }

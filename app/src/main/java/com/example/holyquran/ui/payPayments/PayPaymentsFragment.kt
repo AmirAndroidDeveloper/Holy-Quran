@@ -104,6 +104,7 @@ class PayPaymentsFragment : Fragment() {
                                 userId,
                                 payPayment
                             )
+                            requireView().findNavController().popBackStack()
                         } else {
                             val builder: AlertDialog.Builder =
                                 AlertDialog.Builder(requireActivity())
@@ -112,8 +113,7 @@ class PayPaymentsFragment : Fragment() {
                                 val removeComma =
                                     NumberTextWatcherForThousand.trimCommaOfString(
                                         mPayPaymentsBinding.paymentsMoneyEditText.text.toString()
-                                    )
-                                        .replace(",", "")
+                                    ).replace(",", "")
                                 if (it != null) {
                                     mPayPaymentsBinding.loan = it
                                     val currentPayment = it.payment
@@ -180,13 +180,44 @@ class PayPaymentsFragment : Fragment() {
             {
                 if (it == true) {
                     val getPaymentPrice = mPayPaymentsBinding.paymentPrice.text.toString()
-                    mPayPaymentsBinding.paymentsLayout.getEditText()?.setText(getPaymentPrice);
+                    val convertor = persianToEnglish(getPaymentPrice)
+                    val removeCommaSectionFarsi =
+                        convertor.replace("٬", "")
+                    val removeCommaSectionEnglish =
+                        convertor.replace(",", "")
+                    mPayPaymentsBinding.paymentsLayout.getEditText()
+                        ?.setText(removeCommaSectionFarsi)
+
                 }
             })
+
         return mPayPaymentsBinding.root
     }
 
     private fun notShowLoanInfo() {
         Toast.makeText(activity, "noLoanHasBEENSAVED", Toast.LENGTH_SHORT).show()
+    }
+
+    fun persianToEnglish(persianStr: String): String {
+        var result = ""
+        var en = '0'
+        for (ch in persianStr) {
+            en = ch
+            when (ch) {
+                '۰' -> en = '0'
+                '۱' -> en = '1'
+                '۲' -> en = '2'
+                '۳' -> en = '3'
+                '۴' -> en = '4'
+                '۵' -> en = '5'
+                '۶' -> en = '6'
+                '۷' -> en = '7'
+                '۸' -> en = '8'
+                '۹' -> en = '9'
+            }
+            result = "${result}$en"
+        }
+        Log.d("TAG", "PersianToEnglish: $result")
+        return result
     }
 }
