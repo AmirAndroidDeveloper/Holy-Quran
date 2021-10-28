@@ -35,6 +35,8 @@
     <string name="phone_number">شماره تلفن ثابت</string>
     <string name="current_date">1400/7/29</string>
     <string name="add_user">افزودن کاربر</string>
+    <string name="first_number">اولین مبلغ</string>
+
     <string name="melly">ملی</string>
     <string name="card_number_sample">60377011526585</string>
     <string name="account_number_sample">3479111</string>
