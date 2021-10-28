@@ -20,7 +20,10 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar
 import saman.zamani.persiandate.PersianDateFormat
 import saman.zamani.persiandate.PersianDate
 import android.app.Activity
+import android.util.Log
 import android.view.WindowManager
+import android.widget.ArrayAdapter
+import java.util.ArrayList
 
 
 class AddUserFragment : Fragment() {
@@ -86,6 +89,26 @@ class AddUserFragment : Fragment() {
             }
         })
         mAddUserViewModel.openCalenderDone()
+
+        mAddUserViewModel.getBankList().observe(viewLifecycleOwner, {
+            mAddUserViewModel.bankInfo.value = it
+            val bankList: MutableList<String> = ArrayList() //this is list<string>
+            it.forEach { item ->
+                bankList.add(item.bankName)
+            }
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item, bankList
+            )
+            Log.d("TAG", "toBank: $bankList")
+            mAddUserListBinding.bankListSpinner.adapter = adapter
+        })
+
+
+
+        mAddUserListBinding.firstMoney.setOnClickListener {
+            mAddUserListBinding.bankListSpinner.visibility = View.VISIBLE
+        }
 
 
         return mAddUserListBinding.root

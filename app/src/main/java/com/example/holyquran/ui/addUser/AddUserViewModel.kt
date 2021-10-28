@@ -9,6 +9,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
+import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
 
@@ -77,5 +78,12 @@ class AddUserViewModel(
         _userName.value = mUser
     }
 
-
+    var selectedItemPosition = 0
+    fun onSelectItem(postion: Int) {
+        selectedItemPosition = postion;
+    }
+    val bankInfo = MutableLiveData<List<Bank>>()
+    fun getBankList(): LiveData<List<Bank>> {
+        return mBankDAO.getAllBanks()
+    }
 }
