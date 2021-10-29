@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.HolyQuran" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/navigation_color</item>
+        <item name="colorPrimaryVariant">@color/navigation_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:navigationBarColor">#00786b</item>
+        <item name="android:navigationBarColor">@color/navigation_color</item>
         <item name="fontFamily">@font/b_nazanin</item>
     </style>
 
@@ -28,10 +28,6 @@
         <item name="fontFamily">@font/b_nazanin</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
-        <!--        <item name="android:layout_width">match_parent</item>-->
-        <!--        <item name="android:layout_height">match_parent</item>-->
-
-
     </style>
 
 

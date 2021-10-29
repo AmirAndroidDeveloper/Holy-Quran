@@ -204,6 +204,7 @@ class IncreaseMoneyFragment : Fragment() {
                 )
                 return true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -229,7 +230,7 @@ class IncreaseMoneyFragment : Fragment() {
             transactionStatus,
         )
         mIncreaseMoneyViewModel.goToIncreaseDone()
-        view!!.findNavController().popBackStack()
+        requireView().findNavController().popBackStack()
     }
 
 }

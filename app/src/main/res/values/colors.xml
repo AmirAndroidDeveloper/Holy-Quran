@@ -16,6 +16,7 @@
     <color name="gray400">#BDBDBD</color>
     <color name="gray800">#424242</color>
     <color name="green">#76ff03</color>
+    <color name="navigation_color">#00786b</color>
 
 
 </resources>

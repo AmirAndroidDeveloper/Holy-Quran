@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:id="@+id/group1">
+    <item
+        android:id="@+id/mainPageFragment"
+        android:icon="@drawable/home_page"
+        android:title="صفحه اصلی" />
+    </group>
+
+
     <item
         android:id="@+id/userListFragment"
         android:icon="@drawable/ic_people"
         android:title="اعضا" />
+
     <item
         android:id="@+id/loanListFragment"
         android:icon="@drawable/ic_baseline_attach_money_24"
         android:title="وام ها" />
+
     <item
         android:id="@+id/bankListFragment"
         android:icon="@drawable/ic_baseline_account_balance_wallet_24"
@@ -16,3 +27,27 @@
 
 
 </menu>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
+    <!--    <item android:id="@+id/mainPage"-->
+    <!--        android:title="صفحه اصلی"-->
+    <!--        android:icon="@drawable/home_page"/>-->
+
+<!--        <item-->
+<!--            android:id="@+id/userListFragment"-->
+<!--            android:icon="@drawable/ic_people"-->
+<!--            android:title="اعضا" />-->
+<!--        <item-->
+<!--            android:id="@+id/loanListFragment"-->
+<!--            android:icon="@drawable/ic_baseline_attach_money_24"-->
+<!--            android:title="وام ها" />-->
+<!--        <item-->
+<!--            android:id="@+id/bankListFragment"-->
+<!--            android:icon="@drawable/ic_baseline_account_balance_wallet_24"-->
+<!--            android:title="بانک ها" />-->
+
+
+<!--    </menu>-->

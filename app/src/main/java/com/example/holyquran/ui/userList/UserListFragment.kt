@@ -1,6 +1,5 @@
 package com.example.holyquran.ui.userList
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -9,8 +8,6 @@ import android.os.Vibrator
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -84,7 +81,6 @@ class UserListFragment : Fragment() {
         userInfo()
 
         setHasOptionsMenu(true)
-
         return mUserListBinding.root
     }
 
@@ -122,6 +118,7 @@ class UserListFragment : Fragment() {
             .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
             .show()
     }
+
     private fun deleteAllUserDialog() {
         Snackbar.make(
             mUserListBinding.root,

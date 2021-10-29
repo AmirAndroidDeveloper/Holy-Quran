@@ -34,7 +34,7 @@
             android:layout_marginBottom="30dp"
             android:onClick="@{() -> viewModel.goTOAddUser()}"
             android:src="@drawable/ic_baseline_person_add_alt_1_24"
-            android:backgroundTint="#1e45d1"
+            android:backgroundTint="@color/navigation_color"
             app:tint="@color/white" />
     </FrameLayout>
 </layout>

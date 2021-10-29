@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/sdk/sdk%20last/sdk/icons/material/materialicons/error_outline/baseline_error_outline_24.xml" />
+                                      <entry key="url" value="file:/sdk/sdk%20last/sdk/icons/material/materialicons/home/baseline_home_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,8 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="autoMirrored" value="true" />
-                            <entry key="color" value="fd0101" />
-                            <entry key="outputName" value="ic_baseline_error_outline_24" />
+                            <entry key="outputName" value="home_page" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/../../../user-cirlce-add.svg" />
                           </map>
                         </option>

@@ -3,6 +3,8 @@ package com.example.holyquran.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.holyquran.data.model.Loan
+import com.example.holyquran.data.model.TransactionAndBank
+import com.example.holyquran.data.model.UserAndMoney
 import com.example.holyquran.data.model.UserInfo
 
 @Dao
@@ -22,6 +24,9 @@ interface UserDAO {
 
     @Query("DELETE FROM user_info")
     fun deleteAllUser()
+
+    @Query("SELECT user_info.user_id, `user_info`.full_name, `transaction`.total From user_info JOIN `transaction` ")
+    fun joinTable(): LiveData<List<UserAndMoney>>?
 
     @Query("SELECT * from user_info WHERE user_id = :key")
     fun get(key: Long): LiveData<UserInfo>?
