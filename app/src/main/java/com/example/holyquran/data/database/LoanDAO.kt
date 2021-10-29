@@ -3,10 +3,6 @@ package com.example.holyquran.data.database
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.LoanAndUserInfo
-import com.example.holyquran.data.model.Transaction
-import com.example.holyquran.data.model.TransactionAndBank
-import com.example.holyquran.data.model.UserInfo
 
 @Dao
 interface LoanDAO {
@@ -16,7 +12,7 @@ interface LoanDAO {
     @Delete
     fun deleteLoan(loan: Loan)
 
-    @Query("SELECT * from loan WHERE user_id = :key")
+    @Query("SELECT * from loan WHERE loan_id = :key")
     fun get(key: Long): LiveData<Loan>?
 
     @Query("SELECT * from loan")

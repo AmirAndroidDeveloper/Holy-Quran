@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.addUser
 
+import NumberTextWatcherForThousand
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -65,7 +66,7 @@ class AddUserFragment : Fragment() {
                     mAddUserListBinding.createdDate.text.toString(),
                     mAddUserListBinding.edtAddress.text.toString(),
                 )
-//                findNavController().popBackStack()
+                findNavController().popBackStack()
 
             }
         })
@@ -113,7 +114,11 @@ class AddUserFragment : Fragment() {
 
             mAddUserListBinding.bankListSpinner.visibility = View.VISIBLE
 
-
+        mAddUserListBinding.firstNumber.addTextChangedListener(
+            NumberTextWatcherForThousand(
+                mAddUserListBinding.firstNumber
+            )
+        );
 
         return mAddUserListBinding.root
     }

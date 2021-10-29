@@ -52,13 +52,6 @@ interface TransactionsDAO {
     @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank WHERE `transaction`.bank_id=:key ")
     fun joinAllTables(key: Long): LiveData<List<TransactionAndBank>>
 
-
-    @Query("SELECT  user_info.user_id, `transaction`.increase,`transaction`.type From `transaction` JOIN user_info WHERE user_info.user_id=:key ")
-    fun joinTTT(key: Long): LiveData<LoanAndUserInfo>
-
-    @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank ")
-    fun joinAllTablesNoId(): LiveData<List<TransactionAndBank>>
-
     @Query("SELECT SUM(increase) FROM `transaction`")
     fun sumAllIncrease(): Long
 
@@ -67,6 +60,9 @@ interface TransactionsDAO {
 
     @Query("SELECT SUM(increase) FROM `transaction` WHERE type=:key")
     fun sumAllUserPayments(key: String): Long
+
+    @Query("SELECT SUM(increase) FROM `transaction` WHERE type=:key")
+    fun sumAllUserDeposit(key: String): Long
 
 
 //    @Query("SELECT `transaction`.trans_id FROM `transaction`  JOIN bank ")

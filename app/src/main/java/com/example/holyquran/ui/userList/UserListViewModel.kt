@@ -34,15 +34,16 @@ class UserListViewModel(
         _goTOAddUser.value = true
     }
 
-    fun goToAddUserDone(){
-        _goTOAddUser.value=false
+    fun goToAddUserDone() {
+        _goTOAddUser.value = false
     }
 
     val userInfo = MutableLiveData<List<UserInfo>>()
     fun getUserList(): LiveData<List<UserInfo>> {
         return mUserInfoDAO.getAllUserInfo()
     }
-    fun deleteCategory(
+
+    fun deleteUser(
         userInfo: UserInfo
     ) {
         uiScope.launch {
@@ -54,12 +55,14 @@ class UserListViewModel(
         }
     }
 
-    private val _popUpWindow = MutableLiveData<Boolean>(false)
-    val popUpWindow: LiveData<Boolean>
-        get() = _popUpWindow
-
-    fun popUpWindow() {
-        _popUpWindow.value = true
+    fun deleteAllUsers() {
+        uiScope.launch {
+            try {
+                mUserInfoDAO.deleteAllUser()
+            } catch (e: Exception) {
+                Log.d("TAG", "deleteContact: ${e.message}")
+            }
+        }
     }
 
 }

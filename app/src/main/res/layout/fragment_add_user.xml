@@ -72,54 +72,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layoutDirection="ltr"-->
-        <!--            android:layout_marginTop="20sp"-->
-        <!--            android:orientation="horizontal">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="150dp"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layoutDirection="ltr"-->
-
-        <!--                android:layout_marginStart="20sp">-->
-
-        <!--                <com.google.android.material.textfield.TextInputLayout-->
-        <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:hint="شماره تلفن همراه">-->
-        <!--                    &lt;!&ndash;this is the actual edit text which takes the input&ndash;&gt;-->
-        <!--                    <com.google.android.material.textfield.TextInputEditText-->
-        <!--                        android:id="@+id/edtMobileNumber"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content" />-->
-        <!--                </com.google.android.material.textfield.TextInputLayout>-->
-        <!--            </LinearLayout>-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:layoutDirection="ltr"-->
-
-        <!--                android:layout_marginRight="20sp"-->
-        <!--                android:gravity="right">-->
-
-        <!--                <com.google.android.material.textfield.TextInputLayout-->
-        <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--                    android:layout_width="150dp"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:hint="شماره تلفن خانه">-->
-        <!--                    &lt;!&ndash;this is the actual edit text which takes the input&ndash;&gt;-->
-        <!--                    <com.google.android.material.textfield.TextInputEditText-->
-        <!--                        android:id="@+id/edtPhoneNumber"-->
-        <!--                        android:layout_width="match_parent"-->
-        <!--                        android:layout_height="wrap_content" />-->
-        <!--                </com.google.android.material.textfield.TextInputLayout>-->
-        <!--            </LinearLayout>-->
-        <!--        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -235,17 +187,40 @@
             android:layout_marginTop="20sp"
             android:orientation="vertical">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:afterTextChanged="@{(edtitable)->viewModel.afterUserNameChange(edtitable)}" />
+                android:layout_height="match_parent"
+                android:hint="@string/first_money">
+                <!--this is the actual edit text which takes the input-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:afterTextChanged="@{(edtitable)->viewModel.afterUserNameChange(edtitable)}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/bankListSpinner"
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_marginTop="20sp"
+                android:layout_height="wrap_content">
 
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18sp"
+                    android:layout_marginRight="18sp"
+                    android:background="@drawable/background_line">
+
+                    <Spinner
+                        android:id="@+id/bankListSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -253,9 +228,9 @@
             android:id="@+id/addUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="20sp"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="40dp"
             android:onClick="@{() -> viewModel.addUser()}"
             android:text="@string/add_user" />
     </LinearLayout>

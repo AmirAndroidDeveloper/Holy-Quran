@@ -25,8 +25,6 @@ import java.util.ArrayList
 
 class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
-    var decide = ""
-    private val increasePage = "increase"
     lateinit var mIncreaseMoneyBinding: FragmentIncreaseMoneyBinding
     lateinit var mIncreaseMoneyViewModel: IncreaseMoneyViewModel
     override fun onCreateView(
@@ -78,7 +76,7 @@ class IncreaseMoneyFragment : Fragment() {
                 NumberTextWatcherForThousand(
                     mIncreaseMoneyBinding.increaseEdt
                 )
-            );
+            )
             if (it == true) {
                 saveData()
             }
@@ -206,7 +204,6 @@ class IncreaseMoneyFragment : Fragment() {
                 )
                 return true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }

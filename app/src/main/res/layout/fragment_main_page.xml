@@ -173,10 +173,10 @@
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:id="@+id/info_text2"
+                                    android:id="@+id/userDeposits"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
-                                    android:layout_marginLeft="20sp"
+                                    android:layout_marginStart="20sp"
                                     android:layoutDirection="ltr"
                                     android:text="0 ریال"
                                     android:textColor="@color/black"
@@ -205,12 +205,13 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                        android:id="@+id/increaseDeposits"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
-                                        android:layout_marginLeft="20sp"
+                                        android:layout_marginStart="20sp"
                                         android:layoutDirection="ltr"
                                         android:text="0 ریال"
-                                        android:textSize="16dp" />
+                                        android:textSize="16sp" />
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -420,6 +421,7 @@
                                     android:orientation="horizontal">
 
                                     <TextView
+                                       android:id="@+id/amountLeftLoan"
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:layout_marginStart="20sp"

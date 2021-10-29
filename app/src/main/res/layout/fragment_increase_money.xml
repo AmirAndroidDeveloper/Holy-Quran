@@ -93,13 +93,6 @@
                         android:hint="@string/amount"
                         android:inputType="number" />
 
-                    <!--                    <CheckBox-->
-                    <!--                        android:id="@+id/checkBox"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="50dp"-->
-                    <!--                        android:text="برداخت قسط" />-->
-
-
                     <Spinner
                         android:id="@+id/chooseBank"
                         android:layout_width="match_parent"

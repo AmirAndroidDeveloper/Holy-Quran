@@ -52,6 +52,10 @@ class MainFragmentViewModel(
         return mTransactionsDAO.sumAllUserPayments(type)
     }
 
+    fun sumUserDeposit(type: String): Long {
+        return mTransactionsDAO.sumAllUserDeposit(type)
+    }
+
     private val _increase = MutableLiveData<Loan>()
     val increase: LiveData<Loan>
         get() = _increase

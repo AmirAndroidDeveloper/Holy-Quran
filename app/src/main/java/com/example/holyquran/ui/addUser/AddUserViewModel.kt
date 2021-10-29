@@ -69,14 +69,16 @@ class AddUserViewModel(
             } catch (e: Exception) {
                 Log.d("TAG", "insertContact: ${e.message}")
             }
-
         }
     }
+
     private var username = ObservableField("").toString()
     fun afterUserNameChange(s: CharSequence) {
-        Log.i("truck", s.toString());
-        amount = s.toString()
-        this.username = s.toString()
+        val removeComma =
+            NumberTextWatcherForThousand.trimCommaOfString(s.toString())
+                .replace(",", "")
+        amount = removeComma
+        this.username = removeComma
     }
 
 
@@ -122,19 +124,5 @@ class AddUserViewModel(
     fun getBankList(): LiveData<List<Bank>> {
         return mBankDAO.getAllBanks()
     }
-
-
-    private val _joinName = MutableLiveData<LoanAndUserInfo>()
-    val joinName: LiveData<LoanAndUserInfo>
-        get() = _joinName
-
-    fun joinTables(id: Long): LiveData<LoanAndUserInfo> {
-        return mTransactionDAO.joinTTT(id)
-    }
-
-    fun joinTables(mJoinInfo: LoanAndUserInfo) {
-        _joinName.value = mJoinInfo
-    }
-
 
 }

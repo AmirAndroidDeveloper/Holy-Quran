@@ -7,10 +7,8 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -54,11 +52,6 @@ class UserListFragment : Fragment() {
         mUserListBinding.viewModel = mUserListViewModel
         this.also { mUserListBinding.lifecycleOwner = it }
 
-        mUserListViewModel.popUpWindow.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
-
-            }
-        })
         mUserListViewModel.goTOAddUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -90,8 +83,24 @@ class UserListFragment : Fragment() {
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager
         userInfo()
 
+        setHasOptionsMenu(true)
 
         return mUserListBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_all_user_user_list, menu);
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.deleteAllUsers -> {
+                deleteAllUserDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun userInfo() {
@@ -102,9 +111,25 @@ class UserListFragment : Fragment() {
     }
 
     private fun deleteDialog(userInfo: UserInfo) {
-        Snackbar.make(mUserListBinding.root, "آیا تمایل به حذف عضو دارید؟ ", Snackbar.LENGTH_LONG)
+        Snackbar.make(
+            mUserListBinding.root,
+            "آیا تمایل به حذف عضو دارید؟ ",
+            Snackbar.LENGTH_LONG
+        )
             .setAction("حذف") {
-                mUserListViewModel.deleteCategory(userInfo)
+                mUserListViewModel.deleteUser(userInfo)
+            }
+            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
+            .show()
+    }
+    private fun deleteAllUserDialog() {
+        Snackbar.make(
+            mUserListBinding.root,
+            "آیا تمایل به حذف تمام اعضا دارید؟ ",
+            Snackbar.LENGTH_LONG
+        )
+            .setAction("حذف همه") {
+                mUserListViewModel.deleteAllUsers()
             }
             .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
             .show()
@@ -113,7 +138,12 @@ class UserListFragment : Fragment() {
     private fun Fragment.vibratePhone() {
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (Build.VERSION.SDK_INT >= 26) {
-            vibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    50,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            )
         } else {
             vibrator.vibrate(50)
         }
