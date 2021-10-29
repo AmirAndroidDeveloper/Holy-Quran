@@ -9,25 +9,26 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Bank
-import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.data.model.*
 import kotlinx.coroutines.*
+import androidx.databinding.ObservableField
 
 class AddUserViewModel(
     val mUserInfoDAO: UserDAO,
-    val  mTransactionDAO: TransactionsDAO,
+    val mTransactionDAO: TransactionsDAO,
     val mLoan: LoanDAO,
     val mBankDAO: BankDAO,
     application: Application
 ) :
     AndroidViewModel(application) {
+    var amount = ""
     var viewModelJob = Job()
-    val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    val uiScope = CoroutineScope(Dispatchers.Default + viewModelJob)
 
     fun insertUser(
         fullName: String,
-        accountId:String,
-        mobileNumber:String,
+        accountId: String,
+        mobileNumber: String,
         phoneNumber: String,
         dateOfCreation: String,
         address: String,
@@ -35,14 +36,47 @@ class AddUserViewModel(
         uiScope.launch {
             try {
                 Log.d("TAG", "insertTest")
-                val user = UserInfo(0L, fullName, accountId,mobileNumber,phoneNumber,dateOfCreation,address)
+                val user = UserInfo(
+                    0L,
+                    fullName,
+                    accountId,
+                    mobileNumber,
+                    phoneNumber,
+                    dateOfCreation,
+                    address
+                )
                 withContext(Dispatchers.IO) {
-                  mUserInfoDAO.insert(user)
+                    val id = mUserInfoDAO.insert(user)
+                    Log.d("TAG", "insertUser: $amount")
+                    val increasePage = "firstMoney"
+                    val bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
+                    mTransactionDAO.insert(
+                        Transaction(
+                            0L,
+                            id,
+                            null,
+                            bankId,
+                            null,
+                            amount,
+                            null,
+                            null,
+                            null,
+                            increasePage
+                        )
+                    )
                 }
+
             } catch (e: Exception) {
                 Log.d("TAG", "insertContact: ${e.message}")
             }
+
         }
+    }
+    private var username = ObservableField("").toString()
+    fun afterUserNameChange(s: CharSequence) {
+        Log.i("truck", s.toString());
+        amount = s.toString()
+        this.username = s.toString()
     }
 
 
@@ -54,14 +88,15 @@ class AddUserViewModel(
         _openCalender.value = true
     }
 
-    fun openCalenderDone(){
-        _openCalender.value=false
+    fun openCalenderDone() {
+        _openCalender.value = false
     }
 
 
     private val _addUser = MutableLiveData<Boolean>(false)
     val addUser: LiveData<Boolean>
         get() = _addUser
+
     fun addUser() {
         _addUser.value = true
     }
@@ -82,8 +117,24 @@ class AddUserViewModel(
     fun onSelectItem(postion: Int) {
         selectedItemPosition = postion;
     }
+
     val bankInfo = MutableLiveData<List<Bank>>()
     fun getBankList(): LiveData<List<Bank>> {
         return mBankDAO.getAllBanks()
     }
+
+
+    private val _joinName = MutableLiveData<LoanAndUserInfo>()
+    val joinName: LiveData<LoanAndUserInfo>
+        get() = _joinName
+
+    fun joinTables(id: Long): LiveData<LoanAndUserInfo> {
+        return mTransactionDAO.joinTTT(id)
+    }
+
+    fun joinTables(mJoinInfo: LoanAndUserInfo) {
+        _joinName.value = mJoinInfo
+    }
+
+
 }

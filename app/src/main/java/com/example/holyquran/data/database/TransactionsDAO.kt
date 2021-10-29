@@ -2,10 +2,8 @@ package com.example.holyquran.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.holyquran.data.model.Bank
+import com.example.holyquran.data.model.*
 import com.example.holyquran.data.model.Transaction
-import com.example.holyquran.data.model.TransactionAndBank
-import com.example.holyquran.data.model.UserInfo
 
 @Dao
 interface TransactionsDAO {
@@ -22,7 +20,7 @@ interface TransactionsDAO {
     fun get(key: Long): LiveData<Transaction>?
 
     @Query("SELECT * from `transaction`WHERE type=:key")
-    fun getAll(key:String): LiveData<Transaction>?
+    fun getAll(key: String): LiveData<Transaction>?
 
     @Query("SELECT SUM(loan_number) FROM `transaction` WHERE user_id=:key")
     fun sumLoanPayments(key: Long): Int
@@ -54,6 +52,10 @@ interface TransactionsDAO {
     @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank WHERE `transaction`.bank_id=:key ")
     fun joinAllTables(key: Long): LiveData<List<TransactionAndBank>>
 
+
+    @Query("SELECT  user_info.user_id, `transaction`.increase,`transaction`.type From `transaction` JOIN user_info WHERE user_info.user_id=:key ")
+    fun joinTTT(key: Long): LiveData<LoanAndUserInfo>
+
     @Query("SELECT `transaction`.increase, `transaction`.decrease,`transaction`.type, bank.bank_name From `transaction` JOIN bank ")
     fun joinAllTablesNoId(): LiveData<List<TransactionAndBank>>
 
@@ -64,8 +66,7 @@ interface TransactionsDAO {
     fun sumAllDecrease(): Long
 
     @Query("SELECT SUM(increase) FROM `transaction` WHERE type=:key")
-    fun sumAllUserPayments(key:String): Long
-
+    fun sumAllUserPayments(key: String): Long
 
 
 //    @Query("SELECT `transaction`.trans_id FROM `transaction`  JOIN bank ")

@@ -23,6 +23,7 @@ import android.app.Activity
 import android.util.Log
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import com.example.holyquran.ui.mainPage.MainFragmentViewModel
 import java.util.ArrayList
 
 
@@ -42,16 +43,21 @@ class AddUserFragment : Fragment() {
         val loanDAO = UserDatabase.getInstance(application).mLoanDAO
         val bankDAO = UserDatabase.getInstance(application).mBankDAO
         val viewModelFactory =
-            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO,application)
+            ViewModelProviderFactory(personalDAO, transactionDAO, loanDAO, bankDAO, application)
         mAddUserViewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
             ).get(AddUserViewModel::class.java)
         mAddUserListBinding.viewModel = mAddUserViewModel
         this.also { mAddUserListBinding.lifecycleOwner = it }
+
+
+
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                 mAddUserViewModel.insertUser(
+
+
+                   mAddUserViewModel.insertUser(
                     mAddUserListBinding.fullName.text.toString(),
                     mAddUserListBinding.accountId.text.toString(),
                     mAddUserListBinding.mobileNumber.text.toString(),
@@ -59,7 +65,8 @@ class AddUserFragment : Fragment() {
                     mAddUserListBinding.createdDate.text.toString(),
                     mAddUserListBinding.edtAddress.text.toString(),
                 )
-                findNavController().popBackStack()
+//                findNavController().popBackStack()
+
             }
         })
         val pdate = PersianDate()
@@ -104,11 +111,8 @@ class AddUserFragment : Fragment() {
             mAddUserListBinding.bankListSpinner.adapter = adapter
         })
 
-
-
-        mAddUserListBinding.firstMoney.setOnClickListener {
             mAddUserListBinding.bankListSpinner.visibility = View.VISIBLE
-        }
+
 
 
         return mAddUserListBinding.root
