@@ -33,4 +33,9 @@ interface UserDAO {
 
     @Query("SELECT * FROM user_info ORDER BY full_name DESC")
     fun getAllUserInfo(): LiveData<List<UserInfo>>
+
+    @Query("SELECT * FROM user_info where full_name like '%' || :fullName || '%' ORDER BY full_name ASC")
+    fun searchUserName(fullName: String): LiveData<List<UserInfo>>
+
+
 }

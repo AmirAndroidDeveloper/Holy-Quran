@@ -31,6 +31,7 @@
     <string name="address_home">آدرس خانه</string>
     <string name="add_card">افزودن کارت</string>
     <string name="full_name">نام و نام خانوادگی</string>
+    <string name="search_full_name">نام یا نام خانوادگی کاربر</string>
     <string name="mobile_number">شماره تلفن همراه</string>
     <string name="phone_number">شماره تلفن ثابت</string>
     <string name="current_date">1400/7/29</string>
@@ -46,6 +47,7 @@
     <string name="submit">تایید</string>
     <string name="father_name">نام پدر</string>
     <string name="delete_all">حذف تمامی کاربران</string>
+    <string name="search">جست وجو میان کاربران</string>
     <string name="edit_user_info">ویرایش اطلاعات کاربر</string>
     <string name="father_name_sample">جلال</string>
     <string name="amount">مبلغ</string>
@@ -81,7 +83,9 @@
     <string name="no_loan_user">(تاکنون وامی برای کاربر ثبت نشده است)</string>
     <string name="not_payed_loan">تسویه نشده اقساطی</string>
     <string name="loans">وام های اقساطی</string>
-<!--    <string name="edit">ویرایش</string>-->
+    <string name="speech_not_supported">داداش نمیفهمم چی میگی!!</string>
+    <string name="voiceText">یه چیزی بگو چرا ساکتی؟ </string>
+
 
 
 

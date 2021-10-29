@@ -10,31 +10,75 @@
             type="com.example.holyquran.ui.userList.UserListViewModel" />
     </data>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layoutDirection="ltr"
         android:layout_marginRight="30dp"
+        android:orientation="vertical"
         tools:context=".ui.userList.UserListFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFeed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:userList="@{viewModel.userInfo}" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingBtn"
+        <FrameLayout
+            android:id="@+id/searchPackage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="30dp"
-            android:onClick="@{() -> viewModel.goTOAddUser()}"
-            android:src="@drawable/ic_baseline_person_add_alt_1_24"
-            android:backgroundTint="@color/navigation_color"
-            app:tint="@color/white" />
-    </FrameLayout>
+            android:layout_marginTop="15dp"
+            android:background="@drawable/background_line"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/searchEDT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@null"
+                android:layout_marginEnd="40dp"
+                android:gravity="start"
+                android:hint="@string/search_full_name" />
+
+            <ImageView
+                android:id="@+id/voiceTyping"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/voice" />
+
+            <ImageView
+                android:id="@+id/clear"
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:layout_gravity="center|start"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/clear" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:nestedScrollingEnabled="false"
+                app:userList="@{viewModel.userInfo}" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/navigation_color"
+                android:onClick="@{() -> viewModel.goTOAddUser()}"
+                android:src="@drawable/ic_baseline_person_add_alt_1_24"
+                app:tint="@color/white" />
+        </FrameLayout>
+    </LinearLayout>
 </layout>

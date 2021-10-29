@@ -56,9 +56,7 @@ class AddUserFragment : Fragment() {
 
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-
-
-                   mAddUserViewModel.insertUser(
+                 mAddUserViewModel.insertUser(
                     mAddUserListBinding.fullName.text.toString(),
                     mAddUserListBinding.accountId.text.toString(),
                     mAddUserListBinding.mobileNumber.text.toString(),

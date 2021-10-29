@@ -39,8 +39,12 @@ class UserListViewModel(
     }
 
     val userInfo = MutableLiveData<List<UserInfo>>()
-    fun getUserList(): LiveData<List<UserInfo>> {
-        return mUserInfoDAO.getAllUserInfo()
+    fun getUserList(fullName: String): LiveData<List<UserInfo>> {
+        return if (fullName.isEmpty()){
+            mUserInfoDAO.getAllUserInfo()
+        }else{
+            mUserInfoDAO.searchUserName(fullName)
+        }
     }
 
     fun deleteUser(
