@@ -11,6 +11,9 @@
         <variable
             name="userInfo"
             type="com.example.holyquran.data.model.UserInfo" />
+        <variable
+            name="join"
+            type="com.example.holyquran.data.model.UserAndMoney" />
     </data>
 
     <LinearLayout
@@ -90,7 +93,7 @@
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/b_nazanin"
                             android:gravity="left"
-                            android:text="@{userInfo.mobileNumber}"
+                            android:text="@{join.total}"
                             android:textColor="#000"
                             android:textSize="20sp"
                             android:textStyle="bold" />

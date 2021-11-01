@@ -1,6 +1,7 @@
 package com.example.holyquran.ui.popupWindow
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -15,7 +16,9 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.graphics.Insets
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.util.DisplayMetrics
 import com.example.holyquran.databinding.FragmentPopupWindowBinding
@@ -71,9 +74,7 @@ class PopupWindowFragment : DialogFragment() {
                     }
                 })
             }
-
         })
-
         mPopupViewModel.goToIncreaseSubmit.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 this.findNavController().navigate(
@@ -159,6 +160,8 @@ class PopupWindowFragment : DialogFragment() {
                 mPopupWindowBinding.loan = it
             }
         })
+
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return mPopupWindowBinding.root
     }
     private fun deleteUserDialog(userInfo: UserInfo) {
@@ -178,7 +181,7 @@ class PopupWindowFragment : DialogFragment() {
     private fun notShowLoanInfo() {
         Toast.makeText(activity, "noLoanHasBEENSAVED", Toast.LENGTH_SHORT).show()
         mPopupWindowBinding.payPayment.setTextColor(resources.getColor(R.color.gray500))
-        mPopupWindowBinding.img.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_add_circle))
+        mPopupWindowBinding.payPaymentImg.setImageDrawable(resources.getDrawable(R.drawable.ic_baseline_add_circle))
         mPopupWindowBinding.noLoanForUser.visibility = View.VISIBLE
         mPopupWindowBinding.payPaymentLL.isClickable = false
     }
@@ -196,7 +199,7 @@ class PopupWindowFragment : DialogFragment() {
         } else {
             // Portrait
             if (dialog != null) dialog!!.window!!.setLayout(
-                screenWidth - 16.toPx(requireContext()),
+                screenWidth - 30.toPx(requireContext()),
                 screenHeight - 200.toPx(requireContext())
             )
         }
