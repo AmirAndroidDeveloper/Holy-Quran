@@ -33,10 +33,10 @@
                 android:id="@+id/searchEDT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:layout_gravity="right"
                 android:background="@null"
                 android:layout_marginEnd="40dp"
-                android:gravity="start"
+                android:gravity="right"
                 android:hint="@string/search_full_name" />
 
             <ImageView

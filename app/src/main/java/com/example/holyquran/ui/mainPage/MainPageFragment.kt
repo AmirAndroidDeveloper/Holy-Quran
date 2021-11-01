@@ -1,12 +1,16 @@
 package com.example.holyquran.ui.mainPage
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -23,6 +27,8 @@ class MainPageFragment : Fragment() {
     val firstMoney: String = "firstMoney"
     var type: String = ""
     val number: Long = 1
+    lateinit var mAlert: AlertDialog
+
     lateinit var mMainPageBinding: FragmentMainPageBinding
     lateinit var mMainViewModel: MainFragmentViewModel
     override fun onCreateView(
@@ -92,7 +98,6 @@ class MainPageFragment : Fragment() {
                 mMainPageBinding.amountLoanLeft.append(" ریال")
 
 
-
                 val text = mMainPageBinding.paidLoans.text.toString().toLong()
                 val sumAllLoans = mMainViewModel.sumAllLoansAmount().toString()
                 if (type == sumAllLoans) {
@@ -101,7 +106,56 @@ class MainPageFragment : Fragment() {
                 }
             }
         })
+
+
+        setHasOptionsMenu(true)
         return mMainPageBinding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_page_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.exportData -> {
+                val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
+                val dialogView: View =
+                    LayoutInflater.from(context).inflate(R.layout.item, null, false)
+                val sms: TextView = dialogView.findViewById(R.id.sendViaSms)
+                val txt: TextView = dialogView.findViewById(R.id.sendViaTxt)
+                val img: TextView = dialogView.findViewById(R.id.sendViaImg)
+                sms.setOnClickListener {
+                    val sumAll = mMainViewModel.sumAllIncrease() - mMainViewModel.sumAllDecrease()
+                    val addComma = NumberFormat.getInstance().format(sumAll)
+                    val deposits = mMainViewModel.sumUserDeposit(firstMoney)
+                    val addCommaDeposits = NumberFormat.getInstance().format(deposits)
+                    val sumAllLoans = mMainViewModel.sumAllLoansAmount()
+                    val addCommaLoans = NumberFormat.getInstance().format(sumAllLoans)
+
+                    val sendIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            "موجودی  فعلی صندوق: $addComma" + "سبرده: $addCommaDeposits " + "وام های برداختنی: $addCommaLoans "
+                        )
+                        type = "text/plain"
+                    }
+
+                    val shareIntent = Intent.createChooser(sendIntent, null)
+                    startActivity(shareIntent)
+                }
+
+                txt.setOnClickListener {}
+                img.setOnClickListener {}
+                builder.setView(dialogView)
+                    .create()
+                    .show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun alertDialog() {
@@ -118,4 +172,6 @@ class MainPageFragment : Fragment() {
         alert.show()
 
     }
+
+
 }

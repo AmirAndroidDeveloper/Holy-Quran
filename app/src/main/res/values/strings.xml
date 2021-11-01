@@ -86,6 +86,9 @@
     <string name="loans">وام های اقساطی</string>
     <string name="speech_not_supported">داداش نمیفهمم چی میگی!!</string>
     <string name="voiceText">یه چیزی بگو چرا ساکتی؟ </string>
+    <string name="send_info_via_sms">ارسال متن به صورت بیامک</string>
+    <string name="send_info_via_txt">ارسال متن به صورت متن</string>
+    <string name="send_info_via_img">ارسال متن به صورت تصویر</string>
 
 
 

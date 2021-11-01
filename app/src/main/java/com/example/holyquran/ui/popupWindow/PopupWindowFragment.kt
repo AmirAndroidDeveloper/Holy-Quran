@@ -199,8 +199,8 @@ class PopupWindowFragment : DialogFragment() {
         } else {
             // Portrait
             if (dialog != null) dialog!!.window!!.setLayout(
-                screenWidth - 30.toPx(requireContext()),
-                screenHeight - 200.toPx(requireContext())
+                screenWidth- 50.toPx(requireContext()),
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
     }

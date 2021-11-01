@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="30dp"
-            android:backgroundTint="#1e45d1"
+            android:backgroundTint="@color/navigation_color"
             android:onClick="@{() -> viewModel.goTOAddBank()}"
             android:src="@drawable/ic_baseline_account_balance_wallet_24"
             app:tint="@color/white" />
