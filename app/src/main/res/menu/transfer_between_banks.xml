@@ -5,7 +5,7 @@
     <item
         android:id="@+id/editBankInfo"
         app:showAsAction="always"
-        android:icon="@drawable/ic_baseline_edit_24"
+        android:icon="@drawable/edit_white"
         android:title="ویرایش اطلاعات بانک" />
     <item
         android:id="@+id/transferMoney"

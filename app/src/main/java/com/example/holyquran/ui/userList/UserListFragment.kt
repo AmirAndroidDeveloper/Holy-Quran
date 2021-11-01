@@ -11,7 +11,6 @@ import android.os.Vibrator
 import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -32,6 +31,8 @@ class UserListFragment : Fragment() {
     lateinit var mUserListBinding: FragmentUserListBinding
     lateinit var mUserListViewModel: UserListViewModel
     private val REQ_CODE_SPEECH_INPUT = 100
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +44,7 @@ class UserListFragment : Fragment() {
                 container,
                 false
             )
+
         val application = requireNotNull(this.activity).application
         val personalDAO = UserDatabase.getInstance(application).mUserDAO
         val transactionDAO = UserDatabase.getInstance(application).mTransactionsDAO
@@ -65,6 +67,8 @@ class UserListFragment : Fragment() {
                 mUserListViewModel.goToAddUserDone()
             }
         })
+
+
         val mUserAdapter = UserAdapter()
         mUserAdapter.setOnclickListener(AdapterListener({
             if (it != 0L)
@@ -84,6 +88,7 @@ class UserListFragment : Fragment() {
             mUserListBinding.searchEDT.text = null
 
         })
+
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         mUserListBinding.rvFeed.adapter = mUserAdapter
         mUserListBinding.rvFeed.layoutManager = mLinearLayoutManager

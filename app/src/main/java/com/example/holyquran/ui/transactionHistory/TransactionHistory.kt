@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
@@ -60,6 +59,8 @@ class TransactionHistory() :
                 binding.transactionStatus.text = "برداشت"
             } else if (item.type == "increase") {
                 binding.transactionStatus.text = "واریز"
+            }else if (item.type=="firstMoney"){
+                binding.transactionStatus.text="افتتاحیه"
             }
 
             if (item.decrease == null) {
@@ -114,10 +115,10 @@ class BillDiffCallback : DiffUtil.ItemCallback<TransactionAndBank>() {
 
 class AdapterListener2(
     val clickListener: (id: Long?) -> Unit,
-    val deleteListener: (category: Transaction) -> Unit
+    val deleteListener: (transaction: TransactionAndBank) -> Unit
 
 ) {
     fun onclick(transaction: Transaction) = clickListener(transaction.userId)
-    fun onDeleteClick(userInfo: Transaction) = deleteListener(userInfo)
+    fun onDeleteClick(transaction: TransactionAndBank) = deleteListener(transaction)
 
 }

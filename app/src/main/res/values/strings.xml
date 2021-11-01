@@ -70,6 +70,7 @@
     <string name="calculate">محاسبه</string>
     <string name="transactions_list_of_user">لیست تراکنش های آقای/خانم </string>
     <string name="submit_increase">ثبت واریز</string>
+    <string name="submit_increase_to">ثبت واریز به حساب</string>
     <string name="final_money_user">مبلغ نهایی کاربر</string>
     <string name="total_increase">مبلغ واریز شده تاکنون</string>
     <string name="loan_expired">تاریخ انقضای وام:</string>

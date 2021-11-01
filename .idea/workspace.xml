@@ -4,20 +4,20 @@
     <shared>
       <config>
         <device id="pixel" />
+        <device id="pixel_4a" />
+        <device id="tv_720p" />
         <device id="pixel_c" />
         <device id="pixel_2" />
         <device id="pixel_4_xl" />
         <device id="Nexus 7" />
         <device id="Nexus 7 2013" />
-        <device id="pixel_4a" />
         <device id="tv_1080p" />
         <device id="wear_square" />
-        <device id="pixel_3_xl" />
       </config>
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="getData" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="bind" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -36,18 +36,26 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.0.2/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/UserDAO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/data/database/TransactionsDAO.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/addUser/AddUserFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/banks/addBank/AddBankFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/banks/addBank/AddBankFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/increaseMoney/IncreaseMoneyFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/increaseMoney/IncreaseMoneyFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistory.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistoryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistoryFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistoryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/transactionHistory/TransactionHistoryViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/holyquran/ui/userList/UserListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_bank.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_bank.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_increase_money.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_list.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/delete_all_user_user_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/user_list_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_user_transaction_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_user_transaction_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/loan_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/loan_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/transfer_between_banks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/transfer_between_banks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,12 +102,12 @@
       <list>
         <option value="navigationResourceFile" />
         <option value="Kotlin File" />
-        <option value="layoutResourceFile_vertical" />
         <option value="Kotlin Interface" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
         <option value="Kotlin Class" />
+        <option value="resourceFile" />
+        <option value="layoutResourceFile_vertical" />
       </list>
     </option>
   </component>
@@ -169,6 +177,8 @@
     <property name="android-custom-view/home/amir/AndroidStudioProjects/holy-quran/app/src/main/java/com/example/holyquran/utils/test.kt_ThousandNumberEditText_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-view/home/amirhossein/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_RecyclerView_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-view/home/amirhossein/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
+    <property name="android-custom-view/sdk/sdk last/sdk/sources/android-31/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-view/sdk/sdk last/sdk/sources/android-31/android/view/View.java_View_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-view/sdk/sdk last/sdk/sources/android-31/android/widget/TextView.java_SELECTED" value="TextView" />
     <property name="android-custom-view/sdk/sdk last/sdk/sources/android-31/android/widget/TextView.java_TextView_DIMENSIONS" value="1080&#10;1920" />
     <property name="cidr.known.project.marker" value="true" />

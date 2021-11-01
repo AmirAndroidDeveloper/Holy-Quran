@@ -56,18 +56,21 @@ class AddUserFragment : Fragment() {
 
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                 mAddUserViewModel.insertUser(
-                    mAddUserListBinding.fullName.text.toString(),
-                    mAddUserListBinding.accountId.text.toString(),
-                    mAddUserListBinding.mobileNumber.text.toString(),
-                    mAddUserListBinding.phoneNumber.text.toString(),
-                    mAddUserListBinding.createdDate.text.toString(),
-                    mAddUserListBinding.edtAddress.text.toString(),
+                checkValidation()
+                if (mAddUserListBinding.fullName.text!!.isNotEmpty().and(
+                        mAddUserListBinding.mobileNumber.text!!.isNotEmpty().and(
+                            mAddUserListBinding.firstMoney.text!!.isNotEmpty()
+                                .and(mAddUserListBinding.bankListSpinner.selectedItem != 0)
+                        )
+                    )
                 )
-                findNavController().popBackStack()
-
+                    if (mAddUserListBinding.mobileNumber.text.toString().length < 11) {
+                    } else {
+                        valid()
+                    }
             }
         })
+
         val pdate = PersianDate()
         val pdformater1 = PersianDateFormat("Y/m/d")
         pdformater1.format(pdate) //1396/05/20
@@ -110,17 +113,51 @@ class AddUserFragment : Fragment() {
             mAddUserListBinding.bankListSpinner.adapter = adapter
         })
 
-            mAddUserListBinding.bankListSpinner.visibility = View.VISIBLE
+        mAddUserListBinding.bankListSpinner.visibility = View.VISIBLE
 
-        mAddUserListBinding.firstNumber.addTextChangedListener(
+        mAddUserListBinding.firstMoney.addTextChangedListener(
             NumberTextWatcherForThousand(
-                mAddUserListBinding.firstNumber
+                mAddUserListBinding.firstMoney
             )
         );
 
         return mAddUserListBinding.root
     }
 
+    private fun checkValidation() {
+        if (mAddUserListBinding.fullName.text?.isBlank() == true) {
+            mAddUserListBinding.fullName.error = "نام و نام خانودگی را وارد کنید."
+        } else {
+            mAddUserListBinding.fullName.error = null
+        }
+        if (mAddUserListBinding.mobileNumber.text?.isBlank() == true) {
+            mAddUserListBinding.mobileNumber.error = "شماره تلفن همراه را وارد کنید"
+        } else {
+            mAddUserListBinding.mobileNumber.error = null
+        }
+        if (mAddUserListBinding.firstMoney.text?.isBlank() == true) {
+            mAddUserListBinding.firstMoney.error = "مبلغ افتتاحیه حساب را وارد کنید."
+        } else {
+            mAddUserListBinding.firstMoney.error = null
+        }
+        if (mAddUserListBinding.mobileNumber.text?.length!! < 11) {
+            mAddUserListBinding.mobileNumber.error = "شماره تلفن همرته معتبری وارد کنید."
+        } else {
+            mAddUserListBinding.mobileNumber.error = null
+        }
+    }
+
+    private fun valid() {
+        mAddUserViewModel.insertUser(
+            mAddUserListBinding.fullName.text.toString(),
+            mAddUserListBinding.accountId.text.toString(),
+            mAddUserListBinding.mobileNumber.text.toString(),
+            mAddUserListBinding.phoneNumber.text.toString(),
+            mAddUserListBinding.createdDate.text.toString(),
+            mAddUserListBinding.edtAddress.text.toString(),
+        )
+        findNavController().popBackStack()
+    }
 }
 
 

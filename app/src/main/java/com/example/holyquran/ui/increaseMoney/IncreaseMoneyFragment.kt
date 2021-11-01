@@ -14,14 +14,13 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import android.view.*
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.transition.Slide
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.example.holyquran.databinding.FragmentIncreaseMoneyBinding
 import com.google.android.material.snackbar.Snackbar
-import java.text.NumberFormat
-import java.text.DecimalFormat
-import java.util.ArrayList
 
 class IncreaseMoneyFragment : Fragment() {
     var userId: Long = 0L
@@ -70,7 +69,7 @@ class IncreaseMoneyFragment : Fragment() {
         val increase = mIncreaseMoneyViewModel.sumUserIncrease(userId).toLong()
         val decrease = mIncreaseMoneyViewModel.sumUserDecrease(userId).toLong()
         val result = increase - decrease
-        mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
+//        mIncreaseMoneyBinding.totalMoney.text = NumberFormat.getInstance().format(result)
         mIncreaseMoneyViewModel.increaseMoney.observe(viewLifecycleOwner, Observer {
             mIncreaseMoneyBinding.increaseEdt.addTextChangedListener(
                 NumberTextWatcherForThousand(
@@ -102,13 +101,13 @@ class IncreaseMoneyFragment : Fragment() {
         })
         mIncreaseMoneyViewModel.increase.observe(viewLifecycleOwner, {
             if (it != null) {
-                val formatter: NumberFormat = DecimalFormat("#,###,###,###")
-                mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
-                if (mIncreaseMoneyBinding.totalMoney.text == "0") {
-                    mIncreaseMoneyBinding.userMoney.text = it.increase
-                }
-                mIncreaseMoneyBinding.userMoney.text =
-                    mIncreaseMoneyViewModel.sumUserIncrease(userId).toString()
+//                val formatter: NumberFormat = DecimalFormat("#,###,###,###")
+//                mIncreaseMoneyBinding.userMoney.setText("" + formatter.format(increase))
+//                if (mIncreaseMoneyBinding.totalMoney.text == "0") {
+//                    mIncreaseMoneyBinding.userMoney.text = it.increase
+//                }
+//                mIncreaseMoneyBinding.userMoney.text =
+//                    mIncreaseMoneyViewModel.sumUserIncrease(userId).toString()
                 //                mIncreaseMoneyBinding.userMoney.text = it.increase.toString() + it.increase.toString()
             }
         })
@@ -144,8 +143,22 @@ class IncreaseMoneyFragment : Fragment() {
             )
             mIncreaseMoneyBinding.chooseBank.adapter = adapter
         })
+      mIncreaseMoneyBinding.viewGroup.setOnClickListener {
+          toggle(true)
+      }
+        toggle(false)
 
         return mIncreaseMoneyBinding.root
+    }
+
+    private fun toggle(show: Boolean) {
+        val redLayout = mIncreaseMoneyBinding.redLayout
+        val parent = mIncreaseMoneyBinding.viewGroup
+        val transition: Transition = Slide(Gravity.BOTTOM)
+        transition.setDuration(1000)
+        transition.addTarget(R.id.redLayout)
+        TransitionManager.beginDelayedTransition(parent, transition)
+        redLayout.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

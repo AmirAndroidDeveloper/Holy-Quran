@@ -60,8 +60,8 @@
                         android:id="@+id/amount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="30sp"
-                        android:gravity="right"
+                        android:gravity="start"
+                        android:layout_marginStart="20sp"
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         tools:text="@string/account_number_sample" />
@@ -76,7 +76,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="40sp"
-                        android:gravity="right"
+                        android:gravity="left"
+                        android:layout_marginStart="20sp"
                         android:textColor="@color/black"
                         android:textSize="19sp"
                         tools:text="@string/melly" />

@@ -1,12 +1,17 @@
 package com.example.holyquran.ui.userList
 
+import android.app.Application
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.ItemUserListBinding
+import java.security.AccessController.getContext
 
 class UserAdapter() : ListAdapter<UserInfo, RecyclerView.ViewHolder>(BillDiffCallback()) {
     private val ITEM_VIEW_TYPE_EMPTY = 0
@@ -65,6 +70,8 @@ class UserAdapter() : ListAdapter<UserInfo, RecyclerView.ViewHolder>(BillDiffCal
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.executePendingBindings()
+
+
         }
 
         companion object {

@@ -87,7 +87,7 @@ class TransactionHistoryFragment : Fragment() {
 
         mTransactionHistoryViewModel.joinTables(id)?.observe(viewLifecycleOwner, {
             mTransactionHistoryViewModel.joinTables(it)
-            Log.d("TAG", "onCreateView: ${it.bankName},${it.increase},${it.decrease}")
+            Log.d("TAG", "onCreateView: ${it.bankName},${it.increase},${it.decrease},${it.type}")
         })
         mTransactionHistoryViewModel.joinName.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -101,10 +101,15 @@ class TransactionHistoryFragment : Fragment() {
     }
 
     private fun userInfo() {
-        mTransactionHistoryViewModel.getTransactionList(id).observe(viewLifecycleOwner, {
-            Log.d("TAG", "userInfo2: ${it}")
-            mTransactionHistoryViewModel.transactionInfo.value = it
+        mTransactionHistoryViewModel.getTransactionListOrigin(id).observe(viewLifecycleOwner, {
+            test()
+            mTransactionHistoryViewModel.transactionInfoList.value = it
         })
     }
+
+    private fun test() {
+        mTransactionHistoryViewModel.getTransactionList(id).observe(viewLifecycleOwner, {
+            mTransactionHistoryViewModel.transactionInfo.value = it
+        })    }
 }
 
