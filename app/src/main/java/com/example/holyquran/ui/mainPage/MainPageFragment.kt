@@ -2,15 +2,14 @@ package com.example.holyquran.ui.mainPage
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -19,6 +18,14 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
 import java.text.NumberFormat
+import android.os.Environment
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
+import android.content.ActivityNotFoundException
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.provider.MediaStore
 
 
 class MainPageFragment : Fragment() {
@@ -127,6 +134,10 @@ class MainPageFragment : Fragment() {
                 val txt: TextView = dialogView.findViewById(R.id.sendViaTxt)
                 val img: TextView = dialogView.findViewById(R.id.sendViaImg)
                 sms.setOnClickListener {
+                    sendSMS()
+                }
+
+                txt.setOnClickListener {
                     val sumAll = mMainViewModel.sumAllIncrease() - mMainViewModel.sumAllDecrease()
                     val addComma = NumberFormat.getInstance().format(sumAll)
                     val deposits = mMainViewModel.sumUserDeposit(firstMoney)
@@ -147,8 +158,9 @@ class MainPageFragment : Fragment() {
                     startActivity(shareIntent)
                 }
 
-                txt.setOnClickListener {}
-                img.setOnClickListener {}
+                img.setOnClickListener {
+                    sendImg()
+                }
                 builder.setView(dialogView)
                     .create()
                     .show()
@@ -156,6 +168,44 @@ class MainPageFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+
+    private fun sendSMS() {
+        val sumAll = mMainViewModel.sumAllIncrease() - mMainViewModel.sumAllDecrease()
+        val addComma = NumberFormat.getInstance().format(sumAll)
+        val deposits = mMainViewModel.sumUserDeposit(firstMoney)
+        val addCommaDeposits = NumberFormat.getInstance().format(deposits)
+        val sumAllLoans = mMainViewModel.sumAllLoansAmount()
+        val addCommaLoans = NumberFormat.getInstance().format(sumAllLoans)
+
+        val sendIntent = Intent(Intent.ACTION_VIEW)
+        sendIntent.data = Uri.parse("sms:")
+        sendIntent.putExtra("sms_body", "موجودی  فعلی صندوق: $addComma" + "سبرده: $addCommaDeposits " + "وام های برداختنی: $addCommaLoans ")
+        requireActivity().startActivity(sendIntent)
+    }
+    fun sendImg() {
+        share(screenShot(requireView()));
+
+    }
+    private fun screenShot(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
+    }
+    private fun share(bitmap: Bitmap) {
+        val pathofBmp = MediaStore.Images.Media.insertImage(
+            requireActivity().getContentResolver(),
+            bitmap, "title", null
+        )
+        val uri = Uri.parse(pathofBmp)
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "image/*"
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Star App")
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "")
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        requireActivity().startActivity(Intent.createChooser(shareIntent, "hello hello"))
     }
 
     private fun alertDialog() {
@@ -172,6 +222,4 @@ class MainPageFragment : Fragment() {
         alert.show()
 
     }
-
-
 }
