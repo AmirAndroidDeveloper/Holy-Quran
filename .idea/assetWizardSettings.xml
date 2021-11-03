@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/sdk/sdk%20last/sdk/icons/material/materialicons/keyboard_arrow_up/baseline_keyboard_arrow_up_24.xml" />
+                                      <entry key="url" value="file:/sdk/sdk%20last/sdk/icons/material/materialicons/settings/baseline_settings_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,8 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="autoMirrored" value="true" />
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_baseline_keyboard_arrow_up_24" />
+                            <entry key="outputName" value="setting" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/../../../user-cirlce-add.svg" />
                           </map>
                         </option>

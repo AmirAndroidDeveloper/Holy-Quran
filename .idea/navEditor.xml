@@ -269,6 +269,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="lockScreenFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="96" />
+                            <option name="y" value="-1483" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="mainPageFragment">
                     <value>
                       <LayoutPositions>
@@ -349,6 +361,27 @@
                           <Point>
                             <option name="x" value="-288" />
                             <option name="y" value="-1177" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_payPaymentsFragment_to_userListFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="settingsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-172" />
+                            <option name="y" value="-1496" />
                           </Point>
                         </option>
                       </LayoutPositions>

@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
-    id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
 
@@ -46,6 +45,7 @@ dependencies {
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     def room_version = "2.3.0"
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -63,6 +63,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:$room_version")
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:2.4.0-alpha04")
+    implementation 'com.github.salehyarahmadi:RoomDatabaseBackupAndRestore:v1.0.1'
 
 
     def nav_version = "2.3.5"

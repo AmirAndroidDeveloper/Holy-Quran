@@ -236,4 +236,13 @@
             android:id="@+id/action_payPaymentsFragment_to_userListFragment"
             app:destination="@id/userListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.holyquran.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/lockScreenFragment"
+        android:name="com.example.holyquran.ui.lockScreen.LockScreenFragment"
+        android:label="fragment_lock_screen"
+        tools:layout="@layout/fragment_lock_screen" />
 </navigation>

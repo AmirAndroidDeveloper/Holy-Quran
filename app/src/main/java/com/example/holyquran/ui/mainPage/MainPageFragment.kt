@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.mainPage
 
+import android.app.Activity.RESULT_OK
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -19,13 +20,19 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
 import java.text.NumberFormat
 import android.os.Environment
-import java.io.File
-import java.io.FileOutputStream
 import java.lang.Exception
 import android.content.ActivityNotFoundException
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.provider.MediaStore
+import ir.androidexception.roomdatabasebackupandrestore.Backup
+import ir.androidexception.roomdatabasebackupandrestore.OnWorkFinishListener
+import kotlinx.android.synthetic.main.item.*
+import java.io.*
+import java.nio.channels.FileChannel
+import java.sql.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainPageFragment : Fragment() {
@@ -114,6 +121,17 @@ class MainPageFragment : Fragment() {
             }
         })
 
+        mMainPageBinding.txtTitle.setOnClickListener {
+            Backup.Init()
+                .database(UserDatabase.INSTANCE)
+                .path("path-to-save-backup-file")
+                .fileName("filename.txt")
+                .secretKey("your-secret-key") //optional
+                .onWorkFinishListener { success, message ->
+                    // do anything
+                }
+                .execute()
+        }
 
         setHasOptionsMenu(true)
         return mMainPageBinding.root
@@ -133,6 +151,7 @@ class MainPageFragment : Fragment() {
                 val sms: TextView = dialogView.findViewById(R.id.sendViaSms)
                 val txt: TextView = dialogView.findViewById(R.id.sendViaTxt)
                 val img: TextView = dialogView.findViewById(R.id.sendViaImg)
+                val backUp: TextView = dialogView.findViewById(R.id.backUpData)
                 sms.setOnClickListener {
                     sendSMS()
                 }
@@ -161,6 +180,9 @@ class MainPageFragment : Fragment() {
                 img.setOnClickListener {
                     sendImg()
                 }
+
+                backUp.setOnClickListener {
+                }
                 builder.setView(dialogView)
                     .create()
                     .show()
@@ -181,19 +203,24 @@ class MainPageFragment : Fragment() {
 
         val sendIntent = Intent(Intent.ACTION_VIEW)
         sendIntent.data = Uri.parse("sms:")
-        sendIntent.putExtra("sms_body", "موجودی  فعلی صندوق: $addComma" + "سبرده: $addCommaDeposits " + "وام های برداختنی: $addCommaLoans ")
+        sendIntent.putExtra(
+            "sms_body",
+            "موجودی  فعلی صندوق: $addComma" + "سبرده: $addCommaDeposits " + "وام های برداختنی: $addCommaLoans "
+        )
         requireActivity().startActivity(sendIntent)
     }
-    fun sendImg() {
-        share(screenShot(requireView()));
 
+    private fun sendImg() {
+        share(screenShot(requireView()));
     }
+
     private fun screenShot(view: View): Bitmap {
         val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
     }
+
     private fun share(bitmap: Bitmap) {
         val pathofBmp = MediaStore.Images.Media.insertImage(
             requireActivity().getContentResolver(),
@@ -220,6 +247,96 @@ class MainPageFragment : Fragment() {
                 DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
         val alert: AlertDialog = builder.create()
         alert.show()
-
     }
+
+
+//     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == 12 && resultCode == RESULT_OK && data != null) {
+//            val fileUri = data.data
+//            try {
+//                assert(fileUri != null)
+//                val inputStream: InputStream? = fileUri?.let {
+//                    activity?.getContentResolver()?.openInputStream(
+//                        it
+//                    )
+//                }
+//
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }
+//    }
+
+
+//    private fun restoreDatabase(inputStreamNewDB: InputStream?) {
+//        val DATABASE_NAME = "user_database"
+//        val db = context?.let { UserDatabase.getInstance(it) }
+//        if (db != null) {
+//            db.close()
+//        }
+//        val oldDB = activity?.getDatabasePath(DATABASE_NAME)
+//        if (inputStreamNewDB != null) {
+//            try {
+//                copyFile(inputStreamNewDB as FileInputStream?, FileOutputStream(oldDB))
+//                println("restore success")
+//            } catch (e: IOException) {
+//                Log.d("BindingContextFactory ", "ex for is of restore: $e")
+//                e.printStackTrace()
+//            }
+//        } else {
+//            Log.d("BindingContextFactory ", "Restore - file does not exists")
+//        }
+//    }
+
+
+//    private fun createBackup() {
+//        val DATABASE_NAME = "user_database"
+//        val db = context?.let { UserDatabase.getInstance(it) }
+//        if (db != null) {
+//            db.close()
+//        }
+//        val dbFile: File = activity!!.getDatabasePath(DATABASE_NAME)
+//        val sDir = File(Environment.getExternalStorageDirectory(), "Backup")
+//        val fileName =
+//            "Backup (${getDateTimeFromMillis(System.currentTimeMillis(), "dd-MM-yyyy-hh:mm")})"
+//        val sfPath = sDir.path + File.separator + fileName
+//        if (!sDir.exists()) {
+//            sDir.mkdirs()
+//            Log.d("TAG", "createBackup: $fileName")
+//        }
+//
+//        val saveFile = File(sfPath)
+//        if (saveFile.exists()) {
+//            Log.d("LOGGER ", "File exists. Deleting it and then creating new file.")
+//            saveFile.delete()
+//        }
+//        try {
+//            if (saveFile.createNewFile()) {
+//                val bufferSize = 8 * 1024
+//                val buffer = ByteArray(bufferSize)
+//                var bytesRead: Int
+//                val saveDb: OutputStream = FileOutputStream(sfPath)
+//                val indDb: InputStream = FileInputStream(dbFile)
+//                do {
+//                    bytesRead = indDb.read(buffer, 0, bufferSize)
+//                    if (bytesRead < 0)
+//                        break
+//                    saveDb.write(buffer, 0, bytesRead)
+//                } while (true)
+//                saveDb.flush()
+//                indDb.close()
+//                saveDb.close()
+//            }
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//
+//        }
+//
+//    }
+//
+//    fun getDateTimeFromMillis(millis: Long, pattern: String): String {
+//        val simpleDateFormat = SimpleDateFormat(pattern, Locale.getDefault()).format(Date())
+//        return simpleDateFormat.format(millis)
+//    }
 }

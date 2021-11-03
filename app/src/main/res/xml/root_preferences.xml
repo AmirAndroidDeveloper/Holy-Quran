@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="عممومی">
+
+        <Preference
+            app:key="backUp"
+            app:title="بشتیبان گیری آفلاین از اطلاعات" />
+        <SwitchPreferenceCompat
+            app:key="vibrate"
+            app:defaultValue="true"
+            app:summary="لرزش هنگام انتخاب یک آیتم"
+            app:title="لرزش" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory app:title="مالی">
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="واحد بول"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="امنیتی">
+
+        <Preference
+            app:key="screen_preference"
+            app:summary="تنظیم رمز ورود برای هر ورود"
+            app:title="رمز ورود" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="بشتیبان گیری افلاین">
+
+        <Preference
+            app:key="backUp"
+            app:title="بشتیبان گیری آفلاین از اطلاعات" />
+
+        <Preference
+            app:key="restore"
+            app:title="باز گردانی آفلاین اطلاعات" />
+
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>

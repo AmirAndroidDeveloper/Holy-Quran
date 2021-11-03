@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.editUserInfo
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,14 @@ import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentEditBinding
 import com.google.android.material.snackbar.Snackbar
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
+import java.io.*
+import java.lang.Exception
+import android.os.Environment
+import java.nio.channels.FileChannel
+
 
 class EditUserInfoFragment : Fragment() {
     lateinit var mEditFragmentBiding: FragmentEditBinding
@@ -111,4 +120,5 @@ class EditUserInfoFragment : Fragment() {
         }
         return false
     }
+
 }

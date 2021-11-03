@@ -46,7 +46,7 @@ class TransactionHistoryViewModel(
 
 
     private val _transaction = MutableLiveData<List<Transaction>>()
-    val transaction: LiveData<List<Transaction>>
+    val transactions: LiveData<List<Transaction>>
         get() = _transaction
    private val _transactionList = MutableLiveData<List<Transaction>>()
     val transactionList: LiveData<List<Transaction>>

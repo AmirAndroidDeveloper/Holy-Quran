@@ -25,6 +25,12 @@
         android:icon="@drawable/ic_baseline_account_balance_wallet_24"
         android:title="بانک ها" />
 
+    <group android:id="@+id/settings">
+        <item
+            android:id="@+id/settingsFragment"
+            android:icon="@drawable/setting"
+            android:title="تنظیمات" />
+    </group>
 
 </menu>
 
