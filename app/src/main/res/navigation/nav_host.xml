@@ -239,8 +239,12 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.holyquran.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
-    <fragment
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_lockScreenFragment"
+            app:destination="@id/lockScreenFragment" />
+    </fragment>
+    <dialog
         android:id="@+id/lockScreenFragment"
         android:name="com.example.holyquran.ui.lockScreen.LockScreenFragment"
         android:label="fragment_lock_screen"

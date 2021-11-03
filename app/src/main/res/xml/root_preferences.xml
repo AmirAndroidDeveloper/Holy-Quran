@@ -2,9 +2,6 @@
 
     <PreferenceCategory app:title="عممومی">
 
-        <Preference
-            app:key="backUp"
-            app:title="بشتیبان گیری آفلاین از اطلاعات" />
         <SwitchPreferenceCompat
             app:key="vibrate"
             app:defaultValue="true"
@@ -29,9 +26,11 @@
         app:title="امنیتی">
 
         <Preference
-            app:key="screen_preference"
+            app:key="password"
             app:summary="تنظیم رمز ورود برای هر ورود"
+            app:fragment="com.example.holyquran.ui.lockScreen.LockScreenFragment"
             app:title="رمز ورود" />
+
 
     </PreferenceCategory>
 
