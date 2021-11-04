@@ -1,5 +1,6 @@
 package com.example.holyquran.ui.introPages
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -12,6 +13,13 @@ import com.example.holyquran.R
 import com.example.holyquran.databinding.ActivityIntroBinding
 import com.example.holyquran.ui.mainPage.MainActivity
 import kotlinx.android.synthetic.main.activity_intro.*
+
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.holyquran.ui.lockScreen.LogInActivity
+import kotlinx.coroutines.delay
+import java.lang.Math.log
+
 
 class IntroActivity : AppCompatActivity() {
     val fragment1 = Slider_Fragment()
@@ -40,9 +48,21 @@ class IntroActivity : AppCompatActivity() {
         preference = getSharedPreferences("IntroSlider", MODE_PRIVATE)
         this.supportActionBar?.hide();
         if (!preference.getBoolean(pref_show_intro, true)) {
-            startActivity(Intent(this@IntroActivity,MainActivity::class.java))
+            startActivity(Intent(this@IntroActivity, MainActivity::class.java))
             finish()
         }
+
+        val passKet = "Password"
+        val sharedPreference =
+            getSharedPreferences(passKet, Context.MODE_PRIVATE)
+        sharedPreference.getString("password", "defaultName")
+        if (sharedPreference.getBoolean("passwordStatus", false)) {
+            startActivity(Intent(this@IntroActivity, LogInActivity::class.java))
+            finish()
+
+        }
+
+
         adapter = IntroAdapter(
             supportFragmentManager
         )
@@ -93,6 +113,7 @@ class IntroActivity : AppCompatActivity() {
             }
 
         })
+
     }
     private fun skip() {
         view_pager.currentItem = 2

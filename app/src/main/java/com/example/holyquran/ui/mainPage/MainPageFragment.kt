@@ -28,6 +28,7 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.provider.MediaStore
+import com.example.holyquran.ui.lockScreen.LogInActivity
 import ir.androidexception.roomdatabasebackupandrestore.Backup
 import ir.androidexception.roomdatabasebackupandrestore.OnWorkFinishListener
 import kotlinx.android.synthetic.main.item.*
@@ -68,7 +69,10 @@ class MainPageFragment : Fragment() {
             ).get(MainFragmentViewModel::class.java)
         mMainPageBinding.viewModel = mMainViewModel
         this.also { mMainPageBinding.lifecycleOwner = it }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) { alertDialog() }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            alertDialog()
+
+        }
 
         mMainViewModel.getUserList().observe(viewLifecycleOwner, {
             mMainViewModel.userInfo.value = it
@@ -138,18 +142,11 @@ class MainPageFragment : Fragment() {
 
         }
 
-        val passKet = "Password"
-        val sharedPreference =
-            requireActivity().getSharedPreferences(passKet, Context.MODE_PRIVATE)
-        sharedPreference.getString("password", "defaultName")
-        Toast.makeText(activity, sharedPreference.getString("password",""), Toast.LENGTH_SHORT).show()
-
-
-
 
         setHasOptionsMenu(true)
         return mMainPageBinding.root
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_page_menu, menu);
@@ -256,7 +253,8 @@ class MainPageFragment : Fragment() {
         builder.setMessage("از برنامه خارج میشوید؟")
             .setCancelable(false)
             .setPositiveButton("بله",
-                DialogInterface.OnClickListener { dialog, id -> System.exit(0) })
+                DialogInterface.OnClickListener { dialog, id -> activity?.moveTaskToBack(true);
+                    getActivity()?.finish(); })
             .setNegativeButton("خیر",
                 DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
         val alert: AlertDialog = builder.create()

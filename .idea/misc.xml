@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/drawable/voice.xml" value="0.29444444444444445" />
         <entry key="app/src/main/res/drawable/white.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.346875" />
         <entry key="app/src/main/res/layout/custom_text_view.xml" value="0.25" />

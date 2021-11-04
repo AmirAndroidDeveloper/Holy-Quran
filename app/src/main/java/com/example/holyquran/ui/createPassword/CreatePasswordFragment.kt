@@ -18,10 +18,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.holyquran.R
 import com.example.holyquran.databinding.FragmentCreatePasswordBinding
-import kotlinx.android.synthetic.main.fragment_create_password.*
-import com.example.holyquran.ui.lockScreen.LockScreenFragment
-import com.example.holyquran.ui.mainPage.MainFragmentViewModel
-import com.example.holyquran.ui.mainPage.MainPageFragment
 
 
 class CreatePasswordFragment : DialogFragment() {
