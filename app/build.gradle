@@ -40,12 +40,11 @@ dataBinding{
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-
+    implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'net.objecthunter:exp4j:0.4.8'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
     implementation 'com.github.samanzamani.persiandate:PersianDate:0.8'
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
-    implementation 'androidx.preference:preference:1.1.1'
     def room_version = "2.3.0"
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor "androidx.room:room-compiler:$room_version"

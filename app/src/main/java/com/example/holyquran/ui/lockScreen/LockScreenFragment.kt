@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,15 @@ class LockScreenFragment : DialogFragment() {
         if (getEditTextValue == "5") {
             Toast.makeText(activity, "work", Toast.LENGTH_SHORT).show()
         }
+        mLockScreenBinding.submit.setOnClickListener {
+            createPassword()
+        }
+
+        val passKet = "Password"
+        val sharedPreference =
+            requireActivity().getSharedPreferences(passKet, Context.MODE_PRIVATE)
+        sharedPreference.getString("password", "defaultName")
+        mLockScreenBinding.submit.text = sharedPreference.getString("password", "")
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         return mLockScreenBinding.root
@@ -90,5 +100,14 @@ class LockScreenFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         resize()
+    }
+
+    private fun createPassword() {
+        val passKet = "Password"
+        val sharedPreference =
+            requireActivity().getSharedPreferences(passKet, Context.MODE_PRIVATE)
+        var editor = sharedPreference.edit()
+        editor.putString("password", mLockScreenBinding.password.text.toString())
+        editor.apply()
     }
 }
