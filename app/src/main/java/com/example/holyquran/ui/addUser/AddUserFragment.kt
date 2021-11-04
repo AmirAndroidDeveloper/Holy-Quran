@@ -51,9 +51,6 @@ class AddUserFragment : Fragment() {
             ).get(AddUserViewModel::class.java)
         mAddUserListBinding.viewModel = mAddUserViewModel
         this.also { mAddUserListBinding.lifecycleOwner = it }
-
-
-
         mAddUserViewModel.addUser.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 checkValidation()

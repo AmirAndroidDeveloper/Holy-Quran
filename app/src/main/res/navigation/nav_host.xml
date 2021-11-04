@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.example.holyquran.ui.mainPage.MainPageFragment"
-        android:label="صفحه اصلی"
+        android:label="@string/main_page"
         tools:layout="@layout/fragment_main_page">
 
         <argument
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.example.holyquran.ui.userList.UserListFragment"
-        android:label="لیست کاربر ها"
+        android:label="@string/user_list"
         tools:layout="@layout/fragment_user_list">
 
         <action
@@ -34,13 +34,13 @@
     <fragment
         android:id="@+id/addUserFragment"
         android:name="com.example.holyquran.ui.addUser.AddUserFragment"
-        android:label="افزودن کاربر"
+        android:label="@string/add_user"
         tools:layout="@layout/fragment_add_user"/>
 
     <fragment
         android:id="@+id/increaseMoneyFragment"
         android:name="com.example.holyquran.ui.increaseMoney.IncreaseMoneyFragment"
-        android:label="اطلاعات کاربر"
+        android:label="@string/user_info"
         tools:layout="@layout/fragment_increase_money">
 
         <argument
@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/decreaseMoneyFragment"
         android:name="com.example.holyquran.ui.decreaseMoney.DecreaseMoneyFragment"
-        android:label="DecreaseMoneyFragment"
+        android:label="@string/decrease"
         tools:layout="@layout/fragment_decrease_money">
         <argument
             android:name="userIdDecrease"
@@ -77,7 +77,7 @@
     <fragment
         android:id="@+id/TransactionHistoryFragment"
         android:name="com.example.holyquran.ui.transactionHistory.TransactionHistoryFragment"
-        android:label="تاریخچه ترااکنش ها"
+        android:label="@string/transaction_history"
         tools:layout="@layout/fragment_increase_history">
         <argument
             android:name="userId"
@@ -87,7 +87,7 @@
         android:id="@+id/getLoanFragment"
         android:name="com.example.holyquran.ui.loan.getLoan.GetLoanFragment"
         tools:layout="@layout/fragment_get_loan"
-        android:label="دریافت وام" >
+        android:label="getLoan" >
         <argument
             android:name="userId"
             app:argType="long" />
@@ -99,7 +99,7 @@
         android:id="@+id/loanHistoryFragment"
         tools:layout="@layout/fragment_loan_history"
         android:name="com.example.holyquran.ui.loan.loanHistory.LoanHistoryFragment"
-        android:label="تاریخچه وام ها">
+        android:label="loan_history">
         <argument
             android:name="userId"
             app:argType="long" />
@@ -111,7 +111,7 @@
         android:id="@+id/loanDetailFragment"
         tools:layout="@layout/fragment_loan_detail"
         android:name="com.example.holyquran.ui.loan.loanDetails.LoanDetailFragment"
-        android:label="جزییات وام" >
+        android:label="@string/loan_detail" >
         <argument
             android:name="loanDetailId"
             app:argType="long" />
@@ -122,7 +122,7 @@
     <fragment
         android:id="@+id/loanPaymentsFragment"
         android:name="com.example.holyquran.ui.loan.payments.PaymentsFragment"
-        android:label="اقساط وام"
+        android:label="loan_section"
         tools:layout="@layout/fragment_loan_payments" >
         <argument
             android:name="paymentId"
@@ -131,12 +131,12 @@
     <fragment
         android:id="@+id/addBankFragment"
         android:name="com.example.holyquran.ui.banks.addBank.AddBankFragment"
-        android:label="افزودن بانک"
+        android:label="@string/add_bank"
         tools:layout="@layout/fragment_add_bank" />
     <fragment
         android:id="@+id/bankListFragment"
         android:name="com.example.holyquran.ui.banks.bankList.BankListFragment"
-        android:label="لیست بانک ها"
+        android:label="@string/loan_list_user"
         tools:layout="@layout/fragment_bank_list" >
         <action
             android:id="@+id/action_bankListFragment_to_addBankFragment"
@@ -163,7 +163,7 @@
         android:id="@+id/bankDetailFragment"
         tools:layout="@layout/fragment_bank_detail"
         android:name="com.example.holyquran.ui.banks.bankDetail.BankDetailFragment"
-        android:label="جزییات بانک" >
+        android:label="@string/bank_detail" >
         <argument
             android:name="bankId"
             app:argType="long" />
@@ -175,7 +175,7 @@
         android:id="@+id/editUserInfoFragment"
         tools:layout="@layout/fragment_edit"
         android:name="com.example.holyquran.ui.editUserInfo.EditUserInfoFragment"
-        android:label="ویرایش اطلاعات کاربر" >
+        android:label="@string/edit_user_info" >
         <argument
             android:name="userId"
             app:argType="long" />
@@ -184,7 +184,7 @@
         android:id="@+id/editBankInfoFragment"
         tools:layout="@layout/fragment_edit_bank_info"
         android:name="com.example.holyquran.ui.editBankInfo.EditBankInfoFragment"
-        android:label="ویرایش اطلاعات بانک" >
+        android:label="@string/edit_bank_info" >
         <argument
             android:name="bankId"
             app:argType="long" />
@@ -228,7 +228,7 @@
         android:id="@+id/payPaymentsFragment"
         tools:layout="@layout/fragment_pay_payments"
         android:name="com.example.holyquran.ui.payPayments.PayPaymentsFragment"
-        android:label="PayPaymentsFragment" >
+        android:label="@string/pay_payment" >
         <argument
             android:name="id"
             app:argType="long" />
@@ -246,7 +246,7 @@
     </fragment>
     <dialog
         android:id="@+id/lockScreenFragment"
-        android:name="com.example.holyquran.ui.lockScreen.LockScreenFragment"
+        android:name="com.example.holyquran.ui.createPassword.CreatePasswordFragment"
         android:label="fragment_lock_screen"
-        tools:layout="@layout/fragment_lock_screen" />
+        tools:layout="@layout/fragment_create_password" />
 </navigation>

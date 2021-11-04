@@ -1,15 +1,4 @@
 <resources>
-    <string name="app_name">صندوقچه</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="splash_title">ختم قران</string>
-    <string name="has_been_red">ختم های خوانده شده</string>
-    <string name="user_profile">امیر حسین رجايی زاده</string>
-    <string name="intro_title1">پرداخت آنلاین </string>
-    <string name="intro_title2">مدیریت در زمان </string>
-    <string name="finishBtn">شروع برنامه</string>
-    <string name="login">ورود</string>
-    <string name="userName">نام کاربر</string>
-    <string name="password">رمز عبور</string>
 
     <string-array name="payment_time">
         <item>۱ ماه</item>
@@ -22,6 +11,19 @@
         <item>۵ ماه</item>
         <item>۶ ماه</item>
     </string-array>
+
+    <string name="userName">UserName</string>
+
+    <string name="app_name">Sandoghcheh</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_profile">Amirhossein</string>
+    <string name="intro_title1">Online Payment</string>
+    <string name="intro_title2">Mannage your Time</string>
+    <string name="finishBtn">Start App</string>
+    <string name="login">Log In</string>
+    <string name="splash_title">Read Holy Quran</string>
+
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -37,72 +39,84 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
-    <string name="skip_intro">رد شدن</string>
-    <string name="bank_name">نام بانک</string>
-    <string name="account_number">شماره حساب</string>
-    <string name="card_number">شماره کارت</string>
-    <string name="address">آدرس</string>
-    <string name="address_home">آدرس خانه</string>
-    <string name="add_card">افزودن کارت</string>
-    <string name="full_name">نام و نام خانوادگی</string>
-    <string name="search_full_name">نام یا نام خانوادگی کاربر</string>
-    <string name="mobile_number">شماره تلفن همراه</string>
-    <string name="phone_number">شماره تلفن ثابت</string>
+
+    <string name="user_info">User info</string>
+    <string name="decrease">Decrease Money</string>
+    <string name="loan_detail">Loan Detail</string>
+    <string name="add_bank">Add bank</string>
+    <string name="bank_detail">Bank detail</string>
+    <string name="setting">Settings</string>
+    <string name="user_list">User list</string>
+    <string name="main_page">Main page</string>
+
+
+
+    <string name="skip_intro">Skip</string>
+    <string name="bank_name"> Bank Name</string>
+    <string name="account_number">Account Number</string>
+    <string name="card_number">Card Number</string>
+    <string name="address">Address</string>
+    <string name="address_home">Home Address</string>
+    <string name="add_card">Add Card</string>
+    <string name="full_name">Full Name</string>
+    <string name="search_full_name">Username or lastname</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="phone_number">Phone Number</string>
     <string name="current_date">1400/7/29</string>
-    <string name="add_user">افزودن کاربر</string>
-    <string name="first_money">مبلغ افتتاحیه حساب</string>
-    <string name="melly">ملی</string>
+    <string name="add_user">Add User</string>
+    <string name="first_money">First Money</string>
+    <string name="melly">Melly</string>
     <string name="card_number_sample">60377011526585</string>
     <string name="account_number_sample">3479111</string>
-    <string name="create_date_bank">تاریخ ایجاد بانک</string>
-    <string name="amount_left_in_account">موجودی حساب</string>
+    <string name="create_date_bank">Date of Bank Creation</string>
+    <string name="amount_left_in_account">Amount left in account</string>
     <string name="amount_left">20000</string>
-    <string name="decrease_account">برداشت از حساب</string>
-    <string name="submit">تایید</string>
-    <string name="father_name">نام پدر</string>
-    <string name="delete_all">حذف تمامی کاربران</string>
-    <string name="search">جست وجو میان کاربران</string>
-    <string name="edit_user_info">ویرایش اطلاعات کاربر</string>
-    <string name="father_name_sample">جلال</string>
-    <string name="amount">مبلغ</string>
-    <string name="address_home_sample">ایران, اصفهان</string>
-    <string name="payments_list">لیست اقساط</string>
-    <string name="empty_user_field_error">لطفا نام کاربر را وارد کنید.</string>
-    <string name="edit_bank_info">ویرایش اطلاعات بانک</string>
-    <string name="edit">ویرایش</string>
-    <string name="loan_price">مبلغ وام:</string>
-    <string name="benefit_percent">سود بانکی:</string>
-    <string name="section_time">فاصله اقساط</string>
-    <string name="percent">درصد</string>
-    <string name="loan_getter">وام گیرنده:</string>
-    <string name="section_price">مبلغ هر قسط:</string>
-    <string name="loan_benefit">سود وام</string>
-    <string name="whole_loan_price">مبلغ کل وام</string>
-    <string name="get_loan">دریافت وام</string>
-    <string name="loan_date">تاریخ اعطای وام:</string>
-    <string name="loan_section">تعداد اقساط</string>
-    <string name="calculate">محاسبه</string>
-    <string name="transactions_list_of_user">لیست تراکنش های آقای/خانم </string>
-    <string name="submit_increase">ثبت واریز</string>
-    <string name="submit_increase_to">ثبت واریز به حساب</string>
-    <string name="final_money_user">مبلغ نهایی کاربر</string>
-    <string name="total_increase">مبلغ واریز شده تاکنون</string>
-    <string name="loan_expired">تاریخ انقضای وام:</string>
-    <string name="loan_list_user">لیست وام های آقای/خانم </string>
-    <string name="sandogh">صندوق</string>
-    <string name="submit_decrease">ثبت برداشت</string>
-    <string name="submit_loan">ثبت وام</string>
-    <string name="pay_payment">برداخت قسط</string>
-    <string name="delete_user">حذف کاربر</string>
-    <string name="transaction_history">تاریخچه تراکنش ها</string>
-    <string name="no_loan_user">(تاکنون وامی برای کاربر ثبت نشده است)</string>
-    <string name="not_payed_loan">تسویه نشده اقساطی</string>
-    <string name="loans">وام های اقساطی</string>
-    <string name="speech_not_supported">داداش نمیفهمم چی میگی!!</string>
-    <string name="voiceText">یه چیزی بگو چرا ساکتی؟ </string>
-    <string name="send_info_via_sms">ارسال متن به صورت بیامک</string>
-    <string name="send_info_via_txt">ارسال متن به صورت متن</string>
-    <string name="send_info_via_img">ارسال متن به صورت تصویر</string>
+    <string name="decrease_account">Decrease</string>
+    <string name="submit">Submit</string>
+    <string name="father_name"> Father Name</string>
+    <string name="delete_all">Delete all users</string>
+    <string name="search">Search between users</string>
+    <string name="edit_user_info">Edit user info</string>
+    <string name="father_name_sample">Jalal</string>
+    <string name="amount">Price</string>
+    <string name="address_home_sample">Iran, Isfahan</string>
+    <string name="payments_list">Payment list</string>
+    <string name="empty_user_field_error">Entre Username</string>
+    <string name="edit_bank_info">Edit bank info</string>
+    <string name="edit">Edit</string>
+    <string name="loan_price">Loan Amount:</string>
+    <string name="benefit_percent">Loan benefit percent:</string>
+    <string name="section_time">Section time</string>
+    <string name="percent">Percent</string>
+    <string name="loan_getter">Loan getter:</string>
+    <string name="section_price">Section Price:</string>
+    <string name="loan_benefit">Loan benefit</string>
+    <string name="whole_loan_price">Loan amount included everything</string>
+    <string name="get_loan">Get Loan</string>
+    <string name="loan_date">Date of getting Loan:</string>
+    <string name="loan_section">Loan Sections:</string>
+    <string name="calculate">calculate</string>
+    <string name="transactions_list_of_user">Transaction list of user:</string>
+    <string name="submit_increase">Submit Increase</string>
+    <string name="submit_increase_to">Submit increase to</string>
+    <string name="final_money_user">Last money of user</string>
+    <string name="total_increase">Increase money till now:</string>
+    <string name="loan_expired">Loan Expired at:</string>
+    <string name="loan_list_user">Loan List of user:</string>
+    <string name="sandogh">Sandogh</string>
+    <string name="submit_decrease">Submit Decrease</string>
+    <string name="submit_loan">Get Loan</string>
+    <string name="pay_payment">Pay payment</string>
+    <string name="delete_user">Delete User</string>
+    <string name="transaction_history">Transaction history</string>
+    <string name="no_loan_user">(User had\'t gotten any loan till now)</string>
+    <string name="not_payed_loan">had\'t paid</string>
+    <string name="loans">Loan List</string>
+    <string name="speech_not_supported">Did\'t get you!!</string>
+    <string name="voiceText">Please say something! </string>
+    <string name="send_info_via_sms">Send as sms</string>
+    <string name="send_info_via_txt">Sent as text</string>
+    <string name="send_info_via_img">Send as picture</string>
     <string name="my_preference_key">vibrate</string>
 
 
