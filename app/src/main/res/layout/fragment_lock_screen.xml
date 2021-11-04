@@ -4,8 +4,8 @@
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@drawable/for_pop_up_square"
+        android:orientation="vertical"
         tools:context=".ui.lockScreen.LockScreenFragment">
 
         <FrameLayout
@@ -56,14 +56,14 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/repeat"
+                android:id="@+id/repeatL"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="تکرار رمز ورود">
                 <!--this is the actual edit text which takes the input-->
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dvdv"
+                    android:id="@+id/repeat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="textPassword" />
@@ -74,9 +74,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20sp"
-            android:layout_marginBottom="30sp"
             android:layout_marginTop="20sp"
             android:layout_marginRight="20sp"
+            android:layout_marginBottom="30sp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -94,5 +94,9 @@
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </layout>
