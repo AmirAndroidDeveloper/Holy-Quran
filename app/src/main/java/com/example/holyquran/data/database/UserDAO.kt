@@ -23,7 +23,7 @@ interface UserDAO {
     @Query("DELETE FROM user_info")
     fun deleteAllUser()
 
-    @Query("SELECT user_info.user_id, `user_info`.full_name, `transaction`.total From user_info JOIN `transaction` ")
+    @Query("SELECT user_info.user_id, user_info.full_name, transactions.total From user_info JOIN transactions ")
     fun joinTable(): LiveData<List<UserAndMoney>>?
 
     @Query("SELECT * from user_info WHERE user_id = :key")

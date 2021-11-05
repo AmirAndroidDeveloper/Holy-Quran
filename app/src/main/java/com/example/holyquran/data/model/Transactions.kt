@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "transaction")
-data class Transaction(
+@Entity(tableName = "transactions")
+data class Transactions(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "trans_id")
     var transId: Long = 0L,

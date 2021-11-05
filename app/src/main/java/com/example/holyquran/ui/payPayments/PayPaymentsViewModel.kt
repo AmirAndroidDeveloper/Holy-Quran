@@ -10,7 +10,7 @@ import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -94,7 +94,7 @@ class PayPaymentsViewModel(
         var bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
-                Transaction(
+                Transactions(
                     0L,
                     userId,
                     null,

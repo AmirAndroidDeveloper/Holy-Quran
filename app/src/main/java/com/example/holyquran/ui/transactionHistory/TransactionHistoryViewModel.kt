@@ -8,7 +8,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.data.model.UserInfo
 
@@ -32,24 +32,24 @@ class TransactionHistoryViewModel(
         _userName.value = mUserInfo
     }
 
-    private val _singleTransaction = MutableLiveData<Transaction>()
-    val singleTransaction: LiveData<Transaction>
+    private val _singleTransaction = MutableLiveData<Transactions>()
+    val singleTransactions: LiveData<Transactions>
         get() = _singleTransaction
 
-    fun setTransaction(id: Long): LiveData<Transaction>? {
+    fun setTransaction(id: Long): LiveData<Transactions>? {
         return mTransactionDAO.get(id)
     }
 
-    fun setTransaction(mTransaction: Transaction) {
-        _singleTransaction.value = mTransaction
+    fun setTransaction(mTransactions: Transactions) {
+        _singleTransaction.value = mTransactions
     }
 
 
-    private val _transaction = MutableLiveData<List<Transaction>>()
-    val transactions: LiveData<List<Transaction>>
+    private val _transaction = MutableLiveData<List<Transactions>>()
+    val transactions: LiveData<List<Transactions>>
         get() = _transaction
-   private val _transactionList = MutableLiveData<List<Transaction>>()
-    val transactionList: LiveData<List<Transaction>>
+   private val _transactionList = MutableLiveData<List<Transactions>>()
+    val transactionsList: LiveData<List<Transactions>>
         get() = _transactionList
 
 
@@ -71,8 +71,8 @@ class TransactionHistoryViewModel(
         return mTransactionDAO.joinAllTables(id)
     }
 
-    val transactionInfoList = MutableLiveData<List<Transaction>>()
-    fun getTransactionListOrigin(id: Long): LiveData<List<Transaction>> {
+    val transactionInfoList = MutableLiveData<List<Transactions>>()
+    fun getTransactionListOrigin(id: Long): LiveData<List<Transactions>> {
         return mTransactionDAO.getAllTransactionByUserId(id)
     }
 

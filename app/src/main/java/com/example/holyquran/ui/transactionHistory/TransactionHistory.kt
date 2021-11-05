@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.TransactionAndBank
 import com.example.holyquran.databinding.ItemUserTransactionListBinding
 
@@ -118,7 +118,7 @@ class AdapterListener2(
     val deleteListener: (transaction: TransactionAndBank) -> Unit
 
 ) {
-    fun onclick(transaction: Transaction) = clickListener(transaction.userId)
+    fun onclick(transactions: Transactions) = clickListener(transactions.userId)
     fun onDeleteClick(transaction: TransactionAndBank) = deleteListener(transaction)
 
 }

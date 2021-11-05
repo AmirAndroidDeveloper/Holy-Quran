@@ -51,7 +51,7 @@ class AddUserViewModel(
                     val increasePage = "firstMoney"
                     val bankId: Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
                     mTransactionDAO.insert(
-                        Transaction(
+                        Transactions(
                             0L,
                             id,
                             null,

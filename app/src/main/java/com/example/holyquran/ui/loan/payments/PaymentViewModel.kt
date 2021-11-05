@@ -1,7 +1,6 @@
 package com.example.holyquran.ui.loan.payments
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +9,7 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.Transaction
-import com.example.holyquran.data.model.UserInfo
+import com.example.holyquran.data.model.Transactions
 
 class PaymentViewModel(
     private val mUserInfoDAO: UserDAO,
@@ -21,8 +19,8 @@ class PaymentViewModel(
     application: Application,
 ) :
     AndroidViewModel(application) {
-    private val _loanPayments = MutableLiveData<Transaction>()
-    val loanPayments: LiveData<Transaction>
+    private val _loanPayments = MutableLiveData<Transactions>()
+    val loanPayments: LiveData<Transactions>
         get() = _loanPayments
 
 
@@ -35,11 +33,11 @@ class PaymentViewModel(
     }
 
 
-    fun setLoanPayments(id: Long): LiveData<Transaction>? {
+    fun setLoanPayments(id: Long): LiveData<Transactions>? {
         return mTransactionsDAO.get(id)
     }
 
-    fun setLoanPayments(mLoanDetail: Transaction) {
+    fun setLoanPayments(mLoanDetail: Transactions) {
         _loanPayments.value = mLoanDetail
     }
 

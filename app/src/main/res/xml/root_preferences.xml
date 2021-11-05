@@ -34,7 +34,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="بشتیبان گیری افلاین">
+    <PreferenceCategory app:title="بشتیبان گیری آفلاین">
 
         <Preference
             app:key="backUp"

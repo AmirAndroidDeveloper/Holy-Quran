@@ -9,8 +9,6 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.Transaction
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
 

@@ -12,8 +12,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.ebner.roomdatabasebackup.core.RoomBackup
+import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.ActivityMainBinding
-import com.example.holyquran.ui.password.lockScreen.LockScreenActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,23 +31,16 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-
-//        lifecycleScope.launch {
-//            window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-//                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//            delay(6000)
-//            Log.d("TAG", "onCreate: finished")
-//            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//        }
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-
-
     }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.fragmentContainerView)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
+
+
+
+
 
 }
 

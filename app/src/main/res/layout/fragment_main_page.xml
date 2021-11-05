@@ -16,7 +16,7 @@
 
         <variable
             name="payments"
-            type="com.example.holyquran.data.model.Transaction" />
+            type="com.example.holyquran.data.model.Transactions" />
 
         <variable
             name="viewModel"

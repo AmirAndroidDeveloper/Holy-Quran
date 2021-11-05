@@ -10,7 +10,7 @@ import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
 import com.example.holyquran.data.model.Bank
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.*
 
@@ -34,15 +34,15 @@ class IncreaseMoneyViewModel(
         _userName.value = mUserInfo
     }
 
-    private val _increase = MutableLiveData<Transaction>()
-    val increase: LiveData<Transaction>
+    private val _increase = MutableLiveData<Transactions>()
+    val increase: LiveData<Transactions>
         get() = _increase
 
-    fun setIncrease(id: Long): LiveData<Transaction>? {
+    fun setIncrease(id: Long): LiveData<Transactions>? {
         return mTransactionsDAO.get(id)
     }
 
-    fun setIncrease(mTransInfo: Transaction) {
+    fun setIncrease(mTransInfo: Transactions) {
         _increase.value = mTransInfo
     }
 
@@ -100,7 +100,7 @@ class IncreaseMoneyViewModel(
         val bankId : Long = bankInfo.value?.get(selectedItemPosition)?.bankId!!
         uiScope.launch {
             mTransactionsDAO.insert(
-                Transaction(
+                Transactions(
                     0L,
                     userId,
                     null,

@@ -1,17 +1,19 @@
 package com.example.holyquran.data.database
 
 import android.content.Context
+import android.graphics.Typeface.createFromFile
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.holyquran.data.model.Bank
 import com.example.holyquran.data.model.Loan
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.UserInfo
+import java.io.File
 
 @Database(
-    entities = [UserInfo::class, Transaction::class, Loan::class,Bank::class],
-    version = 2,
+    entities = [UserInfo::class, Transactions::class, Loan::class,Bank::class],
+    version = 3,
     exportSchema = false
 )
 abstract class UserDatabase : RoomDatabase() {
@@ -30,11 +32,11 @@ abstract class UserDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         UserDatabase::class.java,
-                        "user_database"
-                    )
+                        "user_database")
+
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
-                        .build()
+                    .build()
                     INSTANCE = instance
                 }
                 return instance

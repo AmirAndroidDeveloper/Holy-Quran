@@ -8,7 +8,7 @@ import com.example.holyquran.data.database.BankDAO
 import com.example.holyquran.data.database.LoanDAO
 import com.example.holyquran.data.database.TransactionsDAO
 import com.example.holyquran.data.database.UserDAO
-import com.example.holyquran.data.model.Transaction
+import com.example.holyquran.data.model.Transactions
 import com.example.holyquran.data.model.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,15 +35,15 @@ class DecreaseViewModel(
         _userName.value = mUserInfo
     }
 
-    private val _decrease = MutableLiveData<Transaction>()
-    val decrease: LiveData<Transaction>
+    private val _decrease = MutableLiveData<Transactions>()
+    val decrease: LiveData<Transactions>
         get() = _decrease
 
-    fun setDecrease(id: Long): LiveData<Transaction>? {
+    fun setDecrease(id: Long): LiveData<Transactions>? {
         return mTransactionsDAO.get(id)
     }
 
-    fun setDecrease(mTransInfo: Transaction) {
+    fun setDecrease(mTransInfo: Transactions) {
         _decrease.value = mTransInfo
     }
 
@@ -77,7 +77,7 @@ class DecreaseViewModel(
     ) {
         uiScope.launch {
             mTransactionsDAO.insert(
-                Transaction(
+                Transactions(
                     0L,
                     userId,
                     null,

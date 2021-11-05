@@ -8,7 +8,7 @@
             type="com.example.holyquran.ui.loan.payments.PaymentViewModel" />
         <variable
             name="transaction"
-            type="com.example.holyquran.data.model.Transaction" />
+            type="com.example.holyquran.data.model.Transactions" />
         <variable
             name="loan"
             type="com.example.holyquran.data.model.Loan" />
