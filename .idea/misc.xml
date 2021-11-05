@@ -37,6 +37,7 @@
         <entry key="app/src/main/res/layout/fragment_add_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_bank_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_bank_list.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_check_password.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_create_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_date_picker.xml" value="0.34739583333333335" />
         <entry key="app/src/main/res/layout/fragment_decrease_money.xml" value="0.25" />

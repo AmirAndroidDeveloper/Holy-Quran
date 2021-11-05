@@ -8,15 +8,12 @@ import android.view.WindowManager
 import com.example.holyquran.R
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.holyquran.databinding.ActivityMainBinding
-import com.example.holyquran.ui.lockScreen.LogInActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.example.holyquran.ui.password.lockScreen.LockScreenActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,12 +47,7 @@ class MainActivity : AppCompatActivity() {
         val navController = this.findNavController(R.id.fragmentContainerView)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
-    override fun onPause() {
-        val intent = Intent(this, LogInActivity::class.java)
-        startActivity(intent)
-        Log.d("TAG", "onPause: ")
-        super.onPause()
-    }
+
 }
 
 

@@ -14,11 +14,7 @@ import com.example.holyquran.databinding.ActivityIntroBinding
 import com.example.holyquran.ui.mainPage.MainActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.example.holyquran.ui.lockScreen.LogInActivity
-import kotlinx.coroutines.delay
-import java.lang.Math.log
+import com.example.holyquran.ui.password.lockScreen.LockScreenActivity
 
 
 class IntroActivity : AppCompatActivity() {
@@ -57,7 +53,7 @@ class IntroActivity : AppCompatActivity() {
             getSharedPreferences(passKet, Context.MODE_PRIVATE)
         sharedPreference.getString("password", "defaultName")
         if (sharedPreference.getBoolean("passwordStatus", false)) {
-            startActivity(Intent(this@IntroActivity, LogInActivity::class.java))
+            startActivity(Intent(this@IntroActivity, LockScreenActivity::class.java))
             finish()
 
         }

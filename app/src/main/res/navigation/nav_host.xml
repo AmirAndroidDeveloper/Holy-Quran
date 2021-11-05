@@ -241,12 +241,28 @@
         android:name="com.example.holyquran.ui.settings.SettingsFragment"
         android:label="SettingsFragment" >
         <action
-            android:id="@+id/action_settingsFragment_to_lockScreenFragment"
-            app:destination="@id/lockScreenFragment" />
+            android:id="@+id/action_settingsFragment_to_createPasswordFragment"
+            app:destination="@id/createPassword" />
+        <action
+            android:id="@+id/action_settingsFragment_to_checkPasswordFragment"
+            app:destination="@id/checkPasswordFragment" />
     </fragment>
     <dialog
-        android:id="@+id/lockScreenFragment"
-        android:name="com.example.holyquran.ui.createPassword.CreatePasswordFragment"
+        android:id="@+id/createPassword"
+        android:name="com.example.holyquran.ui.password.createPassword.CreatePasswordFragment"
         android:label="fragment_lock_screen"
-        tools:layout="@layout/fragment_create_password" />
+        tools:layout="@layout/fragment_create_password" >
+        <action
+            android:id="@+id/action_createPassword_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/checkPasswordFragment"
+        android:label="برسی رمز"
+        android:name="com.example.holyquran.ui.password.checkPassword.CheckPasswordFragment"
+        tools:layout="@layout/fragment_check_password">
+        <action
+            android:id="@+id/action_checkPasswordFragment_to_createPasswordFragment"
+            app:destination="@id/createPassword" />
+    </dialog>
 </navigation>

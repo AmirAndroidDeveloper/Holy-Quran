@@ -91,6 +91,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="checkPasswordFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-49" />
+                            <option name="y" value="-1820" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="decreaseMoneyFragment">
                     <value>
                       <LayoutPositions>
@@ -274,8 +286,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="96" />
-                            <option name="y" value="-1483" />
+                            <option name="x" value="93" />
+                            <option name="y" value="-1447" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -383,6 +395,15 @@
                             <option name="x" value="-172" />
                             <option name="y" value="-1496" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_settingsFragment_to_lockScreenFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

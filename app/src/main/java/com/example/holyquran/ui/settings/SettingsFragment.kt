@@ -1,8 +1,10 @@
 package com.example.holyquran.ui.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.holyquran.R
@@ -36,9 +38,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val passwordPrf = findPreference("password") as Preference?
         passwordPrf!!.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                view!!.findNavController()
-                    .navigate(R.id.action_settingsFragment_to_lockScreenFragment)
-                true
+
+                val passKet = "Password"
+                val sharedPreference =
+                    requireActivity().getSharedPreferences(passKet, Context.MODE_PRIVATE)
+                sharedPreference.getString("password", "defaultName")
+                if (sharedPreference.getBoolean("passwordStatus", false)) {
+                    this.findNavController()
+                        .navigate(SettingsFragmentDirections.actionSettingsFragmentToCheckPasswordFragment())
+                    Toast.makeText(activity, "has password", Toast.LENGTH_SHORT).show()
+                    true
+                } else {
+                    this.findNavController()
+                        .navigate(SettingsFragmentDirections.actionSettingsFragmentToCreatePasswordFragment())
+                    true
+                }
+
+
             }
 
     }

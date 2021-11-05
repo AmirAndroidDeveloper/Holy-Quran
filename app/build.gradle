@@ -12,11 +12,13 @@ android {
 
     defaultConfig {
         applicationId "com.example.holyquran"
-        minSdk 21
+        minSdk 16
         targetSdk 31
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
     }
 
     buildTypes {
@@ -62,7 +64,7 @@ dependencies {
     testImplementation("androidx.room:room-testing:$room_version")
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:2.4.0-alpha04")
-    implementation 'com.github.salehyarahmadi:RoomDatabaseBackupAndRestore:v1.0.1'
+//    implementation 'com.github.salehyarahmadi:RoomDatabaseBackupAndRestore:v1.0.1'
 
 
     def nav_version = "2.3.5"

@@ -1,7 +1,6 @@
 package com.example.holyquran.ui.mainPage
 
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
@@ -20,22 +19,11 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.databinding.FragmentMainPageBinding
 import java.text.NumberFormat
-import android.os.Environment
-import java.lang.Exception
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.provider.MediaStore
-import com.example.holyquran.ui.lockScreen.LogInActivity
-import ir.androidexception.roomdatabasebackupandrestore.Backup
-import ir.androidexception.roomdatabasebackupandrestore.OnWorkFinishListener
-import kotlinx.android.synthetic.main.item.*
-import java.io.*
-import java.nio.channels.FileChannel
-import java.sql.Date
-import java.text.SimpleDateFormat
 import java.util.*
 
 
