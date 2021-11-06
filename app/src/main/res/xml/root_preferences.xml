@@ -1,6 +1,17 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory app:title="عممومی">
+
+
+        <EditTextPreference
+            app:title="نام برنامه"
+            android:defaultValue="Holy Quran"
+
+            android:key="appName"
+            android:summary="تغییر نام برنامه"/>
+
+
 
         <SwitchPreferenceCompat
             app:key="vibrate"
@@ -13,10 +24,10 @@
 
     <PreferenceCategory app:title="مالی">
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
+            app:defaultValue="تومان"
+            app:entries="@array/currency"
             app:entryValues="@array/reply_values"
-            app:key="reply"
+            app:key="currency"
             app:title="واحد بول"
             app:useSimpleSummaryProvider="true" />
 

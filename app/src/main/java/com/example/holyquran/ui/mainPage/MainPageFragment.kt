@@ -29,19 +29,24 @@ import java.util.*
 
 class MainPageFragment : Fragment() {
     var id: Long = 0L
-    val payPayment: String = "payPayment"
-    val firstMoney: String = "firstMoney"
+    private val payPayment: String = "payPayment"
+    private val firstMoney: String = "firstMoney"
     var type: String = ""
-    val number: Long = 1
-
+    private val number: Long = 1
+    private var currencyStatus: String = ""
     lateinit var mMainPageBinding: FragmentMainPageBinding
     lateinit var mMainViewModel: MainFragmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        loadLocate() // call LoadLocate
-
+        val passKey = "currency_status"
+        val sharedPreference =
+            requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+       val observer= sharedPreference.getString(passKey, "")
+        if (observer != null) {
+            currencyStatus=observer
+        }
         mMainPageBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_main_page, container, false)
         val application = requireNotNull(this.activity).application
@@ -61,18 +66,16 @@ class MainPageFragment : Fragment() {
             alertDialog()
 
         }
-
         mMainViewModel.getUserList().observe(viewLifecycleOwner, {
             mMainViewModel.userInfo.value = it
             mMainPageBinding.currentUsers.text = it.size.toString()
-
 
             val deposits = mMainViewModel.sumUserDeposit(firstMoney)
             type = deposits.toString()
             mMainPageBinding.userDeposits.text = NumberFormat.getInstance().format(deposits)
             mMainPageBinding.increaseDeposits.text = NumberFormat.getInstance().format(deposits)
-            mMainPageBinding.userDeposits.append(" ریال")
-            mMainPageBinding.increaseDeposits.append(" ریال")
+            mMainPageBinding.userDeposits.append(currencyStatus)
+            mMainPageBinding.increaseDeposits.append(currencyStatus)
 
             val resultDeletedUsers = it.size.toString().toLong()
                 .minus(mMainPageBinding.deletedUsers.text.toString().toLong())
@@ -86,17 +89,18 @@ class MainPageFragment : Fragment() {
 
         val sumAll = mMainViewModel.sumAllIncrease() - mMainViewModel.sumAllDecrease()
         mMainPageBinding.wholeMoney.text = NumberFormat.getInstance().format(sumAll)
-        mMainPageBinding.wholeMoney.append(" ریال")
+        mMainPageBinding.wholeMoney.append(currencyStatus)
+
 
         val sumAllLoans = mMainViewModel.sumAllLoansAmount()
         mMainPageBinding.allLoans.text = NumberFormat.getInstance().format(sumAllLoans)
-        mMainPageBinding.allLoans.append(" ریال")
+        mMainPageBinding.allLoans.append(currencyStatus)
 
 
         val sumPayments = mMainViewModel.sumUserPayments(payPayment)
         mMainPageBinding.paidMoneyLoan.text = sumPayments.toString()
         type = sumPayments.toString()
-        mMainPageBinding.paidMoneyLoan.append(" ریال")
+        mMainPageBinding.paidMoneyLoan.append(currencyStatus)
 
         mMainViewModel.setIncrease()?.observe(viewLifecycleOwner, {
             if (it != null) {
@@ -104,8 +108,8 @@ class MainPageFragment : Fragment() {
                 val amountLeft = mMainViewModel.sumAllLoansAmount().minus(sumPayments)
                 mMainPageBinding.amountLoanLeft.text = amountLeft.toString()
                 mMainPageBinding.amountLeftLoan.text = amountLeft.toString()
-                mMainPageBinding.amountLeftLoan.append(" ریال")
-                mMainPageBinding.amountLoanLeft.append(" ریال")
+                mMainPageBinding.amountLeftLoan.append(currencyStatus)
+                mMainPageBinding.amountLoanLeft.append(currencyStatus)
 
 
                 val text = mMainPageBinding.paidLoans.text.toString().toLong()
@@ -116,19 +120,10 @@ class MainPageFragment : Fragment() {
                 }
             }
         })
-
-        mMainPageBinding.txtTitle.setOnClickListener {
-//            Backup.Init()
-//                .database(UserDatabase.INSTANCE)
-//                .path("path-to-save-backup-file")
-//                .fileName("filename.txt")
-//                .secretKey("your-secret-key") //optional
-//                .onWorkFinishListener { success, message ->
-//                    // do anything
-//                }
-//                .execute()
-
-        }
+       mMainPageBinding.currentMoney.append(currencyStatus)
+       mMainPageBinding.decreaseMoney.append(currencyStatus)
+       mMainPageBinding.lateLoans.append(currencyStatus)
+       mMainPageBinding.lateLoan2.append(currencyStatus)
 
 
         setHasOptionsMenu(true)
@@ -241,8 +236,10 @@ class MainPageFragment : Fragment() {
         builder.setMessage("از برنامه خارج میشوید؟")
             .setCancelable(false)
             .setPositiveButton("بله",
-                DialogInterface.OnClickListener { dialog, id -> activity?.moveTaskToBack(true);
-                    getActivity()?.finish(); })
+                DialogInterface.OnClickListener { dialog, id ->
+                    activity?.moveTaskToBack(true);
+                    getActivity()?.finish();
+                })
             .setNegativeButton("خیر",
                 DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
         val alert: AlertDialog = builder.create()

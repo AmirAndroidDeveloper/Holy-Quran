@@ -25,6 +25,7 @@ import com.example.holyquran.ViewModelProviderFactory
 import com.example.holyquran.data.database.UserDatabase
 import com.example.holyquran.data.model.UserInfo
 import com.example.holyquran.databinding.FragmentUserListBinding
+import com.example.holyquran.ui.password.checkPassword.CheckPasswordFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 
 class UserListFragment : Fragment() {
@@ -84,9 +85,8 @@ class UserListFragment : Fragment() {
                 this.findNavController().navigate(
                     UserListFragmentDirections.actionUserListFragmentToNavigationDialogFragment(it)
                 )
-            vibratePhone()
+            checkVibration()
             mUserListBinding.searchEDT.text = null
-
         })
 
         val mLinearLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
@@ -110,9 +110,9 @@ class UserListFragment : Fragment() {
         mUserListBinding.clear.setOnClickListener {
             mUserListBinding.searchEDT.text = null
         }
-      mUserListBinding.voiceTyping.setOnClickListener {
-          promptSpeechInput()
-      }
+        mUserListBinding.voiceTyping.setOnClickListener {
+            promptSpeechInput()
+        }
         setHasOptionsMenu(true)
         return mUserListBinding.root
     }
@@ -211,4 +211,14 @@ class UserListFragment : Fragment() {
             }
         }
     }
+
+    private fun checkVibration() {
+        val passKey = "vibratePhone"
+        val sharedPreference =
+            requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+        if (sharedPreference.getBoolean(passKey, true)) {
+            vibratePhone()
+        }
+
     }
+}

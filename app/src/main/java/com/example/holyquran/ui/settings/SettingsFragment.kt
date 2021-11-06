@@ -2,28 +2,22 @@ package com.example.holyquran.ui.settings
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.example.holyquran.R
-import androidx.preference.SwitchPreferenceCompat
 import com.ebner.roomdatabasebackup.core.RoomBackup
 import com.example.holyquran.data.database.UserDatabase
-import com.example.holyquran.ui.introPages.IntroActivity
-import com.example.holyquran.ui.mainPage.MainActivity
 import com.example.holyquran.ui.mainPage.SplashActivity
-import ir.androidexception.roomdatabasebackupandrestore.OnWorkFinishListener
-
-import ir.androidexception.roomdatabasebackupandrestore.Backup
 import kotlinx.android.synthetic.main.item.*
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import android.text.Editable
+import android.text.InputType
+import androidx.core.widget.doOnTextChanged
+import androidx.preference.*
+import androidx.test.core.app.ApplicationProvider
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -37,9 +31,25 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
                 if (pref is SwitchPreferenceCompat) {
                     val value = newValue as Boolean
-                    if (value) Toast.makeText(requireContext(), "ON", Toast.LENGTH_SHORT)
-                        .show()
-                    else Toast.makeText(requireContext(), "OFF", Toast.LENGTH_SHORT).show()
+                    if (value) {
+                        Toast.makeText(requireContext(), "ON", Toast.LENGTH_SHORT).show()
+
+                        val passKey = "vibratePhone"
+                        val sharedPreference =
+                            requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+                        val editor = sharedPreference.edit()
+                        editor.putBoolean(passKey, true)
+                        editor.apply()
+
+                    } else {
+                        Toast.makeText(requireContext(), "OFF", Toast.LENGTH_SHORT).show()
+                        val passKey = "vibratePhone"
+                        val sharedPreference =
+                            requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+                        val editor = sharedPreference.edit()
+                        editor.putBoolean(passKey, false)
+                        editor.apply()
+                    }
                 }
                 true
             }
@@ -55,9 +65,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         passwordPrf!!.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
 
-                val passKet = "Password"
+                val passKey = "Password"
                 val sharedPreference =
-                    requireActivity().getSharedPreferences(passKet, Context.MODE_PRIVATE)
+                    requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
                 sharedPreference.getString("password", "defaultName")
                 if (sharedPreference.getBoolean("passwordStatus", false)) {
                     this.findNavController()
@@ -78,7 +88,49 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 restore()
                 true
             }
+        val editTextPreference =
+            preferenceManager.findPreference<EditTextPreference>("appName")
+        editTextPreference!!.setOnBindEditTextListener { editText ->
+            val appName: String = resources.getString(R.string.app_name)
+            editText.setText(appName)
+        }
+//        val myPrefList = findPreference("currency") as Preference?
+//        myPrefList!!.onPreferenceClickListener =
+//            Preference.OnPreferenceClickListener {
+//                Toast.makeText(activity, "HI", Toast.LENGTH_SHORT).show()
+//
+//                true
+//            }
+        val listPreference = findPreference("currency") as ListPreference?
+        listPreference?.setOnPreferenceChangeListener { preference, newValue ->
+            if (preference is ListPreference) {
+                val index = preference.findIndexOfValue(newValue.toString())
+                val entry = preference.entries.get(index)
+                val entryvalue = preference.entryValues.get(index)
+                Log.i(
+                    "selected val",
+                    " position - $index value - $entry, entryvalue - $entryvalue "
+                )
+                if (index == 1) {
+                    val passKey = "currency_status"
+                    val sharedPreference =
+                        requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+                    val editor = sharedPreference.edit()
+                    editor.putString(passKey, " ریال")
+                    editor.apply()
+                } else if (index == 0) {
+                    val passKey = "currency_status"
+                    val sharedPreference =
+                        requireActivity().getSharedPreferences(passKey, Context.MODE_PRIVATE)
+                    val editor = sharedPreference.edit()
+                    editor.putString(passKey, " تومان")
+                    editor.apply()
+                }
+            }
+            true
+        }
     }
+
 
     private fun backup() {
         context?.let {
@@ -93,12 +145,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 .apply {
                     onCompleteListener { success, message ->
                         Log.d("TAG", "success: $success, message: $message")
-//                        if (success) restartApp(Intent(context, SplashActivity::class.java))
                     }
                 }
                 .backup()
         }
-
     }
 
     private fun restore() {
